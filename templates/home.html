@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container bg-dark mt-lg-5 text-light">
+
+        <div id="home" class="col-sm-4">
+            <h1 class="text-info">About me</h1>
+            <div class="container border-dark">
+                <img src="{{ user.picture }}" class="rounded float-start img-fluid" alt="not found"/>
+                <h3 class="text-danger">Hi, I'm {{ user.name }}!</h3>
+                <p>I am an undergraduate Computer Science student at Stellenbosch University. I started my studies in 2018
+                    and am currently busy with my final year. My plan is to graduate this year and if possible do my honours
+                    in Computer Science next year. I really enjoy coding, particularly projects involving web development or
+                    network applications.
+                </p>
+            </div>
+        </div>
+
+        <div id="programming" class="col-sm-8">
+
+            <h2 class="text-info">Languages</h2>
+            <details open>
+                <summary></summary>
+                <div class="d-flex flex-wrap border-dark justify-content-center">
+                    {% for language in languages %}
+                            <div class="p-2 card bg-dark border-dark">
+                                <img src="{{ language.avatar }}" class="rounded float-start img-fluid" alt="not found"
+                                     title="{{ language.language }}" data-bs-toggle="popover" data-bs-trigger="hover"
+                                     data-bs-content="{{ language.confidence }}">
+                            </div>
+                    {% endfor %}
+                </div>
+            </details>
+            <h2 class="mt-3 text-info">Frameworks</h2>
+            <details open>
+                <summary></summary>
+                <div class="d-flex flex-wrap border-dark justify-content-center">
+                    {% for framework in frameworks %}
+                        <div class="p-2 card bg-dark border-dark">
+                            <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"
+                                 title="{{ framework.framework }}" data-bs-toggle="popover" data-bs-trigger="hover"
+                                 data-bs-content="{{ framework.confidence }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+            <h2 class="mt-3 text-info">Databases</h2>
+            <details open>
+                <summary></summary>
+                <div class="d-flex flex-wrap border-dark justify-content-center">
+                    {% for database in databases %}
+                        <div class="p-2 card bg-dark border-dark">
+                            <img src="{{ database.avatar }}" class="rounded float-start img-fluid" alt="not found"
+                                 title="{{ database.dbms }}" data-bs-toggle="popover" data-bs-trigger="hover"
+                                 data-bs-content="{{ database.confidence }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+
+        </div>
+
+        <div id="info">
+            <div class="col-sm-8">
+            <h2 class="text-info">Hobbies</h2>
+            <details open>
+                <summary></summary>
+                <div class="d-flex flex-wrap border-dark justify-content-center">
+                    {% for hobby in hobbies %}
+                        <div class="p-2 card bg-dark border-dark">
+                            <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid" alt="not found"
+                                 title="{{ hobby.hobby }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+            </div>
+
+            <div class="col-sm-8">
+                <h2 class="mt-3 text-info">Education</h2>
+                <details open>
+                    <summary></summary>
+                    <div class="container border-dark">
+                        {% for degree in degrees %}
+                            <dl>
+                                <dt class="text-danger">{{ degree.degree }}</dt>
+                                <div class="d-flex">
+                                    <div class="p-2">
+                                        <dd>Institution: {{ degree.institution }}</dd>
+                                        {% if degree.grade %}
+                                            <dd>Grade: {{ degree.grade }}</dd>
+                                        {% endif %}
+                                        <dd>Year: {{ degree.year }}</dd>
+                                    </div>
+                                </div>
+                            </dl>
+                        {% endfor %}
+                    </div>
+                </details>
+                <h2 class="mt-3 text-info">Projects</h2>
+                <details open>
+                    <summary></summary>
+                    <div class="container border-dark">
+                        {% for project in projects %}
+                        <dl>
+                            <dt class="text-danger">{{ project.description }}</dt>
+                            <div class="d-flex">
+                                <div class="p-2">
+                                    <dd>Github: <a href="{{ project.link }}" target="_blank">{{ project.link }}</a></dd>
+                                </div>
+                            </div>
+                        </dl>
+                        {% endfor %}
+                    </div>
+                </details>
+                <h2 class="mt-3 text-info">Strengths</h2>
+                <details open>
+                    <summary></summary>
+                    <div class="container border-dark">
+                        <dl>
+                            {% for skill in skills %}
+                                <li>{{ skill.skill }}</li>
+                            {% endfor %}
+                        </dl>
+                    </div>
+                </details>
+                <h2 class="mt-3 text-info">Experience</h2>
+                <details open>
+                    <summary></summary>
+                    <div class="container border-dark">
+                        {% for job in jobs %}
+                            <dl>
+                                <dt class="text-danger">{{ job.description }}</dt>
+                                <dd>Company: {{ job.company }}</dd>
+                            </dl>
+                        {% endfor %}
+                    </div>
+                </details>
+                <h2 class="mt-3 text-info">Contact</h2>
+                <details open>
+                    <summary></summary>
+                    <div class="container border-dark">
+                        <dl>
+                            <dd><i class="fa fa-envelope text-danger"></i> {{ user.email }}</dd>
+                            <dd><i class="fa fa-phone-square text-danger"></i> {{ user.number }}</dd>
+                        </dl>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+</div>
+
+{% endblock content %}

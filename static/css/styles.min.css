@@ -1,0 +1,16 @@
+* {
+    /*font-family: Sans-serif;*/
+    font-size: large;
+}
+
+#home, #programming, #info {
+    padding:100px 20px;
+}
+
+.card img {
+    height: 100px; width: 100px;
+}
+
+dl, dd {
+    white-space: nowrap;
+}
