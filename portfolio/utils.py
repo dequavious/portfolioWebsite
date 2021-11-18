@@ -48,7 +48,7 @@ def generate_refresh_token(user, email_verification, forgot_password):
             'iat': timezone.now()
         }
     refresh_token = jwt.encode(
-        refresh_token_payload, settings.REFRESH_TOKEN_SECRET, algorithm='HS256')
+        refresh_token_payload, settings.SECRET_KEY, algorithm='HS256')
 
     return refresh_token
 
