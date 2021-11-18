@@ -200,11 +200,28 @@
                                 <dt class="text-danger">{{ degree.degree }}</dt>
                                 <div class="d-flex">
                                     <div class="p-2">
-                                        <dd>Institution: {{ degree.institution }}</dd>
-                                        {% if degree.grade %}
-                                            <dd>Grade: {{ degree.grade }}</dd>
-                                        {% endif %}
-                                        <dd>Year: {{ degree.year }}</dd>
+                                        <table class="table table-dark table-hover table-borderless table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>Institution</th>
+                                                    {% if degree.grade %}
+                                                        <th>Grade</th>
+                                                    {% endif %}
+                                                    <th>Year</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ degree.institution }}</td>
+                                                    <td>
+                                                        {% if degree.grade %}
+                                                            {{ degree.grade }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ degree.year }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </dl>
@@ -220,8 +237,8 @@
                             <dt class="text-danger">{{ project.description }}</dt>
                             <div class="d-flex">
                                 <div class="p-2">
-                                    <dd><a href="{{ project.git }}" target="_blank">Github</a></dd>
-                                    <dd><a href="{{ project.link }}" target="_blank">Homepage</a></dd>
+                                    <li><a href="{{ project.link }}" target="_blank">Homepage</a></li>
+                                    <li><a href="{{ project.git }}" target="_blank">Github</a></li>
                                 </div>
                             </div>
                         </dl>
