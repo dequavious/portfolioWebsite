@@ -390,7 +390,7 @@ def upload_profile_picture(request):
         return Response("not a valid image format", status=status.HTTP_400_BAD_REQUEST)
 
     if user.picture:
-        delete_file(user.picture.path)
+        delete_file(user.picture)
 
     user.picture = image
     user.save()
