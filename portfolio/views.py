@@ -344,6 +344,30 @@ def verify_email(request):
         return render(request, "invalid.html")
 
 
+@api_view(['POST', 'PUT'])
+@permission_classes([IsAuthenticated])
+@csrf_protect
+def update_bio(request):
+    """
+    View to update bio
+    """
+    users = User.objects.all().filter(id=request.user.id)
+    if not users.exists():
+        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
+    user = User.objects.get(id=request.user.id)
+    if not user.authenticated:
+        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
+
+    bio = request.data.get('bio', None)
+    if not bio:
+        return Response("bio not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    user.bio = bio
+    user.save()
+
+    return Response(status=status.HTTP_200_OK)
+
+
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 @permission_classes([IsAuthenticated])
@@ -1177,16 +1201,20 @@ def add_project(request):
     if not description:
         return Response("description not provided", status=status.HTTP_400_BAD_REQUEST)
 
+    git = request.data.get('git', None)
+    if not git:
+        return Response("git not provided", status=status.HTTP_400_BAD_REQUEST)
+
     link = request.data.get('link', None)
-    if not link:
+    if not git:
         return Response("link not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    projects = Project.objects.all().filter(description=description, link=link)
+    projects = Project.objects.all().filter(description=description)
 
     if projects.exists():
         return Response("project already added", status=status.HTTP_400_BAD_REQUEST)
 
-    project = Project(description=description, link=link)
+    project = Project(description=description, git=git, link=link)
     project.save()
 
     return Response(status=status.HTTP_200_OK)
@@ -1222,6 +1250,11 @@ def update_project(request):
         project.description = description
         project.save()
 
+    git = request.data.get('git', None)
+    if git:
+        project.git = git
+        project.save()
+
     link = request.data.get('link', None)
     if link:
         project.link = link
@@ -1230,7 +1263,7 @@ def update_project(request):
     return Response(status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
+@api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def delete_project(request):

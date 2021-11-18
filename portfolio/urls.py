@@ -15,6 +15,7 @@ urlpatterns = [
     path('admin/reset_forgot_password', views.reset_forgotten_password, name="reset forgotten password"),
     path('admin/forgot_password', views.render_forgotten_password_page, name="forgot password"),
     path('admin/upload_profile_picture', views.upload_profile_picture, name="upload profile picture"),
+    path('admin/update_bio', views.update_bio, name="update bio"),
     path('admin/upload_document', views.upload_document, name="upload document"),
     path('admin/delete_document', views.delete_document, name="delete document"),
     path('admin/verify', views.verify_email, name="verify email"),

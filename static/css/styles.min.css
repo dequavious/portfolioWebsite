@@ -1,6 +1,11 @@
 * {
-    /*font-family: Sans-serif;*/
+    /*font-family: "Courier New", Courier, monospace;*/
+    font-weight: bold;
     font-size: large;
+}
+
+body {
+  position: relative;
 }
 
 #home, #programming, #info {

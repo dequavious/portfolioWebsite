@@ -40,6 +40,7 @@ class CustomUser(AbstractBaseUser):
     name = models.CharField(max_length=30, unique=True)
     surname = models.CharField(max_length=30)
     picture = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
+    bio = models.CharField(default=None, max_length=1000, null=True, blank=True)
     number = PhoneNumberField(unique=True)
     dob = models.DateField(default='1998-10-20')
 
@@ -47,7 +48,6 @@ class CustomUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['name', 'surname', 'number']
 
     objects = MyAccountManager()
-
 
 class Address(models.Model):
     street = models.CharField(max_length=60)
@@ -108,8 +108,9 @@ class Work(models.Model):
 
 
 class Project(models.Model):
-    link = models.CharField(unique=True, max_length=256)
     description = models.CharField(unique=True, max_length=256)
+    git = models.CharField(unique=True, max_length=256)
+    link = models.CharField(unique=True, max_length=256)
 
     def __str__(self):
         return self.description
