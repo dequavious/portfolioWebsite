@@ -41,11 +41,11 @@ def home(request):
     context = {'user': user.data, 'languages': languages.data, 'frameworks': frameworks.data,
                'databases': databases.data, 'hobbies': hobbies.data, 'skills': skills.data, 'jobs': jobs.data,
                'projects': projects.data, 'degrees': degrees.data}
-    return render(request, 'home.html', context)
+    return render(request, 'portfolio/home.html', context)
 
 
 def admin(request):
-    return render(request, 'admin.html')
+    return render(request, 'admin/admin.html')
 
 
 @api_view(['POST'])

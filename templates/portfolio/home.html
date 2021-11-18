@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'portfolio/base.html' %}
 {% block content %}
 
 <div class="container bg-dark mt-lg-5 text-light">
@@ -24,9 +24,36 @@
                 <div class="d-flex flex-wrap border-dark">
                     {% for language in languages %}
                             <div class="p-2 card bg-dark border-dark">
+{#                                <img src="{{ language.avatar }}" class="rounded float-start img-fluid" alt="not found"#}
+{#                                     title="{{ language.language }}" data-bs-toggle="popover" data-bs-trigger="hover"#}
+{#                                     data-bs-content="{{ language.confidence }}">#}
                                 <img src="{{ language.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                     title="{{ language.language }}" data-bs-toggle="popover" data-bs-trigger="hover"
-                                     data-bs-content="{{ language.confidence }}">
+                                     title="{{ language.language }}" data-bs-toggle="modal" data-bs-target="#{{ language.language }}">
+
+                                <div class="modal fade" id="{{ language.language }}">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content text-black">
+
+                                          <!-- Modal Header -->
+                                          <div class="modal-header">
+                                            <h4 class="modal-title">{{ language.language }}</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                          </div>
+
+                                          <!-- Modal body -->
+                                          <div class="modal-body">
+                                              {{ language.confidence }}
+                                          </div>
+
+                                          <!-- Modal footer -->
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                          </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                     {% endfor %}
                 </div>
@@ -37,9 +64,36 @@
                 <div class="d-flex flex-wrap border-dark">
                     {% for framework in frameworks %}
                         <div class="p-2 card bg-dark border-dark">
+{#                            <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"#}
+{#                                 title="{{ framework.framework }}" data-bs-toggle="popover" data-bs-trigger="hover"#}
+{#                                 data-bs-content="{{ framework.confidence }}">#}
                             <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ framework.framework }}" data-bs-toggle="popover" data-bs-trigger="hover"
-                                 data-bs-content="{{ framework.confidence }}">
+                                 title="{{ framework.framework }}" data-bs-toggle="modal" data-bs-target="#{{ framework.framework }}">
+
+                            <div class="modal fade" id="{{ framework.framework }}">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content text-black">
+
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">{{ framework.framework }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      </div>
+
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                          {{ framework.confidence }}
+                                      </div>
+
+                                      <!-- Modal footer -->
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     {% endfor %}
                 </div>
@@ -50,9 +104,36 @@
                 <div class="d-flex flex-wrap border-dark">
                     {% for database in databases %}
                         <div class="p-2 card bg-dark border-dark">
+{#                            <img src="{{ database.avatar }}" class="rounded float-start img-fluid" alt="not found"#}
+{#                                 title="{{ database.dbms }}" data-bs-toggle="popover" data-bs-trigger="hover"#}
+{#                                 data-bs-content="{{ database.confidence }}">#}
                             <img src="{{ database.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ database.dbms }}" data-bs-toggle="popover" data-bs-trigger="hover"
-                                 data-bs-content="{{ database.confidence }}">
+                                 title="{{ database.dbms }}" data-bs-toggle="modal" data-bs-target="#{{ database.dbms }}">
+
+                            <div class="modal fade" id="{{ database.dbms }}">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content text-black">
+
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">{{ database.dbms }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      </div>
+
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                          {{ database.confidence }}
+                                      </div>
+
+                                      <!-- Modal footer -->
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     {% endfor %}
                 </div>
@@ -69,7 +150,7 @@
                     {% for hobby in hobbies %}
                         <div class="p-2 card bg-dark border-dark">
                             <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ hobby.hobby }}">
+                                 title="{{ hobby.hobby }}" data-bs-toggle="tooltip" data-trigger="focus">
                         </div>
                     {% endfor %}
                 </div>

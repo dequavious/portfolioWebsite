@@ -16,6 +16,10 @@ body {
     width: 100px;
 }
 
+.modal-body {
+    font-weight: normal;
+}
+
 dl, dd {
     white-space: nowrap;
 }
