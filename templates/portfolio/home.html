@@ -23,9 +23,9 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for language in languages %}
-                            <div class="p-2 card bg-dark border-dark">
+                            <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#{{ language.language }}_modal">
                                 <img src="{{ language.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                     title="{{ language.language }}" data-bs-toggle="modal" data-bs-target="#{{ language.language }}_modal">
+                                     title="{{ language.language }}" data-bs-toggle="tooltip" >
 
                                 <div class="modal fade" id="{{ language.language }}_modal">
                                     <div class="modal-dialog modal-sm">
@@ -74,9 +74,9 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for framework in frameworks %}
-                        <div class="p-2 card bg-dark border-dark">
+                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#{{ framework.framework }}_modal">
                             <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ framework.framework }}" data-bs-toggle="modal" data-bs-target="#{{ framework.framework }}_modal">
+                                 title="{{ framework.framework }}" data-bs-toggle="tooltip">
 
                             <div class="modal fade" id="{{ framework.framework }}_modal">
                                 <div class="modal-dialog modal-sm">
@@ -125,9 +125,9 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for database in databases %}
-                        <div class="p-2 card bg-dark border-dark">
+                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#{{ database.dbms }}_modal">
                             <img src="{{ database.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ database.dbms }}" data-bs-toggle="modal" data-bs-target="#{{ database.dbms }}_modal">
+                                 title="{{ database.dbms }}" data-bs-toggle="tooltip">
 
                             <div class="modal fade" id="{{ database.dbms }}_modal">
                                 <div class="modal-dialog modal-sm">
