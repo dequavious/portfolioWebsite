@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <p>Token: {{ token }}</p>
+    <p>User: {{ user }}</p>
+
+    <form method="post" action="{% url 'authenticate' %}" class="form-group">
+        {% csrf_token %}
+        {{form|crispy}}
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="security_code" placeholder="Enter security code" name="security_code">
+            <label for="security_code">Security code</label>
+        </div>
+
+        <button id="submitButton" type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+
+    <script>
+        $('#submitButton').on('click',function(){
+            $.ajax({
+                  url: "http://127.0.0.1:8000/admin/auth",
+                  type: 'POST',
+                  data: {
+                          securityCode: $('#security_code').val()
+                        },
+                  contentType: 'application/json',
+                  headers: {
+                            "Authorization": "Token " + $('{{ token }}').val()
+                         },
+                  async: false
+                    })
+        });
+    </script>
+{% endblock %}

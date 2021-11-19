@@ -3,9 +3,12 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
+    path('login/', views.render_login, name="render login"),
     path('details', views.get_details, name="details"),
     path('get_document', views.get_document, name="get document"),
-    path('admin/login', views.login, name="login"),
+    path('auth/', views.render_auth, name="render auth"),
+    path('admin/', views.admin, name="admin"),
+    path('admin/login', views.try_login, name="login"),
     path('admin/2fa', views.two_factor_auth, name="send 2fa"),
     path('admin/auth', views.authenticate, name="authenticate"),
     path('admin/logout', views.logout, name="logout"),

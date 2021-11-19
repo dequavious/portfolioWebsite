@@ -2,4 +2,25 @@
 
 {% block content %}
 <h1>Admin</h1>
+    <p>Token: {{ token }}</p>
+    <p>User: {{ user }}</p>
+
+    <form method="post" action="{% url 'logout' %}" class="form-group">
+        {% csrf_token %}
+        <button id="logoutBtn" type="submit" class="btn btn-success">Logout</button>
+    </form>
+
+    <script>
+        $('#logoutButton').on('click',function(){
+            $.ajax({
+                  url: "http://127.0.0.1:8000/admin/logout",
+                  type: 'POST',
+                  headers: {
+                            "Authorization": "Token " + $('{{ token }}').val()
+                         },
+                  async: false
+                    })
+        });
+    </script>
+
 {% endblock content %}
