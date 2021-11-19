@@ -46,11 +46,11 @@ def home(request):
 
 def render_login(request):
     try:
-        if request.session['incorrect']:
+        if request.session['response']:
             context = {
-                'incorrect': request.session['incorrect']
+                'alert': request.session['response']
             }
-            request.session['incorrect'] = None
+            request.session.pop('response')
             return render(request, 'admin/login.html', context)
     except:
         return render(request, 'admin/login.html')
@@ -68,22 +68,28 @@ def admin(request):
     user_id = request.user.id
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
-        print("user does not exist")
         return redirect('render login')
     user = User.objects.get(id=user_id)
     if not user.authenticated:
-        print("not authenticated")
         return redirect('render login')
 
     return render(request, 'admin/admin.html', context)
 
 
 def render_auth(request):
-    context = {
-        'token': request.session['token'],
-        'user': request.session['user'],
-    }
-    return render(request, 'admin/auth.html', context)
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'token': request.session['token'],
+                'user': request.session['user'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/auth.html', context)
+    except:
+        return render(request, 'admin/auth.html')
+
+    return render(request, 'admin/auth.html')
 
 
 @api_view(['POST'])
@@ -94,23 +100,23 @@ def try_login(request):
     View to log in
     """
     if not request.data.get('email', None):
-        request.session['incorrect'] = "email not provided"
+        request.session['response'] = "Email not provided"
         return redirect('render login')
         # return Response("email not provided", status=status.HTTP_400_BAD_REQUEST)
 
     if not request.data.get('password', None):
-        request.session['incorrect'] = "password not provided"
+        request.session['response'] = "Password not provided"
         return redirect('render login')
         # return Response("password not provided", status=status.HTTP_400_BAD_REQUEST)
 
     users = User.objects.all().filter(email=request.data['email'])
     if not users.exists():
-        request.session['incorrect'] = "Email does not exist"
+        request.session['response'] = "Email does not exist"
         return redirect('render login')
         # return Response("Email does not exist", status=status.HTTP_400_BAD_REQUEST)
     user = User.objects.get(email=request.data['email'])
     if not check_password(request.data['password'], user.password):
-        request.session['incorrect'] = "Incorrect password"
+        request.session['response'] = "Incorrect password"
         return redirect('render login')
         # return Response("Incorrect password", status=status.HTTP_400_BAD_REQUEST)
 
@@ -175,21 +181,25 @@ def authenticate(request):
     user_id = request.user.id
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
-        print("user does not exist")
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "User does not exist"
+        return redirect('render auth')
+        # return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
     user = User.objects.get(id=user_id)
     if user.authenticated:
-        print("already authenticated")
-        return Response("already authenticated", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Already authenticated"
+        return redirect('render auth')
+        # return Response("already authenticated", status=status.HTTP_400_BAD_REQUEST)
 
     security_code = request.data.get('security_code', None)
     if not security_code:
-        print("no security code provided")
-        return Response("no security code provided", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "No security code provided"
+        return redirect('render auth')
+        # return Response("no security code provided", status=status.HTTP_400_BAD_REQUEST)
 
     if security_code != user.security_code:
-        print("incorrect code")
-        return Response("incorrect code", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Incorrect code"
+        return redirect('render auth')
+        # return Response("incorrect code", status=status.HTTP_400_BAD_REQUEST)
     user.authenticated = True
     user.security_code = None
     user.save()

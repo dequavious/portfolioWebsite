@@ -1,43 +1,49 @@
 {% extends "admin/base.html" %}
+{% load crispy_forms_filters %}
 
 {% block title %}
     Login
 {% endblock %}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
 
-    <p>Token: {{ token }}</p>
-    <p>User: {{ user }}</p>
+    <div class="container mt-3">
 
-    <form method="post" action="{% url 'authenticate' %}" class="form-group">
-        {% csrf_token %}
-        {{form|crispy}}
+        {% if alert %}
+            <div class="alert alert-danger">
+                <strong>{{ alert }}</strong>
+            </div>
+        {% endif %}
 
-        <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control" id="security_code" placeholder="Enter security code" name="security_code">
-            <label for="security_code">Security code</label>
-        </div>
+        <form method="post" action="{% url 'authenticate' %}" class="form-group" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
 
-        <button id="submitButton" type="submit" class="btn btn-success">Submit</button>
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" id="security_code" placeholder="Enter security code" name="security_code" required>
+                <label for="security_code">Security code</label>
+            </div>
 
-    </form>
+            <button id="submitButton" type="submit" class="btn btn-success">Submit</button>
+
+        </form>
+
+    </div>
 
     <script>
         $('#submitButton').on('click',function(){
             $.ajax({
-                  url: "http://127.0.0.1:8000/admin/auth",
-                  type: 'POST',
-                  data: {
-                          securityCode: $('#security_code').val()
-                        },
-                  contentType: 'application/json',
-                  headers: {
-                            "Authorization": "Token " + $('{{ token }}').val()
-                         },
-                  async: false
-                    })
+                url: "http://127.0.0.1:8000/admin/auth",
+                type: 'POST',
+                data: {
+                    security_code: $('#security_code').val()
+                },
+                contentType: 'application/json',
+                headers: {
+                    "Authorization": "Token " + $('{{ token }}').val()
+                },
+                async: false
+            })
         });
     </script>
 {% endblock %}
