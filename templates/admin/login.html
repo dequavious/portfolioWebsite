@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-3">
+    <div class="container mt-lg-5">
+
+        <h1>Login</h1>
+
         <form method="post" action="{% url 'login' %}" class="form-group" enctype="multipart/form-data">
             {% csrf_token %}
             {{form|crispy}}
@@ -27,22 +30,34 @@
                 <label for="password">Password</label>
             </div>
 
-            <div class="clearfix">
-                <span class="float-start">
-                    <button type="submit" class="btn btn-success">Login</button>
-                </span>
-
-                <span class="float-end">
-                    <input type="checkbox" onclick="myFunction()"> Show Password
-                </span>
+            <div class="form-check mb-0">
+                <div class="clearfix">
+                    <span class="float-start">
+                        <input class="form-check-input me-2" type="checkbox" id="rememberMe" name="remember" />
+                        <label class="form-check-label" for="rememberMe">
+                        Remember me
+                        </label>
+                    </span>
+                    <span class="float-end">
+                        <input class="form-check-input me-2" type="checkbox" id="showPassword" onclick="myFunction()"/>
+                        <label class="form-check-label" for="showPassword">
+                        Show password
+                        </label>
+                    </span>
+                </div>
             </div>
+
+            <br><br>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+
         </form>
     </div>
 
     <script>
     function myFunction() {
-        var x = document.getElementById("password");
-            if (x.type === "password") {
+        const x = document.getElementById("password");
+        if (x.type === "password") {
                 x.type = "text";
             } else {
                 x.type = "password";

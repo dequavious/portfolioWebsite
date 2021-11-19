@@ -2,17 +2,53 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-    <div class="container mt-3">
-        <h1>Admin</h1>
+    <div class="container mt-lg-5">
 
-        <form id="updateBioForm" method="post" action="{% url 'update bio' %}" enctype="multipart/form-data">
+        <h1>Details</h1>
+
+        <form id="updateForm" method="post" action="{% url 'update details' %}" enctype="multipart/form-data" onsubmit="process(event)">
             {% csrf_token %}
             {{form|crispy}}
             <div class="mb-3 mt-3">
-                <label for="bio">Bio:</label>
-                <textarea class="form-control" rows="5" id="bio" name="text">{{ user.bio }}</textarea>
+                <div class="d-flex flex-column container col-sm-4">
+                    <div class="p-0">
+                        <label for="file">Current display picture: </label>
+                    </div>
+                    <div class="p-0">
+                        <img src="{{ user.picture }}" class="rounded float-start img-fluid" alt="not found"/>
+                    </div>
+                </div>
+                <label for="file">Choose another picture: </label>
+                <input type="file" class="form-control"  id="file" name="file">
             </div>
-            <button id="updateBioBtn" type="submit" class="btn btn-primary">Update</button>
+            <div class="mb-3 mt-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="{{ user.email }}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="{{ user.name }}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="surname">Surname:</label>
+                <input type="text" class="form-control" id="surname" name="surname" placeholder="{{ user.surname }}">
+            </div>
+            <div class="mb-3 mt-3">
+                <div class="d-flex flex-column">
+                    <div class="p-0">
+                        <label for="number">Number: </label>
+                    </div>
+                    <div class="p-0">
+                        <input type="tel" class="form-control" id="number" name="number" placeholder="{{ user.number }}" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="bio">Bio:</label>
+                <textarea class="form-control" rows="5" id="bio" name="bio" placeholder="{{ user.bio }}"></textarea>
+            </div>
+
+            <button id="updateBtn" type="submit" class="btn btn-primary">Update</button>
         </form>
 
         <br>
@@ -22,7 +58,7 @@
                 <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{form|crispy}}
-                    <button id="logoutBtn" type="submit" class="btn btn-success">Logout</button>
+                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>
                 </form>
             </div>
         </div>
@@ -30,32 +66,12 @@
     </div>
 
     <script>
-        $('#logoutButton').on('click',function(){
-            $.ajax({
-                url: "http://127.0.0.1:8000/admin/logout",
-                type: 'POST',
-                headers: {
-                    "Authorization": "Token " + $('{{ token }}').val()
-                },
-                async: false
-            })
+        const phoneInputField = document.querySelector("#number");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "za",
+            utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
-
-        $('#updateBioBtn').on('click',function(){
-            $.ajax({
-                url: "http://127.0.0.1:8000/admin/update_bio",
-                type: 'POST',
-                data: {
-                    bio: $('#bio').val()
-                },
-                contentType: 'application/json',
-                headers: {
-                        "Authorization": "Token " + $('{{ token }}').val()
-                },
-                async: false
-            })
-        });
-
     </script>
 
 {% endblock content %}

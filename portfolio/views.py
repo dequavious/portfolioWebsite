@@ -60,11 +60,6 @@ def render_login(request):
 
 @permission_classes([IsAuthenticated])
 def admin(request):
-    context = {
-        'token': request.session['token'],
-        'user': request.session['user'],
-    }
-
     user_id = request.user.id
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
@@ -73,16 +68,31 @@ def admin(request):
     if not user.authenticated:
         return redirect('render login')
 
+    user = UserSerializer(user, many=False)
+
+    context = {
+        'token': request.session['token'],
+        'user': user.data,
+    }
+
     return render(request, 'admin/admin.html', context)
 
 
+@permission_classes([IsAuthenticated])
 def render_auth(request):
+    user_id = request.user.id
+    users = User.objects.all().filter(id=user_id)
+    if not users.exists():
+        return redirect('render login')
+    user = User.objects.get(id=user_id)
+    if not user.is_active:
+        return redirect('render login')
+
     try:
         if request.session['response']:
             context = {
                 'alert': request.session['response'],
                 'token': request.session['token'],
-                'user': request.session['user'],
             }
             request.session.pop('response')
             return render(request, 'admin/auth.html', context)
@@ -129,8 +139,10 @@ def try_login(request):
     serializer = UserSerializer(user, many=False)
 
     if request.data.get('remember', None):
+        print("remember")
         access_token = generate_access_token(user, True)
     else:
+        print("don't remember")
         access_token = generate_access_token(user, False)
 
     refresh_token = generate_refresh_token(user, False, False)
@@ -143,7 +155,6 @@ def try_login(request):
     }
 
     request.session['token'] = access_token
-    request.session['user'] = serializer.data
 
     return redirect('render auth')
 
@@ -245,7 +256,7 @@ def get_details(request):
     return Response(serializer.data)
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def update_details(request):
@@ -259,35 +270,49 @@ def update_details(request):
     if not user.authenticated:
         return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
 
-    if request.data.get('name', None):
-        name = request.data['name']
+    name = request.data.get('name', None)
+    if name:
         user.name = name
         user.save()
 
-    if request.data.get('surname', None):
-        surname = request.data['surname']
+    surname = request.data.get('surname', None)
+    if surname:
         user.surname = surname
         user.save()
 
-    if request.data.get('number', None):
-        number = request.data['number']
+    number = request.data.get('number', None)
+    if number:
         user.number = number
         user.save()
 
-    if request.data.get('email', None):
-        email = request.data['email']
+    bio = request.data.get('bio', None)
+    if bio:
+        user.bio = bio
+        user.save()
+
+    image = request.data.get('file', None)
+    if image:
+        if not imghdr.what(image):
+            return Response("not a valid image format", status=status.HTTP_400_BAD_REQUEST)
+
+        if user.picture:
+            delete_file(user.picture)
+
+        user.picture = image
+        user.save()
+
+    email = request.data.get('email', None)
+    if email:
         if User.objects.all().filter(email=email).exists():
             return Response("email already exists", status=status.HTTP_400_BAD_REQUEST)
         temp = User(id=user.id, email=email, name=user.name, surname=user.surname,
                     number=user.number, password=user.password)
         send_email_verification_link(temp, request)
 
-    return Response("Successfully updated user details. If you have changed your email address, it will have to be "
-                    "verified in order for it to be updated",
-                    status=status.HTTP_200_OK)
+    return redirect('admin')
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def reset_password(request):
@@ -407,60 +432,6 @@ def verify_email(request):
         return render(request, "expired.html")
     except jwt.exceptions.DecodeError:
         return render(request, "invalid.html")
-
-
-@api_view(['POST', 'PUT'])
-@permission_classes([IsAuthenticated])
-@csrf_protect
-def update_bio(request):
-    """
-    View to update bio
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    bio = request.data.get('bio', None)
-    if not bio:
-        return Response("bio not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    user.bio = bio
-    user.save()
-
-    return Response(status=status.HTTP_200_OK)
-
-
-@api_view(['POST'])
-@parser_classes([MultiPartParser])
-@permission_classes([IsAuthenticated])
-@csrf_protect
-def upload_profile_picture(request):
-    """
-    View to upload a profile picture
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    image = request.data.get('file', None)
-    if not image:
-        return Response("no image selected", status=status.HTTP_400_BAD_REQUEST)
-    if not imghdr.what(image):
-        return Response("not a valid image format", status=status.HTTP_400_BAD_REQUEST)
-
-    if user.picture:
-        delete_file(user.picture)
-
-    user.picture = image
-    user.save()
-
-    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST', 'PUT'])
@@ -1502,8 +1473,11 @@ def refresh_token_view(request):
     if user is None:
         raise exceptions.AuthenticationFailed('User not found')
 
+    if not user.is_active:
+        Response("User inactive", status=status.HTTP_400_BAD_REQUEST)
+
     if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
+        return Response("User not authenticated", status=status.HTTP_400_BAD_REQUEST)
 
     user.token_last_expired = timezone.now()
     user.security_code = generate_security_code()

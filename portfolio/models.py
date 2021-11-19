@@ -43,6 +43,7 @@ class CustomUser(AbstractBaseUser):
     bio = models.CharField(default=None, max_length=1000, null=True, blank=True)
     number = PhoneNumberField(unique=True)
     dob = models.DateField(default='1998-10-20')
+    is_active = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'surname', 'number']
