@@ -139,10 +139,8 @@ def try_login(request):
     serializer = UserSerializer(user, many=False)
 
     if request.data.get('remember', None):
-        print("remember")
         access_token = generate_access_token(user, True)
     else:
-        print("don't remember")
         access_token = generate_access_token(user, False)
 
     refresh_token = generate_refresh_token(user, False, False)
@@ -155,6 +153,8 @@ def try_login(request):
     }
 
     request.session['token'] = access_token
+
+    print(access_token)
 
     return redirect('render auth')
 
@@ -660,6 +660,7 @@ def update_language(request):
         language.save()
 
     return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
