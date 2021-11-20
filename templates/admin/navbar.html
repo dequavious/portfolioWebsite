@@ -1,3 +1,4 @@
+{% load crispy_forms_filters %}
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <div class="container-fluid">
 
@@ -39,6 +40,13 @@
                     <a class="nav-link" href="{% url 'databases' %}">Databases</a>
                 </li>
             </ul>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+            <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button id="logoutBtn" type="submit" class="btn btn-light text-secondary">Logout</button>
+            </form>
         </div>
     </div>
 

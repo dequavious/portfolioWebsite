@@ -2,16 +2,24 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-    <div class="container mt-lg-5">
+    <div class="container-fluid mt-lg-5">
 
         <br>
 
         <h1>Strengths</h1>
 
-        <br><br>
+        <br>
+
+        {% if alert %}
+            <div class="alert alert-danger">
+                <strong>{{ alert }}</strong>
+            </div>
+        {% endif %}
+
+        <br>
 
         <h3>Add strength</h3>
-        <div class="container border">
+        <div class="container-fluid border">
             <form method="post" action="{% url 'add skill' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
@@ -30,7 +38,7 @@
         <br><br>
 
         <h3>Edit/delete strength</h3>
-        <div class="container border">
+        <div class="container-fluid border">
             <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
                 {{form|crispy}}
                 <div class="form-floating mt-3 mb-3">

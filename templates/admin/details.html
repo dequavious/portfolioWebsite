@@ -2,13 +2,23 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-    <div class="container mt-lg-5">
+    <div class="container-fluid mt-lg-5">
 
         <br>
 
         <h1>Details</h1>
 
-        <div class="container border">
+        <br>
+
+        {% if alert %}
+            <div class="alert alert-danger">
+                <strong>{{ alert }}</strong>
+            </div>
+        {% endif %}
+
+        <br>
+
+        <div class="container-fluid border">
 
             <form id="updateForm" method="post" action="{% url 'update details' %}" enctype="multipart/form-data">
                 {% csrf_token %}

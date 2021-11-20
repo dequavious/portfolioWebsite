@@ -2,10 +2,111 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+    <div class="container-fluid mt-lg-5">
 
-    <div class="container mt-lg-5">
+        <br>
 
         <h1>Databases</h1>
+
+        <br>
+
+        {% if alert %}
+            <div class="alert alert-danger">
+                <strong>{{ alert }}</strong>
+            </div>
+        {% endif %}
+
+        <br>
+
+        <h3>Add database</h3>
+        <div class="container-fluid border">
+            <form method="post" action="{% url 'add dbms' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="mb-3 mt-3">
+                    <label for="addDatabase">Database:</label>
+                    <input type="text" class="form-control" id="addDatabase" name="dbms" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addConfidence">Confidence:</label>
+                    <input type="text" class="form-control" id="addConfidence" name="confidence" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addImage">Choose avatar: </label>
+                    <input type="file" class="form-control"  id="addImage" name="avatar" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+
+            <br>
+
+        </div>
+
+        <br><br>
+
+        <h3>Edit/delete database</h3>
+        <div class="container-fluid border">
+            <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                {{form|crispy}}
+                <div class="form-floating mt-3 mb-3">
+                    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search for database...">
+                    <label for="myInput">Search</label>
+                </div>
+            </form>
+        </div>
+        <br>
+        <ul id="myUL" class="list-group">
+            {% for db in databases %}
+                <li class="list-group-item">
+
+                    <form id="updateForm{{ db.id }}" method="post" action="{% url 'update dbms' %}?id={{ db.id }}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <div class="mb-3 mt-3">
+                            <label for="update{{ db.id }}">Database:</label>
+                            <input type="text" class="form-control" id="update{{ db.id }}" name="dbms" placeholder="{{ db.dbms }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="updateConfidence{{ db.id }}">Confidence:</label>
+                            <input type="text" class="form-control" id="updateConfidence{{ db.id }}" name="confidence" placeholder="{{ db.confidence }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <div class="d-flex flex-column container col-sm-4">
+                                <div class="p-0">
+                                    <label for="file">Current avatar: </label>
+                                </div>
+                                <div class="p-0">
+                                    <img src="{{ db.avatar }}" class="rounded float-start img-fluid" alt="not found"/>
+                                </div>
+                            </div>
+                            <label for="updateImage{{ db.id }}">Choose another avatar: </label>
+                            <input type="file" class="form-control"  id="updateImage{{ db.id }}" name="avatar">
+                        </div>
+                    </form>
+
+                    <div class="clearfix">
+                        <div class="float-start">
+                            <button type="submit" class="btn btn-primary" form="updateForm{{ db.id }}">Update</button>
+                        </div>
+                        <div class="float-start">
+                            <form method="post" action="{% url 'delete dbms' %}?id={{ db.id }}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form|crispy}}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br>
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <br>
 
         <div class="clearfix">
             <div class="float-end">
@@ -17,6 +118,32 @@
             </div>
         </div>
 
+        <br>
+
     </div>
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, div, form, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                form = li[i].getElementsByTagName("form")[0];
+                div =  form.getElementsByTagName("div")[0];
+                input = div.getElementsByTagName("input")[0];
+                txtValue = input.placeholder;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 {% endblock %}

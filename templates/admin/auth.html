@@ -7,28 +7,38 @@
 
 {% block content %}
 
-    <div class="container mt-lg-5">
+    <div class="container-fluid mt-lg-5">
 
-        <h1>Authorize</h1>
+        <br>
 
-        {% if alert %}
-            <div class="alert alert-danger">
-                <strong>{{ alert }}</strong>
-            </div>
-        {% endif %}
+        <div class="container border">
 
-        <form method="post" action="{% url 'authenticate' %}" class="form-group" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form|crispy}}
+            <br>
 
-            <div class="form-floating mb-3 mt-3">
-                <input type="text" class="form-control" id="security_code" placeholder="Enter security code" name="security_code" required>
-                <label for="security_code">Security code</label>
-            </div>
+            <h1>Authorize</h1>
 
-            <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+            {% if alert %}
+                <div class="alert alert-danger">
+                    <strong>{{ alert }}</strong>
+                </div>
+            {% endif %}
 
-        </form>
+            <form method="post" action="{% url 'authenticate' %}" class="form-group" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+
+                <div class="form-floating mb-3 mt-3">
+                    <input type="text" class="form-control" id="security_code" placeholder="Enter security code" name="security_code" required>
+                    <label for="security_code">Security code</label>
+                </div>
+
+                <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+
+            <br>
+
+        </div>
 
     </div>
 

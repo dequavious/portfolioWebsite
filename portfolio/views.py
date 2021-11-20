@@ -100,6 +100,22 @@ def details(request):
 
     user = UserSerializer(user, many=False)
 
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'user': user.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/details.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'user': user.data,
+        }
+        return render(request, 'admin/details.html', context)
+
     context = {
         'token': request.session['token'],
         'user': user.data,
@@ -122,6 +138,22 @@ def documents(request):
 
     docs = Document.objects.all()
     docs = DocumentSerializer(docs, many=True)
+
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'documents': docs.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/documents.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'documents': docs.data,
+        }
+        return render(request, 'admin/documents.html', context)
 
     context = {
         'token': request.session['token'],
@@ -146,6 +178,22 @@ def hobbies(request):
     interests = Hobby.objects.all()
     interests = HobbySerializer(interests, many=True)
 
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'hobbies': interests.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/hobbies.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'hobbies': interests.data,
+        }
+        return render(request, 'admin/hobbies.html', context)
+
     context = {
         'token': request.session['token'],
         'hobbies': interests.data,
@@ -168,6 +216,22 @@ def education(request):
 
     edu = Education.objects.all()
     edu = EducationSerializer(edu, many=True)
+
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'degrees': edu.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/education.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'degrees': edu.data,
+        }
+        return render(request, 'admin/education.html', context)
 
     context = {
         'token': request.session['token'],
@@ -192,6 +256,22 @@ def work(request):
     jobs = Work.objects.all()
     jobs = WorkSerializer(jobs, many=True)
 
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'jobs': jobs.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/work.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'jobs': jobs.data,
+        }
+        return render(request, 'admin/work.html', context)
+
     context = {
         'token': request.session['token'],
         'jobs': jobs.data,
@@ -214,6 +294,22 @@ def strengths(request):
 
     skills = Skill.objects.all()
     skills = SkillSerializer(skills, many=True)
+
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'skills': skills.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/strengths.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'skills': skills.data,
+        }
+        return render(request, 'admin/strengths.html', context)
 
     context = {
         'token': request.session['token'],
@@ -238,6 +334,22 @@ def projects(request):
     proj = Project.objects.all()
     proj = ProjectSerializer(proj, many=True)
 
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'projects': proj.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/projects.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'projects': proj.data,
+        }
+        return render(request, 'admin/projects.html', context)
+
     context = {
         'token': request.session['token'],
         'projects': proj.data,
@@ -260,6 +372,22 @@ def languages(request):
 
     lang = Language.objects.all()
     lang = LanguageSerializer(lang, many=True)
+
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'languages': lang.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/languages.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'languages': lang.data,
+        }
+        return render(request, 'admin/languages.html', context)
 
     context = {
         'token': request.session['token'],
@@ -284,6 +412,22 @@ def frameworks(request):
     technologies = Framework.objects.all()
     technologies = FrameworkSerializer(technologies, many=True)
 
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'frameworks': technologies.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/frameworks.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'frameworks': technologies.data,
+        }
+        return render(request, 'admin/frameworks.html', context)
+
     context = {
         'token': request.session['token'],
         'frameworks': technologies.data,
@@ -306,6 +450,22 @@ def databases(request):
 
     db = DBMS.objects.all()
     db = DBMSSerializer(db, many=True)
+
+    try:
+        if request.session['response']:
+            context = {
+                'alert': request.session['response'],
+                'databases': db.data,
+                'token': request.session['token'],
+            }
+            request.session.pop('response')
+            return render(request, 'admin/databases.html', context)
+    except:
+        context = {
+            'token': request.session['token'],
+            'databases': db.data,
+        }
+        return render(request, 'admin/databases.html', context)
 
     context = {
         'token': request.session['token'],
@@ -486,7 +646,9 @@ def update_details(request):
     image = request.data.get('file', None)
     if image:
         if not imghdr.what(image):
-            return Response("not a valid image format", status=status.HTTP_400_BAD_REQUEST)
+            request.session['response'] = "Not a valid image format"
+            return redirect('details')
+            # return Response("not a valid image format", status=status.HTTP_400_BAD_REQUEST)
 
         if user.picture:
             delete_file(user.picture)
@@ -648,7 +810,9 @@ def upload_document(request):
 
     tokens = os.path.splitext(str(file))
     if not tokens[1] == '.pdf':
-        return Response("needs to be pdf format", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Needs to be pdf format"
+        return redirect('documents')
+        # return Response("needs to be pdf format", status=status.HTTP_400_BAD_REQUEST)
 
     file_type = request.data.get('type', None)
     if not file_type:
@@ -793,14 +957,16 @@ def add_language(request):
     if not language:
         return Response("language not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    languages = Language.objects.all().filter(language=language)
+    lang = Language.objects.all().filter(language=language)
 
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    if languages.exists():
-        return Response("language already added", status=status.HTTP_400_BAD_REQUEST)
+    if lang.exists():
+        request.session['response'] = "Language already added"
+        return redirect('languages')
+        # return Response("language already added", status=status.HTTP_400_BAD_REQUEST)
 
     avatar = request.data.get('avatar', None)
     if avatar:
@@ -810,10 +976,10 @@ def add_language(request):
 
     language.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('languages')
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser])
 @csrf_protect
@@ -832,14 +998,19 @@ def update_language(request):
     if not lid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    languages = Language.objects.all().filter(id=lid)
-    if not languages.exists():
+    lang = Language.objects.all().filter(id=lid)
+    if not lang.exists():
         return Response("language not found", status=status.HTTP_400_BAD_REQUEST)
 
     language = Language.objects.get(id=lid)
 
-    language_str = request.GET.get('language')
+    language_str = request.data.get('language', None)
     if language_str:
+        lang = Language.objects.all().filter(language=language_str)
+
+        if lang.exists():
+            request.session['response'] = "Language already added"
+            return redirect('languages')
         language.language = language_str
         language.save()
 
@@ -855,10 +1026,10 @@ def update_language(request):
         language.avatar = avatar
         language.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('languages')
 
 
-@api_view(['DELETE'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def delete_language(request):
@@ -876,8 +1047,8 @@ def delete_language(request):
     if not lid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    languages = Language.objects.all().filter(id=lid)
-    if not languages.exists():
+    lang = Language.objects.all().filter(id=lid)
+    if not lang.exists():
         return Response("language not found", status=status.HTTP_400_BAD_REQUEST)
 
     language = Language.objects.get(id=lid)
@@ -887,7 +1058,7 @@ def delete_language(request):
 
     language.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('languages')
 
 
 @api_view(['POST'])
@@ -909,14 +1080,15 @@ def add_framework(request):
     if not framework:
         return Response("framework not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    frameworks = Framework.objects.all().filter(framework=framework)
+    technologies = Framework.objects.all().filter(framework=framework)
 
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    if frameworks.exists():
-        return Response("framework already added", status=status.HTTP_400_BAD_REQUEST)
+    if technologies.exists():
+        request.session['response'] = "Framework already added"
+        return redirect('frameworks')
 
     avatar = request.data.get('avatar', None)
     if avatar:
@@ -926,10 +1098,10 @@ def add_framework(request):
 
     framework.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('frameworks')
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser])
 @csrf_protect
@@ -948,14 +1120,19 @@ def update_framework(request):
     if not fid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    frameworks = Framework.objects.all().filter(id=fid)
-    if not frameworks.exists():
+    technologies = Framework.objects.all().filter(id=fid)
+    if not technologies.exists():
         return Response("framework not found", status=status.HTTP_400_BAD_REQUEST)
 
     framework = Framework.objects.get(id=fid)
 
-    framework_str = request.GET.get('framework')
+    framework_str = request.data.get('framework', None)
     if framework_str:
+        technologies = Framework.objects.all().filter(framework=framework_str)
+
+        if technologies.exists():
+            request.session['response'] = "Framework already added"
+            return redirect('frameworks')
         framework.framework = framework_str
         framework.save()
 
@@ -971,10 +1148,10 @@ def update_framework(request):
         framework.avatar = avatar
         framework.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('frameworks')
 
 
-@api_view(['DELETE'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def delete_framework(request):
@@ -992,8 +1169,8 @@ def delete_framework(request):
     if not fid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    frameworks = Framework.objects.all().filter(id=fid)
-    if not frameworks.exists():
+    technologies = Framework.objects.all().filter(id=fid)
+    if not technologies.exists():
         return Response("framework not found", status=status.HTTP_400_BAD_REQUEST)
 
     framework = Framework.objects.get(id=fid)
@@ -1003,7 +1180,7 @@ def delete_framework(request):
 
     framework.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('frameworks')
 
 
 @api_view(['POST'])
@@ -1025,14 +1202,15 @@ def add_dbms(request):
     if not dbms:
         return Response("dbms not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    databases = DBMS.objects.all().filter(dbms=dbms)
+    db = DBMS.objects.all().filter(dbms=dbms)
 
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    if databases.exists():
-        return Response("dbms already added", status=status.HTTP_400_BAD_REQUEST)
+    if db.exists():
+        request.session['response'] = "Database already added"
+        return redirect('databases')
 
     avatar = request.data.get('avatar', None)
     if avatar:
@@ -1042,10 +1220,10 @@ def add_dbms(request):
 
     dbms.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('databases')
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser])
 @csrf_protect
@@ -1064,14 +1242,18 @@ def update_dbms(request):
     if not did:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    databases = DBMS.objects.all().filter(id=did)
-    if not databases.exists():
+    db = DBMS.objects.all().filter(id=did)
+    if not db.exists():
         return Response("dbms not found", status=status.HTTP_400_BAD_REQUEST)
 
     database = DBMS.objects.get(id=did)
 
     dbms = request.data.get('dbms', None)
     if dbms:
+        db = DBMS.objects.all().filter(dbms=dbms)
+        if db.exists():
+            request.session['response'] = "Database already added"
+            return redirect('databases')
         database.dbms = dbms
         database.save()
 
@@ -1087,10 +1269,10 @@ def update_dbms(request):
         database.avatar = avatar
         database.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('databases')
 
 
-@api_view(['DELETE'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def delete_dbms(request):
@@ -1108,8 +1290,8 @@ def delete_dbms(request):
     if not did:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    databases = DBMS.objects.all().filter(id=did)
-    if not databases.exists():
+    db = DBMS.objects.all().filter(id=did)
+    if not db.exists():
         return Response("dbms not found", status=status.HTTP_400_BAD_REQUEST)
 
     database = DBMS.objects.get(id=did)
@@ -1119,7 +1301,7 @@ def delete_dbms(request):
 
     database.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('databases')
 
 
 @api_view(['POST'])
@@ -1144,7 +1326,9 @@ def add_hobby(request):
     interests = Hobby.objects.all().filter(hobby=hobby)
 
     if interests.exists():
-        return Response("hobby already added", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Hobby already added"
+        return redirect('hobbies')
+        # return Response("hobby already added", status=status.HTTP_400_BAD_REQUEST)
 
     avatar = request.data.get('avatar', None)
     if avatar:
@@ -1183,6 +1367,10 @@ def update_hobby(request):
 
     interest = request.data.get('hobby', None)
     if interest:
+        interests = Hobby.objects.all().filter(hobby=interest)
+        if interests.exists():
+            request.session['response'] = "Hobby already added"
+            return redirect('hobbies')
         hobby.hobby = interest
         hobby.save()
 
@@ -1194,6 +1382,7 @@ def update_hobby(request):
         hobby.save()
 
     return redirect('hobbies')
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -1246,7 +1435,9 @@ def add_skill(request):
     skills = Skill.objects.all().filter(skill=skill)
 
     if skills.exists():
-        return Response("skill already added", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Strength already added"
+        return redirect('strengths')
+        # return Response("skill already added", status=status.HTTP_400_BAD_REQUEST)
 
     skill = Skill(skill=skill)
     skill.save()
@@ -1281,6 +1472,10 @@ def update_skill(request):
 
     skill_str = request.data.get('skill', None)
     if skill_str:
+        skills = Skill.objects.all().filter(skill=skill_str)
+        if skills.exists():
+            request.session['response'] = "Strength already added"
+            return redirect('strengths')
         skill.skill = skill_str
         skill.save()
 
@@ -1341,7 +1536,9 @@ def add_work(request):
     jobs = Work.objects.all().filter(description=description, company=company)
 
     if jobs.exists():
-        return Response("job already added", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Job already added"
+        return redirect('work')
+        # return Response("job already added", status=status.HTTP_400_BAD_REQUEST)
 
     job = Work(description=description, company=company)
     job.save()
@@ -1375,11 +1572,18 @@ def update_work(request):
     job = Work.objects.get(id=wid)
 
     description = request.data.get('description', None)
+    company = request.data.get('company', None)
+
+    if description and company:
+        jobs = Work.objects.all().filter(description=description, company=company)
+        if jobs.exists():
+            request.session['response'] = "Job already added"
+            return redirect('work')
+
     if description:
         job.description = description
         job.save()
 
-    company = request.data.get('company', None)
     if company:
         job.company = company
         job.save()
@@ -1442,18 +1646,20 @@ def add_project(request):
     if not git:
         return Response("link not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    projects = Project.objects.all().filter(description=description)
+    proj = Project.objects.all().filter(description=description)
 
-    if projects.exists():
-        return Response("project already added", status=status.HTTP_400_BAD_REQUEST)
+    if proj.exists():
+        request.session['response'] = "Project already added"
+        return redirect('projects')
+        # return Response("project already added", status=status.HTTP_400_BAD_REQUEST)
 
     project = Project(description=description, git=git, link=link)
     project.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('projects')
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def update_project(request):
@@ -1471,15 +1677,20 @@ def update_project(request):
     if not pid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    projects = Project.objects.all().filter(id=pid)
+    proj = Project.objects.all().filter(id=pid)
 
-    if not projects.exists():
+    if not proj.exists():
         return Response("project not found", status=status.HTTP_400_BAD_REQUEST)
 
     project = Project.objects.get(id=pid)
 
     description = request.data.get('description', None)
     if description:
+        proj = Project.objects.all().filter(description=description)
+
+        if proj.exists():
+            request.session['response'] = "Project already added"
+            return redirect('projects')
         project.description = description
         project.save()
 
@@ -1493,10 +1704,10 @@ def update_project(request):
         project.link = link
         project.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('projects')
 
 
-@api_view(['DELETE'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
 def delete_project(request):
@@ -1514,15 +1725,15 @@ def delete_project(request):
     if not pid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    projects = Project.objects.all().filter(id=pid)
+    proj = Project.objects.all().filter(id=pid)
 
-    if not projects.exists():
+    if not proj.exists():
         return Response("project not found", status=status.HTTP_400_BAD_REQUEST)
 
     project = Project.objects.get(id=pid)
     project.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    return redirect('projects')
 
 
 @api_view(['POST'])
@@ -1556,7 +1767,9 @@ def add_education(request):
     degrees = Education.objects.all().filter(degree=degree)
 
     if degrees.exists():
-        return Response("degree already added", status=status.HTTP_400_BAD_REQUEST)
+        request.session['response'] = "Degree already added"
+        return redirect('education')
+        # return Response("degree already added", status=status.HTTP_400_BAD_REQUEST)
 
     if grade:
         degree = Education(degree=degree, grade=grade, year=year, institution=institution)
@@ -1595,6 +1808,10 @@ def update_education(request):
 
     degree_str = request.data.get('degree', None)
     if degree_str:
+        degrees = Education.objects.all().filter(degree=degree_str)
+        if degrees.exists():
+            request.session['response'] = "Degree already added"
+            return redirect('education')
         degree.degree = degree_str
         degree.save()
 

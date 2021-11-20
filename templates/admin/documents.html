@@ -4,11 +4,22 @@
 
 {% block content %}
 
-    <div class="container mt-lg-5">
+    <div class="container-fluid mt-lg-5">
 
         <br>
 
         <h1>Documents</h1>
+
+
+        <br>
+
+        {% if alert %}
+            <div class="alert alert-danger">
+                <strong>{{ alert }}</strong>
+            </div>
+        {% endif %}
+
+        <br>
 
         <script>
             const types = []
@@ -20,7 +31,7 @@
         </script>
 
         {% for document in documents %}
-            <div class="container border">
+            <div class="container-fluid border">
                 <br>
                 <form id="update{{ document.type }}Form" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -68,7 +79,7 @@
 
         {% endfor %}
 
-        <div id="uploadCvBorder" class="container border" style="display: none">
+        <div id="uploadCvBorder" class="container-fluid border" style="display: none">
             <br>
             <form id="uploadCvForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
                 {% csrf_token %}
@@ -88,7 +99,7 @@
 
         <br>
 
-        <div id="uploadRecorderBorder" class="container border" style="display: none">
+        <div id="uploadRecorderBorder" class="container-fluid border" style="display: none">
             <br>
             <form id="uploadRecordForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
                 {% csrf_token %}

@@ -6,52 +6,63 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-lg-5">
+    <div class="container-fluid mt-lg-5">
 
-        <h1>Login</h1>
+        <br>
 
-        <form method="post" action="{% url 'login' %}" class="form-group" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form|crispy}}
+        <div class="container border">
 
-            {% if alert %}
-                <div class="alert alert-danger">
-                    <strong>{{ alert }}</strong>
+            <br>
+
+            <h1>Login</h1>
+
+            <form method="post" action="{% url 'login' %}" class="form-group" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+
+                {% if alert %}
+                    <div class="alert alert-danger">
+                        <strong>{{ alert }}</strong>
+                    </div>
+                {% endif %}
+
+                <div class="form-floating mt-3 mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    <label for="email">Email</label>
                 </div>
-            {% endif %}
 
-            <div class="form-floating mt-3 mb-3">
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-                <label for="email">Email</label>
-            </div>
-
-            <div class="form-floating mt-3 mb-3">
-                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
-                <label for="password">Password</label>
-            </div>
-
-            <div class="form-check mb-0">
-                <div class="clearfix">
-                    <span class="float-start">
-                        <input class="form-check-input me-2" type="checkbox" id="rememberMe" name="remember" />
-                        <label class="form-check-label" for="rememberMe">
-                        Remember me
-                        </label>
-                    </span>
-                    <span class="float-end">
-                        <input class="form-check-input me-2" type="checkbox" id="showPassword" onclick="myFunction()"/>
-                        <label class="form-check-label" for="showPassword">
-                        Show password
-                        </label>
-                    </span>
+                <div class="form-floating mt-3 mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+                    <label for="password">Password</label>
                 </div>
-            </div>
 
-            <br><br>
+                <div class="form-check mb-0">
+                    <div class="clearfix">
+                        <span class="float-start">
+                            <input class="form-check-input me-2" type="checkbox" id="rememberMe" name="remember" />
+                            <label class="form-check-label" for="rememberMe">
+                            Remember me
+                            </label>
+                        </span>
+                        <span class="float-end">
+                            <input class="form-check-input me-2" type="checkbox" id="showPassword" onclick="myFunction()"/>
+                            <label class="form-check-label" for="showPassword">
+                            Show password
+                            </label>
+                        </span>
+                    </div>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+                <br>
 
-        </form>
+                <button type="submit" class="btn btn-primary">Login</button>
+
+            </form>
+
+            <br>
+
+        </div>
+
     </div>
 
     <script>

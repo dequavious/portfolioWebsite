@@ -2,10 +2,103 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+    <div class="container-fluid mt-lg-5">
 
-    <div class="container mt-lg-5">
+        <br>
 
         <h1>Projects</h1>
+
+        <br>
+
+        {% if alert %}
+            <div class="alert alert-danger">
+                <strong>{{ alert }}</strong>
+            </div>
+        {% endif %}
+
+        <br>
+
+        <h3>Add project</h3>
+        <div class="container-fluid border">
+            <form method="post" action="{% url 'add project' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="mb-3 mt-3">
+                    <label for="addDescription">Description:</label>
+                    <input type="text" class="form-control" id="addDescription" name="description" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addGit">Git: </label>
+                    <input type="text" class="form-control"  id="addGit" name="git" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addLink">Homepage: </label>
+                    <input type="text" class="form-control"  id="addLink" name="link" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+
+            <br>
+
+        </div>
+
+        <br><br>
+
+        <h3>Edit/delete project</h3>
+        <div class="container-fluid border">
+            <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                {{form|crispy}}
+                <div class="form-floating mt-3 mb-3">
+                    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search for projects...">
+                    <label for="myInput">Search</label>
+                </div>
+            </form>
+        </div>
+        <br>
+        <ul id="myUL" class="list-group">
+            {% for proj in projects %}
+                <li class="list-group-item">
+
+                    <form id="updateForm{{ proj.id }}" method="post" action="{% url 'update project' %}?id={{ proj.id }}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <div class="mb-3 mt-3">
+                            <label for="updateDescription{{ proj.id }}">Description:</label>
+                            <input type="text" class="form-control" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="updateGit{{ proj.id }}">Git: </label>
+                            <input type="text" class="form-control"  id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="updateLink{{ proj.id }}">Homepage: </label>
+                            <input type="text" class="form-control"  id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
+                        </div>
+                    </form>
+
+                    <div class="clearfix">
+                        <div class="float-start">
+                            <button type="submit" class="btn btn-primary" form="updateForm{{ proj.id }}">Update</button>
+                        </div>
+                        <div class="float-start">
+                            <form method="post" action="{% url 'delete project' %}?id={{ proj.id }}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form|crispy}}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br>
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <br>
 
         <div class="clearfix">
             <div class="float-end">
@@ -17,6 +110,32 @@
             </div>
         </div>
 
+        <br>
+
     </div>
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, div, form, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                form = li[i].getElementsByTagName("form")[0];
+                div =  form.getElementsByTagName("div")[0];
+                input = div.getElementsByTagName("input")[0];
+                txtValue = input.placeholder;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 {% endblock %}
