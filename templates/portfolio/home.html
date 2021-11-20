@@ -176,18 +176,18 @@
 
         <div id="info">
             <div class="col-sm-12">
-            <h2 class="text-info">Hobbies</h2>
-            <details open>
-                <summary></summary>
-                <div class="d-flex flex-wrap border-dark">
-                    {% for hobby in hobbies %}
-                        <div class="p-2 card bg-dark border-dark">
-                            <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ hobby.hobby }}" data-bs-toggle="tooltip" data-trigger="focus">
-                        </div>
-                    {% endfor %}
-                </div>
-            </details>
+                <h2 class="text-info">Hobbies</h2>
+                <details open>
+                    <summary></summary>
+                    <div class="d-flex flex-wrap border-dark">
+                        {% for hobby in hobbies %}
+                            <div class="p-2 card bg-dark border-dark">
+                                <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid" alt="not found"
+                                     title="{{ hobby.hobby }}" data-bs-toggle="tooltip">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </details>
             </div>
 
             <div class="col-sm-8">
