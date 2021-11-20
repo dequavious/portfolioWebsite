@@ -1,0 +1,141 @@
+{% extends 'admin/admin.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <div class="container mt-lg-5">
+
+        <br>
+
+        <h1>Education</h1>
+
+        <br><br>
+
+        <h3>Add education</h3>
+        <div class="container border">
+            <form method="post" action="{% url 'add education' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="mb-3 mt-3">
+                    <label for="addEducation">Degree:</label>
+                    <input type="text" class="form-control" id="addEducation" name="degree" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addGrade">Grade: </label>
+                    <input type="text" class="form-control"  id="addGrade" name="grade">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addInstitution">Institution: </label>
+                    <input type="text" class="form-control"  id="addInstitution" name="institution" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="addYear">Year: </label>
+                    <input type="text" class="form-control"  id="addYear" name="year" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+
+            <br>
+
+        </div>
+
+        <br><br>
+
+        <h3>Edit/delete education</h3>
+        <div class="container border">
+            <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                {{form|crispy}}
+                <div class="form-floating mt-3 mb-3">
+                    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search education...">
+                    <label for="myInput">Search</label>
+                </div>
+            </form>
+        </div>
+        <br>
+        <ul id="myUL" class="list-group">
+            {% for degree in degrees %}
+                <li class="list-group-item">
+
+                    <form id="updateForm{{ degree.id }}" method="post" action="{% url 'update education' %}?id={{ degree.id }}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <div class="mb-3 mt-3">
+                            <label for="update{{ degree.id }}">Degree:</label>
+                            <input type="text" class="form-control" id="update{{ degree.id }}" name="degree" placeholder="{{ degree.degree }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="updateGrade{{ degree.id }}">Grade: </label>
+                            <input type="text" class="form-control"  id="updateGrade{{ degree.id }}" name="grade" placeholder="{{ degree.grade }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="updateInstitution{{ degree.id }}">Institution: </label>
+                            <input type="text" class="form-control"  id="updateInstitution{{ degree.id }}" name="institution" placeholder="{{ degree.institution }}">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="updateYear{{ degree.id }}">Year: </label>
+                            <input type="text" class="form-control"  id="updateYear{{ degree.id }}" name="year" placeholder="{{ degree.year }}">
+                        </div>
+                    </form>
+
+                    <div class="clearfix">
+                        <div class="float-start">
+                            <button type="submit" class="btn btn-primary" form="updateForm{{ degree.id }}">Update</button>
+                        </div>
+                        <div class="float-start">
+                            <form method="post" action="{% url 'delete education' %}?id={{ degree.id }}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form|crispy}}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br>
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <br>
+
+        <div class="clearfix">
+            <div class="float-end">
+                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+    </div>
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, div, form, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                form = li[i].getElementsByTagName("form")[0];
+                div =  form.getElementsByTagName("div")[0];
+                input = div.getElementsByTagName("input")[0];
+                txtValue = input.placeholder;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+{% endblock %}

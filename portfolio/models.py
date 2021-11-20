@@ -50,6 +50,7 @@ class CustomUser(AbstractBaseUser):
 
     objects = MyAccountManager()
 
+
 class Address(models.Model):
     street = models.CharField(max_length=60)
     suburb = models.CharField(max_length=60)

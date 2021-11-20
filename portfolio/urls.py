@@ -3,12 +3,24 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('login/', views.render_login, name="render login"),
-    path('details', views.get_details, name="details"),
-    path('get_document', views.get_document, name="get document"),
-    path('auth/', views.render_auth, name="render auth"),
+    path('login/', views.login_page, name="login page"),
+    path('auth/', views.auth_page, name="auth page"),
+
     path('admin/', views.admin, name="admin"),
-    path('admin/login', views.try_login, name="login"),
+    path('details/', views.details, name="details"),
+    path('documents/', views.documents, name="documents"),
+    path('hobbies/', views.hobbies, name="hobbies"),
+    path('education/', views.education, name="education"),
+    path('work/', views.work, name="work"),
+    path('strengths/', views.strengths, name="strengths"),
+    path('projects/', views.projects, name="projects"),
+    path('languages/', views.languages, name="languages"),
+    path('frameworks/', views.frameworks, name="frameworks"),
+    path('databases/', views.databases, name="databases"),
+
+    path('get_document', views.get_document, name="get document"),
+
+    path('admin/login', views.login, name="login"),
     path('admin/2fa', views.two_factor_auth, name="send 2fa"),
     path('admin/auth', views.authenticate, name="authenticate"),
     path('admin/logout', views.logout, name="logout"),
@@ -42,8 +54,8 @@ urlpatterns = [
     path('admin/add_project', views.add_project, name="add project"),
     path('admin/update_project', views.update_project, name="update project"),
     path('admin/delete_project', views.delete_project, name="delete project"),
-    path('admin/add_education', views.add_eduction, name="add education"),
+    path('admin/add_education', views.add_education, name="add education"),
     path('admin/update_education', views.update_education, name="update education"),
-    path('admin/delete_education', views.delete_eduction, name="delete education"),
+    path('admin/delete_education', views.delete_education, name="delete education"),
     path('admin/refresh', views.refresh_token_view, name="refresh token"),
 ]

@@ -1,0 +1,144 @@
+{% extends 'admin/admin.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <div class="container mt-lg-5">
+
+        <br>
+
+        <h1>Documents</h1>
+
+        <script>
+            const types = []
+
+            function add(name) {
+                if(types.indexOf(name) === -1)
+                    types.push(name);
+            }
+        </script>
+
+        {% for document in documents %}
+            <div class="container border">
+                <br>
+                <form id="update{{ document.type }}Form" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <label id="{{ document.type }}Label1" for="{{ document.type }}">{{ document.type }}</label>
+                    <iframe id="{{ document.type }}" src="{% static document.file  %}#toolbar=0" width="100%" height="500px"></iframe>
+                    <label id="{{ document.type }}Label2" for="update{{ document.type }}file">Choose another {{ document.type }}: </label>
+                    <input type="hidden" class="form-control" name="type" value="{{ document.type }}" required>
+                    <input type="file" class="form-control" id="update{{ document.type }}file" name="file" required>
+
+                    <br>
+
+                </form>
+
+                <div class="clearfix">
+                    <div class="float-start">
+                        <button type="submit" class="btn btn-primary" form="update{{ document.type }}Form">Update</button>
+                    </div>
+                    <div class="float-start">
+                        <form method="post" action="{% url 'delete document' %}?type={{ document.type }}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+                <br>
+
+            </div>
+
+            <br>
+
+            <script type="text/javascript">
+                if ("{{ document.type }}" === "cv") {
+                    add("cv")
+                    document.getElementById("{{ document.type }}Label1").innerHTML = "Current CV:";
+                    document.getElementById("{{ document.type }}Label2").innerHTML = "Replace CV:";
+                } else {
+                    add("record")
+                    document.getElementById("{{ document.type }}Label1").innerHTML = "Current academic record:";
+                    document.getElementById("{{ document.type }}Label2").innerHTML = "Replace academic record:";
+                }
+            </script>
+
+        {% endfor %}
+
+        <div id="uploadCvBorder" class="container border" style="display: none">
+            <br>
+            <form id="uploadCvForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
+                {% csrf_token %}
+                {{form|crispy}}
+                <label for="uploadCvFile">Upload CV: </label>
+                <input type="hidden" class="form-control" name="type" value="cv" required>
+                <input type="file" class="form-control" id="uploadCvFile" name="file" required>
+                <br>
+            </form>
+            <div class="clearfix">
+                <div class="float-start">
+                    <button id="uploadCvButton" type="submit" class="btn btn-primary" form="uploadCvForm" style="display: none">Upload</button>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <br>
+
+        <div id="uploadRecorderBorder" class="container border" style="display: none">
+            <br>
+            <form id="uploadRecordForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
+                {% csrf_token %}
+                {{form|crispy}}
+                <label for="uploadRecordFile">Upload Record: </label>
+                <input type="hidden" class="form-control" name="type" value="record" required>
+                <input type="file" class="form-control" id="uploadCvFile" name="file" required>
+                <br>
+            </form>
+            <div id="recordButtons" class="clearfix">
+                <div class="float-start">
+                    <button id="uploadRecordButton" type="submit" class="btn btn-primary" form="uploadRecordForm" style="display: none">Upload</button>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <br>
+
+        <script>
+            if(types.indexOf("cv") === -1) {
+                document.getElementById("uploadCvForm").style.display = "block";
+                document.getElementById("uploadCvButton").style.display = "block";
+                document.getElementById("uploadCvBorder").style.display = "block";
+            } else {
+                document.getElementById("uploadCvForm").style.display = "hidden";
+                document.getElementById("uploadCvButton").style.display = "hidden";
+                document.getElementById("uploadCvBorder").style.display = "hidden";
+            }
+            if(types.indexOf("record") === -1) {
+                document.getElementById("uploadRecordForm").style.display = "block";
+                document.getElementById("uploadRecordButton").style.display = "block";
+                document.getElementById("uploadRecorderBorder").style.display = "block";
+            } else {
+                document.getElementById("uploadRecordForm").style.display = "hidden";
+                document.getElementById("uploadRecordButton").style.display = "hidden";
+                document.getElementById("uploadRecorderBorder").style.display = "hidden";
+            }
+        </script>
+
+        <div class="clearfix">
+            <div class="float-end">
+                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
