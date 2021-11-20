@@ -45,7 +45,7 @@
             <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
-                <button id="logoutBtn" type="submit" class="btn btn-light text-secondary">Logout</button>
+                <button id="logoutBtn" type="submit" class="btn btn-light text-secondary"><strong>Logout</strong></button>
             </form>
         </div>
     </div>
