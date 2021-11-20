@@ -19,7 +19,7 @@
         <br>
 
         <h3>Add strength</h3>
-        <div class="container-fluid border">
+        <div class="container-fluid bg-white border">
             <form method="post" action="{% url 'add skill' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
@@ -38,7 +38,7 @@
         <br><br>
 
         <h3>Edit/delete strength</h3>
-        <div class="container-fluid border">
+        <div class="container-fluid bg-white border">
             <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
                 {{form|crispy}}
                 <div class="form-floating mt-3 mb-3">
@@ -48,7 +48,7 @@
             </form>
         </div>
         <br>
-        <ul id="myUL" class="list-group">
+        <ul id="myUL" class="list-group bg-white">
             {% for skill in skills %}
                 <li class="list-group-item">
 

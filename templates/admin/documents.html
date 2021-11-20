@@ -31,7 +31,7 @@
         </script>
 
         {% for document in documents %}
-            <div class="container-fluid border">
+            <div class="container-fluid bg-white border">
                 <br>
                 <form id="update{{ document.type }}Form" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -79,7 +79,7 @@
 
         {% endfor %}
 
-        <div id="uploadCvBorder" class="container-fluid border" style="display: none">
+        <div id="uploadCvBorder" class="container-fluid bg-white border" style="display: none">
             <br>
             <form id="uploadCvForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
                 {% csrf_token %}
@@ -99,7 +99,7 @@
 
         <br>
 
-        <div id="uploadRecorderBorder" class="container-fluid border" style="display: none">
+        <div id="uploadRecorderBorder" class="container-fluid bg-white border" style="display: none">
             <br>
             <form id="uploadRecordForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
                 {% csrf_token %}
