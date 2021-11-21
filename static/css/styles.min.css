@@ -23,3 +23,11 @@ body {
 dl, dd {
     white-space: nowrap;
 }
+
+.navbar-nav a:hover {
+    border-bottom: 3px solid red;
+}
+
+.navbar-nav a.active {
+    border-bottom: 3px solid red;
+}
