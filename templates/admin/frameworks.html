@@ -2,6 +2,11 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+
+    <script>
+        document.getElementById("frameworks").style.borderBottom = "3px solid white";
+    </script>
+
     <div class="container-fluid mt-lg-5">
 
         <br>
@@ -72,14 +77,15 @@
                             <input type="text" class="form-control" id="updateConfidence{{ framework.id }}" name="confidence" placeholder="{{ framework.confidence }}">
                         </div>
                         <div class="mb-3 mt-3">
-                            <div class="d-flex flex-column container col-sm-4">
+                            <div class="d-flex flex-column">
                                 <div class="p-0">
                                     <label for="file">Current avatar: </label>
                                 </div>
                                 <div class="p-0">
-                                    <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"/>
+                                    <img src="{{ framework.avatar }}" class="rounded float-start img-fluid admin-img" alt="not found"/>
                                 </div>
                             </div>
+                            <br>
                             <label for="updateImage{{ framework.id }}">Choose another avatar: </label>
                             <input type="file" class="form-control"  id="updateImage{{ framework.id }}" name="avatar">
                         </div>

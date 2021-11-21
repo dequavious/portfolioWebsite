@@ -11,7 +11,7 @@ body {
     padding:100px 20px;
 }
 
-.card img {
+.card img, .admin-img {
     height: 100px;
     width: 100px;
 }
@@ -33,11 +33,16 @@ dl, dd {
 }
 
 .admin-nav a:hover {
+    background: #78184a;
     border-bottom: 3px solid white;
 }
 
 .admin-nav a.active {
     border-bottom: 3px solid white;
+}
+
+.admin-footer {
+    background: #66023c;
 }
 
 #admin-navbar {

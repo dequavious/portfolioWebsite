@@ -23,12 +23,12 @@
 
     {% endblock content %}
 
-    <div class="mt-5 p-4 d-flex flex-row justify-content-center" style="background: #78184a;">
+    <div class="mt-5 p-4 d-flex flex-row justify-content-center admin-footer">
 
         <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
-                <button id="logoutBtn" type="submit" class="btn btn-light" style="background: #78184a; color: white"><strong>Logout</strong></button>
+                <button id="logoutBtn" type="submit" class="btn btn-light"><strong>Logout</strong></button>
         </form>
 
     </div>
