@@ -23,11 +23,11 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for language in languages %}
-                            <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#{{ language.language }}_modal">
+                            <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#languageModal{{ language.id }}">
                                 <img src="{{ language.avatar }}" class="rounded float-start img-fluid" alt="not found"
                                      title="{{ language.language }}" data-bs-toggle="tooltip" >
 
-                                <div class="modal fade" id="{{ language.language }}_modal">
+                                <div class="modal fade" id="languageModal{{ language.id }}">
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content text-black">
 
@@ -38,7 +38,7 @@
                                           </div>
 
                                           <!-- Modal body -->
-                                          <div id="{{ language.language }}_body" class="modal-body">
+                                          <div id="languageBody{{ language.id }}" class="modal-body">
                                               {{ language.confidence }}
                                           </div>
 
@@ -55,13 +55,13 @@
 
                             <script type="text/javascript">
                                 if ("{{ language.confidence }}" === "Confident") {
-                                    document.getElementById("{{ language.language }}_body").innerHTML =
+                                    document.getElementById("languageBody{{ language.id }}").innerHTML =
                                         "<i class=\"fa fa-check-square-o\"> {{ language.confidence }}</i>";
                                 } else if ("{{ language.confidence }}" === "Partially confident") {
-                                    document.getElementById("{{ language.language }}_body").innerHTML =
+                                    document.getElementById("languageBody{{ language.id }}").innerHTML =
                                         "<i class=\"fa fa-check\"> {{ language.confidence }}</i>";
                                 } else {
-                                    document.getElementById("{{ language.language }}_body").innerHTML =
+                                    document.getElementById("languageBody{{ language.id }}").innerHTML =
                                         "<i class=\"fa fa-info-circle\"> {{ language.confidence }}</i>";
                                 }
                             </script>
@@ -74,11 +74,11 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for framework in frameworks %}
-                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#{{ framework.framework }}_modal">
+                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#frameworkModal{{ framework.id }}">
                             <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"
                                  title="{{ framework.framework }}" data-bs-toggle="tooltip">
 
-                            <div class="modal fade" id="{{ framework.framework }}_modal">
+                            <div class="modal fade" id="frameworkModal{{ framework.id }}">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content text-black">
 
@@ -89,7 +89,7 @@
                                       </div>
 
                                       <!-- Modal body -->
-                                      <div id="{{ framework.framework }}_body" class="modal-body">
+                                      <div id="frameworkBody{{ framework.id }}" class="modal-body">
                                           {{ framework.confidence }}
                                       </div>
 
@@ -106,13 +106,13 @@
 
                         <script type="text/javascript">
                             if ("{{ framework.confidence }}" === "Confident") {
-                                document.getElementById("{{ framework.framework }}_body").innerHTML =
+                                document.getElementById("frameworkBody{{ framework.id }}").innerHTML =
                                     "<i class=\"fa fa-check-square-o\"> {{ framework.confidence }}</i>";
                             } else if ("{{ language.confidence }}" === "Partially confident") {
-                                document.getElementById("{{ framework.framework }}_body").innerHTML =
+                                document.getElementById("frameworkBody{{ framework.id }}").innerHTML =
                                     "<i class=\"fa fa-check\"> {{ framework.confidence }}</i>";
                             } else {
-                                document.getElementById("{{ framework.framework }}_body").innerHTML =
+                                document.getElementById("frameworkBody{{ framework.id }}").innerHTML =
                                     "<i class=\"fa fa-info-circle\"> {{ framework.confidence }}</i>";
                             }
                         </script>
@@ -125,11 +125,11 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for database in databases %}
-                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#{{ database.dbms }}_modal">
+                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#dbModal{{ database.id }}">
                             <img src="{{ database.avatar }}" class="rounded float-start img-fluid" alt="not found"
                                  title="{{ database.dbms }}" data-bs-toggle="tooltip">
 
-                            <div class="modal fade" id="{{ database.dbms }}_modal">
+                            <div class="modal fade" id="dbModal{{ database.id }}">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content text-black">
 
@@ -140,7 +140,7 @@
                                       </div>
 
                                       <!-- Modal body -->
-                                      <div id="{{ database.dbms }}_body" class="modal-body">
+                                      <div id="dbBody{{ database.id }}" class="modal-body">
                                           <i class="fa fa-check-square-o"> {{ database.confidence }}</i>
                                       </div>
 
@@ -157,13 +157,13 @@
 
                         <script type="text/javascript">
                             if ("{{ database.confidence }}" === "Confident") {
-                                document.getElementById("{{ database.dbms }}_body").innerHTML =
+                                document.getElementById("dbBody{{ database.id }}").innerHTML =
                                     "<i class=\"fa fa-check-square-o\"> {{ database.confidence }}</i>";
                             } else if ("{{ database.confidence }}" === "Partially confident") {
-                                document.getElementById("{{ database.dbms }}_body").innerHTML =
+                                document.getElementById("dbBody{{ database.id }}").innerHTML =
                                     "<i class=\"fa fa-check\"> {{ database.confidence }}</i>";
                             } else {
-                                document.getElementById("{{ database.dbms }}_body").innerHTML =
+                                document.getElementById("dbBody{{ database.id }}").innerHTML =
                                     "<i class=\"fa fa-info\"> {{ database.confidence }}</i>";
                             }
                         </script>
