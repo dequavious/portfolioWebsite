@@ -1,43 +1,43 @@
 {% load crispy_forms_filters %}
-<nav class="navbar navbar-expand-sm navbar-light bg-white text-secondary border">
+<nav id="admin-navbar" class="navbar navbar-expand-sm navbar-light border">
     <div class="container-fluid">
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon text-white"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <!-- Links -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav admin-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'admin' %}">Details</a>
+                    <a class="nav-link text-white" href="{% url 'admin' %}">Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'documents' %}">Documents</a>
+                    <a class="nav-link text-white" href="{% url 'documents' %}">Documents</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'hobbies' %}">Hobbies</a>
+                    <a class="nav-link text-white" href="{% url 'hobbies' %}">Hobbies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'education' %}">Education</a>
+                    <a class="nav-link text-white" href="{% url 'education' %}">Education</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'work' %}">Work</a>
+                    <a class="nav-link text-white" href="{% url 'work' %}">Work</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'strengths' %}">Strengths</a>
+                    <a class="nav-link text-white" href="{% url 'strengths' %}">Strengths</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'projects' %}">Projects</a>
+                    <a class="nav-link text-white" href="{% url 'projects' %}">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'languages' %}">Languages</a>
+                    <a class="nav-link text-white" href="{% url 'languages' %}">Languages</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'frameworks' %}">Frameworks</a>
+                    <a class="nav-link text-white" href="{% url 'frameworks' %}">Frameworks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="{% url 'databases' %}">Databases</a>
+                    <a class="nav-link text-white" href="{% url 'databases' %}">Databases</a>
                 </li>
             </ul>
         </div>
@@ -45,7 +45,7 @@
             <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
-                <button id="logoutBtn" type="submit" class="btn btn-light text-secondary"><strong>Logout</strong></button>
+                <button id="logoutBtn" type="submit" class="btn btn-light"><strong>Logout</strong></button>
             </form>
         </div>
     </div>

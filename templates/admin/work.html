@@ -92,15 +92,15 @@
 
         <br>
 
-        <div class="clearfix">
-            <div class="float-end">
-                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form|crispy}}
-                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>
-                </form>
-            </div>
-        </div>
+{#        <div class="clearfix">#}
+{#            <div class="float-end">#}
+{#                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">#}
+{#                    {% csrf_token %}#}
+{#                    {{form|crispy}}#}
+{#                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
 
         <br>
 

@@ -1,3 +1,4 @@
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% load static %}
 <!DOCTYPE html>
@@ -22,7 +23,14 @@
 
     {% endblock content %}
 
-    <div class="mt-5 p-4">
+    <div class="mt-5 p-4 d-flex flex-row justify-content-center" style="background: #78184a;">
+
+        <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button id="logoutBtn" type="submit" class="btn btn-light" style="background: #78184a; color: white"><strong>Logout</strong></button>
+        </form>
+
     </div>
 
 </body>
