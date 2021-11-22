@@ -59,6 +59,10 @@ body {margin:0}
 .icon-bar {
     width: 70px;
     position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     background-color: #555;
 }
 
