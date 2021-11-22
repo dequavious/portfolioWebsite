@@ -7,7 +7,15 @@
         document.getElementById("work").style.borderBottom = "3px solid white";
     </script>
 
-    <div class="container-fluid mt-lg-5">
+    <div class="d-flex flex-row justify-content-start">
+
+    <div class="p-0 bg-light border icon-bar">
+        <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
+        <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
+        <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
+    </div>
+
+    <div class="p-0 container-fluid" style="margin-left: 80px;">
 
         <br>
 
@@ -23,7 +31,7 @@
 
         <br>
 
-        <h3>Add work</h3>
+        <h3 id="add">Add work</h3>
         <div class="container-fluid bg-white border">
             <form method="post" action="{% url 'add work' %}" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -37,7 +45,12 @@
                     <input type="text" class="form-control"  id="addCompany" name="company" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Add</button>
+                <div class="clearfix">
+                    <div class="float-end">
+                        <button type="submit" class="btn"><i class="fa fa-plus text-secondary" style="font-size:36px;"></i></button>
+                    </div>
+                </div>
+
             </form>
 
             <br>
@@ -46,13 +59,13 @@
 
         <br><br>
 
-        <h3>Edit/delete work</h3>
+        <h3 id="edit">Edit/delete work</h3>
         <div class="container-fluid bg-white border">
             <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
                 {{form|crispy}}
                 <div class="form-floating mt-3 mb-3">
-                    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search for jobs...">
-                    <label for="myInput">Search</label>
+                    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search">
+                    <label for="myInput">&#128269;</label>
                 </div>
             </form>
         </div>
@@ -75,14 +88,14 @@
                     </form>
 
                     <div class="clearfix">
-                        <div class="float-start">
-                            <button type="submit" class="btn btn-primary" form="updateForm{{ job.id }}">Update</button>
+                        <div class="float-end">
+                            <button type="submit" class="btn" form="updateForm{{ job.id }}"><i class="fa fa-save text-secondary" style="font-size:36px"></i></button>
                         </div>
-                        <div class="float-start">
+                        <div class="float-end">
                             <form method="post" action="{% url 'delete work' %}?id={{ job.id }}" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{form|crispy}}
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                             </form>
                         </div>
                     </div>
@@ -108,6 +121,8 @@
 {#        </div>#}
 
         <br>
+
+    </div>
 
     </div>
 

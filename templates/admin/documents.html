@@ -51,14 +51,14 @@
                 </form>
 
                 <div class="clearfix">
-                    <div class="float-start">
-                        <button type="submit" class="btn btn-primary" form="update{{ document.type }}Form">Update</button>
+                    <div class="float-end">
+                        <button type="submit" class="btn" form="update{{ document.type }}Form"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                     </div>
-                    <div class="float-start">
+                    <div class="float-end">
                         <form method="post" action="{% url 'delete document' %}?type={{ document.type }}" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{form|crispy}}
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                         </form>
                     </div>
                 </div>
@@ -94,8 +94,8 @@
                 <br>
             </form>
             <div class="clearfix">
-                <div class="float-start">
-                    <button id="uploadCvButton" type="submit" class="btn btn-primary" form="uploadCvForm" style="display: none">Upload</button>
+                <div class="float-end">
+                    <button id="uploadCvButton" type="submit" class="btn" form="uploadCvForm" style="display: none"><i class="fa fa-upload text-secondary" style="font-size:36px;"></i></button>
                 </div>
             </div>
             <br>
@@ -114,8 +114,8 @@
                 <br>
             </form>
             <div id="recordButtons" class="clearfix">
-                <div class="float-start">
-                    <button id="uploadRecordButton" type="submit" class="btn btn-primary" form="uploadRecordForm" style="display: none">Upload</button>
+                <div class="float-end">
+                    <button id="uploadRecordButton" type="submit" class="btn" form="uploadRecordForm" style="display: none"><i class="fa fa-upload text-secondary" style="font-size:36px;"></i></button>
                 </div>
             </div>
             <br>

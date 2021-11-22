@@ -957,11 +957,11 @@ def add_language(request):
     if not language:
         return Response("language not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    lang = Language.objects.all().filter(language=language)
-
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    lang = Language.objects.all().filter(language__iexact=language)
 
     if lang.exists():
         request.session['response'] = "Language already added"
@@ -1006,7 +1006,7 @@ def update_language(request):
 
     language_str = request.data.get('language', None)
     if language_str:
-        lang = Language.objects.all().filter(language=language_str)
+        lang = Language.objects.all().filter(language__iexact=language_str)
 
         if lang.exists():
             request.session['response'] = "Language already added"
@@ -1080,11 +1080,11 @@ def add_framework(request):
     if not framework:
         return Response("framework not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    technologies = Framework.objects.all().filter(framework=framework)
-
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    technologies = Framework.objects.all().filter(framework__iexact=framework)
 
     if technologies.exists():
         request.session['response'] = "Framework already added"
@@ -1128,7 +1128,7 @@ def update_framework(request):
 
     framework_str = request.data.get('framework', None)
     if framework_str:
-        technologies = Framework.objects.all().filter(framework=framework_str)
+        technologies = Framework.objects.all().filter(framework__iexact=framework_str)
 
         if technologies.exists():
             request.session['response'] = "Framework already added"
@@ -1202,12 +1202,11 @@ def add_dbms(request):
     if not dbms:
         return Response("dbms not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    db = DBMS.objects.all().filter(dbms=dbms)
-
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
 
+    db = DBMS.objects.all().filter(dbms__iexact=dbms)
     if db.exists():
         request.session['response'] = "Database already added"
         return redirect('databases')
@@ -1250,7 +1249,7 @@ def update_dbms(request):
 
     dbms = request.data.get('dbms', None)
     if dbms:
-        db = DBMS.objects.all().filter(dbms=dbms)
+        db = DBMS.objects.all().filter(dbms__iexact=dbms)
         if db.exists():
             request.session['response'] = "Database already added"
             return redirect('databases')
@@ -1323,8 +1322,7 @@ def add_hobby(request):
     if not hobby:
         return Response("hobby not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    interests = Hobby.objects.all().filter(hobby=hobby)
-
+    interests = Hobby.objects.all().filter(hobby__iexact=hobby)
     if interests.exists():
         request.session['response'] = "Hobby already added"
         return redirect('hobbies')
@@ -1367,7 +1365,7 @@ def update_hobby(request):
 
     interest = request.data.get('hobby', None)
     if interest:
-        interests = Hobby.objects.all().filter(hobby=interest)
+        interests = Hobby.objects.all().filter(hobby__iexact=interest)
         if interests.exists():
             request.session['response'] = "Hobby already added"
             return redirect('hobbies')
@@ -1432,7 +1430,7 @@ def add_skill(request):
     if not skill:
         return Response("skill not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    skills = Skill.objects.all().filter(skill=skill)
+    skills = Skill.objects.all().filter(skill__iexact=skill)
 
     if skills.exists():
         request.session['response'] = "Strength already added"
@@ -1472,7 +1470,7 @@ def update_skill(request):
 
     skill_str = request.data.get('skill', None)
     if skill_str:
-        skills = Skill.objects.all().filter(skill=skill_str)
+        skills = Skill.objects.all().filter(skill__iexact=skill_str)
         if skills.exists():
             request.session['response'] = "Strength already added"
             return redirect('strengths')
@@ -1533,7 +1531,7 @@ def add_work(request):
     if not company:
         return Response("company not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    jobs = Work.objects.all().filter(description=description, company=company)
+    jobs = Work.objects.all().filter(description__iexact=description, company=company)
 
     if jobs.exists():
         request.session['response'] = "Job already added"
@@ -1575,7 +1573,7 @@ def update_work(request):
     company = request.data.get('company', None)
 
     if description and company:
-        jobs = Work.objects.all().filter(description=description, company=company)
+        jobs = Work.objects.all().filter(description__iexact=description, company=company)
         if jobs.exists():
             request.session['response'] = "Job already added"
             return redirect('work')
@@ -1646,7 +1644,7 @@ def add_project(request):
     if not git:
         return Response("link not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    proj = Project.objects.all().filter(description=description)
+    proj = Project.objects.all().filter(description__iexact=description)
 
     if proj.exists():
         request.session['response'] = "Project already added"
@@ -1686,7 +1684,7 @@ def update_project(request):
 
     description = request.data.get('description', None)
     if description:
-        proj = Project.objects.all().filter(description=description)
+        proj = Project.objects.all().filter(description__iexact=description)
 
         if proj.exists():
             request.session['response'] = "Project already added"
@@ -1764,7 +1762,7 @@ def add_education(request):
     if not institution:
         return Response("institution not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    degrees = Education.objects.all().filter(degree=degree)
+    degrees = Education.objects.all().filter(degree__iexact=degree)
 
     if degrees.exists():
         request.session['response'] = "Degree already added"
@@ -1808,7 +1806,7 @@ def update_education(request):
 
     degree_str = request.data.get('degree', None)
     if degree_str:
-        degrees = Education.objects.all().filter(degree=degree_str)
+        degrees = Education.objects.all().filter(degree__iexact=degree_str)
         if degrees.exists():
             request.session['response'] = "Degree already added"
             return redirect('education')
