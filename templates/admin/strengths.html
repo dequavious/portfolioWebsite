@@ -5,6 +5,35 @@
 
     <script>
         document.getElementById("strengths").style.borderBottom = "3px solid white";
+        function change(id) {
+            var bool = false;
+            var input, ul, li, divs, form, i, j;
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                form = li[i].getElementsByTagName("form")[0];
+                divs =  form.getElementsByTagName("div");
+                for (j= 0; j < divs.length; j++) {
+                    input = divs[j].getElementsByTagName("input")[0];
+                    if (input !== undefined) {
+                        if (input.value.length > 0) {
+                            bool = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var btn = "saveBtn" + id;
+
+            if (bool) {
+                document.getElementById(btn).style.display = "block";
+            } else {
+                document.getElementById(btn).style.display = "none";
+            }
+        }
     </script>
 
     <div class="d-flex flex-row justify-content-start">
@@ -75,13 +104,13 @@
                         {{form|crispy}}
                         <div class="mb-3 mt-3">
                             <label for="updateSkill{{ skill.id }}">Strength:</label>
-                            <input type="text" class="form-control" id="updateSkill{{ skill.id }}" name="skill" placeholder="{{ skill.skill }}">
+                            <input type="text" oninput="change({{ skill.id }})" class="form-control" id="updateSkill{{ skill.id }}" name="skill" placeholder="{{ skill.skill }}">
                         </div>
                     </form>
 
                     <div class="clearfix">
                         <div class="float-end">
-                            <button type="submit" class="btn" form="updateForm{{ skill.id }}"><i class="fa fa-save text-secondary" style="font-size:36px"></i></button>
+                            <button id="saveBtn{{ skill.id }}" type="submit" class="btn" form="updateForm{{ skill.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                         </div>
                         <div class="float-end">
                             <form method="post" action="{% url 'delete skill' %}?id={{ skill.id }}" enctype="multipart/form-data">
