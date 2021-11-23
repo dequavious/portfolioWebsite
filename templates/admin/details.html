@@ -6,6 +6,10 @@
     <script>
         document.getElementById("details").style.borderBottom = "3px solid white";
 
+        function clickFunction(id, val) {
+            document.getElementById(id).value = val;
+        }
+
         function myFunction() {
             var i;
             var input = document.getElementsByTagName('input');
@@ -67,15 +71,15 @@
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="email">Email:</label>
-                    <input type="email" oninput="myFunction()" class="form-control" id="email" name="email" placeholder="{{ user.email }}">
+                    <input type="email" onclick="clickFunction(this.id, '{{ user.email }}')" oninput="myFunction()" class="form-control" id="email" name="email" placeholder="{{ user.email }}">
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="name">Name:</label>
-                    <input type="text" oninput="myFunction()" class="form-control" id="name" name="name" placeholder="{{ user.name }}">
+                    <input type="text" onclick="clickFunction(this.id, '{{ user.name }}')" oninput="myFunction()" class="form-control" id="name" name="name" placeholder="{{ user.name }}">
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="surname">Surname:</label>
-                    <input type="text" oninput="myFunction()" class="form-control" id="surname" name="surname" placeholder="{{ user.surname }}">
+                    <input type="text" onclick="clickFunction(this.id, '{{ user.surname }}')" oninput="myFunction()" class="form-control" id="surname" name="surname" placeholder="{{ user.surname }}">
                 </div>
                 <div class="mb-3 mt-3">
                     <div class="d-flex flex-column">
@@ -83,13 +87,13 @@
                             <label for="number">Number: </label>
                         </div>
                         <div class="p-0">
-                            <input type="tel" oninput="myFunction()" class="form-control" id="number" name="number" placeholder="{{ user.number }}" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+                            <input type="tel" onclick="clickFunction(this.id, '{{ user.number }}')" oninput="myFunction()" class="form-control" id="number" name="number" placeholder="{{ user.number }}" pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
                         </div>
                     </div>
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="bio">Bio:</label>
-                    <textarea class="form-control" oninput="myFunction()" rows="5" id="bio" name="bio" placeholder="{{ user.bio }}"></textarea>
+                    <textarea class="form-control" onclick="clickFunction(this.id, '{{ user.bio }}')" oninput="myFunction()" rows="5" id="bio" name="bio" placeholder="{{ user.bio }}"></textarea>
                 </div>
                 <div class="clearfix">
                     <div class="float-end">

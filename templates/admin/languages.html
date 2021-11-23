@@ -5,6 +5,9 @@
 
     <script>
         document.getElementById("languages").style.borderBottom = "3px solid white";
+        function clickFunction(id, val) {
+            document.getElementById(id).value = val;
+        }
         function change(id) {
             var bool = false;
             var input, ul, li, divs, form, i, j;
@@ -112,11 +115,11 @@
                         {{form|crispy}}
                         <div class="mb-3 mt-3">
                             <label for="update{{ language.id }}">Language:</label>
-                            <input type="text" oninput="change({{ language.id }})" class="form-control" id="update{{ language.id }}" name="language" placeholder="{{ language.language }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ language.language }}')" oninput="change({{ language.id }})" class="form-control" id="update{{ language.id }}" name="language" placeholder="{{ language.language }}">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="updateConfidence{{ language.id }}">Confidence:</label>
-                            <input type="text" oninput="change({{ language.id }})" class="form-control" id="updateConfidence{{ language.id }}" name="confidence" placeholder="{{ language.confidence }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ language.confidence }}')" oninput="change({{ language.id }})" class="form-control" id="updateConfidence{{ language.id }}" name="confidence" placeholder="{{ language.confidence }}">
                         </div>
                         <div class="mb-3 mt-3">
                             <div class="d-flex flex-column">

@@ -970,6 +970,9 @@ def add_language(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('languages')
         language = Language(language=language, confidence=confidence, avatar=avatar)
     else:
         language = Language(language=language, confidence=confidence)
@@ -1021,6 +1024,9 @@ def update_language(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('languages')
         if language.avatar:
             delete_file(language.avatar)
         language.avatar = avatar
@@ -1092,6 +1098,9 @@ def add_framework(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('frameworks')
         framework = Framework(framework=framework, confidence=confidence, avatar=avatar)
     else:
         framework = Framework(framework=framework, confidence=confidence)
@@ -1143,6 +1152,9 @@ def update_framework(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('frameworks')
         if framework.avatar:
             delete_file(framework.avatar)
         framework.avatar = avatar
@@ -1213,6 +1225,9 @@ def add_dbms(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('databases')
         dbms = DBMS(dbms=dbms, confidence=confidence, avatar=avatar)
     else:
         dbms = DBMS(dbms=dbms, confidence=confidence)
@@ -1263,6 +1278,9 @@ def update_dbms(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('databases')
         if database.avatar:
             delete_file(database.avatar)
         database.avatar = avatar
@@ -1330,6 +1348,9 @@ def add_hobby(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('hobbies')
         hobby = Hobby(hobby=hobby, avatar=avatar)
     else:
         hobby = Hobby(hobby=hobby)
@@ -1374,6 +1395,9 @@ def update_hobby(request):
 
     avatar = request.data.get('avatar', None)
     if avatar:
+        if not imghdr.what(avatar):
+            request.session['response'] = "Not a valid image format"
+            return redirect('hobbies')
         if hobby.avatar:
             delete_file(hobby.avatar)
         hobby.avatar = avatar

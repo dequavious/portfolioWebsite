@@ -5,6 +5,9 @@
 
     <script>
         document.getElementById("frameworks").style.borderBottom = "3px solid white";
+        function clickFunction(id, val) {
+            document.getElementById(id).value = val;
+        }
         function change(id) {
             var bool = false;
             var input, ul, li, divs, form, i, j;
@@ -111,11 +114,11 @@
                         {{form|crispy}}
                         <div class="mb-3 mt-3">
                             <label for="update{{ framework.id }}">Framework:</label>
-                            <input type="text" oninput="change({{ framework.id }})" class="form-control" id="update{{ framework.id }}" name="framework" placeholder="{{ framework.framework }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ framework.framework }}')" oninput="change({{ framework.id }})" class="form-control" id="update{{ framework.id }}" name="framework" placeholder="{{ framework.framework }}">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="updateConfidence{{ framework.id }}">Confidence:</label>
-                            <input type="text" oninput="change({{ framework.id }})" class="form-control" id="updateConfidence{{ framework.id }}" name="confidence" placeholder="{{ framework.confidence }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ framework.confidence }}')" oninput="change({{ framework.id }})" class="form-control" id="updateConfidence{{ framework.id }}" name="confidence" placeholder="{{ framework.confidence }}">
                         </div>
                         <div class="mb-3 mt-3">
                             <div class="d-flex flex-column">

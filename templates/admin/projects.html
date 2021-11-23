@@ -5,6 +5,9 @@
 
     <script>
         document.getElementById("projs").style.borderBottom = "3px solid white";
+        function clickFunction(id, val) {
+            document.getElementById(id).value = val;
+        }
         function change(id) {
             var bool = false;
             var input, ul, li, divs, form, i, j;
@@ -123,19 +126,19 @@
                         {{form|crispy}}
                         <div class="mb-3 mt-3">
                             <label for="updateTitle{{ proj.id }}">Title:</label>
-                            <input type="text" oninput="change({{ proj.id }})" class="form-control" id="updateTitle{{ proj.id }}" name="title" placeholder="{{ proj.title }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ proj.title }}')" oninput="change({{ proj.id }})" class="form-control" id="updateTitle{{ proj.id }}" name="title" placeholder="{{ proj.title }}">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="updateDescription{{ proj.id }}">Description:</label>
-                            <textarea class="form-control" oninput="change({{ proj.id }})" rows="5" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}"></textarea>
+                            <textarea class="form-control" onclick="clickFunction(this.id, '{{ proj.description }}')" oninput="change({{ proj.id }})" rows="5" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}"></textarea>
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="updateGit{{ proj.id }}">Git: </label>
-                            <input type="text" oninput="change({{ proj.id }})" class="form-control"  id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ proj.git }}')" oninput="change({{ proj.id }})" class="form-control"  id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="updateLink{{ proj.id }}">Homepage: </label>
-                            <input type="text" oninput="change({{ proj.id }})" class="form-control"  id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ proj.link }}')" oninput="change({{ proj.id }})" class="form-control"  id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
                         </div>
                     </form>
 

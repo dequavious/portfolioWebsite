@@ -5,6 +5,9 @@
 
     <script>
         document.getElementById("strengths").style.borderBottom = "3px solid white";
+        function clickFunction(id, val) {
+            document.getElementById(id).value = val;
+        }
         function change(id) {
             var bool = false;
             var input, ul, li, divs, form, i, j;
@@ -104,7 +107,7 @@
                         {{form|crispy}}
                         <div class="mb-3 mt-3">
                             <label for="updateSkill{{ skill.id }}">Strength:</label>
-                            <input type="text" oninput="change({{ skill.id }})" class="form-control" id="updateSkill{{ skill.id }}" name="skill" placeholder="{{ skill.skill }}">
+                            <input type="text" onclick="clickFunction(this.id, '{{ skill.skill }}')" oninput="change({{ skill.id }})" class="form-control" id="updateSkill{{ skill.id }}" name="skill" placeholder="{{ skill.skill }}">
                         </div>
                     </form>
 
