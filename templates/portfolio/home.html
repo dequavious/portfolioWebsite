@@ -23,45 +23,27 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for language in languages %}
-                            <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#languageModal{{ language.id }}">
-                                <img src="{{ language.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                     title="{{ language.language }}" data-bs-toggle="tooltip" >
 
-                                <div class="modal fade" id="languageModal{{ language.id }}">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content text-black">
+                        <div class="p-2 card bg-dark border-dark">
 
-                                          <!-- Modal Header -->
-                                          <div class="modal-header">
-                                            <h4 class="modal-title">{{ language.language }}</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                          </div>
+                                <img id="img{{ language.id }}" src="{{ language.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ language.language }}">
 
-                                          <!-- Modal body -->
-                                          <div id="languageBody{{ language.id }}" class="modal-body">
-                                              {{ language.confidence }}
-                                          </div>
-
-                                          <!-- Modal footer -->
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                          </div>
-
-                                        </div>
-                                    </div>
+                                <div class="content">
+                                    <h3 style="text-align: center;">{{ language.language }}</h3>
+                                    <p id="langPar{{ language.id }}" style="font-size: 16px; text-align: center;"></p>
                                 </div>
 
                             </div>
 
                             <script type="text/javascript">
                                 if ("{{ language.confidence }}" === "Confident") {
-                                    document.getElementById("languageBody{{ language.id }}").innerHTML =
+                                    document.getElementById("langPar{{ language.id }}").innerHTML =
                                         "<i class=\"fa fa-check-square-o\"> {{ language.confidence }}</i>";
                                 } else if ("{{ language.confidence }}" === "Partially confident") {
-                                    document.getElementById("languageBody{{ language.id }}").innerHTML =
+                                    document.getElementById("langPar{{ language.id }}").innerHTML =
                                         "<i class=\"fa fa-check\"> {{ language.confidence }}</i>";
                                 } else {
-                                    document.getElementById("languageBody{{ language.id }}").innerHTML =
+                                    document.getElementById("langPar{{ language.id }}").innerHTML =
                                         "<i class=\"fa fa-info-circle\"> {{ language.confidence }}</i>";
                                 }
                             </script>
@@ -74,45 +56,25 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for framework in frameworks %}
-                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#frameworkModal{{ framework.id }}">
-                            <img src="{{ framework.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ framework.framework }}" data-bs-toggle="tooltip">
+                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal">
+                            <img src="{{ framework.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ framework.framework }}">
 
-                            <div class="modal fade" id="frameworkModal{{ framework.id }}">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content text-black">
-
-                                      <!-- Modal Header -->
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">{{ framework.framework }}</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                      </div>
-
-                                      <!-- Modal body -->
-                                      <div id="frameworkBody{{ framework.id }}" class="modal-body">
-                                          {{ framework.confidence }}
-                                      </div>
-
-                                      <!-- Modal footer -->
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      </div>
-
-                                    </div>
-                                </div>
+                            <div class="content">
+                                <h3 style="text-align: center;">{{ framework.framework }}</h3>
+                                <p id="framePar{{ framework.id }}" style="font-size: 16px; text-align: center;"></p>
                             </div>
 
                         </div>
 
                         <script type="text/javascript">
                             if ("{{ framework.confidence }}" === "Confident") {
-                                document.getElementById("frameworkBody{{ framework.id }}").innerHTML =
+                                document.getElementById("framePar{{ framework.id }}").innerHTML =
                                     "<i class=\"fa fa-check-square-o\"> {{ framework.confidence }}</i>";
                             } else if ("{{ language.confidence }}" === "Partially confident") {
-                                document.getElementById("frameworkBody{{ framework.id }}").innerHTML =
+                                document.getElementById("framePar{{ framework.id }}").innerHTML =
                                     "<i class=\"fa fa-check\"> {{ framework.confidence }}</i>";
                             } else {
-                                document.getElementById("frameworkBody{{ framework.id }}").innerHTML =
+                                document.getElementById("framePar{{ framework.id }}").innerHTML =
                                     "<i class=\"fa fa-info-circle\"> {{ framework.confidence }}</i>";
                             }
                         </script>
@@ -125,45 +87,25 @@
                 <summary></summary>
                 <div class="d-flex flex-wrap border-dark">
                     {% for database in databases %}
-                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal" data-bs-target="#dbModal{{ database.id }}">
-                            <img src="{{ database.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                 title="{{ database.dbms }}" data-bs-toggle="tooltip">
+                        <div class="p-2 card bg-dark border-dark">
+                            <img src="{{ database.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ database.dbms }}">
 
-                            <div class="modal fade" id="dbModal{{ database.id }}">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content text-black">
-
-                                      <!-- Modal Header -->
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">{{ database.dbms }}</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                      </div>
-
-                                      <!-- Modal body -->
-                                      <div id="dbBody{{ database.id }}" class="modal-body">
-                                          <i class="fa fa-check-square-o"> {{ database.confidence }}</i>
-                                      </div>
-
-                                      <!-- Modal footer -->
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      </div>
-
-                                    </div>
-                                </div>
+                            <div class="content">
+                                <h3 style="text-align: center;">{{ database.dbms }}</h3>
+                                <p id="dbPar{{ database.id }}" style="font-size: 16px; text-align: center;"></p>
                             </div>
 
                         </div>
 
                         <script type="text/javascript">
                             if ("{{ database.confidence }}" === "Confident") {
-                                document.getElementById("dbBody{{ database.id }}").innerHTML =
+                                document.getElementById("dbPar{{ database.id }}").innerHTML =
                                     "<i class=\"fa fa-check-square-o\"> {{ database.confidence }}</i>";
                             } else if ("{{ database.confidence }}" === "Partially confident") {
-                                document.getElementById("dbBody{{ database.id }}").innerHTML =
+                                document.getElementById("dbPar{{ database.id }}").innerHTML =
                                     "<i class=\"fa fa-check\"> {{ database.confidence }}</i>";
                             } else {
-                                document.getElementById("dbBody{{ database.id }}").innerHTML =
+                                document.getElementById("dbPar{{ database.id }}").innerHTML =
                                     "<i class=\"fa fa-info\"> {{ database.confidence }}</i>";
                             }
                         </script>
@@ -174,25 +116,53 @@
 
         </div>
 
-        <div id="info">
-            <div class="col-sm-12">
-                <h2 class="text-info">Hobbies</h2>
+        <div id="projects" class="col-sm-12">
+            <h2 class="text-info">Projects</h2>
+            <details open>
+                <summary></summary>
+                <div class="container border-dark">
+                    {% for project in projects %}
+                    <div class="d-block">
+                        <dt class="text-danger">{{ project.title }}</dt>
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <p class="text-light">{{ project.description }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-0">
+                                <ul>
+                                <li><a href="{{ project.link }}" target="_blank">Homepage</a></li>
+                                <li><a href="{{ project.git }}" target="_blank">Github</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </details>
+        </div>
+
+        <div id="info" class="col-sm-12">
+
+                <h2 id="hobbies" class="text-info">Hobbies</h2>
                 <details open>
                     <summary></summary>
                     <div class="d-flex flex-wrap border-dark">
                         {% for hobby in hobbies %}
                             <div class="p-2 card bg-dark border-dark">
-                                <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid" alt="not found"
-                                     title="{{ hobby.hobby }}" data-bs-toggle="tooltip">
+                                <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid align-self-center hover-shadow" alt="{{ hobby.avatar }}"
+                                     title="{{ hobby.hobby }}">
+                                <div class="hobby-content">
+                                    <p style="font-size: 16px; text-align: center;">{{ hobby.hobby }}</p>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                 </details>
-            </div>
 
-            <div class="col-sm-8">
-                <h2 class="mt-3 text-info">Education</h2>
-                <details open>
+                <h2 id="education" class="text-info">Education</h2>
+                <details  open>
                     <summary></summary>
                     <div class="container border-dark">
                         {% for degree in degrees %}
@@ -228,24 +198,8 @@
                         {% endfor %}
                     </div>
                 </details>
-                <h2 class="mt-3 text-info">Projects</h2>
-                <details open>
-                    <summary></summary>
-                    <div class="container border-dark">
-                        {% for project in projects %}
-                        <dl>
-                            <dt class="text-danger">{{ project.description }}</dt>
-                            <div class="d-flex">
-                                <div class="p-2">
-                                    <li><a href="{{ project.link }}" target="_blank">Homepage</a></li>
-                                    <li><a href="{{ project.git }}" target="_blank">Github</a></li>
-                                </div>
-                            </div>
-                        </dl>
-                        {% endfor %}
-                    </div>
-                </details>
-                <h2 class="mt-3 text-info">Strengths</h2>
+
+                <h2 id="strengths" class="text-info">Strengths</h2>
                 <details open>
                     <summary></summary>
                     <div class="container border-dark">
@@ -256,7 +210,8 @@
                         </dl>
                     </div>
                 </details>
-                <h2 class="mt-3 text-info">Experience</h2>
+
+                <h2 id="experience" class="text-info">Experience</h2>
                 <details open>
                     <summary></summary>
                     <div class="container border-dark">
@@ -272,7 +227,8 @@
                         {% endfor %}
                     </div>
                 </details>
-                <h2 class="mt-3 text-info">Contact</h2>
+
+                <h2 id="contact" class="text-info">Contact</h2>
                 <details open>
                     <summary></summary>
                     <div class="container border-dark">
@@ -282,7 +238,6 @@
                         </dl>
                     </div>
                 </details>
-            </div>
         </div>
 
 </div>

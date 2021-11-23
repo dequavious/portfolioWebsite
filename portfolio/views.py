@@ -1632,6 +1632,10 @@ def add_project(request):
     if not user.authenticated:
         return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
 
+    title = request.data.get('title', None)
+    if not title:
+        return Response("title not provided", status=status.HTTP_400_BAD_REQUEST)
+
     description = request.data.get('description', None)
     if not description:
         return Response("description not provided", status=status.HTTP_400_BAD_REQUEST)
@@ -1644,14 +1648,14 @@ def add_project(request):
     if not git:
         return Response("link not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    proj = Project.objects.all().filter(description__iexact=description)
+    proj = Project.objects.all().filter(title__iexact=title)
 
     if proj.exists():
         request.session['response'] = "Project already added"
         return redirect('projects')
         # return Response("project already added", status=status.HTTP_400_BAD_REQUEST)
 
-    project = Project(description=description, git=git, link=link)
+    project = Project(title=title, description=description, git=git, link=link)
     project.save()
 
     return redirect('projects')
@@ -1682,13 +1686,19 @@ def update_project(request):
 
     project = Project.objects.get(id=pid)
 
-    description = request.data.get('description', None)
-    if description:
-        proj = Project.objects.all().filter(description__iexact=description)
+    title = request.data.get('title', None)
+    if title:
+        proj = Project.objects.all().filter(title__iexact=title)
 
         if proj.exists():
             request.session['response'] = "Project already added"
             return redirect('projects')
+
+        project.title = title
+        project.save()
+
+    description = request.data.get('description', None)
+    if description:
         project.description = description
         project.save()
 

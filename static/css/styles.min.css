@@ -3,12 +3,16 @@
     font-size: large;
 }
 
-body {
-  position: relative;
+html, body {
+    margin: 0;
 }
 
-#about, #programming, #info {
-    padding:100px 20px;
+body {
+    position: relative;
+}
+
+#about, #programming, #info, #projects {
+    padding-top: 100px;
 }
 
 .card img, .admin-img {
@@ -16,20 +20,59 @@ body {
     width: 100px;
 }
 
-.modal-body {
-    font-weight: normal;
-}
-
 dl, dd {
     white-space: nowrap;
 }
 
-.portfolio-nav a:hover {
+.subnav {
+    float: left;
+    overflow: hidden;
+}
+
+.subnav .subnavbtn {
+    border: none;
+    outline: none;
+    padding-left: 0;
+    background-color: inherit;
+    font-family: inherit;
+}
+
+.link a:hover, .subnav:hover .subnavbtn {
     border-bottom: 3px solid red;
 }
 
-.portfolio-nav a.active {
+.link a.active {
     border-bottom: 3px solid red;
+}
+
+.link button.active {
+    border-bottom: 3px solid red;
+}
+
+.subnav-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: red;
+    width: 100%;
+    z-index: 1;
+}
+
+.subnav-content a {
+    float: left;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.subnav-content a:hover {
+    border-bottom: 3px solid white;
+}
+
+.subnav:hover .subnav-content {
+    display: block;
 }
 
 .admin-nav a:hover {
@@ -53,8 +96,6 @@ dl, dd {
     background: #66023c;
     color: white;
 }
-
-body {margin:0}
 
 .icon-bar {
     width: 70px;
@@ -94,4 +135,28 @@ div.scrollmenu a {
   text-align: center;
   padding: 14px;
   text-decoration: none;
+}
+
+.content {
+    bottom: 20px;
+    right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+}
+
+.hobby-content {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+}
+
+img.hover-shadow {
+    transition: 0.3s;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

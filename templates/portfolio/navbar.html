@@ -1,27 +1,30 @@
 <!-- Nav tabs -->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top inline-group">
     <div class="container-fluid">
-        <a id="initials" class="navbar-brand disabled text-danger">Initials</a>
+        <a id="initials" class="navbar-brand disabled text-danger"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav portfolio-nav">
-                <li class="nav-item">
+        <div class="p-0 collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="d-flex navbar-nav portfolio-nav">
+                <li class="nav-item link">
                     <a class="nav-link link" href="#about">About</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item link">
                     <a class="nav-link link" href="#programming">Programming</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item link">
+                    <a class="nav-link link" href="#projects">Projects</a>
+                </li>
+                <li class="nav-item link">
                     <a class="nav-link link" href="#info">More info</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/">Documents</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item text-black link" href="{% url 'get document' %}?type=cv" target="_blank">CV</a></li>
-                        <li><a class="dropdown-item text-black link" href="{% url 'get document' %}?type=record" target="_blank">Academic Record</a></li>
-                    </ul>
+                <li class="nav-item link subnav">
+                    <button class="subnavbtn nav-link" href="/">Documents <i class="fa fa-caret-down"></i></button>
+                    <div class="subnav-content">
+                        <a class="text-black link" href="{% url 'get document' %}?type=cv" target="_blank">CV</a>
+                        <a class="text-black link" href="{% url 'get document' %}?type=record" target="_blank">Academic Record</a>
+                    </div>
                 </li>
             </ul>
         </div>
