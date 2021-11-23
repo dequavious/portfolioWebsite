@@ -34,6 +34,12 @@ dl, dd {
     border-bottom: 3px solid red;
 }
 
+.dropdown-menu a:hover {
+    color: white;
+    background-color: red;
+    border-bottom: 3px solid white;
+}
+
 .admin-nav a:hover {
     background: #78184a;
     border-bottom: 3px solid white;
