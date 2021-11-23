@@ -21,6 +21,11 @@ dl, dd {
     white-space: nowrap;
 }
 
+.footer p {
+    color:white;
+    text-align: center;
+}
+
 .subnav {
     float: left;
     overflow: hidden;
