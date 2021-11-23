@@ -11,20 +11,20 @@
                     <a class="nav-link link" href="#about">About</a>
                 </li>
                 <li class="nav-item link">
-                    <a class="nav-link link" href="#programming">Programming</a>
+                    <a class="nav-link" href="#programming">Programming</a>
                 </li>
                 <li class="nav-item link">
-                    <a class="nav-link link" href="#projects">Projects</a>
+                    <a class="nav-link" href="#projects">Projects</a>
                 </li>
                 <li class="nav-item link">
-                    <a class="nav-link link" href="#info">More info</a>
+                    <a class="nav-link" href="#info">More info</a>
                 </li>
-                <li class="nav-item link subnav">
-                    <button class="subnavbtn nav-link" href="/">Documents <i class="fa fa-caret-down"></i></button>
-                    <div class="subnav-content">
-                        <a class="link" href="{% url 'get document' %}?type=cv" target="_blank">CV</a>
-                        <a class="link" href="{% url 'get document' %}?type=record" target="_blank">Academic Record</a>
-                    </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/">Documents</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item text-black" href="{% url 'get document' %}?type=cv" target="_blank">CV</a></li>
+                        <li><a class="dropdown-item text-black" href="{% url 'get document' %}?type=record" target="_blank">Academic Record</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
