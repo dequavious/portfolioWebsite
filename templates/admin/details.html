@@ -7,7 +7,9 @@
         document.getElementById("details").style.borderBottom = "3px solid white";
 
         function clickFunction(id, val) {
-            document.getElementById(id).value = val;
+            if (document.getElementById(id).value.length === 0) {
+                document.getElementById(id).value = val;
+            }
         }
 
         function myFunction() {
