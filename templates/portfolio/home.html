@@ -4,10 +4,15 @@
 <div class="container bg-dark mt-lg-3 text-light">
 
         <div id="about" class="col-lg-12">
-            <h1 class="text-info">About me</h1>
+            <h1 class="text-info text-uppercase">About me</h1>
             <div class="d-flex flex-wrap">
                 <div class="p-0 float-end col-sm-4">
                     <img src="{{ user.picture }}" class="rounded-circle float-start img-fluid" alt="not found"/>
+                </div>
+                <div class="divider-light divider-custom">
+                    <div class="line-heading text-light"></div>
+                    <div class="text-light star"><i class="fa fa-star"></i></div>
+                    <div class="line-heading text-light"></div>
                 </div>
                 <div class="container border-dark p-0">
                     <h3 class="text-danger">Hi, I'm {{ user.name }}!</h3>
@@ -19,8 +24,13 @@
         <div id="programming" class="col-lg-12">
 
             <h2 class="text-info">Languages</h2>
-            <details open>
-                <summary></summary>
+            <div class="divider-light divider-custom">
+                <div class="line text-light"></div>
+                <div class="text-light"><i class="fa fa-star"></i></div>
+                <div class="line text-light"></div>
+            </div>
+{#            <details open>#}
+{#                <summary></summary>#}
                 <div class="d-flex flex-wrap">
                     {% for language in languages %}
 
@@ -50,10 +60,16 @@
 
                     {% endfor %}
                 </div>
-            </details>
+{#            </details>#}
+
             <h2 class="mt-3 text-info">Frameworks</h2>
-            <details open>
-                <summary></summary>
+            <div class="divider-light divider-custom">
+                <div class="line text-light"></div>
+                <div class="text-light"><i class="fa fa-star"></i></div>
+                <div class="line text-light"></div>
+            </div>
+{#            <details open>#}
+{#                <summary></summary>#}
                 <div class="d-flex flex-wrap">
                     {% for framework in frameworks %}
                         <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal">
@@ -81,10 +97,16 @@
 
                     {% endfor %}
                 </div>
-            </details>
+{#            </details>#}
+
             <h2 class="mt-3 text-info">Databases</h2>
-            <details open>
-                <summary></summary>
+            <div class="divider-light divider-custom">
+                <div class="line text-light"></div>
+                <div class="text-light"><i class="fa fa-star"></i></div>
+                <div class="line text-light"></div>
+            </div>
+{#            <details open>#}
+{#                <summary></summary>#}
                 <div class="d-flex flex-wrap">
                     {% for database in databases %}
                         <div class="p-2 card bg-dark border-dark">
@@ -112,16 +134,21 @@
 
                     {% endfor %}
                 </div>
-            </details>
+{#            </details>#}
 
         </div>
 
         <div id="projects" class="col-lg-12">
             <h2 class="text-info">Projects</h2>
-            <details open>
-                <summary></summary>
-                <div class="container border-dark">
+{#            <details open>#}
+{#                <summary></summary>#}
+{#                <div class="container border-dark">#}
                     {% for project in projects %}
+                    <div class="divider-light divider-custom">
+                        <div class="line text-light"></div>
+                        <div class="text-light"><i class="fa fa-star"></i></div>
+                        <div class="line text-light"></div>
+                    </div>
                     <div class="d-block">
                         <dt class="text-danger">{{ project.title }}</dt>
                         <div class="d-flex">
@@ -139,16 +166,21 @@
                         </div>
                     </div>
                     {% endfor %}
-                </div>
-            </details>
+{#                </div>#}
+{#            </details>#}
         </div>
 
         <div id="info" class="col-lg-12">
 
                 <h2 id="hobbies" class="text-info">Hobbies</h2>
-                <details open>
-                    <summary></summary>
-                    <div class="d-flex flex-wrap border-dark">
+                <div class="divider-light divider-custom">
+                    <div class="line text-light"></div>
+                    <div class="text-light"><i class="fa fa-star"></i></div>
+                    <div class="line text-light"></div>
+                </div>
+{#                <details open>#}
+{#                    <summary></summary>#}
+                    <div class="d-flex flex-wrap border-dark justify-content-evenly">
                         {% for hobby in hobbies %}
                             <div class="p-2 card bg-dark border-dark">
                                 <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid align-self-center hover-shadow" alt="{{ hobby.avatar }}">
@@ -158,13 +190,18 @@
                             </div>
                         {% endfor %}
                     </div>
-                </details>
+{#                </details>#}
 
                 <h2 id="education" class="mt-3 text-info">Education</h2>
-                <details  open>
-                    <summary></summary>
-                    <div class="container border-dark">
+{#                <details  open>#}
+{#                    <summary></summary>#}
+{#                    <div class="container border-dark">#}
                         {% for degree in degrees %}
+                            <div class="divider-light divider-custom">
+                                <div class="line text-light"></div>
+                                <div class="text-light"><i class="fa fa-star"></i></div>
+                                <div class="line text-light"></div>
+                            </div>
                             <dl>
                                 <dt class="text-danger">{{ degree.degree }}</dt>
                                 <div class="d-flex">
@@ -195,26 +232,38 @@
                                 </div>
                             </dl>
                         {% endfor %}
-                    </div>
-                </details>
+{#                    </div>#}
+{#                </details>#}
 
                 <h2 id="strengths" class="text-info">Strengths</h2>
-                <details open>
-                    <summary></summary>
-                    <div class="container border-dark">
+{#                <details open>#}
+{#                    <summary></summary>#}
+{#                    <div class="container border-dark">#}
+                        <div class="divider-light divider-custom">
+                            <div class="line text-light"></div>
+                            <div class="text-light"><i class="fa fa-star"></i></div>
+                            <div class="line text-light"></div>
+                        </div>
                         <dl>
                             {% for skill in skills %}
                                 <li>{{ skill.skill }}</li>
                             {% endfor %}
                         </dl>
-                    </div>
-                </details>
+{#                    </div>#}
+{#                </details>#}
+
+                <br>
 
                 <h2 id="experience" class="text-info">Experience</h2>
-                <details open>
-                    <summary></summary>
-                    <div class="container border-dark">
+{#                <details open>#}
+{#                    <summary></summary>#}
+{#                    <div class="container border-dark">#}
                         {% for job in jobs %}
+                            <div class="divider-light divider-custom">
+                                <div class="line text-light"></div>
+                                <div class="text-light"><i class="fa fa-star"></i></div>
+                                <div class="line text-light"></div>
+                            </div>
                             <dl>
                                 <dt class="text-danger">{{ job.description }}</dt>
                                 <div class="d-flex">
@@ -224,19 +273,24 @@
                                 </div>
                             </dl>
                         {% endfor %}
-                    </div>
-                </details>
+{#                    </div>#}
+{#                </details>#}
 
                 <h2 id="contact" class="text-info">Contact</h2>
-                <details open>
-                    <summary></summary>
-                    <div class="container border-dark">
+{#                <details open>#}
+{#                    <summary></summary>#}
+{#                    <div class="container border-dark">#}
+                        <div class="divider-light divider-custom">
+                            <div class="line text-light"></div>
+                            <div class="text-light"><i class="fa fa-star"></i></div>
+                            <div class="line text-light"></div>
+                        </div>
                         <dl>
                             <dd><i class="fa fa-envelope text-danger"></i> {{ user.email }}</dd>
                             <dd><i class="fa fa-phone-square text-danger"></i> {{ user.number }}</dd>
                         </dl>
-                    </div>
-                </details>
+{#                    </div>#}
+{#                </details>#}
         </div>
 
         <br>
