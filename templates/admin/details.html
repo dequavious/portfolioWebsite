@@ -22,7 +22,11 @@
                 val = input[i].value
                 if (val.length > 0 && (input[i].name !== "csrfmiddlewaretoken")) {
                     bool = true;
-                    break;
+                    if (input[i].name === 'file') {
+                        console.log(name);
+                        console.log($('#file')[0].files[0]);
+                    }
+                     break;
                 }
             }
 
@@ -46,30 +50,27 @@
 
         <br>
 
-        {% if alert %}
-            <div class="alert alert-danger">
-                <strong>{{ alert }}</strong>
-            </div>
-        {% endif %}
+        {% include 'admin/messages.html' %}
 
         <br>
 
         <div class="container-fluid bg-white border">
 
-            <form id="updateForm" method="post" action="{% url 'update details' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form|crispy}}
+        <form id="updateForm">
                 <div class="mb-3 mt-3">
-                    <div class="d-flex flex-column container col-sm-4">
+                    <div class="d-flex flex-wrap flex-column">
                         <div class="p-0">
                             <label for="file">Current display picture: </label>
                         </div>
+                        <div class="p-0" style="height: 100px; width: 100px;">
+                            <img src="{{ user.picture }}" class="rounded img-fluid float-start" alt="not found"/>
+                        </div>
+                        <br><br>
                         <div class="p-0">
-                            <img src="{{ user.picture }}" class="rounded float-start img-fluid" alt="not found"/>
+                            <label for="file">Choose another picture: </label>
+                            <input type="file" oninput="myFunction()" class="form-control"  id="file" name="file">
                         </div>
                     </div>
-                    <label for="file">Choose another picture: </label>
-                    <input type="file" oninput="myFunction()" class="form-control"  id="file" name="file">
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="email">Email:</label>
@@ -104,21 +105,17 @@
                 </div>
             </form>
 
-            <br>
+            <a href="http://127.0.0.1:8000/password">Reset password</a>
+
+            <br><br>
 
         </div>
 
         <br>
 
-{#        <div class="clearfix">#}
-{#            <div class="float-end">#}
-{#                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">#}
-{#                    {% csrf_token %}#}
-{#                    {{form|crispy}}#}
-{#                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
+    </div>
+
+    <div style="height: 100%">
 
     </div>
 
@@ -128,6 +125,50 @@
             initialCountry: "za",
             utilsScript:
             "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+        $(document).on('submit', '#updateForm', function(e) {
+
+            var i, val, name;
+            var data = new FormData();
+            var input = document.getElementsByTagName('input');
+
+            for (i = 0; i < input.length; i++) {
+                name = input[i].name;
+                val = input[i].value;
+                if ((val.length > 0) && !data.has(name)) {
+                    if (name !== 'file') {
+                        data.append(name, val);
+                    } else {
+                        val = $('#file')[0].files[0];
+                        data.append(name, val);
+                    }
+                }
+            }
+
+            var textarea = document.getElementById('bio');
+
+            if (textarea.value.length > 0) {
+                data.append(textarea.name, textarea.value)
+            }
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'update details' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
         });
     </script>
 

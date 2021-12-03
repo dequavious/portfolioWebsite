@@ -17,6 +17,8 @@ urlpatterns = [
     path('languages/', views.languages, name="languages"),
     path('frameworks/', views.frameworks, name="frameworks"),
     path('databases/', views.databases, name="databases"),
+    path('password/', views.password_page, name="password page"),
+    path('forgot-password', views.forgot_password_page, name="forgot password page"),
 
     path('get_document', views.get_document, name="get document"),
 
@@ -28,7 +30,6 @@ urlpatterns = [
     path('admin/reset_password', views.reset_password, name="reset password"),
     path('admin/send_forgot_password', views.send_forgot_password_link, name="send forgot password link"),
     path('admin/reset_forgot_password', views.reset_forgotten_password, name="reset forgotten password"),
-    path('admin/forgot_password', views.render_forgotten_password_page, name="forgot password"),
     path('admin/upload_document', views.upload_document, name="upload document"),
     path('admin/delete_document', views.delete_document, name="delete document"),
     path('admin/verify', views.verify_email, name="verify email"),

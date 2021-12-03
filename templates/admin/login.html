@@ -16,31 +16,29 @@
 
             <h1>Login</h1>
 
+            <br>
+
+            {% include 'admin/messages.html' %}
+
             <form method="post" action="{% url 'login' %}" class="form-group" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
 
-                {% if alert %}
-                    <div class="alert alert-danger">
-                        <strong>{{ alert }}</strong>
-                    </div>
-                {% endif %}
-
                 <div class="form-floating mt-3 mb-3">
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    <input type="email" onchange="forgotLink(this.value)" class="form-control" id="email" placeholder="Enter email" name="email" required>
                     <label for="email">Email</label>
                 </div>
 
-                    <div class="d-flex">
-                        <div class="p-0 form-floating" style="width: 95%;">
-                            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="p-0">
-                            <i id="showIcon" class='fa fa-eye' style='font-size:64px; display: block;' onclick="myFunction()"></i>
-                            <i id="hideIcon" class='fa fa-eye-slash' style='font-size:64px; display: none;' onclick="myFunction()"></i>
-                        </div>
+                <div class="d-flex">
+                    <div class="p-0 form-floating" style="width: 95%;">
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+                        <label for="password">Password</label>
                     </div>
+                    <div class="p-0">
+                        <i id="showIcon" class='fa fa-eye text-secondary' style='font-size:64px; display: block;' onclick="myFunction()"></i>
+                        <i id="hideIcon" class='fa fa-eye-slash text-secondary' style='font-size:64px; display: none;' onclick="myFunction()"></i>
+                    </div>
+                </div>
 
                 <br>
 
@@ -53,7 +51,7 @@
                             </label>
                         </span>
                         <span class="float-end">
-                            <a href="">Forgot password?</a>
+                            <a href="" id="forgotPassword">Forgot password?</a>
                         </span>
                     </div>
                 </div>
@@ -86,6 +84,9 @@
                 x.type = "password";
             }
         }
+    }
+    function forgotLink(email) {
+        document.getElementById("forgotPassword").href = "http://127.0.0.1:8000/admin/send_forgot_password?email=" + email;
     }
     </script>
 

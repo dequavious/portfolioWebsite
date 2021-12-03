@@ -17,45 +17,55 @@
 
             <h1>Authorization</h1>
 
-            {% if alert %}
-                <div class="alert alert-danger">
-                    <strong>{{ alert }}</strong>
-                </div>
-            {% endif %}
+            <br>
 
-            <form method="post" action="{% url 'authenticate' %}" class="form-group" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form|crispy}}
+            {% include 'admin/messages.html' %}
+
+            <form id="submitForm">
+{#                {% csrf_token %}#}
+
+{#                <input type="hidden" class="form-control" name="Authorization" value="Token {{ token }}">#}
 
                 <div class="form-floating mb-3 mt-3">
                     <input type="text" class="form-control" id="security_code" placeholder="Enter security code" name="security_code" required>
                     <label for="security_code">Security code</label>
                 </div>
 
-                <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+                <button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>
 
             </form>
 
-            <br>
+            <br><br>
 
         </div>
 
     </div>
-
     <script>
-        $('#submitButton').on('click',function(){
+        var authenticated = '{{ auth }}';
+        console.log(authenticated);
+        if (authenticated === 'True') {
+            window.location.replace({% url 'details' %});
+        }
+        $(document).on('submit', '#submitForm', function(e) {
+
+            /* stop form from submitting normally */
+            e.preventDefault();
+
             $.ajax({
-                url: "http://127.0.0.1:8000/admin/auth",
-                type: 'POST',
-                data: {
-                    security_code: $('#security_code').val()
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'authenticate' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
                 },
-                contentType: 'application/json',
-                headers: {
-                    "Authorization": "Token " + $('{{ token }}').val()
+                data:{
+                    security_code:$('#security_code').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
                 },
-                async: false
-            })
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
         });
     </script>
 {% endblock %}

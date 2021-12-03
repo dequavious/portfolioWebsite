@@ -69,14 +69,9 @@
 
         <h1>Documents</h1>
 
-
         <br>
 
-        {% if alert %}
-            <div class="alert alert-danger">
-                <strong>{{ alert }}</strong>
-            </div>
-        {% endif %}
+        {% include 'admin/messages.html' %}
 
         <br>
 
@@ -92,13 +87,10 @@
         {% for document in documents %}
             <div class="container-fluid bg-white border">
                 <br>
-                <form id="updateForm{{ document.id }}" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form|crispy}}
+                <form id="updateForm{{ document.id }}">
                     <label id="{{ document.type }}Label1" for="{{ document.type }}">{{ document.type }}</label>
                     <iframe id="{{ document.type }}" src="{% static document.file  %}#toolbar=0" width="100%" height="500px"></iframe>
                     <label id="{{ document.type }}Label2" for="updateFile{{ document.id }}">Choose another {{ document.type }}: </label>
-                    <input type="hidden" class="form-control" name="type" value="{{ document.type }}" required>
                     <input type="file" oninput="update({{ document.id }})" class="form-control" id="updateFile{{ document.id }}" name="file" required>
 
                     <br>
@@ -110,9 +102,7 @@
                         <button id="saveBtn{{ document.id }}" type="submit" class="btn" form="updateForm{{ document.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                     </div>
                     <div class="float-end">
-                        <form method="post" action="{% url 'delete document' %}?type={{ document.type }}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{form|crispy}}
+                        <form id="deleteForm{{ document.id }}">
                             <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                         </form>
                     </div>
@@ -134,17 +124,67 @@
                     document.getElementById("{{ document.type }}Label1").innerHTML = "Current academic record:";
                     document.getElementById("{{ document.type }}Label2").innerHTML = "Replace academic record:";
                 }
+
+                $(document).on('submit', '#updateForm{{ document.id }}', function(e) {
+                    var data = new FormData();
+                    data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                    data.append('type', '{{ document.type }}');
+                    data.append('file', $('#updateFile{{ document.id }}')[0].files[0]);
+
+                    /* stop form from submitting normally */
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        enctype: 'multipart/form-data',
+                        url: '{% url 'upload document' %}',
+                        headers:{
+                          Authorization: 'Token {{ token }}'
+                        },
+                        data:data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        timeout: 800000,
+                        success:function () {
+                            window.location.reload(true);
+                        }
+                    });
+                });
+
+                $(document).on('submit', '#deleteForm{{ document.id }}', function(e) {
+                    var data = new FormData();
+                    data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                    /* stop form from submitting normally */
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        enctype: 'multipart/form-data',
+                        url: '{% url 'delete document' %}?type={{ document.type }}',
+                        headers:{
+                          Authorization: 'Token {{ token }}'
+                        },
+                        data:data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        timeout: 800000,
+                        success:function () {
+                            window.location.reload(true);
+                        }
+                    });
+                });
+
             </script>
 
         {% endfor %}
 
         <div id="uploadCvBorder" class="container-fluid bg-white border" style="display: none">
             <br>
-            <form id="uploadCvForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
-                {% csrf_token %}
-                {{form|crispy}}
+            <form id="uploadCvForm" style="display: none">
                 <label for="uploadCvFile">Upload CV: </label>
-                <input type="hidden" class="form-control" name="type" value="cv" required>
                 <input type="file" oninput="uploadCv()" class="form-control" id="uploadCvFile" name="file" required>
                 <br>
             </form>
@@ -161,11 +201,8 @@
         <div id="uploadRecordBorder" class="container-fluid bg-white border" style="display: none">
             <br>
             <form id="uploadRecordForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
-                {% csrf_token %}
-                {{form|crispy}}
                 <label for="uploadRecordFile">Upload Record: </label>
-                <input type="hidden" class="form-control" name="type" value="record" required>
-                <input type="file" oninput="uploadRecord()" class="form-control" id="uploadCvFile" name="file" required>
+                <input type="file" oninput="uploadRecord()" class="form-control" id="uploadRecordFile" name="file" required>
                 <br>
             </form>
             <div id="recordButtons" class="clearfix">
@@ -178,33 +215,80 @@
 
         <br>
 
-        <script>
-            if(types.indexOf("cv") === -1) {
-                document.getElementById("uploadCvForm").style.display = "block";
-                document.getElementById("uploadCvBorder").style.display = "block";
-            } else {
-                document.getElementById("uploadCvForm").style.display = "hidden";
-                document.getElementById("uploadCvBorder").style.display = "hidden";
-            }
-            if(types.indexOf("record") === -1) {
-                document.getElementById("uploadRecordForm").style.display = "block";
-                document.getElementById("uploadRecordBorder").style.display = "block";
-            } else {
-                document.getElementById("uploadRecordForm").style.display = "hidden";
-                document.getElementById("uploadRecordBorder").style.display = "hidden";
-            }
-        </script>
-
-{#        <div class="clearfix">#}
-{#            <div class="float-end">#}
-{#                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">#}
-{#                    {% csrf_token %}#}
-{#                    {{form|crispy}}#}
-{#                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-
     </div>
+
+    <div style="height: 100%">
+    </div>
+
+    <script>
+        if(types.indexOf("cv") === -1) {
+            document.getElementById("uploadCvForm").style.display = "block";
+            document.getElementById("uploadCvBorder").style.display = "block";
+        } else {
+            document.getElementById("uploadCvForm").style.display = "hidden";
+            document.getElementById("uploadCvBorder").style.display = "hidden";
+        }
+        if(types.indexOf("record") === -1) {
+            document.getElementById("uploadRecordForm").style.display = "block";
+            document.getElementById("uploadRecordBorder").style.display = "block";
+        } else {
+            document.getElementById("uploadRecordForm").style.display = "hidden";
+            document.getElementById("uploadRecordBorder").style.display = "hidden";
+        }
+
+        $(document).on('submit', '#uploadCvForm', function(e) {
+            var data = new FormData();
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('type', 'cv');
+            data.append('file', $('#uploadCvFile')[0].files[0]);
+
+            /* stop form from submitting normally */
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'upload document' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data:data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
+
+        $(document).on('submit', '#uploadRecordForm', function(e) {
+            var data = new FormData();
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('type', 'record');
+            data.append('file', $('#uploadRecordFile')[0].files[0]);
+
+            /* stop form from submitting normally */
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'upload document' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data:data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
+    </script>
 
 {% endblock %}

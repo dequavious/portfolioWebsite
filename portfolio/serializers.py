@@ -6,7 +6,7 @@ from .models import CustomUser as User, Address, Document, Hobby, Language, Skil
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['name', 'surname', 'email', 'number', 'picture', 'bio']
+        fields = ['name', 'surname', 'email', 'number', 'picture', 'bio', 'authenticated', 'is_active']
 
     def validate(self, attrs):
         email = attrs['email']

@@ -43,7 +43,7 @@
 
     <div class="d-flex flex-row justify-content-start">
 
-    <div class="p-0 bg-light border icon-bar">
+    <div id="iconBar" class="p-0 bg-light border icon-bar">
         <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
         <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
         <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
@@ -56,19 +56,13 @@
 
         <br>
 
-        {% if alert %}
-            <div class="alert alert-danger">
-                <strong>{{ alert }}</strong>
-            </div>
-        {% endif %}
+        {% include 'admin/messages.html' %}
 
         <br>
 
         <h3 id="add">Add framework</h3>
         <div class="container-fluid bg-white border">
-            <form method="post" action="{% url 'add framework' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form|crispy}}
+            <form id="addFrameworkForm">
                 <div class="mb-3 mt-3">
                     <label for="addFramework">Framework:</label>
                     <input type="text" class="form-control" id="addFramework" name="framework" required>
@@ -111,9 +105,7 @@
             {% for framework in frameworks %}
                 <li class="list-group-item">
 
-                    <form id="updateForm{{ framework.id }}" method="post" action="{% url 'update framework' %}?id={{ framework.id }}" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{form|crispy}}
+                    <form id="updateForm{{ framework.id }}">
                         <div class="mb-3 mt-3">
                             <label for="update{{ framework.id }}">Framework:</label>
                             <input type="text" onclick="clickFunction(this.id, '{{ framework.framework }}')" oninput="change({{ framework.id }})" class="form-control" id="update{{ framework.id }}" name="framework" placeholder="{{ framework.framework }}">
@@ -142,9 +134,7 @@
                             <button id="saveBtn{{ framework.id }}" type="submit" class="btn" form="updateForm{{ framework.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                         </div>
                         <div class="float-end">
-                            <form method="post" action="{% url 'delete framework' %}?id={{ framework.id }}" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{form|crispy}}
+                            <form id="deleteForm{{ framework.id }}">
                                 <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                             </form>
                         </div>
@@ -154,25 +144,86 @@
 
                 </li>
 
+                <script>
+                    $(document).on('submit', '#updateForm{{ framework.id }}', function(e) {
+                        var data = new FormData();
+                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                        var i, divs, form, input;
+                        form = document.getElementById("updateForm{{ framework.id }}");
+                        divs = form.getElementsByTagName('div');
+
+                        for (i = 0; i < divs.length; i++) {
+                            input = divs[i].getElementsByTagName("input")[0];
+                            if (input !== undefined) {
+                                if (input.value.length > 0) {
+                                    if (input.name === 'avatar') {
+                                        data.append('avatar', $('#updateImage{{ framework.id }}')[0].files[0]);
+                                    } else {
+                                        data.append(input.name, input.value);
+                                    }
+                                }
+                            }
+                        }
+
+                        e.preventDefault();
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: 'multipart/form-data',
+                            url: '{% url 'update framework' %}?id={{ framework.id }}',
+                            headers:{
+                              Authorization: 'Token {{ token }}'
+                            },
+                            data:data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 800000,
+                            success:function () {
+                                window.location.reload(true);
+                            }
+                        });
+                    });
+
+                    $(document).on('submit', '#deleteForm{{ framework.id }}', function(e) {
+                        var data = new FormData();
+                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                        e.preventDefault();
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: 'multipart/form-data',
+                            url: '{% url 'delete framework' %}?id={{ framework.id }}',
+                            headers:{
+                              Authorization: 'Token {{ token }}'
+                            },
+                            data:data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 800000,
+                            success:function () {
+                                window.location.reload(true);
+                            }
+                        });
+                    });
+                </script>
+
             {% endfor %}
 
         </ul>
 
         <br>
 
-{#        <div class="clearfix">#}
-{#            <div class="float-end">#}
-{#                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">#}
-{#                    {% csrf_token %}#}
-{#                    {{form|crispy}}#}
-{#                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-
         <br>
 
     </div>
+
+    </div>
+
+    <div style="height: 100%">
 
     </div>
 
@@ -198,6 +249,34 @@
                 }
             }
         }
+
+        $(document).on('submit', '#addFrameworkForm', function(e) {
+            var data = new FormData();
+
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('framework', $('#addFramework').val());
+            data.append('confidence', $('#addConfidence').val());
+            data.append('avatar', $('#addImage')[0].files[0]);
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'add framework' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
     </script>
 
 {% endblock %}

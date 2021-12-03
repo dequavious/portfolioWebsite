@@ -2,13 +2,18 @@ import imghdr
 import re
 
 from django.contrib.auth.hashers import check_password, make_password
+from django.http import HttpResponse
+from django.template import RequestContext
+from django.template.loader import render_to_string
 from rest_framework import status, exceptions
-from rest_framework.decorators import api_view, permission_classes, parser_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes, authentication_classes
 from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+
+from django.contrib import messages
 
 from .serializers import *
 from .utils import *
@@ -45,22 +50,24 @@ def home(request):
 
 
 def login_page(request):
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response']
-            }
-            request.session.pop('response')
-            return render(request, 'admin/login.html', context)
-    except:
-        return render(request, 'admin/login.html')
-
+    # try:
+    #     if request.session['alert']:
+    #         context = {
+    #             'alert': request.session['alert']
+    #         }
+    #         request.session.pop('alert')
+    #         return render(request, 'admin/login.html', context)
+    # except:
+    #     return render(request, 'admin/login.html')
     return render(request, 'admin/login.html')
 
 
 @permission_classes([IsAuthenticated])
 def auth_page(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -68,18 +75,12 @@ def auth_page(request):
     if not user.is_active:
         return redirect('login page')
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/auth.html', context)
-    except:
-        return render(request, 'admin/auth.html')
-
-    return render(request, 'admin/auth.html')
+    # user = UserSerializer(user, many=False)
+    context = {
+        'auth': user.authenticated,
+        'token': request.session['token']
+    }
+    return render(request, 'admin/auth.html', context)
 
 
 def admin(request):
@@ -87,8 +88,11 @@ def admin(request):
 
 
 @permission_classes([IsAuthenticated])
-def details(request):
-    user_id = request.user.id
+def password_page(request):
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -100,21 +104,40 @@ def details(request):
 
     user = UserSerializer(user, many=False)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'user': user.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/details.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'user': user.data,
-        }
-        return render(request, 'admin/details.html', context)
+    context = {
+        'user': user.data,
+        'token': request.session['token'],
+    }
+
+    return render(request, 'admin/password.html', context)
+
+
+@permission_classes([AllowAny])
+def forgot_password_page(request):
+
+    context = {
+        'token': request.session['token'],
+    }
+
+    return render(request, 'admin/forgot_password.html', context)
+
+
+@permission_classes([IsAuthenticated])
+def details(request):
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
+    users = User.objects.all().filter(id=user_id)
+    if not users.exists():
+        return redirect('login page')
+    user = User.objects.get(id=user_id)
+    if not user.is_active:
+        return redirect('login page')
+    if not user.authenticated:
+        return redirect('login page')
+
+    user = UserSerializer(user, many=False)
 
     context = {
         'token': request.session['token'],
@@ -126,7 +149,10 @@ def details(request):
 
 @permission_classes([IsAuthenticated])
 def documents(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -139,22 +165,6 @@ def documents(request):
     docs = Document.objects.all()
     docs = DocumentSerializer(docs, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'documents': docs.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/documents.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'documents': docs.data,
-        }
-        return render(request, 'admin/documents.html', context)
-
     context = {
         'token': request.session['token'],
         'documents': docs.data,
@@ -165,7 +175,10 @@ def documents(request):
 
 @permission_classes([IsAuthenticated])
 def hobbies(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -178,22 +191,6 @@ def hobbies(request):
     interests = Hobby.objects.all()
     interests = HobbySerializer(interests, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'hobbies': interests.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/hobbies.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'hobbies': interests.data,
-        }
-        return render(request, 'admin/hobbies.html', context)
-
     context = {
         'token': request.session['token'],
         'hobbies': interests.data,
@@ -204,7 +201,10 @@ def hobbies(request):
 
 @permission_classes([IsAuthenticated])
 def education(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -217,22 +217,6 @@ def education(request):
     edu = Education.objects.all()
     edu = EducationSerializer(edu, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'degrees': edu.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/education.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'degrees': edu.data,
-        }
-        return render(request, 'admin/education.html', context)
-
     context = {
         'token': request.session['token'],
         'degrees': edu.data,
@@ -243,7 +227,10 @@ def education(request):
 
 @permission_classes([IsAuthenticated])
 def work(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -256,22 +243,6 @@ def work(request):
     jobs = Work.objects.all()
     jobs = WorkSerializer(jobs, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'jobs': jobs.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/work.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'jobs': jobs.data,
-        }
-        return render(request, 'admin/work.html', context)
-
     context = {
         'token': request.session['token'],
         'jobs': jobs.data,
@@ -282,7 +253,10 @@ def work(request):
 
 @permission_classes([IsAuthenticated])
 def strengths(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -295,22 +269,6 @@ def strengths(request):
     skills = Skill.objects.all()
     skills = SkillSerializer(skills, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'skills': skills.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/strengths.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'skills': skills.data,
-        }
-        return render(request, 'admin/strengths.html', context)
-
     context = {
         'token': request.session['token'],
         'skills': skills.data,
@@ -321,7 +279,10 @@ def strengths(request):
 
 @permission_classes([IsAuthenticated])
 def projects(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -334,22 +295,6 @@ def projects(request):
     proj = Project.objects.all()
     proj = ProjectSerializer(proj, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'projects': proj.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/projects.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'projects': proj.data,
-        }
-        return render(request, 'admin/projects.html', context)
-
     context = {
         'token': request.session['token'],
         'projects': proj.data,
@@ -360,7 +305,10 @@ def projects(request):
 
 @permission_classes([IsAuthenticated])
 def languages(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -373,22 +321,6 @@ def languages(request):
     lang = Language.objects.all()
     lang = LanguageSerializer(lang, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'languages': lang.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/languages.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'languages': lang.data,
-        }
-        return render(request, 'admin/languages.html', context)
-
     context = {
         'token': request.session['token'],
         'languages': lang.data,
@@ -399,7 +331,10 @@ def languages(request):
 
 @permission_classes([IsAuthenticated])
 def frameworks(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -412,22 +347,6 @@ def frameworks(request):
     technologies = Framework.objects.all()
     technologies = FrameworkSerializer(technologies, many=True)
 
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'frameworks': technologies.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/frameworks.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'frameworks': technologies.data,
-        }
-        return render(request, 'admin/frameworks.html', context)
-
     context = {
         'token': request.session['token'],
         'frameworks': technologies.data,
@@ -438,7 +357,10 @@ def frameworks(request):
 
 @permission_classes([IsAuthenticated])
 def databases(request):
-    user_id = request.user.id
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
         return redirect('login page')
@@ -450,22 +372,6 @@ def databases(request):
 
     db = DBMS.objects.all()
     db = DBMSSerializer(db, many=True)
-
-    try:
-        if request.session['response']:
-            context = {
-                'alert': request.session['response'],
-                'databases': db.data,
-                'token': request.session['token'],
-            }
-            request.session.pop('response')
-            return render(request, 'admin/databases.html', context)
-    except:
-        context = {
-            'token': request.session['token'],
-            'databases': db.data,
-        }
-        return render(request, 'admin/databases.html', context)
 
     context = {
         'token': request.session['token'],
@@ -483,31 +389,29 @@ def login(request):
     View to log in
     """
     if not request.data.get('email', None):
-        request.session['response'] = "Email not provided"
-        return redirect('login page')
-        # return Response("email not provided", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Email not provided")
+        return render(request, 'admin/login.html')
 
     if not request.data.get('password', None):
-        request.session['response'] = "Password not provided"
-        return redirect('login page')
-        # return Response("password not provided", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Password not provided")
+        return render(request, 'admin/login.html')
 
     users = User.objects.all().filter(email=request.data['email'])
     if not users.exists():
-        request.session['response'] = "Email does not exist"
-        return redirect('login page')
-        # return Response("Email does not exist", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Email does not exist")
+        return render(request, 'admin/login.html')
     user = User.objects.get(email=request.data['email'])
     if not check_password(request.data['password'], user.password):
-        request.session['response'] = "Incorrect password"
-        return redirect('login page')
-        # return Response("Incorrect password", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Incorrect password")
+        return render(request, 'admin/login.html')
 
     user.token_last_expired = timezone.now()
     user.authenticated = False
     user.security_code = generate_security_code()
     user.is_active = True
     user.save()
+
+    request.user = user
 
     serializer = UserSerializer(user, many=False)
 
@@ -525,9 +429,10 @@ def login(request):
         'user': serializer.data,
     }
 
+    request.session['user'] = user.id
     request.session['token'] = access_token
 
-    print(access_token)
+    email_2fa(user)
 
     return redirect('auth page')
 
@@ -565,26 +470,23 @@ def authenticate(request):
     user_id = request.user.id
     users = User.objects.all().filter(id=user_id)
     if not users.exists():
-        request.session['response'] = "User does not exist"
-        return redirect('auth page')
-        # return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
+        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
     user = User.objects.get(id=user_id)
 
     security_code = request.data.get('security_code', None)
     if not security_code:
-        request.session['response'] = "No security code provided"
-        return redirect('auth page')
-        # return Response("no security code provided", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "No security code provided")
+        return render(request, 'admin/auth.html')
 
     if security_code != user.security_code:
-        request.session['response'] = "Incorrect code"
-        return redirect('auth page')
-        # return Response("incorrect code", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Incorrect code")
+        html = render_to_string('admin/auth.html')
+        return HttpResponse(html)
     user.authenticated = True
     user.security_code = None
     user.save()
 
-    return redirect('details')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -606,7 +508,8 @@ def logout(request):
     user.authenticated = False
     user.is_active = False
     user.save()
-    return redirect('home')
+
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -646,9 +549,9 @@ def update_details(request):
     image = request.data.get('file', None)
     if image:
         if not imghdr.what(image):
-            request.session['response'] = "Not a valid image format"
-            return redirect('details')
-            # return Response("not a valid image format", status=status.HTTP_400_BAD_REQUEST)
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/details.html')
+            return HttpResponse(html)
 
         if user.picture:
             delete_file(user.picture)
@@ -659,12 +562,14 @@ def update_details(request):
     email = request.data.get('email', None)
     if email:
         if User.objects.all().filter(email=email).exists():
-            return Response("email already exists", status=status.HTTP_400_BAD_REQUEST)
+            messages.error(request, "Email already exists.")
+            html = render_to_string('admin/details.html')
+            return HttpResponse(html)
         temp = User(id=user.id, email=email, name=user.name, surname=user.surname,
                     number=user.number, password=user.password)
         send_email_verification_link(temp, request)
 
-    return redirect('details')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -692,21 +597,27 @@ def reset_password(request):
 
     password = user.password
     if not check_password(request.data['old_password'], password):
-        return Response("incorrect password", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Incorrect password")
+        html = render_to_string('admin/password.html')
+        return HttpResponse(html)
 
     if not re.search("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{12,}$", request.data['new_password']):
-        return Response("invalid password", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Invalid password")
+        html = render_to_string('admin/password.html')
+        return HttpResponse(html)
 
     if request.data['new_password'] != request.data['repeat_password']:
-        return Response("passwords don't match", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Passwords don't match")
+        html = render_to_string('admin/password.html')
+        return HttpResponse(html)
 
     user.password = make_password(request.data['new_password'])
     user.save()
 
-    return Response("password has been reset", status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
 def send_forgot_password_link(request):
     """
@@ -721,12 +632,12 @@ def send_forgot_password_link(request):
 
         send_forgot_password_email(user, request)
 
-        return Response(status=status.HTTP_200_OK)
+        return redirect('password page')
     else:
         return Response("no email provided", status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def reset_forgotten_password(request):
     """
@@ -752,20 +663,11 @@ def reset_forgotten_password(request):
         user.password = make_password(request.data['password'])
         user.save()
 
-        return render(request, "success.html")
+        return redirect('details')
     except jwt.ExpiredSignatureError:
-        return render(request, "expired.html")
+        return Response("Token expired", status=status.HTTP_400_BAD_REQUEST)
     except jwt.exceptions.DecodeError:
-        return render(request, "invalid.html")
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def render_forgotten_password_page(request):
-    """
-    View to render forgotten password page
-    """
-    return render(request, "password.html")
+        return Response("Invalid token", status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -782,11 +684,11 @@ def verify_email(request):
             email = payload['email']
             user.email = email
         user.save()
-        return render(request, "email.html")
+        return redirect('details')
     except jwt.ExpiredSignatureError:
-        return render(request, "expired.html")
+        return Response("Token expired", status=status.HTTP_400_BAD_REQUEST)
     except jwt.exceptions.DecodeError:
-        return render(request, "invalid.html")
+        return Response("Invalid token", status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -810,9 +712,9 @@ def upload_document(request):
 
     tokens = os.path.splitext(str(file))
     if not tokens[1] == '.pdf':
-        request.session['response'] = "Needs to be pdf format"
-        return redirect('documents')
-        # return Response("needs to be pdf format", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Needs to be pdf format")
+        html = render_to_string('admin/documents.html')
+        return HttpResponse(html)
 
     file_type = request.data.get('type', None)
     if not file_type:
@@ -831,7 +733,7 @@ def upload_document(request):
         document = Document(file=file, type=file_type)
         document.save()
 
-    return redirect('documents')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -879,7 +781,7 @@ def delete_document(request):
     else:
         return Response("document does not exist", status=status.HTTP_400_BAD_REQUEST)
 
-    return redirect('documents')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST', 'PUT'])
@@ -964,14 +866,14 @@ def add_language(request):
     lang = Language.objects.all().filter(language__iexact=language)
 
     if lang.exists():
-        request.session['response'] = "Language already added"
+        request.session['alert'] = "Language already added"
         return redirect('languages')
         # return Response("language already added", status=status.HTTP_400_BAD_REQUEST)
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
+            request.session['alert'] = "Not a valid image format"
             return redirect('languages')
         language = Language(language=language, confidence=confidence, avatar=avatar)
     else:
@@ -979,7 +881,7 @@ def add_language(request):
 
     language.save()
 
-    return redirect('languages')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1012,7 +914,7 @@ def update_language(request):
         lang = Language.objects.all().filter(language__iexact=language_str)
 
         if lang.exists():
-            request.session['response'] = "Language already added"
+            request.session['alert'] = "Language already added"
             return redirect('languages')
         language.language = language_str
         language.save()
@@ -1025,14 +927,14 @@ def update_language(request):
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
+            request.session['alert'] = "Not a valid image format"
             return redirect('languages')
         if language.avatar:
             delete_file(language.avatar)
         language.avatar = avatar
         language.save()
 
-    return redirect('languages')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1064,7 +966,7 @@ def delete_language(request):
 
     language.delete()
 
-    return redirect('languages')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1093,13 +995,13 @@ def add_framework(request):
     technologies = Framework.objects.all().filter(framework__iexact=framework)
 
     if technologies.exists():
-        request.session['response'] = "Framework already added"
+        request.session['alert'] = "Framework already added"
         return redirect('frameworks')
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
+            request.session['alert'] = "Not a valid image format"
             return redirect('frameworks')
         framework = Framework(framework=framework, confidence=confidence, avatar=avatar)
     else:
@@ -1107,7 +1009,7 @@ def add_framework(request):
 
     framework.save()
 
-    return redirect('frameworks')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1140,7 +1042,7 @@ def update_framework(request):
         technologies = Framework.objects.all().filter(framework__iexact=framework_str)
 
         if technologies.exists():
-            request.session['response'] = "Framework already added"
+            request.session['alert'] = "Framework already added"
             return redirect('frameworks')
         framework.framework = framework_str
         framework.save()
@@ -1153,14 +1055,14 @@ def update_framework(request):
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
+            request.session['alert'] = "Not a valid image format"
             return redirect('frameworks')
         if framework.avatar:
             delete_file(framework.avatar)
         framework.avatar = avatar
         framework.save()
 
-    return redirect('frameworks')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1192,7 +1094,7 @@ def delete_framework(request):
 
     framework.delete()
 
-    return redirect('frameworks')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1220,13 +1122,13 @@ def add_dbms(request):
 
     db = DBMS.objects.all().filter(dbms__iexact=dbms)
     if db.exists():
-        request.session['response'] = "Database already added"
+        request.session['alert'] = "Database already added"
         return redirect('databases')
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
+            request.session['alert'] = "Not a valid image format"
             return redirect('databases')
         dbms = DBMS(dbms=dbms, confidence=confidence, avatar=avatar)
     else:
@@ -1234,7 +1136,7 @@ def add_dbms(request):
 
     dbms.save()
 
-    return redirect('databases')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1266,7 +1168,7 @@ def update_dbms(request):
     if dbms:
         db = DBMS.objects.all().filter(dbms__iexact=dbms)
         if db.exists():
-            request.session['response'] = "Database already added"
+            request.session['alert'] = "Database already added"
             return redirect('databases')
         database.dbms = dbms
         database.save()
@@ -1279,14 +1181,14 @@ def update_dbms(request):
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
+            request.session['alert'] = "Not a valid image format"
             return redirect('databases')
         if database.avatar:
             delete_file(database.avatar)
         database.avatar = avatar
         database.save()
 
-    return redirect('databases')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1318,7 +1220,7 @@ def delete_dbms(request):
 
     database.delete()
 
-    return redirect('databases')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1342,22 +1244,23 @@ def add_hobby(request):
 
     interests = Hobby.objects.all().filter(hobby__iexact=hobby)
     if interests.exists():
-        request.session['response'] = "Hobby already added"
-        return redirect('hobbies')
-        # return Response("hobby already added", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Hobby already added")
+        html = render_to_string('admin/hobbies.html')
+        return HttpResponse(html)
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
-            return redirect('hobbies')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/hobbies.html')
+            return HttpResponse(html)
         hobby = Hobby(hobby=hobby, avatar=avatar)
     else:
         hobby = Hobby(hobby=hobby)
 
     hobby.save()
 
-    return redirect('hobbies')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1388,22 +1291,24 @@ def update_hobby(request):
     if interest:
         interests = Hobby.objects.all().filter(hobby__iexact=interest)
         if interests.exists():
-            request.session['response'] = "Hobby already added"
-            return redirect('hobbies')
+            messages.error(request, "Hobby already added")
+            html = render_to_string('admin/hobbies.html')
+            return HttpResponse(html)
         hobby.hobby = interest
         hobby.save()
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['response'] = "Not a valid image format"
-            return redirect('hobbies')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/hobbies.html')
+            return HttpResponse(html)
         if hobby.avatar:
             delete_file(hobby.avatar)
         hobby.avatar = avatar
         hobby.save()
 
-    return redirect('hobbies')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1433,7 +1338,7 @@ def delete_hobby(request):
     else:
         return Response("hobby not found", status=status.HTTP_400_BAD_REQUEST)
 
-    return redirect('hobbies')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1457,14 +1362,14 @@ def add_skill(request):
     skills = Skill.objects.all().filter(skill__iexact=skill)
 
     if skills.exists():
-        request.session['response'] = "Strength already added"
-        return redirect('strengths')
-        # return Response("skill already added", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Strength already added")
+        html = render_to_string('admin/strengths.html')
+        return HttpResponse(html)
 
     skill = Skill(skill=skill)
     skill.save()
 
-    return redirect('strengths')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1496,12 +1401,13 @@ def update_skill(request):
     if skill_str:
         skills = Skill.objects.all().filter(skill__iexact=skill_str)
         if skills.exists():
-            request.session['response'] = "Strength already added"
-            return redirect('strengths')
+            messages.error(request, "Strength already added")
+            html = render_to_string('admin/strengths.html')
+            return HttpResponse(html)
         skill.skill = skill_str
         skill.save()
 
-    return redirect('strengths')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1530,7 +1436,7 @@ def delete_skill(request):
     skill = Skill.objects.get(id=sid)
     skill.delete()
 
-    return redirect('strengths')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1555,17 +1461,17 @@ def add_work(request):
     if not company:
         return Response("company not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    jobs = Work.objects.all().filter(description__iexact=description, company=company)
+    jobs = Work.objects.all().filter(description__iexact=description, company__iexact=company)
 
     if jobs.exists():
-        request.session['response'] = "Job already added"
-        return redirect('work')
-        # return Response("job already added", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Work already added")
+        html = render_to_string('admin/work.html')
+        return HttpResponse(html)
 
     job = Work(description=description, company=company)
     job.save()
 
-    return redirect('work')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1597,10 +1503,11 @@ def update_work(request):
     company = request.data.get('company', None)
 
     if description and company:
-        jobs = Work.objects.all().filter(description__iexact=description, company=company)
+        jobs = Work.objects.all().filter(description__iexact=description, company__iexact=company)
         if jobs.exists():
-            request.session['response'] = "Job already added"
-            return redirect('work')
+            messages.error(request, "Work already added")
+            html = render_to_string('admin/work.html')
+            return HttpResponse(html)
 
     if description:
         job.description = description
@@ -1610,7 +1517,7 @@ def update_work(request):
         job.company = company
         job.save()
 
-    return redirect('work')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1639,7 +1546,7 @@ def delete_work(request):
     job = Work.objects.get(id=wid)
     job.delete()
 
-    return redirect('work')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1675,14 +1582,14 @@ def add_project(request):
     proj = Project.objects.all().filter(title__iexact=title)
 
     if proj.exists():
-        request.session['response'] = "Project already added"
-        return redirect('projects')
-        # return Response("project already added", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Project already added")
+        html = render_to_string('admin/strengths.html')
+        return HttpResponse(html)
 
     project = Project(title=title, description=description, git=git, link=link)
     project.save()
 
-    return redirect('projects')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1715,8 +1622,9 @@ def update_project(request):
         proj = Project.objects.all().filter(title__iexact=title)
 
         if proj.exists():
-            request.session['response'] = "Project already added"
-            return redirect('projects')
+            messages.error(request, "Project already added")
+            html = render_to_string('admin/strengths.html')
+            return HttpResponse(html)
 
         project.title = title
         project.save()
@@ -1736,7 +1644,7 @@ def update_project(request):
         project.link = link
         project.save()
 
-    return redirect('projects')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1765,7 +1673,7 @@ def delete_project(request):
     project = Project.objects.get(id=pid)
     project.delete()
 
-    return redirect('projects')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1799,9 +1707,9 @@ def add_education(request):
     degrees = Education.objects.all().filter(degree__iexact=degree)
 
     if degrees.exists():
-        request.session['response'] = "Degree already added"
-        return redirect('education')
-        # return Response("degree already added", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Degree already added")
+        html = render_to_string('admin/education.html')
+        return HttpResponse(html)
 
     if grade:
         degree = Education(degree=degree, grade=grade, year=year, institution=institution)
@@ -1810,7 +1718,7 @@ def add_education(request):
         degree = Education(degree=degree, year=year, institution=institution)
         degree.save()
 
-    return redirect('education')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1842,8 +1750,9 @@ def update_education(request):
     if degree_str:
         degrees = Education.objects.all().filter(degree__iexact=degree_str)
         if degrees.exists():
-            request.session['response'] = "Degree already added"
-            return redirect('education')
+            messages.error(request, "Degree already added")
+            html = render_to_string('admin/education.html')
+            return HttpResponse(html)
         degree.degree = degree_str
         degree.save()
 
@@ -1862,7 +1771,7 @@ def update_education(request):
         degree.institution = institution
         degree.save()
 
-    return redirect('education')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -1891,7 +1800,7 @@ def delete_education(request):
     degree = Education.objects.get(id=eid)
     degree.delete()
 
-    return redirect('education')
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

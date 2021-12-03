@@ -1,0 +1,15 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger" id="msg" role="alert">
+            <strong>{{ message }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<script>
+    setTimeout(function (){
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 10000)
+</script>

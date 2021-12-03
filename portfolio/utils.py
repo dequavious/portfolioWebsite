@@ -105,7 +105,7 @@ def send_forgot_password_email(user, request):
     token = generate_refresh_token(user, False, True)
     domain = get_current_site(request).domain
     domain = str(domain).replace(domain.rpartition(':')[-1], "8000")
-    relative_link = reverse('forgot password')
+    relative_link = reverse('forgot password page')
     absolute_url = 'http://' + domain + relative_link + '?token=' + str(token)
     data = {
         'subject': 'Reset PayAt password',

@@ -43,7 +43,7 @@
 
     <div class="d-flex flex-row justify-content-start">
 
-    <div class="p-0 bg-light border icon-bar">
+    <div id="iconBar" class="p-0 bg-light border icon-bar">
         <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
         <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
         <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
@@ -57,19 +57,13 @@
 
         <br>
 
-        {% if alert %}
-            <div class="alert alert-danger">
-                <strong>{{ alert }}</strong>
-            </div>
-        {% endif %}
+        {% include 'admin/messages.html' %}
 
         <br>
 
         <h3 id="add">Add work</h3>
         <div class="container-fluid bg-white border">
-            <form method="post" action="{% url 'add work' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form|crispy}}
+            <form id="addWorkForm">
                 <div class="mb-3 mt-3">
                     <label for="addWork">Description:</label>
                     <input type="text" class="form-control" id="addWork" name="description" required>
@@ -96,7 +90,6 @@
         <h3 id="edit">Edit/delete work</h3>
         <div class="container-fluid bg-white border">
             <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
-                {{form|crispy}}
                 <div class="form-floating mt-3 mb-3">
                     <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search">
                     <label for="myInput">&#128269;</label>
@@ -108,9 +101,7 @@
             {% for job in jobs %}
                 <li class="list-group-item">
 
-                    <form id="updateForm{{ job.id }}" method="post" action="{% url 'update work' %}?id={{ job.id }}" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{form|crispy}}
+                    <form id="updateForm{{ job.id }}">
                         <div class="mb-3 mt-3">
                             <label for="updateWork{{ job.id }}">Description:</label>
                             <input type="text" onclick="clickFunction(this.id, '{{ job.description }}')" oninput="change({{ job.id }})" class="form-control" id="updateWork{{ job.id }}" name="description" placeholder="{{ job.description }}">
@@ -126,9 +117,7 @@
                             <button id="saveBtn{{ job.id }}" type="submit" class="btn" form="updateForm{{ job.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                         </div>
                         <div class="float-end">
-                            <form method="post" action="{% url 'delete work' %}?id={{ job.id }}" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{form|crispy}}
+                            <form id="deleteForm{{ job.id }}">
                                 <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                             </form>
                         </div>
@@ -138,26 +127,82 @@
 
                 </li>
 
+                <script>
+                    $(document).on('submit', '#updateForm{{ job.id }}', function(e) {
+                        var data = new FormData();
+                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                        var i, divs, form, input;
+                        form = document.getElementById("updateForm{{ job.id }}");
+                        divs = form.getElementsByTagName('div');
+
+                        for (i = 0; i < divs.length; i++) {
+                            input = divs[i].getElementsByTagName("input")[0];
+                            if (input !== undefined) {
+                                if (input.value.length > 0) {
+                                    data.append(input.name, input.value);
+                                }
+                            }
+                        }
+
+                        e.preventDefault();
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: 'multipart/form-data',
+                            url: '{% url 'update work' %}?id={{ job.id }}',
+                            headers:{
+                              Authorization: 'Token {{ token }}'
+                            },
+                            data:data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 800000,
+                            success:function () {
+                                window.location.reload(true);
+                            }
+                        });
+                    });
+
+                    $(document).on('submit', '#deleteForm{{ job.id }}', function(e) {
+                        var data = new FormData();
+                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                        e.preventDefault();
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: 'multipart/form-data',
+                            url: '{% url 'delete work' %}?id={{ job.id }}',
+                            headers:{
+                              Authorization: 'Token {{ token }}'
+                            },
+                            data:data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 800000,
+                            success:function () {
+                                window.location.reload(true);
+                            }
+                        });
+                    });
+                </script>
+
             {% endfor %}
 
         </ul>
 
         <br>
 
-{#        <div class="clearfix">#}
-{#            <div class="float-end">#}
-{#                <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">#}
-{#                    {% csrf_token %}#}
-{#                    {{form|crispy}}#}
-{#                    <button id="logoutBtn" type="submit" class="btn btn-danger">Logout</button>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-
         <br>
 
     </div>
 
+    </div>
+
+    <div style="height: 100%">
     </div>
 
     <script>
@@ -182,6 +227,34 @@
                 }
             }
         }
+
+        $(document).on('submit', '#addWorkForm', function(e) {
+            var data = new FormData();
+
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('description', $('#addWork').val());
+            data.append('company', $('#addCompany').val());
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'add work' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
+
     </script>
 
 {% endblock %}

@@ -102,7 +102,7 @@ class Document(models.Model):
 
 
 class Work(models.Model):
-    description = models.CharField(unique=True, max_length=60)
+    description = models.CharField(max_length=60)
     company = models.CharField(max_length=60)
 
     def __str__(self):

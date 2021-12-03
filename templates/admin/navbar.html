@@ -42,9 +42,7 @@
             </ul>
         </div>
         <div class="nav navbar-nav navbar-right">
-            <form method="post" action="{% url 'logout' %}" class="form-group" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form|crispy}}
+            <form id="navLogoutForm">
                 <button id="logoutBtn" type="submit" class="btn btn-light"><strong>Logout</strong></button>
             </form>
         </div>
@@ -52,3 +50,34 @@
 
 
 </nav>
+
+<script>
+    $(document).on('submit', '#navLogoutForm', function(e) {
+
+        /* stop form from submitting normally */
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: '{% url 'logout' %}',
+            headers:{
+              Authorization: 'Token {{ token }}'
+            },
+            data:{
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success:function () {
+                window.location.reload(true);
+            }
+        });
+    });
+
+    function open() {
+        document.getElementById("iconBar").style.display = "none";
+    }
+
+    function close() {
+        document.getElementById("iconBar").style.display = "block";
+    }
+</script>
