@@ -655,15 +655,19 @@ def reset_forgotten_password(request):
             return Response("repeated password not provided", status=status.HTTP_400_BAD_REQUEST)
 
         if not re.search("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).{12,}$", request.data['password']):
-            return Response("invalid password", status=status.HTTP_400_BAD_REQUEST)
+            messages.error(request, "Invalid password")
+            html = render_to_string('admin/forgot_password.html')
+            return HttpResponse(html)
 
         if request.data['password'] != request.data['repeat_password']:
-            return Response("passwords don't match", status=status.HTTP_400_BAD_REQUEST)
+            messages.error(request, "Passwords don't match")
+            html = render_to_string('admin/forgot_password.html')
+            return HttpResponse(html)
 
         user.password = make_password(request.data['password'])
         user.save()
 
-        return redirect('details')
+        return Response(status=status.HTTP_200_OK)
     except jwt.ExpiredSignatureError:
         return Response("Token expired", status=status.HTTP_400_BAD_REQUEST)
     except jwt.exceptions.DecodeError:
