@@ -3,7 +3,6 @@ import re
 
 from django.contrib.auth.hashers import check_password, make_password
 from django.http import HttpResponse
-from django.template import RequestContext
 from django.template.loader import render_to_string
 from rest_framework import status, exceptions
 from rest_framework.decorators import api_view, permission_classes, parser_classes, authentication_classes
@@ -434,7 +433,7 @@ def login(request):
 @csrf_protect
 def two_factor_auth(request):
     """
-    View to send 2 factor authentication security code
+    View to send 2-factor authentication security code
     """
     user_id = request.user.id
     users = User.objects.all().filter(id=user_id)
@@ -457,7 +456,7 @@ def two_factor_auth(request):
 @csrf_protect
 def authenticate(request):
     """
-    View to authenticate user using 2 factor authentication
+    View to authenticate user using 2-factor authentication
     """
     user_id = request.user.id
     users = User.objects.all().filter(id=user_id)

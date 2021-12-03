@@ -86,7 +86,7 @@
         }
     }
     function forgotLink(email) {
-        document.getElementById("forgotPassword").href = "http://127.0.0.1:8000/admin/send_forgot_password?email=" + email;
+        document.getElementById("forgotPassword").href = '{% url 'send forgot password link' %}?email=' + email;
     }
     </script>
 
