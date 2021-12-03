@@ -52,6 +52,9 @@
 </nav>
 
 <script>
+
+    let isOpen = false;
+
     $(document).on('submit', '#navLogoutForm', function(e) {
 
         /* stop form from submitting normally */
@@ -71,6 +74,21 @@
                 window.location.reload(true);
             }
         });
+    });
+
+    $('.navbar-nav>li>a').on('click', function(){
+        isOpen = false;
+        close();
+    });
+
+    $('.navbar-toggler').on('click', function(){
+        if (isOpen) {
+            isOpen = false;
+            close();
+        } else {
+            isOpen = true;
+            open();
+        }
     });
 
     function open() {
