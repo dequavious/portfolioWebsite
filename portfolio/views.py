@@ -50,15 +50,6 @@ def home(request):
 
 
 def login_page(request):
-    # try:
-    #     if request.session['alert']:
-    #         context = {
-    #             'alert': request.session['alert']
-    #         }
-    #         request.session.pop('alert')
-    #         return render(request, 'admin/login.html', context)
-    # except:
-    #     return render(request, 'admin/login.html')
     return render(request, 'admin/login.html')
 
 
@@ -434,6 +425,7 @@ def login(request):
 
     email_2fa(user)
 
+    messages.info(request, "Please enter the security code that has been sent to your email.")
     return redirect('auth page')
 
 
@@ -526,25 +518,31 @@ def update_details(request):
     if not user.authenticated:
         return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
 
+    just_email = True
+
     name = request.data.get('name', None)
     if name:
         user.name = name
         user.save()
+        just_email = False
 
     surname = request.data.get('surname', None)
     if surname:
         user.surname = surname
         user.save()
+        just_email = False
 
     number = request.data.get('number', None)
     if number:
         user.number = number
         user.save()
+        just_email = False
 
     bio = request.data.get('bio', None)
     if bio:
         user.bio = bio
         user.save()
+        just_email = False
 
     image = request.data.get('file', None)
     if image:
@@ -558,6 +556,7 @@ def update_details(request):
 
         user.picture = image
         user.save()
+        just_email = False
 
     email = request.data.get('email', None)
     if email:
@@ -568,8 +567,12 @@ def update_details(request):
         temp = User(id=user.id, email=email, name=user.name, surname=user.surname,
                     number=user.number, password=user.password)
         send_email_verification_link(temp, request)
+        messages.info(request, "A link has been sent to verify your new email.")
 
-    return Response(status=status.HTTP_200_OK)
+    if not just_email:
+        messages.success(request, "Details updated successfully.")
+    html = render_to_string('admin/details.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -614,7 +617,9 @@ def reset_password(request):
     user.password = make_password(request.data['new_password'])
     user.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Password has been reset.")
+    html = render_to_string('admin/password.html')
+    return HttpResponse(html)
 
 
 @api_view(['GET'])
@@ -632,6 +637,7 @@ def send_forgot_password_link(request):
 
         send_forgot_password_email(user, request)
 
+        messages.info(request, "A link has been sent to your email to change your password.")
         return redirect('password page')
     else:
         return Response("no email provided", status=status.HTTP_400_BAD_REQUEST)
@@ -667,7 +673,9 @@ def reset_forgotten_password(request):
         user.password = make_password(request.data['password'])
         user.save()
 
-        return Response(status=status.HTTP_200_OK)
+        messages.success(request, "Password has been reset.")
+        html = render_to_string('admin/forgot_password.html')
+        return HttpResponse(html)
     except jwt.ExpiredSignatureError:
         return Response("Token expired", status=status.HTTP_400_BAD_REQUEST)
     except jwt.exceptions.DecodeError:
@@ -688,6 +696,7 @@ def verify_email(request):
             email = payload['email']
             user.email = email
         user.save()
+        messages.success(request, "Email verification successful.")
         return redirect('details')
     except jwt.ExpiredSignatureError:
         return Response("Token expired", status=status.HTTP_400_BAD_REQUEST)
@@ -737,7 +746,9 @@ def upload_document(request):
         document = Document(file=file, type=file_type)
         document.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Document upload successful.")
+    html = render_to_string('admin/documents.html')
+    return HttpResponse(html)
 
 
 @api_view(['GET'])
@@ -785,7 +796,9 @@ def delete_document(request):
     else:
         return Response("document does not exist", status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Document has been deleted.")
+    html = render_to_string('admin/documents.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST', 'PUT'])
@@ -870,22 +883,25 @@ def add_language(request):
     lang = Language.objects.all().filter(language__iexact=language)
 
     if lang.exists():
-        request.session['alert'] = "Language already added"
-        return redirect('languages')
-        # return Response("language already added", status=status.HTTP_400_BAD_REQUEST)
+        messages.error(request, "Language already added")
+        html = render_to_string('admin/languages.html')
+        return HttpResponse(html)
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['alert'] = "Not a valid image format"
-            return redirect('languages')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/languages.html')
+            return HttpResponse(html)
         language = Language(language=language, confidence=confidence, avatar=avatar)
     else:
         language = Language(language=language, confidence=confidence)
 
     language.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Language has been added.")
+    html = render_to_string('admin/languages.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -918,8 +934,9 @@ def update_language(request):
         lang = Language.objects.all().filter(language__iexact=language_str)
 
         if lang.exists():
-            request.session['alert'] = "Language already added"
-            return redirect('languages')
+            messages.error(request, "Language already added")
+            html = render_to_string('admin/languages.html')
+            return HttpResponse(html)
         language.language = language_str
         language.save()
 
@@ -931,14 +948,17 @@ def update_language(request):
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['alert'] = "Not a valid image format"
-            return redirect('languages')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/languages.html')
+            return HttpResponse(html)
         if language.avatar:
             delete_file(language.avatar)
         language.avatar = avatar
         language.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Language has been updated.")
+    html = render_to_string('admin/languages.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -970,7 +990,9 @@ def delete_language(request):
 
     language.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Language has been deleted.")
+    html = render_to_string('admin/languages.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -999,21 +1021,25 @@ def add_framework(request):
     technologies = Framework.objects.all().filter(framework__iexact=framework)
 
     if technologies.exists():
-        request.session['alert'] = "Framework already added"
-        return redirect('frameworks')
+        messages.error(request, "Framework already added")
+        html = render_to_string('admin/frameworks.html')
+        return HttpResponse(html)
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['alert'] = "Not a valid image format"
-            return redirect('frameworks')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/frameworks.html')
+            return HttpResponse(html)
         framework = Framework(framework=framework, confidence=confidence, avatar=avatar)
     else:
         framework = Framework(framework=framework, confidence=confidence)
 
     framework.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Framework has been added.")
+    html = render_to_string('admin/frameworks.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1046,8 +1072,9 @@ def update_framework(request):
         technologies = Framework.objects.all().filter(framework__iexact=framework_str)
 
         if technologies.exists():
-            request.session['alert'] = "Framework already added"
-            return redirect('frameworks')
+            messages.error(request, "Framework already added")
+            html = render_to_string('admin/frameworks.html')
+            return HttpResponse(html)
         framework.framework = framework_str
         framework.save()
 
@@ -1059,14 +1086,17 @@ def update_framework(request):
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['alert'] = "Not a valid image format"
-            return redirect('frameworks')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/frameworks.html')
+            return HttpResponse(html)
         if framework.avatar:
             delete_file(framework.avatar)
         framework.avatar = avatar
         framework.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Framework has been updated.")
+    html = render_to_string('admin/frameworks.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1098,7 +1128,9 @@ def delete_framework(request):
 
     framework.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Framework has been deleted.")
+    html = render_to_string('admin/frameworks.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1126,21 +1158,25 @@ def add_dbms(request):
 
     db = DBMS.objects.all().filter(dbms__iexact=dbms)
     if db.exists():
-        request.session['alert'] = "Database already added"
-        return redirect('databases')
+        messages.error(request, "Database already added")
+        html = render_to_string('admin/databases.html')
+        return HttpResponse(html)
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['alert'] = "Not a valid image format"
-            return redirect('databases')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/databases.html')
+            return HttpResponse(html)
         dbms = DBMS(dbms=dbms, confidence=confidence, avatar=avatar)
     else:
         dbms = DBMS(dbms=dbms, confidence=confidence)
 
     dbms.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Database has been added.")
+    html = render_to_string('admin/databases.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1172,8 +1208,9 @@ def update_dbms(request):
     if dbms:
         db = DBMS.objects.all().filter(dbms__iexact=dbms)
         if db.exists():
-            request.session['alert'] = "Database already added"
-            return redirect('databases')
+            messages.error(request, "Database already added")
+            html = render_to_string('admin/databases.html')
+            return HttpResponse(html)
         database.dbms = dbms
         database.save()
 
@@ -1185,14 +1222,17 @@ def update_dbms(request):
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            request.session['alert'] = "Not a valid image format"
-            return redirect('databases')
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/databases.html')
+            return HttpResponse(html)
         if database.avatar:
             delete_file(database.avatar)
         database.avatar = avatar
         database.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Database has been updated.")
+    html = render_to_string('admin/databases.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1224,7 +1264,9 @@ def delete_dbms(request):
 
     database.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Database has been deleted.")
+    html = render_to_string('admin/databases.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1264,7 +1306,9 @@ def add_hobby(request):
 
     hobby.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Hobby has been added.")
+    html = render_to_string('admin/hobbies.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1312,7 +1356,9 @@ def update_hobby(request):
         hobby.avatar = avatar
         hobby.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Hobby has been updated.")
+    html = render_to_string('admin/hobbies.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1342,7 +1388,9 @@ def delete_hobby(request):
     else:
         return Response("hobby not found", status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Hobby has been deleted.")
+    html = render_to_string('admin/hobbies.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1373,7 +1421,9 @@ def add_skill(request):
     skill = Skill(skill=skill)
     skill.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Strength has been added.")
+    html = render_to_string('admin/strengths.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1411,7 +1461,9 @@ def update_skill(request):
         skill.skill = skill_str
         skill.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Strength has been updated.")
+    html = render_to_string('admin/strengths.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1440,7 +1492,9 @@ def delete_skill(request):
     skill = Skill.objects.get(id=sid)
     skill.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Strength has been deleted.")
+    html = render_to_string('admin/strengths.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1475,7 +1529,9 @@ def add_work(request):
     job = Work(description=description, company=company)
     job.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Work has been added.")
+    html = render_to_string('admin/work.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1521,7 +1577,9 @@ def update_work(request):
         job.company = company
         job.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Work has been updated.")
+    html = render_to_string('admin/work.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1550,7 +1608,9 @@ def delete_work(request):
     job = Work.objects.get(id=wid)
     job.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Work has been deleted.")
+    html = render_to_string('admin/work.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1593,7 +1653,9 @@ def add_project(request):
     project = Project(title=title, description=description, git=git, link=link)
     project.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Project has been added.")
+    html = render_to_string('admin/projects.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1648,7 +1710,9 @@ def update_project(request):
         project.link = link
         project.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Project has been updated.")
+    html = render_to_string('admin/projects.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1677,7 +1741,9 @@ def delete_project(request):
     project = Project.objects.get(id=pid)
     project.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Project has been deleted.")
+    html = render_to_string('admin/projects.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1722,7 +1788,9 @@ def add_education(request):
         degree = Education(degree=degree, year=year, institution=institution)
         degree.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Degree has been added.")
+    html = render_to_string('admin/education.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1775,7 +1843,9 @@ def update_education(request):
         degree.institution = institution
         degree.save()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Degree has been updated.")
+    html = render_to_string('admin/education.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])
@@ -1804,7 +1874,9 @@ def delete_education(request):
     degree = Education.objects.get(id=eid)
     degree.delete()
 
-    return Response(status=status.HTTP_200_OK)
+    messages.success(request, "Degree has been deleted.")
+    html = render_to_string('admin/education.html')
+    return HttpResponse(html)
 
 
 @api_view(['POST'])

@@ -63,7 +63,9 @@
         }
     </script>
 
-    <div class="container-fluid mt-lg-5">
+    <div class="container-fluid mt-lg-3">
+
+        <div class="container-fluid bg-white border">
 
         <br>
 
@@ -93,8 +95,6 @@
                     <label id="{{ document.type }}Label2" for="updateFile{{ document.id }}">Choose another {{ document.type }}: </label>
                     <input type="file" oninput="update({{ document.id }})" class="form-control" id="updateFile{{ document.id }}" name="file" required>
 
-                    <br>
-
                 </form>
 
                 <div class="clearfix">
@@ -107,8 +107,6 @@
                         </form>
                     </div>
                 </div>
-
-                <br>
 
             </div>
 
@@ -193,7 +191,6 @@
                     <button id="uploadCvBtn" type="submit" class="btn" form="uploadCvForm" style="display: none"><i class="fa fa-upload text-secondary" style="font-size:36px;"></i></button>
                 </div>
             </div>
-            <br>
         </div>
 
         <br>
@@ -210,10 +207,11 @@
                     <button id="uploadRecordBtn" type="submit" class="btn" form="uploadRecordForm" style="display: none"><i class="fa fa-upload text-secondary" style="font-size:36px;"></i></button>
                 </div>
             </div>
-            <br>
         </div>
 
         <br>
+
+    </div>
 
     </div>
 

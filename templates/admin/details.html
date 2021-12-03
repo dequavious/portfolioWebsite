@@ -42,7 +42,9 @@
         }
     </script>
 
-    <div class="container-fluid mt-lg-5">
+    <div class="container-fluid mt-lg-3">
+
+        <div class="container-fluid bg-white border">
 
         <br>
 
@@ -51,10 +53,6 @@
         <br>
 
         {% include 'admin/messages.html' %}
-
-        <br>
-
-        <div class="container-fluid bg-white border">
 
         <form id="updateForm">
                 <div class="mb-3 mt-3">
@@ -130,6 +128,7 @@
 
             var i, val, name;
             var data = new FormData();
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
             var input = document.getElementsByTagName('input');
 
             for (i = 0; i < input.length; i++) {

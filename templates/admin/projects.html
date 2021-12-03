@@ -48,191 +48,187 @@
         }
     </script>
 
-    <div class="d-flex flex-row justify-content-start">
+    <div class="d-flex flex-row justify-content-start" style="padding-right: 10px;">
 
-    <div id="iconBar" class="p-0 bg-light border icon-bar">
-        <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
-        <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
-        <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
-    </div>
-
-    <div class="p-0 container-fluid" style="margin-left: 80px;">
-
-        <br>
-
-        <h1>Projects</h1>
-
-        <br>
-
-        {% include 'admin/messages.html' %}
-
-        <br>
-
-        <h3 id="add">Add project</h3>
-        <div class="container-fluid bg-white border">
-            <form id="addProjectForm">
-                <div class="mb-3 mt-3">
-                    <label for="addTitle">Title:</label>
-                    <input type="text" class="form-control" id="addTitle" name="title" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="addDescription">Description:</label>
-                    <textarea class="form-control" oninput="myFunction()" rows="5" id="addDescription" name="description" required></textarea>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="addGit">Git: </label>
-                    <input type="text" class="form-control"  id="addGit" name="git" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="addLink">Homepage: </label>
-                    <input type="text" class="form-control"  id="addLink" name="link" required>
-                </div>
-
-                <div class="clearfix">
-                    <div class="float-end">
-                        <button type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
-                    </div>
-                </div>
-
-            </form>
-
-            <br>
-
+        <div id="iconBar" class="p-0 bg-light border icon-bar">
+            <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
+            <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
+            <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
         </div>
 
-        <br><br>
+        <div class="p-0 container-fluid mt-lg-3" style="margin-left: 80px;">
 
-        <h3 id="edit">Edit/delete project</h3>
-        <div class="container-fluid bg-white border">
-            <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
-                <div class="form-floating mt-3 mb-3">
-                    <input id="myInput" onkeyup="myFunction()" type="search" class="form-control" placeholder="Search">
-                    <label for="myInput">&#128269;</label>
-                </div>
-            </form>
-        </div>
-        <br>
-        <ul id="myUL" class="list-group bg-white">
-            {% for proj in projects %}
-                <li class="list-group-item">
-
-                    <form id="updateForm{{ proj.id }}">
-                        <div class="mb-3 mt-3">
-                            <label for="updateTitle{{ proj.id }}">Title:</label>
-                            <input type="text" onclick="clickFunction(this.id, '{{ proj.title }}')" oninput="change({{ proj.id }})" class="form-control" id="updateTitle{{ proj.id }}" name="title" placeholder="{{ proj.title }}">
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="updateDescription{{ proj.id }}">Description:</label>
-                            <textarea class="form-control" onclick="clickFunction(this.id, '{{ proj.description }}')" oninput="change({{ proj.id }})" rows="5" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}"></textarea>
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="updateGit{{ proj.id }}">Git: </label>
-                            <input type="text" onclick="clickFunction(this.id, '{{ proj.git }}')" oninput="change({{ proj.id }})" class="form-control"  id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="updateLink{{ proj.id }}">Homepage: </label>
-                            <input type="text" onclick="clickFunction(this.id, '{{ proj.link }}')" oninput="change({{ proj.id }})" class="form-control"  id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
-                        </div>
-                    </form>
-
-                    <div class="clearfix">
-                        <div class="float-end">
-                            <button id="saveBtn{{ proj.id }}" type="submit" class="btn" form="updateForm{{ proj.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
-                        </div>
-                        <div class="float-end">
-                            <form id="deleteForm{{ proj.id }}">
-                                <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
-                            </form>
-                        </div>
-                    </div>
+            <div class="container-fluid bg-white border">
 
                     <br>
 
-                </li>
+                    <h1>Projects</h1>
 
-                <script>
-                    $(document).on('submit', '#updateForm{{ proj.id }}', function(e) {
-                        var data = new FormData();
-                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                    <br>
 
-                        var i, divs, form, input;
-                        form = document.getElementById("updateForm{{ proj.id }}");
-                        divs = form.getElementsByTagName('div');
+                    {% include 'admin/messages.html' %}
 
-                        for (i = 0; i < divs.length; i++) {
-                            input = divs[i].getElementsByTagName("input")[0];
-                            if (input !== undefined) {
-                                if (input.value.length > 0) {
-                                    data.append(input.name, input.value);
-                                }
-                            }
-                        }
+                    <br>
 
-                        var textarea = document.getElementById("updateDescription{{ proj.id }}");
+                    <h3 id="add">Add project</h3>
+                    <div class="container-fluid bg-white border">
+                        <form id="addProjectForm">
+                            <div class="mb-3 mt-3">
+                                <label for="addTitle">Title:</label>
+                                <input type="text" class="form-control" id="addTitle" name="title" required>
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="addDescription">Description:</label>
+                                <textarea class="form-control" oninput="myFunction()" rows="5" id="addDescription" name="description" required></textarea>
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="addGit">Git: </label>
+                                <input type="text" class="form-control"  id="addGit" name="git" required>
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="addLink">Homepage: </label>
+                                <input type="text" class="form-control"  id="addLink" name="link" required>
+                            </div>
 
-                        if (textarea.value.length > 0) {
-                            data.append(textarea.name, textarea.value);
-                        }
+                            <div class="clearfix">
+                                <div class="float-end">
+                                    <button type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                                </div>
+                            </div>
 
-                        e.preventDefault();
+                        </form>
 
-                        $.ajax({
-                            type: "POST",
-                            enctype: 'multipart/form-data',
-                            url: '{% url 'update project' %}?id={{ proj.id }}',
-                            headers:{
-                              Authorization: 'Token {{ token }}'
-                            },
-                            data:data,
-                            processData: false,
-                            contentType: false,
-                            cache: false,
-                            timeout: 800000,
-                            success:function () {
-                                window.location.reload(true);
-                            }
-                        });
-                    });
+                    </div>
 
-                    $(document).on('submit', '#deleteForm{{ proj.id }}', function(e) {
-                        var data = new FormData();
-                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                    <br><br>
 
-                        e.preventDefault();
+                    <h3 id="edit">Edit/delete project</h3>
+                    <div class="container-fluid bg-white border">
+                        <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                            <div class="form-floating mt-3 mb-3">
+                                <input id="myInput" onkeyup="myFunction()" type="search" class="form-control" placeholder="Search">
+                                <label for="myInput"><i class="fa fa-search text-secondary"></i></label>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <ul id="myUL" class="list-group bg-white">
+                        {% for proj in projects %}
+                            <li class="list-group-item">
 
-                        $.ajax({
-                            type: "POST",
-                            enctype: 'multipart/form-data',
-                            url: '{% url 'delete project' %}?id={{ proj.id }}',
-                            headers:{
-                              Authorization: 'Token {{ token }}'
-                            },
-                            data:data,
-                            processData: false,
-                            contentType: false,
-                            cache: false,
-                            timeout: 800000,
-                            success:function () {
-                                window.location.reload(true);
-                            }
-                        });
-                    });
-                </script>
+                                <form id="updateForm{{ proj.id }}">
+                                    <div class="mb-3 mt-3">
+                                        <label for="updateTitle{{ proj.id }}">Title:</label>
+                                        <input type="text" onclick="clickFunction(this.id, '{{ proj.title }}')" oninput="change({{ proj.id }})" class="form-control" id="updateTitle{{ proj.id }}" name="title" placeholder="{{ proj.title }}">
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="updateDescription{{ proj.id }}">Description:</label>
+                                        <textarea class="form-control" onclick="clickFunction(this.id, '{{ proj.description }}')" oninput="change({{ proj.id }})" rows="5" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}"></textarea>
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="updateGit{{ proj.id }}">Git: </label>
+                                        <input type="text" onclick="clickFunction(this.id, '{{ proj.git }}')" oninput="change({{ proj.id }})" class="form-control"  id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="updateLink{{ proj.id }}">Homepage: </label>
+                                        <input type="text" onclick="clickFunction(this.id, '{{ proj.link }}')" oninput="change({{ proj.id }})" class="form-control"  id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
+                                    </div>
+                                </form>
 
-            {% endfor %}
+                                <div class="clearfix">
+                                    <div class="float-end">
+                                        <button id="saveBtn{{ proj.id }}" type="submit" class="btn" form="updateForm{{ proj.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                                    </div>
+                                    <div class="float-end">
+                                        <form id="deleteForm{{ proj.id }}">
+                                            <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
 
-        </ul>
+                            </li>
 
-        <br>
+                            <script>
+                                $(document).on('submit', '#updateForm{{ proj.id }}', function(e) {
+                                    var data = new FormData();
+                                    data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
-        <br>
+                                    var i, divs, form, input;
+                                    form = document.getElementById("updateForm{{ proj.id }}");
+                                    divs = form.getElementsByTagName('div');
 
+                                    for (i = 0; i < divs.length; i++) {
+                                        input = divs[i].getElementsByTagName("input")[0];
+                                        if (input !== undefined) {
+                                            if (input.value.length > 0) {
+                                                data.append(input.name, input.value);
+                                            }
+                                        }
+                                    }
+
+                                    var textarea = document.getElementById("updateDescription{{ proj.id }}");
+
+                                    if (textarea.value.length > 0) {
+                                        data.append(textarea.name, textarea.value);
+                                    }
+
+                                    e.preventDefault();
+
+                                    $.ajax({
+                                        type: "POST",
+                                        enctype: 'multipart/form-data',
+                                        url: '{% url 'update project' %}?id={{ proj.id }}',
+                                        headers:{
+                                          Authorization: 'Token {{ token }}'
+                                        },
+                                        data:data,
+                                        processData: false,
+                                        contentType: false,
+                                        cache: false,
+                                        timeout: 800000,
+                                        success:function () {
+                                            window.location.reload(true);
+                                        }
+                                    });
+                                });
+
+                                $(document).on('submit', '#deleteForm{{ proj.id }}', function(e) {
+                                    var data = new FormData();
+                                    data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                                    e.preventDefault();
+
+                                    $.ajax({
+                                        type: "POST",
+                                        enctype: 'multipart/form-data',
+                                        url: '{% url 'delete project' %}?id={{ proj.id }}',
+                                        headers:{
+                                          Authorization: 'Token {{ token }}'
+                                        },
+                                        data:data,
+                                        processData: false,
+                                        contentType: false,
+                                        cache: false,
+                                        timeout: 800000,
+                                        success:function () {
+                                            window.location.reload(true);
+                                        }
+                                    });
+                                });
+                            </script>
+
+                        {% endfor %}
+
+                    </ul>
+
+                <br><br>
+
+            </div>
+        </div>
     </div>
 
-    </div>
+    <div style="height: 100%"></div>
 
-    <div style="height: 100%">
-    </div>
 
     <script>
         function myFunction() {

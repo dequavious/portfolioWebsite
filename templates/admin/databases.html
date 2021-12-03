@@ -41,188 +41,184 @@
         }
     </script>
 
-    <div class="d-flex flex-row justify-content-start">
+    <div class="d-flex flex-row justify-content-start" style="padding-right: 10px;">
 
-    <div id="iconBar" class="p-0 bg-light border icon-bar">
-        <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
-        <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
-        <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
-    </div>
-
-    <div class="p-0 container-fluid" style="margin-left: 80px;">
-
-        <br>
-
-        <h1>Databases</h1>
-
-        <br>
-
-        {% include 'admin/messages.html' %}
-
-        <br>
-
-        <h3 id="add">Add database</h3>
-        <div class="container-fluid bg-white border">
-            <form id="addDBForm">
-                <div class="mb-3 mt-3">
-                    <label for="addDatabase">Database:</label>
-                    <input type="text" class="form-control" id="addDatabase" name="dbms" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="addConfidence">Confidence:</label>
-                    <input type="text" class="form-control" id="addConfidence" name="confidence" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="addImage">Choose avatar: </label>
-                    <input type="file" class="form-control"  id="addImage" name="avatar" required>
-                </div>
-                <div class="clearfix">
-                    <div class="float-end">
-                        <button type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
-                    </div>
-                </div>
-            </form>
-
-            <br>
-
+        <div id="iconBar" class="p-0 bg-light border icon-bar">
+            <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
+            <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
+            <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
         </div>
 
-        <br><br>
+        <div class="p-0 container-fluid mt-lg-3" style="margin-left: 80px;">
 
-        <h3 id="edit">Edit/delete database</h3>
-        <div class="container-fluid bg-white border">
-            <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
-                {{form|crispy}}
-                <div class="form-floating mt-3 mb-3">
-                    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search">
-                    <label for="myInput">&#128269;</label>
-                </div>
-            </form>
-        </div>
-        <br>
-        <ul id="myUL" class="list-group bg-white">
-            {% for db in databases %}
-                <li class="list-group-item">
+            <div class="container-fluid bg-white border">
 
-                    <form id="updateForm{{ db.id }}">
+                <br>
+
+                <h1>Databases</h1>
+
+                <br>
+
+                {% include 'admin/messages.html' %}
+
+                <br>
+
+                <h3 id="add">Add database</h3>
+                <div class="container-fluid bg-white border">
+                    <form id="addDBForm">
                         <div class="mb-3 mt-3">
-                            <label for="update{{ db.id }}">Database:</label>
-                            <input type="text" onclick="clickFunction(this.id, '{{ db.dbms }}')" oninput="change({{ db.id }})" class="form-control" id="update{{ db.id }}" name="dbms" placeholder="{{ db.dbms }}">
+                            <label for="addDatabase">Database:</label>
+                            <input type="text" class="form-control" id="addDatabase" name="dbms" required>
                         </div>
                         <div class="mb-3 mt-3">
-                            <label for="updateConfidence{{ db.id }}">Confidence:</label>
-                            <input type="text" onclick="clickFunction(this.id, '{{ db.confidence }}')" oninput="change({{ db.id }})" class="form-control" id="updateConfidence{{ db.id }}" name="confidence" placeholder="{{ db.confidence }}">
+                            <label for="addConfidence">Confidence:</label>
+                            <input type="text" class="form-control" id="addConfidence" name="confidence" required>
                         </div>
                         <div class="mb-3 mt-3">
-                            <div class="d-flex flex-column">
-                                <div class="p-0">
-                                    <label for="file">Current avatar: </label>
-                                </div>
-                                <div class="p-0">
-                                    <img src="{{ db.avatar }}" class="rounded float-start img-fluid admin-img" alt="not found"/>
-                                </div>
+                            <label for="addImage">Choose avatar: </label>
+                            <input type="file" class="form-control"  id="addImage" name="avatar" required>
+                        </div>
+                        <div class="clearfix">
+                            <div class="float-end">
+                                <button type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                             </div>
-                            <br>
-                            <label for="updateImage{{ db.id }}">Choose another avatar: </label>
-                            <input type="file" oninput="change({{ db.id }})" class="form-control" id="updateImage{{ db.id }}" name="avatar">
                         </div>
                     </form>
 
-                    <div class="clearfix">
-                        <div class="float-end">
-                            <button id="saveBtn{{ db.id }}" type="submit" class="btn" form="updateForm{{ db.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                </div>
+
+                <br><br>
+
+                <h3 id="edit">Edit/delete database</h3>
+                <div class="container-fluid bg-white border">
+                    <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                        {{form|crispy}}
+                        <div class="form-floating mt-3 mb-3">
+                            <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search">
+                            <label for="myInput"><i class="fa fa-search text-secondary"></i></label>
                         </div>
-                        <div class="float-end">
-                            <form id="deleteForm{{ db.id }}">
-                                <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
+                    </form>
+                </div>
+                <br>
+                <ul id="myUL" class="list-group bg-white">
+                    {% for db in databases %}
+                        <li class="list-group-item">
+
+                            <form id="updateForm{{ db.id }}">
+                                <div class="mb-3 mt-3">
+                                    <label for="update{{ db.id }}">Database:</label>
+                                    <input type="text" onclick="clickFunction(this.id, '{{ db.dbms }}')" oninput="change({{ db.id }})" class="form-control" id="update{{ db.id }}" name="dbms" placeholder="{{ db.dbms }}">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="updateConfidence{{ db.id }}">Confidence:</label>
+                                    <input type="text" onclick="clickFunction(this.id, '{{ db.confidence }}')" oninput="change({{ db.id }})" class="form-control" id="updateConfidence{{ db.id }}" name="confidence" placeholder="{{ db.confidence }}">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <div class="d-flex flex-column">
+                                        <div class="p-0">
+                                            <label for="file">Current avatar: </label>
+                                        </div>
+                                        <div class="p-0">
+                                            <img src="{{ db.avatar }}" class="rounded float-start img-fluid admin-img" alt="not found"/>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label for="updateImage{{ db.id }}">Choose another avatar: </label>
+                                    <input type="file" oninput="change({{ db.id }})" class="form-control" id="updateImage{{ db.id }}" name="avatar">
+                                </div>
                             </form>
-                        </div>
-                    </div>
 
-                    <br>
+                            <div class="clearfix">
+                                <div class="float-end">
+                                    <button id="saveBtn{{ db.id }}" type="submit" class="btn" form="updateForm{{ db.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                                </div>
+                                <div class="float-end">
+                                    <form id="deleteForm{{ db.id }}">
+                                        <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
+                                    </form>
+                                </div>
+                            </div>
 
-                </li>
+                        </li>
 
-                <script>
-                    $(document).on('submit', '#updateForm{{ db.id }}', function(e) {
-                        var data = new FormData();
-                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                        <script>
+                            $(document).on('submit', '#updateForm{{ db.id }}', function(e) {
+                                var data = new FormData();
+                                data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
-                        var i, divs, form, input;
-                        form = document.getElementById("updateForm{{ db.id }}");
-                        divs = form.getElementsByTagName('div');
+                                var i, divs, form, input;
+                                form = document.getElementById("updateForm{{ db.id }}");
+                                divs = form.getElementsByTagName('div');
 
-                        for (i = 0; i < divs.length; i++) {
-                            input = divs[i].getElementsByTagName("input")[0];
-                            if (input !== undefined) {
-                                if (input.value.length > 0) {
-                                    if (input.name === 'avatar') {
-                                        data.append('avatar', $('#updateImage{{ db.id }}')[0].files[0]);
-                                    } else {
-                                        data.append(input.name, input.value);
+                                for (i = 0; i < divs.length; i++) {
+                                    input = divs[i].getElementsByTagName("input")[0];
+                                    if (input !== undefined) {
+                                        if (input.value.length > 0) {
+                                            if (input.name === 'avatar') {
+                                                data.append('avatar', $('#updateImage{{ db.id }}')[0].files[0]);
+                                            } else {
+                                                data.append(input.name, input.value);
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
 
-                        e.preventDefault();
+                                e.preventDefault();
 
-                        $.ajax({
-                            type: "POST",
-                            enctype: 'multipart/form-data',
-                            url: '{% url 'update dbms' %}?id={{ db.id }}',
-                            headers:{
-                              Authorization: 'Token {{ token }}'
-                            },
-                            data:data,
-                            processData: false,
-                            contentType: false,
-                            cache: false,
-                            timeout: 800000,
-                            success:function () {
-                                window.location.reload(true);
-                            }
-                        });
-                    });
+                                $.ajax({
+                                    type: "POST",
+                                    enctype: 'multipart/form-data',
+                                    url: '{% url 'update dbms' %}?id={{ db.id }}',
+                                    headers:{
+                                      Authorization: 'Token {{ token }}'
+                                    },
+                                    data:data,
+                                    processData: false,
+                                    contentType: false,
+                                    cache: false,
+                                    timeout: 800000,
+                                    success:function () {
+                                        window.location.reload(true);
+                                    }
+                                });
+                            });
 
-                    $(document).on('submit', '#deleteForm{{ db.id }}', function(e) {
-                        var data = new FormData();
-                        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                            $(document).on('submit', '#deleteForm{{ db.id }}', function(e) {
+                                var data = new FormData();
+                                data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
-                        e.preventDefault();
+                                e.preventDefault();
 
-                        $.ajax({
-                            type: "POST",
-                            enctype: 'multipart/form-data',
-                            url: '{% url 'delete dbms' %}?id={{ db.id }}',
-                            headers:{
-                              Authorization: 'Token {{ token }}'
-                            },
-                            data:data,
-                            processData: false,
-                            contentType: false,
-                            cache: false,
-                            timeout: 800000,
-                            success:function () {
-                                window.location.reload(true);
-                            }
-                        });
-                    });
-                </script>
+                                $.ajax({
+                                    type: "POST",
+                                    enctype: 'multipart/form-data',
+                                    url: '{% url 'delete dbms' %}?id={{ db.id }}',
+                                    headers:{
+                                      Authorization: 'Token {{ token }}'
+                                    },
+                                    data:data,
+                                    processData: false,
+                                    contentType: false,
+                                    cache: false,
+                                    timeout: 800000,
+                                    success:function () {
+                                        window.location.reload(true);
+                                    }
+                                });
+                            });
+                        </script>
 
-            {% endfor %}
+                    {% endfor %}
 
-        </ul>
+                </ul>
 
-        <br>
+                <br><br>
 
-        <br>
-
-    </div>
+            </div>
+        </div>
     </div>
 
-    <div style="height: 100%">
-    </div>
+    <div style="height: 100%"></div>
 
     <script>
         function myFunction() {
