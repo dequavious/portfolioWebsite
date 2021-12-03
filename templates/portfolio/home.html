@@ -219,11 +219,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td>{{ degree.institution }}</td>
-                                                    <td>
-                                                        {% if degree.grade %}
+                                                    {% if degree.grade %}
+                                                        <td>
                                                             {{ degree.grade }}
-                                                        {% endif %}
-                                                    </td>
+                                                        </td>
+                                                    {% endif %}
                                                     <td>{{ degree.year }}</td>
                                                 </tr>
                                             </tbody>
