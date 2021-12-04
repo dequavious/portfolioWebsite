@@ -48,6 +48,9 @@
         }
         $(document).on('submit', '#submitForm', function(e) {
 
+            document.getElementById("submitBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("submitBtn").disabled = true;
+
             /* stop form from submitting normally */
             e.preventDefault();
 

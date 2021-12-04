@@ -126,6 +126,9 @@
         });
         $(document).on('submit', '#updateForm', function(e) {
 
+            document.getElementById("saveBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("saveBtn").disabled = true;
+
             var i, val, name;
             var data = new FormData();
             data.append('csrfmiddlewaretoken', '{{ csrf_token }}');

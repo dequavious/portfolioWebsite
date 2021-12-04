@@ -932,7 +932,7 @@ def update_language(request):
     if language_str:
         lang = Language.objects.all().filter(language__iexact=language_str)
 
-        if lang.exists():
+        if lang.exists() and (int(lang.first().id) != int(lid)):
             messages.error(request, "Language already added")
             html = render_to_string('admin/languages.html')
             return HttpResponse(html)
@@ -1070,7 +1070,7 @@ def update_framework(request):
     if framework_str:
         technologies = Framework.objects.all().filter(framework__iexact=framework_str)
 
-        if technologies.exists():
+        if technologies.exists() and (int(technologies.first().id) != int(fid)):
             messages.error(request, "Framework already added")
             html = render_to_string('admin/frameworks.html')
             return HttpResponse(html)
@@ -1206,7 +1206,7 @@ def update_dbms(request):
     dbms = request.data.get('dbms', None)
     if dbms:
         db = DBMS.objects.all().filter(dbms__iexact=dbms)
-        if db.exists():
+        if db.exists() and (int(db.first().id) != int(did)):
             messages.error(request, "Database already added")
             html = render_to_string('admin/databases.html')
             return HttpResponse(html)
@@ -1337,7 +1337,7 @@ def update_hobby(request):
     interest = request.data.get('hobby', None)
     if interest:
         interests = Hobby.objects.all().filter(hobby__iexact=interest)
-        if interests.exists():
+        if interests.exists() and (int(interests.first().id) != int(hid)):
             messages.error(request, "Hobby already added")
             html = render_to_string('admin/hobbies.html')
             return HttpResponse(html)
@@ -1453,7 +1453,7 @@ def update_skill(request):
     skill_str = request.data.get('skill', None)
     if skill_str:
         skills = Skill.objects.all().filter(skill__iexact=skill_str)
-        if skills.exists():
+        if skills.exists() and (int(skills.first().id) != int(sid)):
             messages.error(request, "Strength already added")
             html = render_to_string('admin/strengths.html')
             return HttpResponse(html)
@@ -1563,16 +1563,26 @@ def update_work(request):
 
     if description and company:
         jobs = Work.objects.all().filter(description__iexact=description, company__iexact=company)
-        if jobs.exists():
+        if jobs.exists() and (int(jobs.first().id) != int(wid)):
             messages.error(request, "Work already added")
             html = render_to_string('admin/work.html')
             return HttpResponse(html)
 
     if description:
+        jobs = Work.objects.all().filter(description__iexact=description, company__iexact=job.company)
+        if jobs.exists() and (int(jobs.first().id) != int(wid)):
+            messages.error(request, "Work already added")
+            html = render_to_string('admin/work.html')
+            return HttpResponse(html)
         job.description = description
         job.save()
 
     if company:
+        jobs = Work.objects.all().filter(description__iexact=job.description, company__iexact=company)
+        if jobs.exists() and (int(jobs.first().id) != int(wid)):
+            messages.error(request, "Work already added")
+            html = render_to_string('admin/work.html')
+            return HttpResponse(html)
         job.company = company
         job.save()
 
@@ -1686,7 +1696,7 @@ def update_project(request):
     if title:
         proj = Project.objects.all().filter(title__iexact=title)
 
-        if proj.exists():
+        if proj.exists() and (int(proj.first().id) != int(pid)):
             messages.error(request, "Project already added")
             html = render_to_string('admin/strengths.html')
             return HttpResponse(html)
@@ -1820,7 +1830,7 @@ def update_education(request):
     degree_str = request.data.get('degree', None)
     if degree_str:
         degrees = Education.objects.all().filter(degree__iexact=degree_str)
-        if degrees.exists():
+        if degrees.exists() and (int(degrees.first().id) != int(eid)):
             messages.error(request, "Degree already added")
             html = render_to_string('admin/education.html')
             return HttpResponse(html)

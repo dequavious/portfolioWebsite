@@ -77,7 +77,7 @@
 
                         <div class="clearfix">
                             <div class="float-end">
-                                <button type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                                <button id="saveBtn" type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
                             </div>
                         </div>
 
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="float-end">
                                     <form id="deleteForm{{ job.id }}">
-                                        <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
+                                        <button id="deleteBtn{{ job.id }}" type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -127,6 +127,10 @@
 
                         <script>
                             $(document).on('submit', '#updateForm{{ job.id }}', function(e) {
+
+                                document.getElementById("saveBtn{{ job.id }}").innerHTML = "<div class=\"spinner-border\"></div>";
+                                document.getElementById("saveBtn{{ job.id }}").disabled = true;
+
                                 var data = new FormData();
                                 data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
@@ -164,6 +168,10 @@
                             });
 
                             $(document).on('submit', '#deleteForm{{ job.id }}', function(e) {
+
+                                document.getElementById("deleteBtn{{ job.id }}").innerHTML = "<div class=\"spinner-border\"></div>";
+                                document.getElementById("deleteBtn{{ job.id }}").disabled = true;
+
                                 var data = new FormData();
                                 data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
@@ -224,6 +232,10 @@
         }
 
         $(document).on('submit', '#addWorkForm', function(e) {
+
+            document.getElementById("saveBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("saveBtn").disabled = true;
+
             var data = new FormData();
 
             data.append('csrfmiddlewaretoken', '{{ csrf_token }}');

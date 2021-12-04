@@ -103,7 +103,7 @@
                     </div>
                     <div class="float-end">
                         <form id="deleteForm{{ document.id }}">
-                            <button type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
+                            <button id="deleteBtn{{ document.id }}" type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
                         </form>
                     </div>
                 </div>
@@ -124,6 +124,10 @@
                 }
 
                 $(document).on('submit', '#updateForm{{ document.id }}', function(e) {
+
+                    document.getElementById("saveBtn{{ document.id }}").innerHTML = "<div class=\"spinner-border\"></div>";
+                    document.getElementById("saveBtn{{ document.id }}").disabled = true;
+
                     var data = new FormData();
                     data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
                     data.append('type', '{{ document.type }}');
@@ -151,6 +155,10 @@
                 });
 
                 $(document).on('submit', '#deleteForm{{ document.id }}', function(e) {
+
+                    document.getElementById("deleteBtn{{ document.id }}").innerHTML = "<div class=\"spinner-border\"></div>";
+                    document.getElementById("deleteBtn{{ document.id }}").disabled = true;
+
                     var data = new FormData();
                     data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
@@ -235,6 +243,10 @@
         }
 
         $(document).on('submit', '#uploadCvForm', function(e) {
+
+            document.getElementById("uploadCvBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("uploadCvBtn").disabled = true;
+
             var data = new FormData();
             data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
             data.append('type', 'cv');
@@ -262,6 +274,10 @@
         });
 
         $(document).on('submit', '#uploadRecordForm', function(e) {
+
+            document.getElementById("uploadRecordBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("uploadRecordBtn").disabled = true;
+
             var data = new FormData();
             data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
             data.append('type', 'record');

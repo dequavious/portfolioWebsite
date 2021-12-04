@@ -20,7 +20,7 @@
 
             {% include 'admin/messages.html' %}
 
-            <form method="post" action="{% url 'login' %}" class="form-group" enctype="multipart/form-data">
+            <form onsubmit="disable()" method="post" action="{% url 'login' %}" class="form-group" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
 
@@ -58,7 +58,7 @@
 
                 <br>
 
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button id="loginBtn" type="submit" class="btn btn-primary">Login</button>
 
             </form>
 
@@ -69,25 +69,29 @@
     </div>
 
     <script>
-    function myFunction() {
-        const x = document.getElementById("password");
-        const show = document.getElementById("showIcon");
-        const hide = document.getElementById("hideIcon");
-        if (x.value.length > 0) {
-            if (x.type === "password") {
-                show.style.display = "none";
-                hide.style.display = "block";
-                x.type = "text";
-            } else {
-                hide.style.display = "none";
-                show.style.display = "block";
-                x.type = "password";
+        function myFunction() {
+            const x = document.getElementById("password");
+            const show = document.getElementById("showIcon");
+            const hide = document.getElementById("hideIcon");
+            if (x.value.length > 0) {
+                if (x.type === "password") {
+                    show.style.display = "none";
+                    hide.style.display = "block";
+                    x.type = "text";
+                } else {
+                    hide.style.display = "none";
+                    show.style.display = "block";
+                    x.type = "password";
+                }
             }
         }
-    }
-    function forgotLink(email) {
-        document.getElementById("forgotPassword").href = '{% url 'send forgot password link' %}?email=' + email;
-    }
+        function forgotLink(email) {
+            document.getElementById("forgotPassword").href = '{% url 'send forgot password link' %}?email=' + email;
+        }
+        function disable() {
+            document.getElementById("loginBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("loginBtn").disabled = true;
+        }
     </script>
 
 {% endblock %}
