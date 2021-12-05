@@ -16,8 +16,18 @@
             $(this).scrollTop(0);
         });
     </script>
+    <style>
+        #about {
+            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #portfolioBody {
+            background-image: url("{% static 'media/images/background/pexels-rahul-pandit-1933900.jpg' %}");
+        }
+    </style>
 </head>
-<body class="bg-dark" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+<body id="portfolioBody" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
 
     {% include 'portfolio/navbar.html' %}
 

@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-weight: bold;
     font-size: large;
+    /*font-family: Arial, Helvetica, sans-serif;*/
 }
 
 html, body {
@@ -138,15 +139,6 @@ div.scrollmenu a {
     align-items: center;
 }
 
-.line-heading {
-    width: 100%;
-    max-width: 10rem;
-    height: 0.25rem;
-    background-color: lightskyblue;
-    border-radius: 1rem;
-    border-color: white;
-}
-
 .line-heading:first-child {
     margin-right: 1rem;
 }
@@ -169,4 +161,68 @@ div.scrollmenu a {
 
 .line:last-child {
     margin-left: 1rem;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .line-heading {
+        width: 100%;
+        height: 0.25rem;
+        background-color: lightskyblue;
+        border-radius: 1rem;
+        border-color: white;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .line-heading {
+        width: 100%;
+        max-width: 10rem;
+        height: 0.25rem;
+        background-color: lightskyblue;
+        border-radius: 1rem;
+        border-color: white;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .line-heading {
+        width: 100%;
+        max-width: 10rem;
+        height: 0.25rem;
+        background-color: lightskyblue;
+        border-radius: 1rem;
+        border-color: white;
+    }
+    #projects {
+        background-image: url("{% static 'media/images/background/pexels-rahul-pandit-1933900.jpg' %}");
+        background-repeat: repeat-x;
+        background-size: contain;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .line-heading {
+        width: 100%;
+        max-width: 10rem;
+        height: 0.25rem;
+        background-color: lightskyblue;
+        border-radius: 1rem;
+        border-color: white;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .line-heading {
+        width: 100%;
+        max-width: 10rem;
+        height: 0.25rem;
+        background-color: lightskyblue;
+        border-radius: 1rem;
+        border-color: white;
+    }
 }

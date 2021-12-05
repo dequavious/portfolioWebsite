@@ -1,302 +1,317 @@
 {% extends 'portfolio/base.html' %}
 {% block content %}
 
-<div class="container bg-dark mt-lg-0 text-light">
 
-        <div id="about" class="col-lg-12">
-            <h1 class="text-info text-uppercase" style="text-shadow: 4px 4px 0 #5C6BC0;">About me</h1>
-            <div class="d-flex flex-column flex-wrap">
-                <div class="p-0 float-end col-sm-4">
-                    <img src="{{ user.picture }}" class="rounded-circle float-start img-fluid" alt="not found" style="transform: scale(0.90, 0.90);"/>
-                </div>
-                <p class="masthead-subheading font-weight-light mb-0 col-sm-4" style="text-align: center; font-size: 1.25rem; text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Full Stack Developer</p>
-                <div class="p-0 divider-custom">
-                    <div class="line-heading text-light"></div>
-                    <div class="text-light star"><i class="fa fa-star"></i></div>
-                    <div class="line-heading text-light"></div>
-                </div>
-                <h3 class="text-danger col-sm-4" style="text-align: center; font-size: 2.75rem; line-height: 2.75rem; text-shadow: 0 1px 1px #1A237E;">Hi, I'm {{ user.name }}!</h3>
-                <div class="container border-dark p-0">
-                    <p class="text-light">{{ user.bio }}</p>
-                </div>
-            </div>
-        </div>
 
-        <div id="programming" class="col-lg-12">
-
-            <h2 class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Languages</h2>
-            <div class="divider-light divider-custom">
-                <div class="line text-light"></div>
-                <div class="text-light"><i class="fa fa-star"></i></div>
-                <div class="line text-light"></div>
-            </div>
-{#            <details open>#}
-{#                <summary></summary>#}
-                <div class="d-flex flex-wrap">
-                    {% for language in languages %}
-
-                        <div class="p-2 card bg-dark border-dark">
-
-                                <img id="img{{ language.id }}" src="{{ language.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ language.language }}">
-
-                                <div class="content">
-                                    <h3 style="text-align: center;">{{ language.language }}</h3>
-                                    <p id="langPar{{ language.id }}" style="font-size: 16px; text-align: center;"></p>
-                                </div>
-
-                            </div>
-
-                            <script type="text/javascript">
-                                if ("{{ language.confidence }}" === "Confident") {
-                                    document.getElementById("langPar{{ language.id }}").innerHTML =
-                                        "<i class=\"fa fa-check-square-o\"> {{ language.confidence }}</i>";
-                                } else if ("{{ language.confidence }}" === "Partially confident") {
-                                    document.getElementById("langPar{{ language.id }}").innerHTML =
-                                        "<i class=\"fa fa-check\"> {{ language.confidence }}</i>";
-                                } else {
-                                    document.getElementById("langPar{{ language.id }}").innerHTML =
-                                        "<i class=\"fa fa-info-circle\"> {{ language.confidence }}</i>";
-                                }
-                            </script>
-
-                    {% endfor %}
-                </div>
-{#            </details>#}
-
-            <h2 class="mt-3 text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Frameworks</h2>
-            <div class="divider-light divider-custom">
-                <div class="line text-light"></div>
-                <div class="text-light"><i class="fa fa-star"></i></div>
-                <div class="line text-light"></div>
-            </div>
-{#            <details open>#}
-{#                <summary></summary>#}
-                <div class="d-flex flex-wrap">
-                    {% for framework in frameworks %}
-                        <div class="p-2 card bg-dark border-dark" data-bs-toggle="modal">
-                            <img src="{{ framework.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ framework.framework }}">
-
-                            <div class="content">
-                                <h3 style="text-align: center;">{{ framework.framework }}</h3>
-                                <p id="framePar{{ framework.id }}" style="font-size: 16px; text-align: center;"></p>
-                            </div>
-
-                        </div>
-
-                        <script type="text/javascript">
-                            if ("{{ framework.confidence }}" === "Confident") {
-                                document.getElementById("framePar{{ framework.id }}").innerHTML =
-                                    "<i class=\"fa fa-check-square-o\"> {{ framework.confidence }}</i>";
-                            } else if ("{{ language.confidence }}" === "Partially confident") {
-                                document.getElementById("framePar{{ framework.id }}").innerHTML =
-                                    "<i class=\"fa fa-check\"> {{ framework.confidence }}</i>";
-                            } else {
-                                document.getElementById("framePar{{ framework.id }}").innerHTML =
-                                    "<i class=\"fa fa-info-circle\"> {{ framework.confidence }}</i>";
-                            }
-                        </script>
-
-                    {% endfor %}
-                </div>
-{#            </details>#}
-
-            <h2 class="mt-3 text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Databases</h2>
-            <div class="divider-light divider-custom">
-                <div class="line text-light"></div>
-                <div class="text-light"><i class="fa fa-star"></i></div>
-                <div class="line text-light"></div>
-            </div>
-{#            <details open>#}
-{#                <summary></summary>#}
-                <div class="d-flex flex-wrap">
-                    {% for database in databases %}
-                        <div class="p-2 card bg-dark border-dark">
-                            <img src="{{ database.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ database.dbms }}">
-
-                            <div class="content">
-                                <h3 style="text-align: center;">{{ database.dbms }}</h3>
-                                <p id="dbPar{{ database.id }}" style="font-size: 16px; text-align: center;"></p>
-                            </div>
-
-                        </div>
-
-                        <script type="text/javascript">
-                            if ("{{ database.confidence }}" === "Confident") {
-                                document.getElementById("dbPar{{ database.id }}").innerHTML =
-                                    "<i class=\"fa fa-check-square-o\"> {{ database.confidence }}</i>";
-                            } else if ("{{ database.confidence }}" === "Partially confident") {
-                                document.getElementById("dbPar{{ database.id }}").innerHTML =
-                                    "<i class=\"fa fa-check\"> {{ database.confidence }}</i>";
-                            } else {
-                                document.getElementById("dbPar{{ database.id }}").innerHTML =
-                                    "<i class=\"fa fa-info\"> {{ database.confidence }}</i>";
-                            }
-                        </script>
-
-                    {% endfor %}
-                </div>
-{#            </details>#}
-
-        </div>
-
-        <div id="projects" class="col-lg-12">
-            <h2 class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Projects</h2>
-{#            <details open>#}
-{#                <summary></summary>#}
-{#                <div class="container border-dark">#}
-                    {% for project in projects %}
-                    <div class="divider-light divider-custom">
-                        <div class="line text-light"></div>
-                        <div class="text-light"><i class="fa fa-star"></i></div>
-                        <div class="line text-light"></div>
+        <div id="about" class="text-light">
+            <div class="container col-lg-12">
+                <div class="d-flex flex-column flex-wrap">
+                    <h1 class="p-0 text-info text-uppercase" style="text-shadow: 4px 4px 0 #FF0000;">About me</h1>
+                    <div id="profilePic" class="p-0 float-start col-sm-4" style="transform: scale(0.90, 0.90);">
+                        <img src="{{ user.picture }}" class="rounded-circle float-start img-fluid" alt="not found"/>
                     </div>
-                    <div class="d-block">
-                        <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E;">{{ project.title }}</dt>
-                        <div class="d-flex">
-                            <div class="p-2">
-                                <p>{{ project.description }}</p>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="p-0">
-                                <ul>
-                                <li><a href="{{ project.link }}" target="_blank">Homepage</a></li>
-                                <li><a href="{{ project.git }}" target="_blank">Github</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <p class="p-0 masthead-subheading font-weight-light mb-0 col-sm-4" style="white-space: nowrap; text-align: center; font-size: 1.25rem; text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Full Stack Developer</p>
+                    <div class="p-0 divider-custom">
+                        <div class="line-heading text-light"></div>
+                        <div class="text-light star"><i class="fa fa-star"></i></div>
+                        <div class="line-heading text-light"></div>
                     </div>
-                    {% endfor %}
-{#                </div>#}
-{#            </details>#}
+                    <h3 class="text-danger col-sm-4" style="white-space: nowrap; text-align: center; font-size: 2.75rem; line-height: 2.75rem; text-shadow: 0 1px 1px #1A237E;">Hi, I'm {{ user.name }}!</h3>
+                    <div class="container border-dark p-0">
+                        <p class="text-light">{{ user.bio }}</p>
+                    </div>
+                </div>
+            </div>
+            <br>
         </div>
 
-        <div id="info" class="col-lg-12">
+{#    <div class="container mt-lg-0 text-light">#}
 
-                <h2 id="hobbies" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Hobbies</h2>
+        <div id="programming">
+
+            <div class="container col-lg-12">
+
+                <h2 class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Languages</h2>
                 <div class="divider-light divider-custom">
                     <div class="line text-light"></div>
                     <div class="text-light"><i class="fa fa-star"></i></div>
                     <div class="line text-light"></div>
                 </div>
-{#                <details open>#}
-{#                    <summary></summary>#}
-                    <div class="d-flex flex-wrap border-dark justify-content-evenly">
-                        {% for hobby in hobbies %}
-                            <div class="p-2 card bg-dark border-dark">
-                                <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid align-self-center hover-shadow" alt="{{ hobby.avatar }}">
-                                <div class="hobby-content">
-                                    <p style="font-size: 16px; text-align: center;">{{ hobby.hobby }}</p>
+    {#            <details open>#}
+    {#                <summary></summary>#}
+                    <div class="d-flex flex-wrap">
+                        {% for language in languages %}
+
+                            <div class="p-2 card" style="background: inherit; border: none;">
+
+                                    <img id="img{{ language.id }}" src="{{ language.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ language.language }}" style="opacity: 100%;">
+
+                                    <div class="content">
+                                        <h3 style="text-align: center;">{{ language.language }}</h3>
+                                        <p id="langPar{{ language.id }}" style="font-size: 16px; text-align: center;"></p>
+                                    </div>
+
                                 </div>
-                            </div>
+
+                                <script type="text/javascript">
+                                    if ("{{ language.confidence }}" === "Confident") {
+                                        document.getElementById("langPar{{ language.id }}").innerHTML =
+                                            "<i class=\"fa fa-check-square-o\"> {{ language.confidence }}</i>";
+                                    } else if ("{{ language.confidence }}" === "Partially confident") {
+                                        document.getElementById("langPar{{ language.id }}").innerHTML =
+                                            "<i class=\"fa fa-check\"> {{ language.confidence }}</i>";
+                                    } else {
+                                        document.getElementById("langPar{{ language.id }}").innerHTML =
+                                            "<i class=\"fa fa-info-circle\"> {{ language.confidence }}</i>";
+                                    }
+                                </script>
+
                         {% endfor %}
                     </div>
-{#                </details>#}
+    {#            </details>#}
 
-                <h2 id="education" class="mt-3 text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Education</h2>
-{#                <details  open>#}
-{#                    <summary></summary>#}
-{#                    <div class="container border-dark">#}
-                        {% for degree in degrees %}
-                            <div class="divider-light divider-custom">
-                                <div class="line text-light"></div>
-                                <div class="text-light"><i class="fa fa-star"></i></div>
-                                <div class="line text-light"></div>
-                            </div>
-                            <dl>
-                                <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E;">{{ degree.degree }}</dt>
-                                <div class="d-flex">
-                                    <div class="p-2">
-                                        <table class="table table-dark table-hover table-borderless table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th>Institution</th>
-                                                    {% if degree.grade %}
-                                                        <th>Grade</th>
-                                                    {% endif %}
-                                                    <th>Year</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>{{ degree.institution }}</td>
-                                                    {% if degree.grade %}
-                                                        <td>
-                                                            {{ degree.grade }}
-                                                        </td>
-                                                    {% endif %}
-                                                    <td>{{ degree.year }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                <h2 class="mt-3 text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Frameworks</h2>
+                <div class="divider-light divider-custom">
+                    <div class="line text-light"></div>
+                    <div class="text-light"><i class="fa fa-star"></i></div>
+                    <div class="line text-light"></div>
+                </div>
+    {#            <details open>#}
+    {#                <summary></summary>#}
+                    <div class="d-flex flex-wrap">
+                        {% for framework in frameworks %}
+                            <div class="p-2 card" style="background: inherit; border: none;">
+                                <img src="{{ framework.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ framework.framework }}" style="opacity: 100%;">
+
+                                <div class="content">
+                                    <h3 style="text-align: center;">{{ framework.framework }}</h3>
+                                    <p id="framePar{{ framework.id }}" style="font-size: 16px; text-align: center;"></p>
                                 </div>
-                            </dl>
-                        {% endfor %}
-{#                    </div>#}
-{#                </details>#}
 
-                <h2 id="strengths" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Strengths</h2>
-{#                <details open>#}
-{#                    <summary></summary>#}
-{#                    <div class="container border-dark">#}
-                        <div class="divider-light divider-custom">
-                            <div class="line text-light"></div>
-                            <div class="text-light"><i class="fa fa-star"></i></div>
-                            <div class="line text-light"></div>
-                        </div>
-                        <dl>
-                            {% for skill in skills %}
-                                <li>{{ skill.skill }}</li>
-                            {% endfor %}
-                        </dl>
-{#                    </div>#}
-{#                </details>#}
-
-                <br>
-
-                <h2 id="experience" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Experience</h2>
-{#                <details open>#}
-{#                    <summary></summary>#}
-{#                    <div class="container border-dark">#}
-                        {% for job in jobs %}
-                            <div class="divider-light divider-custom">
-                                <div class="line text-light"></div>
-                                <div class="text-light"><i class="fa fa-star"></i></div>
-                                <div class="line text-light"></div>
                             </div>
-                            <dl>
-                                <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E;">{{ job.description }}</dt>
-                                <div class="d-flex">
-                                    <div class="p-2">
-                                        <dd><strong>Company:</strong> {{ job.company }}</dd>
-                                    </div>
-                                </div>
-                            </dl>
-                        {% endfor %}
-{#                    </div>#}
-{#                </details>#}
 
-                <h2 id="contact" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Contact</h2>
-{#                <details open>#}
-{#                    <summary></summary>#}
-{#                    <div class="container border-dark">#}
-                        <div class="divider-light divider-custom">
-                            <div class="line text-light"></div>
-                            <div class="text-light"><i class="fa fa-star"></i></div>
-                            <div class="line text-light"></div>
-                        </div>
-                        <dl>
-                            <dd><i class="fa fa-envelope text-danger"></i> {{ user.email }}</dd>
-                            <dd><i class="fa fa-phone-square text-danger"></i> {{ user.number }}</dd>
-                        </dl>
-{#                    </div>#}
-{#                </details>#}
+                            <script type="text/javascript">
+                                if ("{{ framework.confidence }}" === "Confident") {
+                                    document.getElementById("framePar{{ framework.id }}").innerHTML =
+                                        "<i class=\"fa fa-check-square-o\"> {{ framework.confidence }}</i>";
+                                } else if ("{{ language.confidence }}" === "Partially confident") {
+                                    document.getElementById("framePar{{ framework.id }}").innerHTML =
+                                        "<i class=\"fa fa-check\"> {{ framework.confidence }}</i>";
+                                } else {
+                                    document.getElementById("framePar{{ framework.id }}").innerHTML =
+                                        "<i class=\"fa fa-info-circle\"> {{ framework.confidence }}</i>";
+                                }
+                            </script>
+
+                        {% endfor %}
+                    </div>
+    {#            </details>#}
+
+                <h2 class="mt-3 text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Databases</h2>
+                <div class="divider-light divider-custom">
+                    <div class="line text-light"></div>
+                    <div class="text-light"><i class="fa fa-star"></i></div>
+                    <div class="line text-light"></div>
+                </div>
+    {#            <details open>#}
+    {#                <summary></summary>#}
+                    <div class="d-flex flex-wrap">
+                        {% for database in databases %}
+                            <div class="p-2 card" style="background: inherit; border: none;">
+                                <img src="{{ database.avatar }}" class="rounded float-start img-fluid align-self-start hover-shadow" alt="{{ database.dbms }}" style="opacity: 100%;">
+
+                                <div class="content">
+                                    <h3 style="text-align: center;">{{ database.dbms }}</h3>
+                                    <p id="dbPar{{ database.id }}" style="font-size: 16px; text-align: center;"></p>
+                                </div>
+
+                            </div>
+
+                            <script type="text/javascript">
+                                if ("{{ database.confidence }}" === "Confident") {
+                                    document.getElementById("dbPar{{ database.id }}").innerHTML =
+                                        "<i class=\"fa fa-check-square-o\"> {{ database.confidence }}</i>";
+                                } else if ("{{ database.confidence }}" === "Partially confident") {
+                                    document.getElementById("dbPar{{ database.id }}").innerHTML =
+                                        "<i class=\"fa fa-check\"> {{ database.confidence }}</i>";
+                                } else {
+                                    document.getElementById("dbPar{{ database.id }}").innerHTML =
+                                        "<i class=\"fa fa-info\"> {{ database.confidence }}</i>";
+                                }
+                            </script>
+
+                        {% endfor %}
+                    </div>
+    {#            </details>#}
+
+            </div>
+
+            <br>
+
         </div>
 
-        <br>
+        <div id="projects" class="text-light">
+            <div class="container col-lg-12">
+                <h2 class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Projects</h2>
+    {#            <details open>#}
+    {#                <summary></summary>#}
+    {#                <div class="container border-dark">#}
+                        {% for project in projects %}
+                        <div class="divider-light divider-custom">
+                            <div class="line text-light"></div>
+                            <div class="text-light"><i class="fa fa-star"></i></div>
+                            <div class="line text-light"></div>
+                        </div>
+                        <div class="d-block">
+                            <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E;">{{ project.title }}</dt>
+                            <div class="d-flex">
+                                <div class="p-2">
+                                    <p>{{ project.description }}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="p-0">
+                                    <ul>
+                                    <li><a href="{{ project.link }}" target="_blank">Homepage</a></li>
+                                    <li><a href="{{ project.git }}" target="_blank">Github</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+    {#                </div>#}
+    {#            </details>#}
+            </div>
+            <br>
+        </div>
 
-</div>
+        <div id="info" class="text-light">
+            <div class="container col-lg-12">
+
+                    <h2 id="hobbies" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Hobbies</h2>
+                    <div class="divider-light divider-custom">
+                        <div class="line text-light"></div>
+                        <div class="text-light"><i class="fa fa-star"></i></div>
+                        <div class="line text-light"></div>
+                    </div>
+    {#                <details open>#}
+    {#                    <summary></summary>#}
+                        <div class="d-flex flex-wrap border-dark justify-content-evenly">
+                            {% for hobby in hobbies %}
+                                <div class="p-2 card" style="background: inherit; border: none;">
+                                    <img src="{{ hobby.avatar }}" class="rounded float-start img-fluid align-self-center hover-shadow" alt="{{ hobby.avatar }}" style="opacity: 100%;">
+                                    <div class="hobby-content">
+                                        <p style="font-size: 16px; text-align: center;">{{ hobby.hobby }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+    {#                </details>#}
+
+                    <h2 id="education" class="mt-3 text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Education</h2>
+    {#                <details  open>#}
+    {#                    <summary></summary>#}
+    {#                    <div class="container border-dark">#}
+                            {% for degree in degrees %}
+                                <div class="divider-light divider-custom">
+                                    <div class="line text-light"></div>
+                                    <div class="text-light"><i class="fa fa-star"></i></div>
+                                    <div class="line text-light"></div>
+                                </div>
+                                <dl>
+                                    <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E;">{{ degree.degree }}</dt>
+                                    <div class="d-flex">
+                                        <div class="p-2">
+                                            <table class="table table-hover table-borderless table-responsive text-light" style="background: inherit; border: none;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Institution</th>
+                                                        {% if degree.grade %}
+                                                            <th>Grade</th>
+                                                        {% endif %}
+                                                        <th>Year</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-light">{{ degree.institution }}</td>
+                                                        {% if degree.grade %}
+                                                            <td class="text-light">
+                                                                {{ degree.grade }}
+                                                            </td>
+                                                        {% endif %}
+                                                        <td class="text-light">{{ degree.year }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </dl>
+                            {% endfor %}
+    {#                    </div>#}
+    {#                </details>#}
+
+                    <h2 id="strengths" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Strengths</h2>
+    {#                <details open>#}
+    {#                    <summary></summary>#}
+    {#                    <div class="container border-dark">#}
+                            <div class="divider-light divider-custom">
+                                <div class="line text-light"></div>
+                                <div class="text-light"><i class="fa fa-star"></i></div>
+                                <div class="line text-light"></div>
+                            </div>
+                            <dl>
+                                {% for skill in skills %}
+                                    <li>{{ skill.skill }}</li>
+                                {% endfor %}
+                            </dl>
+    {#                    </div>#}
+    {#                </details>#}
+
+                    <br>
+
+                    <h2 id="experience" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Experience</h2>
+    {#                <details open>#}
+    {#                    <summary></summary>#}
+    {#                    <div class="container border-dark">#}
+                            {% for job in jobs %}
+                                <div class="divider-light divider-custom">
+                                    <div class="line text-light"></div>
+                                    <div class="text-light"><i class="fa fa-star"></i></div>
+                                    <div class="line text-light"></div>
+                                </div>
+                                <dl>
+                                    <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E;">{{ job.description }}</dt>
+                                    <div class="d-flex">
+                                        <div class="p-2">
+                                            <dd><strong>Company:</strong> {{ job.company }}</dd>
+                                        </div>
+                                    </div>
+                                </dl>
+                            {% endfor %}
+    {#                    </div>#}
+    {#                </details>#}
+
+                    <h2 id="contact" class="text-info" style="text-shadow: 20px 20px 10px rgba(0,0,0,0.5);">Contact</h2>
+    {#                <details open>#}
+    {#                    <summary></summary>#}
+    {#                    <div class="container border-dark">#}
+                            <div class="divider-light divider-custom">
+                                <div class="line text-light"></div>
+                                <div class="text-light"><i class="fa fa-star"></i></div>
+                                <div class="line text-light"></div>
+                            </div>
+                            <dl>
+                                <dd><i class="fa fa-envelope text-danger"></i> {{ user.email }}</dd>
+                                <dd><i class="fa fa-phone-square text-danger"></i> {{ user.number }}</dd>
+                            </dl>
+    {#                    </div>#}
+    {#                </details>#}
+            </div>
+            <br>
+        </div>
+
+{#</div>#}
 
 <div class="footer p-4 bg-black">
     <p>Portfolio website</p>
