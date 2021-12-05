@@ -14,6 +14,11 @@ html, body {
     padding-top: 100px;
 }
 
+.star {
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 .card img, .admin-img {
     height: 100px;
     width: 100px;
@@ -153,6 +158,7 @@ div.scrollmenu a {
     background-color: lightskyblue;
     border-radius: 1rem;
     border-color: white;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .line:first-child {
@@ -195,11 +201,6 @@ div.scrollmenu a {
         background-color: lightskyblue;
         border-radius: 1rem;
         border-color: white;
-    }
-    #projects {
-        background-image: url("{% static 'media/images/background/pexels-rahul-pandit-1933900.jpg' %}");
-        background-repeat: repeat-x;
-        background-size: contain;
     }
 }
 
