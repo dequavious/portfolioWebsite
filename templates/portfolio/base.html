@@ -12,9 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $(this).scrollTop(0);
-        });
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        } else {
+            window.onbeforeunload = function () {
+                window.scrollTo(0, 0);
+            }
+        }
     </script>
     <style>
         #about {
@@ -25,9 +29,31 @@
         #portfolioBody {
             background-image: url("{% static 'media/images/background/gray-bg.jpg' %}");
         }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: inherit;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #555;
+        }
+        ::-webkit-scrollbar-track{
+            border-radius: 10px;
+            background: rgba(0, 0, 0, .6);
+        }
+
+        #scrollbar{
+            opacity: .8;
+        }
     </style>
 </head>
 <body id="portfolioBody" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+
+    <div id="scrollbar">
+        <div class="force-overflow"></div>
+    </div>
 
     {% include 'portfolio/navbar.html' %}
 
