@@ -1,21 +1,25 @@
 {% extends 'portfolio/base.html' %}
 {% block content %}
 
-    <div id="about" class="text-light">
+<div class="d-flex flex-column">
+
+    <div id="about" class="p-6 text-light">
         <div class="container col-lg-12">
-            <div class="d-flex flex-column flex-wrap">
-                <h1 class="p-0 text-info text-uppercase" style="text-shadow: 3px 3px 0 #FF0000, 2px 2px 4px #000000;">About me</h1>
+            <div id="about-inner" class="d-flex flex-column flex-wrap">
+                <h1 class="p-0 text-info text-uppercase" style="filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;">About me</h1>
                 <div class="p-0 float-start col-sm-4" style="transform: scale(0.90, 0.90);">
-                    <img id="profilePic" src="{{ user.picture }}" class="rounded-circle img-fluid" alt="not found"/>
+                    <img src="{{ user.picture }}" class="rounded-circle img-fluid" alt="not found" style="filter:contrast(140%) drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));"/>
                 </div>
-                <p class="p-0 sec masthead-subheading font-weight-light mb-0 col-sm-4" style="white-space: nowrap; text-align: center; font-size: 1.25rem; text-shadow: 20px 20px 10px rgba(0, 0, 0, 0.5), 2px 2px 4px #000000; color: lightyellow;">Full Stack Developer</p>
-                <div class="p-0 sec divider-custom">
+            </div>
+            <div class="d-flex flex-column flex-wrap">
+                <p class="p-0 masthead-subheading font-weight-light mb-0 col-sm-4" style="white-space: nowrap; text-align: center; font-size: 1.25rem; text-shadow: 20px 20px 10px rgba(0, 0, 0, 0.5), 2px 2px 4px #000000; color: lightyellow;">Full Stack Developer</p>
+                <div class="p-0 divider-custom">
                     <div class="line-heading text-light"></div>
                     <div class="star"><i class="fa fa-star"></i></div>
                     <div class="line-heading text-light"></div>
                 </div>
-                <h3 class="text-danger sec col-sm-4" style="white-space: nowrap; text-align: center; font-size: 2.75rem; line-height: 2.75rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;">Hi, I'm {{ user.name }}!</h3>
-                <div class="container sec border-dark p-0">
+                <h3 class="text-danger col-sm-4" style="white-space: nowrap; text-align: center; font-size: 2.75rem; line-height: 2.75rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;">Hi, I'm {{ user.name }}!</h3>
+                <div class="container border-dark p-0">
                     <p class="text-light">{{ user.bio }}</p>
                 </div>
             </div>
@@ -23,7 +27,7 @@
         <br>
     </div>
 
-    <div id="programming">
+    <div id="programming" class="p-6">
 
         <div class="container col-lg-12">
 
@@ -38,7 +42,7 @@
 
                     <div class="p-2 card" style="background: inherit; border: none;">
 
-                        <img id="img{{ language.id }}" src="{{ language.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ language.language }}" style="opacity: 100%;">
+                        <img id="img{{ language.id }}" src="{{ language.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ language.language }}" style="filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));">
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ language.language }}</h3>
@@ -73,7 +77,7 @@
             <div class="d-flex flex-wrap">
                 {% for framework in frameworks %}
                     <div class="p-2 card" style="background: inherit; border: none;">
-                        <img src="{{ framework.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ framework.framework }}">
+                        <img src="{{ framework.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ framework.framework }}" style="filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));">
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ framework.framework }}</h3>
@@ -107,7 +111,7 @@
             <div class="d-flex flex-wrap">
                 {% for database in databases %}
                     <div class="p-2 card" style="background: inherit; border: none;">
-                        <img src="{{ database.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ database.dbms }}">
+                        <img src="{{ database.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ database.dbms }}" style="filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));">
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ database.dbms }}</h3>
@@ -138,7 +142,7 @@
 
     </div>
 
-    <div id="projects" class="text-light">
+    <div id="projects" class="p-6 text-light">
         <div class="container col-lg-12">
             <h2 class="text-info" style="text-shadow: 20px 20px 10px rgba(0, 0, 0, 0.5), 2px 2px 4px #000000;">Projects</h2>
                 {% for project in projects %}
@@ -168,7 +172,7 @@
         <br>
     </div>
 
-    <div id="info" class="text-light">
+    <div id="info" class="p-12 text-light">
         <div class="container col-lg-12">
 
             <h2 id="hobbies" class="text-info" style="text-shadow: 20px 20px 10px rgba(0, 0, 0, 0.5), 2px 2px 4px #000000;">Hobbies</h2>
@@ -180,7 +184,7 @@
             <div class="d-flex flex-wrap border-dark justify-content-evenly">
                 {% for hobby in hobbies %}
                     <div class="p-2 card" style="background: inherit; border: none;">
-                        <img src="{{ hobby.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ hobby.avatar }}">
+                        <img src="{{ hobby.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ hobby.avatar }}" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));">
                         <div class="hobby-content">
                             <p style="font-size: 16px; text-align: center;">{{ hobby.hobby }}</p>
                         </div>
@@ -271,12 +275,17 @@
         <br>
     </div>
 
-    <div class="footer p-4 bg-black">
+    <div class="p-0 footer p-4 bg-black">
         <p>Portfolio website</p>
     </div>
 
+</div>
+
     <script>
-        var profilePic = document.getElementById('profilePic');
+
+
+
+        var aboutInner = document.getElementById('about-inner');
 
         function fadeOutOnScroll(element) {
 
@@ -300,10 +309,11 @@
         }
 
         function scrollHandler() {
-            fadeOutOnScroll(profilePic);
+            fadeOutOnScroll(aboutInner);
         }
 
         window.addEventListener('scroll', scrollHandler);
+
     </script>
 
 {% endblock content %}

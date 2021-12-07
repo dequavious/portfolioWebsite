@@ -21,11 +21,6 @@
         }
     </script>
     <style>
-        #about {
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
         #portfolioBody {
             background-image: url("{% static 'media/images/background/gray-bg.jpg' %}");
         }
@@ -47,6 +42,58 @@
         #scrollbar{
             opacity: .8;
         }
+
+        #about {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            #about {
+                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-repeat: no-repeat;
+                {#background-size: cover;#}
+                background-size: 100% 100%;
+            }
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            #about {
+                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            #about {
+                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            #about {
+                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+            #about {
+                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+
     </style>
 </head>
 <body id="portfolioBody" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
