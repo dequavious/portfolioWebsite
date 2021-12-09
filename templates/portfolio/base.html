@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/styles.min.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css">
+{#    <script type="module" src="https://spicy-sections.glitch.me/SpicySections.js"></script>#}
+    <script type="module" src="https://assets.codepen.io/3/SpicySections-2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -64,13 +66,13 @@
     }
 
     #portfolioBody {
-        background-image: url("{% static 'media/images/background/gray-bg.jpg' %}");
+        background-color: #333;
     }
 
     /* Scrollbar */
     ::-webkit-scrollbar {
         width: 12px;
-        background: inherit;
+        background-color: #333;
     }
     ::-webkit-scrollbar-thumb {
         border-radius: 10px;
@@ -88,6 +90,7 @@
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 576px) {
         #about {
+            padding-top: 100px;
             width: 100%;
             height: 100%;
             background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
@@ -95,16 +98,35 @@
             background-size: 100% 100%;
             overflow: auto;
         }
+        #programming, #info {
+            padding-top: 100px;
+            overflow: auto;
+        }
+        #projects {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
     }
 
     /* Small devices (portrait tablets and large phones, 600px and up) */
     @media only screen and (min-width: 576px) {
         #about {
+            padding-top: 100px;
             width: 100%;
             height: 100vh;
             background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
             background-repeat: no-repeat;
             background-size: 100% 100%;
+            overflow: auto;
+        }
+        #programming, #info {
+            padding-top: 100px;
+            overflow: auto;
+        }
+        #projects {
+            padding-top: 100px;
+            height: 100vh;
             overflow: auto;
         }
     }
@@ -112,11 +134,44 @@
     /* Medium devices (landscape tablets, 768px and up) */
     @media only screen and (min-width: 768px) {
         #about {
+            padding-top: 100px;
             width: 100%;
             height: 100vh;
             background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
             background-repeat: no-repeat;
             background-size: 100% 100%;
+            overflow: auto;
+        }
+        #programming, #info {
+            padding-top: 100px;
+            overflow: auto;
+        }
+        #projects {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
+    }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 800px) {
+        #about {
+            padding-top: 100px;
+            width: 100%;
+            height: 100vh;
+            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            overflow: auto;
+        }
+        #programming, #info {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
+        #projects {
+            padding-top: 100px;
+            height: 100vh;
             overflow: auto;
         }
     }
@@ -124,6 +179,7 @@
     /* Large devices (laptops/desktops, 992px and up) */
     @media only screen and (min-width: 992px) {
         #about {
+            padding-top: 100px;
             width: 100%;
             height: 100vh;
             background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
@@ -131,11 +187,22 @@
             background-size: 100% 100%;
             overflow: auto;
         }
+        #programming, #info {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
+        #projects {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
     }
 
     /* Extra large devices (large laptops and desktops, 1200px and up) */
     @media only screen and (min-width: 1200px) {
         #about {
+            padding-top: 100px;
             width: 100%;
             height: 100vh;
             background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
@@ -152,7 +219,73 @@
         .site-wrapper-inner {
             vertical-align: middle;
         }
+        #programming, #info {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
+        #projects {
+            padding-top: 100px;
+            height: 100vh;
+            overflow: auto;
+        }
     }
+
+    spicy-sections {
+      display: block;
+      /* prettier-ignore */
+      --const-mq-affordances:
+        [screen and (max-width: 30em) ] collapse |
+        [screen and (min-width: 50em) ] tab-bar;
+      /* another type is exclusive-collapse */
+    }
+    spicy-sections > h2,
+    spicy-sections > div {
+        background: inherit;
+    }
+    spicy-sections > h2 {
+        cursor: pointer;
+        font-weight: 800;
+        margin: 1rem 0 0 0;
+        padding-right: 1rem;
+        padding-bottom: 0.5rem;
+    }
+    {#spicy-sections > div {#}
+    {#    padding: 0 1rem 1rem 1rem;#}
+    {#}#}
+
+    spicy-sections[affordance=tab-bar] h2[aria-selected=true] {
+        border-bottom: 3px solid orange;
+    }
+    spicy-sections[affordance=tab-bar] > div {
+        {#padding: 2rem;#}
+    }
+
+    spicy-sections[affordance=collapse] > h2,
+    spicy-sections[affordance=collapse] > div {
+        background: inherit;
+        {#border-left: 3px solid #ffc48c;#}
+        {#box-shadow: var(--shadow-elevation-low);#}
+    }
+    spicy-sections[affordance=collapse] > h2::before {
+        content: "+";
+        background: inherit;
+        width: auto;
+        height: auto;
+        display: inline-block;
+        font-weight: 100;
+        transition: transform 0.2s;
+    }
+    spicy-sections[affordance=collapse] > h2[expanded] {
+        background: inherit;
+    }
+    spicy-sections[affordance=collapse] > h2[expanded]::before {
+        transform: rotate(45deg);
+    }
+    spicy-sections[affordance=collapse] > div {
+        background: inherit;
+    }
+
     </style>
 </head>
 <body id="portfolioBody" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">

@@ -16,10 +16,6 @@ html, body {
     scroll-behavior: smooth;
 }
 
-#about, #programming, #info, #projects {
-    padding-top: 100px;
-}
-
 .star {
     color: whitesmoke;
     text-shadow: 2px 2px 4px #000000;
