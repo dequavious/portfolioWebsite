@@ -78,6 +78,12 @@ class DBMS(models.Model):
     avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
 
 
+class Tool(models.Model):
+    tool = models.CharField(unique=True, max_length=30)
+    confidence = models.CharField(max_length=256)
+    avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
+
+
 class Hobby(models.Model):
     hobby = models.CharField(unique=True, max_length=30)
     avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)

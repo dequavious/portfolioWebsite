@@ -16,7 +16,7 @@ from django.contrib import messages
 
 from .serializers import *
 from .utils import *
-from .models import CustomUser as User, Document, Language, Hobby, Skill, Address, Framework, DBMS
+from .models import CustomUser as User, Document, Language, Hobby, Skill, Address, Framework, DBMS, Tool
 
 
 def home(request):
@@ -28,6 +28,8 @@ def home(request):
     technologies = FrameworkSerializer(technologies, many=True)
     db = DBMS.objects.all()
     db = DBMSSerializer(db, many=True)
+    tool_list = Tool.objects.all()
+    tool_serializer = ToolSerializer(tool_list, many=True)
     interests = Hobby.objects.all()
     interests = HobbySerializer(interests, many=True)
     skills = Skill.objects.all()
@@ -43,8 +45,8 @@ def home(request):
     degrees = EducationSerializer(degrees, many=True)
 
     context = {'user': user.data, 'languages': lang.data, 'frameworks': technologies.data,
-               'databases': db.data, 'hobbies': interests.data, 'skills': skills.data, 'jobs': jobs.data,
-               'projects': proj.data, 'degrees': degrees.data}
+               'databases': db.data, 'tools': tool_serializer.data, 'hobbies': interests.data, 'skills': skills.data,
+               'jobs': jobs.data, 'projects': proj.data, 'degrees': degrees.data}
     return render(request, 'portfolio/home.html', context)
 
 
@@ -369,6 +371,32 @@ def databases(request):
     }
 
     return render(request, 'admin/databases.html', context)
+
+
+@permission_classes([IsAuthenticated])
+def tools(request):
+    user_id = request.session.get('user', None)
+    if not user_id:
+        return redirect('login page')
+
+    users = User.objects.all().filter(id=user_id)
+    if not users.exists():
+        return redirect('login page')
+    user = User.objects.get(id=user_id)
+    if not user.is_active:
+        return redirect('login page')
+    if not user.authenticated:
+        return redirect('login page')
+
+    technologies = Tool.objects.all()
+    technologies = ToolSerializer(technologies, many=True)
+
+    context = {
+        'token': request.session['token'],
+        'tools': technologies.data,
+    }
+
+    return render(request, 'admin/tools.html', context)
 
 
 @api_view(['POST'])
@@ -1265,6 +1293,142 @@ def delete_dbms(request):
 
     messages.success(request, "Database has been deleted.")
     html = render_to_string('admin/databases.html')
+    return HttpResponse(html)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser])
+@csrf_protect
+def add_tool(request):
+    """
+    View to add a tool
+    """
+    users = User.objects.all().filter(id=request.user.id)
+    if not users.exists():
+        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
+    user = User.objects.get(id=request.user.id)
+    if not user.authenticated:
+        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
+
+    tool = request.data.get('tool', None)
+    if not tool:
+        return Response("tool not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    confidence = request.data.get('confidence', None)
+    if not confidence:
+        return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    tools = Tool.objects.all().filter(tool__iexact=tool)
+    if tools.exists():
+        messages.error(request, "Tool already added")
+        html = render_to_string('admin/tools.html')
+        return HttpResponse(html)
+
+    avatar = request.data.get('avatar', None)
+    if avatar:
+        if not imghdr.what(avatar):
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/tools.html')
+            return HttpResponse(html)
+        tool = Tool(tool=tool, confidence=confidence, avatar=avatar)
+    else:
+        tool = Tool(tool=tool, confidence=confidence)
+
+    tool.save()
+
+    messages.success(request, "Tool has been added.")
+    html = render_to_string('admin/tools.html')
+    return HttpResponse(html)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser])
+@csrf_protect
+def update_tool(request):
+    """
+    View to add update tool
+    """
+    users = User.objects.all().filter(id=request.user.id)
+    if not users.exists():
+        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
+    user = User.objects.get(id=request.user.id)
+    if not user.authenticated:
+        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
+
+    tid = request.GET.get('id')
+    if not tid:
+        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    tools = Tool.objects.all().filter(id=tid)
+    if not tools.exists():
+        return Response("tool not found", status=status.HTTP_400_BAD_REQUEST)
+
+    tool = Tool.objects.get(id=tid)
+
+    tool_str = request.data.get('tool', None)
+    if tool_str:
+        tools = Tool.objects.all().filter(tool__iexact=tool_str)
+        if tools.exists() and (int(tools.first().id) != int(tid)):
+            messages.error(request, "Tool already added")
+            html = render_to_string('admin/tools.html')
+            return HttpResponse(html)
+        tool.tool = tool_str
+        tool.save()
+
+    confidence = request.data.get('confidence', None)
+    if confidence:
+        tool.confidence = confidence
+        tool.save()
+
+    avatar = request.data.get('avatar', None)
+    if avatar:
+        if not imghdr.what(avatar):
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/databases.html')
+            return HttpResponse(html)
+        if tool.avatar:
+            delete_file(tool.avatar)
+        tool.avatar = avatar
+        tool.save()
+
+    messages.success(request, "Tool has been updated.")
+    html = render_to_string('admin/tools.html')
+    return HttpResponse(html)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@csrf_protect
+def delete_tool(request):
+    """
+    View to delete a tool
+    """
+    users = User.objects.all().filter(id=request.user.id)
+    if not users.exists():
+        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
+    user = User.objects.get(id=request.user.id)
+    if not user.authenticated:
+        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
+
+    tid = request.GET.get('id')
+    if not tid:
+        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    technologies = Tool.objects.all().filter(id=tid)
+    if not technologies.exists():
+        return Response("tool not found", status=status.HTTP_400_BAD_REQUEST)
+
+    tool = Tool.objects.get(id=tid)
+
+    if tool.avatar:
+        delete_file(tool.avatar)
+
+    tool.delete()
+
+    messages.success(request, "Tool has been deleted.")
+    html = render_to_string('admin/tools.html')
     return HttpResponse(html)
 
 

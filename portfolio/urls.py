@@ -17,6 +17,7 @@ urlpatterns = [
     path('languages/', views.languages, name="languages"),
     path('frameworks/', views.frameworks, name="frameworks"),
     path('databases/', views.databases, name="databases"),
+    path('tools/', views.tools, name="tools"),
     path('password/', views.password_page, name="password page"),
     path('forgot-password', views.forgot_password_page, name="forgot password page"),
 
@@ -43,6 +44,9 @@ urlpatterns = [
     path('admin/add_dbms', views.add_dbms, name="add dbms"),
     path('admin/update_dbms', views.update_dbms, name="update dbms"),
     path('admin/delete_dbms', views.delete_dbms, name="delete dbms"),
+    path('admin/add_tool', views.add_tool, name="add tool"),
+    path('admin/update_tool', views.update_tool, name="update tool"),
+    path('admin/delete_tool', views.delete_tool, name="delete tool"),
     path('admin/add_hobby', views.add_hobby, name="add hobby"),
     path('admin/update_hobby', views.update_hobby, name="update hobby"),
     path('admin/delete_hobby', views.delete_hobby, name="delete hobby"),

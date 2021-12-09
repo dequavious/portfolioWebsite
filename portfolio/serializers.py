@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import CustomUser as User, Address, Document, Hobby, Language, Skill, Framework, DBMS, Work, Project, \
-    Education
+    Education, Tool
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -48,6 +48,12 @@ class FrameworkSerializer(serializers.ModelSerializer):
 class DBMSSerializer(serializers.ModelSerializer):
     class Meta:
         model = DBMS
+        fields = '__all__'
+
+
+class ToolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tool
         fields = '__all__'
 
 

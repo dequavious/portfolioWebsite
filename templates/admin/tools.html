@@ -1,0 +1,287 @@
+{% extends 'admin/admin.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <script>
+        document.getElementById("tools").style.borderBottom = "3px solid white";
+        function clickFunction(id, val) {
+            if (document.getElementById(id).value.length === 0) {
+                document.getElementById(id).value = val;
+            }
+        }
+        function change(id) {
+            var bool = false;
+            var input, ul, li, divs, form, i, j;
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                form = li[i].getElementsByTagName("form")[0];
+                divs =  form.getElementsByTagName("div");
+                for (j= 0; j < divs.length; j++) {
+                    input = divs[j].getElementsByTagName("input")[0];
+                    if (input !== undefined) {
+                        if (input.value.length > 0) {
+                            bool = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var btn = "saveBtn" + id;
+
+            if (bool) {
+                document.getElementById(btn).style.display = "block";
+            } else {
+                document.getElementById(btn).style.display = "none";
+            }
+        }
+    </script>
+
+    <div class="d-flex flex-row justify-content-start" style="padding-right: 10px;">
+
+        <div id="iconBar" class="p-0 bg-light border icon-bar">
+            <a href="#add"><i class="fa fa-plus text-secondary"></i></a>
+            <a href="#edit"><i class="fa fa-edit text-secondary"></i></a>
+            <a href="#edit"><i class="fa fa-trash text-secondary"></i></a>
+        </div>
+
+        <div class="p-0 container-fluid mt-lg-3" style="margin-left: 80px;">
+
+            <div class="container-fluid bg-white border">
+
+                <br>
+
+                <h1>Tools</h1>
+
+                <br>
+
+                {% include 'admin/messages.html' %}
+
+                <br>
+
+                <h3 id="add">Add tool</h3>
+                <div class="container-fluid bg-white border">
+                    <form id="addToolForm">
+                        <div class="mb-3 mt-3">
+                            <label for="addTool">Tool:</label>
+                            <input type="text" class="form-control" id="addTool" name="tools" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="addConfidence">Confidence:</label>
+                            <input type="text" class="form-control" id="addConfidence" name="confidence" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="addImage">Choose avatar: </label>
+                            <input type="file" class="form-control"  id="addImage" name="avatar" required>
+                        </div>
+                        <div class="clearfix">
+                            <div class="float-end">
+                                <button id="saveBtn" type="submit" class="btn"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <br><br>
+
+                <h3 id="edit">Edit/delete tool</h3>
+                <div class="container-fluid bg-white border">
+                    <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                        {{form|crispy}}
+                        <div class="form-floating mt-3 mb-3">
+                            <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search">
+                            <label for="myInput"><i class="fa fa-search text-secondary"></i></label>
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <ul id="myUL" class="list-group bg-white">
+                    {% for tool in tools %}
+                        <li class="list-group-item">
+
+                            <form id="updateForm{{ tool.id }}">
+                                <div class="mb-3 mt-3">
+                                    <label for="update{{ tool.id }}">Tool:</label>
+                                    <input type="text" onclick="clickFunction(this.id, '{{ tool.tool }}')" oninput="change({{ tool.id }})" class="form-control" id="update{{ tool.id }}" name="tool" placeholder="{{ tool.tool }}">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="updateConfidence{{ tool.id }}">Confidence:</label>
+                                    <input type="text" onclick="clickFunction(this.id, '{{ tool.confidence }}')" oninput="change({{ tool.id }})" class="form-control" id="updateConfidence{{ tool.id }}" name="confidence" placeholder="{{ tool.confidence }}">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <div class="d-flex flex-column">
+                                        <div class="p-0">
+                                            <label for="file">Current avatar: </label>
+                                        </div>
+                                        <div class="p-0">
+                                            <img src="{{ tool.avatar }}" class="rounded float-start img-fluid admin-img" alt="not found"/>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <label for="updateImage{{ tool.id }}">Choose another avatar: </label>
+                                    <input type="file" oninput="change({{ tool.id }})" class="form-control" id="updateImage{{ tool.id }}" name="avatar">
+                                </div>
+                            </form>
+
+                            <div class="clearfix">
+                                <div class="float-end">
+                                    <button id="saveBtn{{ tool.id }}" type="submit" class="btn" form="updateForm{{ tool.id }}" style="display: none"><i class="fa fa-save text-secondary" style="font-size:36px;"></i></button>
+                                </div>
+                                <div class="float-end">
+                                    <form id="deleteForm{{ tool.id }}">
+                                        <button id="deleteBtn{{ tool.id }}" type="submit" class="btn"><i class="fa fa-trash text-secondary" style="font-size:36px"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </li>
+
+                        <script>
+                            $(document).on('submit', '#updateForm{{ tool.id }}', function(e) {
+
+                                document.getElementById("saveBtn{{ tool.id }}").innerHTML = "<div class=\"spinner-border\"></div>";
+                                document.getElementById("saveBtn{{ tool.id }}").disabled = true;
+
+                                var data = new FormData();
+                                data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                                var i, divs, form, input;
+                                form = document.getElementById("updateForm{{ tool.id }}");
+                                divs = form.getElementsByTagName('div');
+
+                                for (i = 0; i < divs.length; i++) {
+                                    input = divs[i].getElementsByTagName("input")[0];
+                                    if (input !== undefined) {
+                                        if (input.value.length > 0) {
+                                            if (input.name === 'avatar') {
+                                                data.append('avatar', $('#updateImage{{ tool.id }}')[0].files[0]);
+                                            } else {
+                                                data.append(input.name, input.value);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                e.preventDefault();
+
+                                $.ajax({
+                                    type: "POST",
+                                    enctype: 'multipart/form-data',
+                                    url: '{% url 'update tool' %}?id={{ tool.id }}',
+                                    headers:{
+                                      Authorization: 'Token {{ token }}'
+                                    },
+                                    data:data,
+                                    processData: false,
+                                    contentType: false,
+                                    cache: false,
+                                    timeout: 800000,
+                                    success:function () {
+                                        window.location.reload(true);
+                                    }
+                                });
+                            });
+
+                            $(document).on('submit', '#deleteForm{{ tool.id }}', function(e) {
+
+                                document.getElementById("deleteBtn{{ tool.id }}").innerHTML = "<div class=\"spinner-border\"></div>";
+                                document.getElementById("deleteBtn{{ tool.id }}").disabled = true;
+
+                                var data = new FormData();
+                                data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                                e.preventDefault();
+
+                                $.ajax({
+                                    type: "POST",
+                                    enctype: 'multipart/form-data',
+                                    url: '{% url 'delete tool' %}?id={{ tool.id }}',
+                                    headers:{
+                                      Authorization: 'Token {{ token }}'
+                                    },
+                                    data:data,
+                                    processData: false,
+                                    contentType: false,
+                                    cache: false,
+                                    timeout: 800000,
+                                    success:function () {
+                                        window.location.reload(true);
+                                    }
+                                });
+                            });
+                        </script>
+
+                    {% endfor %}
+
+                </ul>
+
+                <br><br>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 100%"></div>
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, div, form, i, txtValue;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                form = li[i].getElementsByTagName("form")[0];
+                div =  form.getElementsByTagName("div")[0];
+                input = div.getElementsByTagName("input")[0];
+                txtValue = input.placeholder;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+        $(document).on('submit', '#addToolForm', function(e) {
+
+            document.getElementById("saveBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("saveBtn").disabled = true;
+
+            var data = new FormData();
+
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('tool', $('#addTool').val());
+            data.append('confidence', $('#addConfidence').val());
+            data.append('avatar', $('#addImage')[0].files[0]);
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'add tool' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
