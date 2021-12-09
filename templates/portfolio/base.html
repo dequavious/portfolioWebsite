@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/styles.min.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css">
-{#    <script type="module" src="https://spicy-sections.glitch.me/SpicySections.js"></script>#}
     <script type="module" src="https://assets.codepen.io/3/SpicySections-2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -39,8 +38,6 @@
         font-size: 3rem;
         line-height: 2.5rem;
         letter-spacing: 0.8rem;
-        {#-webkit-text-fill-color: transparent;#}
-        {#--bs-text-opacity: 1;#}
         opacity: 0.4;
         color: lightyellow;
         filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;
@@ -57,7 +54,6 @@
     #home {
         color: #fff;
         text-shadow: 0 1px 3px rgba(0,0,0,.5);
-        {#display: table;#}
         width: 100%;
         height: 100vh;
         background-color: #333;
@@ -98,14 +94,12 @@
             background-size: 100% 100%;
             overflow: auto;
         }
-        #programming, #info {
+        #programming, #info, #projects {
             padding-top: 100px;
-            overflow: auto;
         }
-        #projects {
-            padding-top: 100px;
-            height: 100vh;
-            overflow: auto;
+        spicy-sections > h2 {
+            cursor: pointer;
+            margin: 1rem 0 0 0;
         }
     }
 
@@ -120,14 +114,12 @@
             background-size: 100% 100%;
             overflow: auto;
         }
-        #programming, #info {
+        #programming, #info, #projects {
             padding-top: 100px;
-            overflow: auto;
         }
-        #projects {
-            padding-top: 100px;
-            height: 100vh;
-            overflow: auto;
+        spicy-sections > h2 {
+            cursor: pointer;
+            margin: 1rem 0 0 0;
         }
     }
 
@@ -142,37 +134,12 @@
             background-size: 100% 100%;
             overflow: auto;
         }
-        #programming, #info {
+        #programming, #info, #projects  {
             padding-top: 100px;
-            overflow: auto;
         }
-        #projects {
-            padding-top: 100px;
-            height: 100vh;
-            overflow: auto;
-        }
-    }
-
-        /* Medium devices (landscape tablets, 768px and up) */
-    @media only screen and (min-width: 800px) {
-        #about {
-            padding-top: 100px;
-            width: 100%;
-            height: 100vh;
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            overflow: auto;
-        }
-        #programming, #info {
-            padding-top: 100px;
-            height: 100vh;
-            overflow: auto;
-        }
-        #projects {
-            padding-top: 100px;
-            height: 100vh;
-            overflow: auto;
+        spicy-sections > h2 {
+            cursor: pointer;
+            margin: 1rem 0 0 0;
         }
     }
 
@@ -196,6 +163,11 @@
             padding-top: 100px;
             height: 100vh;
             overflow: auto;
+        }
+        spicy-sections > h2 {
+            cursor: pointer;
+            margin: 1rem 0 0 0;
+            padding: 0.5rem;
         }
     }
 
@@ -229,13 +201,22 @@
             height: 100vh;
             overflow: auto;
         }
+        spicy-sections > h2 {
+            cursor: pointer;
+            margin: 1rem 0 0 0;
+            padding: 0.5rem;
+        }
+    }
+
+    .text-info {
+        font-weight: 800;
     }
 
     spicy-sections {
-      display: block;
+        display: block;
       /* prettier-ignore */
       --const-mq-affordances:
-        [screen and (max-width: 30em) ] collapse |
+        [screen and (max-width: 991px) ] collapse |
         [screen and (min-width: 50em) ] tab-bar;
       /* another type is exclusive-collapse */
     }
@@ -243,29 +224,14 @@
     spicy-sections > div {
         background: inherit;
     }
-    spicy-sections > h2 {
-        cursor: pointer;
-        font-weight: 800;
-        margin: 1rem 0 0 0;
-        padding-right: 1rem;
-        padding-bottom: 0.5rem;
-    }
-    {#spicy-sections > div {#}
-    {#    padding: 0 1rem 1rem 1rem;#}
-    {#}#}
 
     spicy-sections[affordance=tab-bar] h2[aria-selected=true] {
         border-bottom: 3px solid orange;
-    }
-    spicy-sections[affordance=tab-bar] > div {
-        {#padding: 2rem;#}
     }
 
     spicy-sections[affordance=collapse] > h2,
     spicy-sections[affordance=collapse] > div {
         background: inherit;
-        {#border-left: 3px solid #ffc48c;#}
-        {#box-shadow: var(--shadow-elevation-low);#}
     }
     spicy-sections[affordance=collapse] > h2::before {
         content: "+";
