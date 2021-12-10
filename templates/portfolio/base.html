@@ -22,243 +22,246 @@
         }
     </script>
     <style>
-
-    .btn-primary {
-        color: #fff;
-        background-color: #64a19d;
-        border-color: #64a19d;
-    }
-    .btn-primary:hover {
-        color: #fff;
-        background-color: #558985;
-        border-color: #50817e;
-    }
-
-    #cover-page-heading-1 {
-        font-size: 3rem;
-        line-height: 2.5rem;
-        letter-spacing: 0.8rem;
-        opacity: 0.4;
-        color: lightyellow;
-        filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;
-    }
-
-    #cover-page-heading-2 {
-        opacity: 0.8;
-        max-width: 20rem;
-        font-size: 1.5rem;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* Extra markup and styles for table-esque vertical and horizontal centering */
-    #home {
-        color: #fff;
-        text-shadow: 0 1px 3px rgba(0,0,0,.5);
-        width: 100%;
-        height: 100vh;
-        background-color: #333;
-        background-image: url("{% static 'media/images/background/bg-masthead.jpg' %}");
-        background-size: cover;
-    }
-
-    #portfolioBody {
-        {#background-color: #333;#}
-        background-image: url("{% static 'media/images/background/download.gif' %}");
-        background-size: 100% 100%;
-    }
-
-    #programming, #projects, #info {
-        background-image: url("{% static 'media/images/background/download-2.gif' %}");
-        background-size: 100% 100%;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-        width: 12px;
-        background-color: #333;
-    }
-    ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: #555;
-    }
-    ::-webkit-scrollbar-track{
-        border-radius: 10px;
-        background: rgba(0, 0, 0, .7);
-    }
-
-    #scrollbar{
-        opacity: .8;
-    }
-
-    /* Extra small devices (phones, 600px and down) */
-    @media only screen and (max-width: 576px) {
-        #about {
-            padding-top: 100px;
-            width: 100%;
-            height: 100%;
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            overflow: auto;
+        .btn-primary {
+            color: #fff;
+            background-color: #64a19d;
+            border-color: #64a19d;
         }
-        #programming, #info, #projects {
-            padding-top: 100px;
-        }
-        spicy-sections > h2 {
-            cursor: pointer;
-            margin: 1rem 0 0 0;
-        }
-    }
 
-    /* Small devices (portrait tablets and large phones, 600px and up) */
-    @media only screen and (min-width: 576px) {
-        #about {
-            padding-top: 100px;
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #558985;
+            border-color: #50817e;
+        }
+
+        .btn-primary:active {
+            color: #fff;
+            background-color: #558985;
+            border-color: #50817e;
+        }
+
+        .btn-primary:focus {
+            color: #fff;
+            background-color: #558985;
+            border-color: #50817e;
+        }
+
+        #cover-page-heading-1 {
+            font-size: 3rem;
+            line-height: 2.5rem;
+            letter-spacing: 0.8rem;
+            opacity: 0.4;
+            color: lightyellow;
+            filter:drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;
+        }
+
+        #cover-page-heading-2 {
+            opacity: 0.8;
+            max-width: 20rem;
+            font-size: 1.5rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Extra markup and styles for table-esque vertical and horizontal centering */
+        #home {
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,.5);
             width: 100%;
             height: 100vh;
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
+            background-color: #333;
+            background-image: url("{% static 'media/images/background/bg-masthead.jpg' %}");
+            background-size: cover;
+        }
+
+        #portfolioBody {
+            background-image: url("{% static 'media/images/background/download.gif' %}");
             background-size: 100% 100%;
-            overflow: auto;
         }
-        #programming, #info, #projects {
-            padding-top: 100px;
-        }
-        spicy-sections > h2 {
-            cursor: pointer;
-            margin: 1rem 0 0 0;
-        }
-    }
 
-    /* Medium devices (landscape tablets, 768px and up) */
-    @media only screen and (min-width: 768px) {
-        #about {
-            padding-top: 100px;
-            width: 100%;
-            height: 100vh;
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            overflow: auto;
+        #programming, #projects, #info {
+            background-color: #333;
         }
-        #programming, #info, #projects  {
-            padding-top: 100px;
-        }
-        spicy-sections > h2 {
-            cursor: pointer;
-            margin: 1rem 0 0 0;
-        }
-    }
 
-    /* Large devices (laptops/desktops, 992px and up) */
-    @media only screen and (min-width: 992px) {
-        #about {
-            padding-top: 100px;
-            width: 100%;
-            height: 100vh;
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            overflow: auto;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #333;
         }
-        #programming, #info {
-            {#padding-top: 100px;#}
-            height: 100vh;
-            overflow: auto;
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #555;
         }
-        #projects {
-            {#padding-top: 100px;#}
-            height: 100vh;
-            overflow: auto;
+        ::-webkit-scrollbar-track{
+            border-radius: 10px;
+            background: rgba(0, 0, 0, .7);
         }
-        spicy-sections > h2 {
-            cursor: pointer;
-            margin: 1rem 0 0 0;
-            padding: 0.5rem;
-        }
-    }
 
-    /* Extra large devices (large laptops and desktops, 1200px and up) */
-    @media only screen and (min-width: 1200px) {
-        #about {
-            padding-top: 100px;
-            width: 100%;
-            height: 100vh;
-            background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            overflow: auto;
+        #scrollbar{
+            opacity: .8;
         }
-        /* Pull out the header and footer */
-        .masthead {
-            position: fixed;
-            top: 0;
-        }
-        /* Start the vertical centering */
-        .site-wrapper-inner {
-            vertical-align: middle;
-        }
-        #programming, #info {
-            {#padding-top: 100px;#}
-            height: 100vh;
-            overflow: auto;
-        }
-        #projects {
-            {#padding-top: 100px;#}
-            height: 100vh;
-            overflow: auto;
-        }
-        spicy-sections > h2 {
-            cursor: pointer;
-            margin: 1rem 0 0 0;
-            padding: 0.5rem;
-        }
-    }
 
-    .text-info {
-        font-weight: 800;
-    }
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 576px) {
+            #about {
+                padding-top: 100px;
+                width: 100%;
+                height: 100%;
+                background-image: url("{% static 'media/images/background/download-2.gif' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                overflow: auto;
+            }
+            #programming, #info, #projects {
+                padding-top: 100px;
+            }
+            spicy-sections > h2 {
+                cursor: pointer;
+                margin: 1rem 0 0 0;
+            }
+        }
 
-    spicy-sections {
-        display: block;
-      /* prettier-ignore */
-      --const-mq-affordances:
-        [screen and (max-width: 991px) ] collapse |
-        [screen and (min-width: 100vw) ] tab-bar;
-      /* another type is exclusive-collapse */
-    }
-    spicy-sections > h2,
-    spicy-sections > div {
-        background: inherit;
-    }
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 576px) {
+            #about {
+                padding-top: 100px;
+                width: 100%;
+                height: 100vh;
+                background-image: url("{% static 'media/images/background/download-2.gif' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                overflow: auto;
+            }
+            #programming, #info, #projects {
+                padding-top: 100px;
+            }
+            spicy-sections > h2 {
+                cursor: pointer;
+                margin: 1rem 0 0 0;
+            }
+        }
 
-    spicy-sections[affordance=tab-bar] h2[aria-selected=true] {
-        border-bottom: 3px solid orange;
-    }
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            #about {
+                padding-top: 100px;
+                width: 100%;
+                height: 100vh;
+                background-image: url("{% static 'media/images/background/download-2.gif' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                overflow: auto;
+            }
+            #programming, #info, #projects  {
+                padding-top: 100px;
+            }
+            spicy-sections > h2 {
+                cursor: pointer;
+                margin: 1rem 0 0 0;
+            }
+        }
 
-    spicy-sections[affordance=collapse] > h2,
-    spicy-sections[affordance=collapse] > div {
-        background: inherit;
-    }
-    spicy-sections[affordance=collapse] > h2::before {
-        content: "+";
-        background: inherit;
-        width: auto;
-        height: auto;
-        display: inline-block;
-        font-weight: 100;
-        transition: transform 0.5s;
-    }
-    spicy-sections[affordance=collapse] > h2[expanded] {
-        background: inherit;
-    }
-    spicy-sections[affordance=collapse] > h2[expanded]::before {
-        transform: rotate(45deg);
-    }
-    spicy-sections[affordance=collapse] > div {
-        background: inherit;
-    }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            #about {
+                padding-top: 100px;
+                width: 100%;
+                height: 100vh;
+                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                overflow: auto;
+            }
+            #programming, #info {
+                height: 100vh;
+                overflow: auto;
+            }
+            #projects {
+                height: 100vh;
+                overflow: auto;
+            }
+            spicy-sections > h2 {
+                cursor: pointer;
+                margin: 1rem 0 0 0;
+                padding: 0.5rem;
+            }
+        }
 
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+            #about {
+                padding-top: 100px;
+                width: 100%;
+                height: 100vh;
+                background-image: url("{% static 'media/images/background/download-2.gif' %}");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                overflow: auto;
+            }
+
+            .masthead {
+                position: fixed;
+                top: 0;
+            }
+
+            .site-wrapper-inner {
+                vertical-align: middle;
+            }
+            #programming, #info {
+                height: 100vh;
+                overflow: auto;
+            }
+            #projects {
+                height: 100vh;
+                overflow: auto;
+            }
+            spicy-sections > h2 {
+                cursor: pointer;
+                margin: 1rem 0 0 0;
+                padding: 0.5rem;
+            }
+        }
+
+        .text-info {
+            font-weight: 800;
+        }
+
+        spicy-sections {
+            display: block;
+            --const-mq-affordances:
+            [screen and (max-width: 991px) ] collapse |
+            [screen and (min-width: 100vw) ] tab-bar;
+        }
+        spicy-sections > h2,
+        spicy-sections > div {
+            background: inherit;
+        }
+
+        spicy-sections[affordance=tab-bar] h2[aria-selected=true] {
+            border-bottom: 3px solid orange;
+        }
+
+        spicy-sections[affordance=collapse] > h2,
+        spicy-sections[affordance=collapse] > div {
+            background: inherit;
+        }
+        spicy-sections[affordance=collapse] > h2::before {
+            content: "+";
+            background: inherit;
+            width: auto;
+            height: auto;
+            display: inline-block;
+            font-weight: 100;
+            transition: transform 0.5s;
+        }
+        spicy-sections[affordance=collapse] > h2[expanded] {
+            background: inherit;
+        }
+        spicy-sections[affordance=collapse] > h2[expanded]::before {
+            transform: rotate(45deg);
+        }
+        spicy-sections[affordance=collapse] > div {
+            background: inherit;
+        }
     </style>
 </head>
 <body id="portfolioBody" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">

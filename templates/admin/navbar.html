@@ -7,7 +7,6 @@
         </button>
 
         <div class="collapse navbar-collapse scrollmenu" id="collapsibleNavbar">
-            <!-- Links -->
             <ul class="navbar-nav admin-nav">
                 <li class="nav-item">
                     <a id="details" class="nav-link text-white" href="{% url 'details' %}">Details</a>
@@ -60,7 +59,6 @@
 
     $(document).on('submit', '#navLogoutForm', function(e) {
 
-        /* stop form from submitting normally */
         e.preventDefault();
 
         $.ajax({
