@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/styles.min.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script type="module" src="https://assets.codepen.io/3/SpicySections-2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -232,12 +231,19 @@
             [screen and (max-width: 991px) ] collapse |
             [screen and (min-width: 100vw) ] tab-bar;
         }
+        spicy-sections h2 {
+            font-weight: 800;
+            color: #0dcaf0;
+            drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));
+            text-shadow: 2px 2px 4px #000000;
+        }
         spicy-sections[affordance=tab-bar]::part(tab-list) {
             justify-content: space-evenly;
             border-bottom: 1px solid rgba(0, 0, 0, 0.5);
         }
         spicy-sections[affordance=tab-bar] h2[aria-selected=true]{
-            border-bottom: 3px solid orange;
+            {#color: #F93154;#}
+            border-bottom: 3px solid #FFA900;
         }
         spicy-sections[affordance=collapse] > h2::before {
             content: "+";
