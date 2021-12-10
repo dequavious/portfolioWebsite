@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: large;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+	height: 100vh;
+    position: absolute;
+    scroll-behavior: smooth;
+}
+
+#footer{
+  margin-top:auto;
+}
+
+.admin-img {
+    height: 100px;
+    width: 100px;
+}
+
+.admin-nav a:hover {
+    background: #78184a;
+    border-bottom: 3px solid white;
+}
+
+.admin-nav a.active {
+    border-bottom: 3px solid white;
+}
+
+.admin-footer {
+    background: #66023c;
+}
+
+#admin-navbar {
+    background: #66023c;
+}
+
+#logoutBtn {
+    background: #66023c;
+    color: white;
+}
+
+.icon-bar {
+    width: 70px;
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-color: #555;
+}
+
+.icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+}
+
+.icon-bar a:hover {
+    background-color: lightgrey;
+}
+
+.icon-bar .active {
+    background-color: #04AA6D;
+}
+
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}

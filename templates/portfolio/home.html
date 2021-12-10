@@ -308,11 +308,11 @@
                 <div class="star"><i class="fa fa-star"></i></div>
                 <div class="line text-light"></div>
             </div>
-            <dl>
+            <ul class="list-group">
                 {% for skill in skills %}
-                    <li class="portfolioList">{{ skill.skill }}</li>
+                    <li class="list-group-item portfolioList text-light" style="background: inherit; border: none;"><i class="fa fa-circle-thin" style="font-size: 12px;"></i> {{ skill.skill }}</li>
                 {% endfor %}
-            </dl>
+            </ul>
             </div>
 
             <h2 id="experience">Experience</h2>
@@ -342,8 +342,8 @@
                 <div class="line text-light"></div>
             </div>
             <dl>
-                <dd><i class="fa fa-envelope text-danger"></i> {{ user.email }}</dd>
-                <dd><i class="fa fa-phone-square text-danger"></i> {{ user.number }}</dd>
+                <dd><i class="fa fa-envelope text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;"></i> {{ user.email }}</dd>
+                <dd><i class="fa fa-phone-square text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;"></i> {{ user.number }}</dd>
             </dl>
             </div>
         </spicy-sections>
