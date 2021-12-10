@@ -5,39 +5,6 @@
 
     <script>
         document.getElementById("work").style.borderBottom = "3px solid white";
-        function clickFunction(id, val) {
-            if (document.getElementById(id).value.length === 0) {
-                document.getElementById(id).value = val;
-            }
-        }
-        function change(id) {
-            var bool = false;
-            var input, ul, li, divs, form, i, j;
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName('li');
-
-            for (i = 0; i < li.length; i++) {
-                form = li[i].getElementsByTagName("form")[0];
-                divs =  form.getElementsByTagName("div");
-                for (j= 0; j < divs.length; j++) {
-                    input = divs[j].getElementsByTagName("input")[0];
-                    if (input !== undefined) {
-                        if (input.value.length > 0) {
-                            bool = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            var btn = "saveBtn" + id;
-
-            if (bool) {
-                document.getElementById(btn).style.display = "block";
-            } else {
-                document.getElementById(btn).style.display = "none";
-            }
-        }
     </script>
 
     <div class="d-flex flex-row justify-content-start" style="padding-right: 10px;">
@@ -88,9 +55,9 @@
 
                 <h3 id="edit">Edit/delete work</h3>
                 <div class="container-fluid bg-white border">
-                    <form method="post" onsubmit="myFunction(); return false;" class="form-group" enctype="multipart/form-data">
+                    <form method="post" onsubmit="return false;" class="form-group" enctype="multipart/form-data">
                         <div class="form-floating mt-3 mb-3">
-                            <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" placeholder="Search">
+                            <input id="myInput" onkeyup="search()" type="text" class="form-control" placeholder="Search">
                             <label for="myInput"><i class="fa fa-search text-secondary"></i></label>
                         </div>
                     </form>
@@ -208,26 +175,6 @@
     <div style="height: 100%"></div>
 
     <script>
-        function myFunction() {
-            var input, filter, ul, li, div, form, i, txtValue;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName('li');
-
-            for (i = 0; i < li.length; i++) {
-                form = li[i].getElementsByTagName("form")[0];
-                div =  form.getElementsByTagName("div")[0];
-                input = div.getElementsByTagName("input")[0];
-                txtValue = input.placeholder;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
-
         $(document).on('submit', '#addWorkForm', function(e) {
 
             document.getElementById("saveBtn").innerHTML = "<div class=\"spinner-border\"></div>";
