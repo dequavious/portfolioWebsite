@@ -48,7 +48,7 @@
 
         <spicy-sections>
 
-            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;">Languages</h2>
+            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;"><i class="fa fa-language"></i> Languages</h2>
             <div>
             <div class="divider-light divider-custom">
                 <div class="line text-light"></div>
@@ -87,7 +87,7 @@
             </div>
             </div>
 
-            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;">Frameworks</h2>
+            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;"><i class="fa fa-map"></i> Frameworks</h2>
             <div>
             <div class="divider-light divider-custom">
                 <div class="line text-light"></div>
@@ -123,7 +123,7 @@
             </div>
             </div>
 
-            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;">Databases</h2>
+            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;"><i class="fa fa-database"></i> Databases</h2>
             <div>
             <div class="divider-light divider-custom">
                 <div class="line text-light"></div>
@@ -159,7 +159,7 @@
             </div>
             </div>
 
-            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;">Tools</h2>
+            <h2 class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;"><i class="fa fa-wrench"></i> Tools</h2>
             <div>
             <div class="divider-light divider-custom">
                 <div class="line text-light"></div>
@@ -222,8 +222,8 @@
                         <div class="d-flex">
                             <div class="p-0">
                                 <ul>
-                                <li class="portfolioList"><a href="{{ project.link }}" target="_blank">Homepage</a></li>
-                                <li class="portfolioList"><a href="{{ project.git }}" target="_blank">Github</a></li>
+                                <li class="portfolioList"><a href="{{ project.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
+                                <li class="portfolioList"><a href="{{ project.git }}" target="_blank"><i class="fa fa-github"></i> Github</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -266,17 +266,17 @@
                     <div class="line text-light"></div>
                 </div>
                 <dl>
-                    <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;">{{ degree.degree }}</dt>
+                    <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;"><i class="fa fa-graduation-cap"></i> {{ degree.degree }}</dt>
                     <div class="d-flex">
                         <div class="p-2">
                             <table class="table table-hover table-borderless table-responsive text-light" style="background: inherit; border: none;">
                                 <thead>
                                     <tr>
-                                        <th>Institution</th>
+                                        <th><i class="fa fa-institution"></i> Institution</th>
                                         {% if degree.grade %}
                                             <th>Grade</th>
                                         {% endif %}
-                                        <th>Year</th>
+                                        <th><i class="fa fa-calendar"></i> Year</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -311,8 +311,6 @@
             </dl>
             </div>
 
-{#            <br>#}
-
             <h2 id="experience" class="text-info" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5)); text-shadow: 2px 2px 4px #000000;">Experience</h2>
             <div>
             {% for job in jobs %}
@@ -322,7 +320,7 @@
                     <div class="line text-light"></div>
                 </div>
                 <dl>
-                    <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;">{{ job.description }}</dt>
+                    <dt class="text-danger" style="font-size: 1.25rem; text-shadow: 0 1px 1px #1A237E, 2px 2px 4px #000000;"><i class="fa fa-briefcase"></i> {{ job.description }}</dt>
                     <div class="d-flex">
                         <div class="p-2">
                             <dd><strong>Company:</strong> {{ job.company }}</dd>
