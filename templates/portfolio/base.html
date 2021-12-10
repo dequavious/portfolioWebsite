@@ -166,7 +166,7 @@
                 padding-top: 100px;
                 width: 100%;
                 height: 100vh;
-                background-image: url("{% static 'media/images/background/pexels-gabriel-peter-696644.jpg' %}");
+                background-image: url("{% static 'media/images/background/download-2.gif' %}");
                 background-repeat: no-repeat;
                 background-size: 100% 100%;
                 overflow: auto;
@@ -231,18 +231,12 @@
             [screen and (max-width: 991px) ] collapse |
             [screen and (min-width: 100vw) ] tab-bar;
         }
-        spicy-sections > h2,
-        spicy-sections > div {
-            background: inherit;
+        spicy-sections::part(tab-list) {
+            justify-content: space-evenly;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
         }
-
-        spicy-sections[affordance=tab-bar] h2[aria-selected=true] {
+        spicy-sections[affordance=tab-bar] h2[aria-selected=true]{
             border-bottom: 3px solid orange;
-        }
-
-        spicy-sections[affordance=collapse] > h2,
-        spicy-sections[affordance=collapse] > div {
-            background: inherit;
         }
         spicy-sections[affordance=collapse] > h2::before {
             content: "+";
@@ -252,15 +246,6 @@
             display: inline-block;
             font-weight: 100;
             transition: transform 0.5s;
-        }
-        spicy-sections[affordance=collapse] > h2[expanded] {
-            background: inherit;
-        }
-        spicy-sections[affordance=collapse] > h2[expanded]::before {
-            transform: rotate(45deg);
-        }
-        spicy-sections[affordance=collapse] > div {
-            background: inherit;
         }
     </style>
 </head>
