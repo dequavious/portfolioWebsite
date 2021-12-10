@@ -231,7 +231,7 @@
             [screen and (max-width: 991px) ] collapse |
             [screen and (min-width: 100vw) ] tab-bar;
         }
-        spicy-sections::part(tab-list) {
+        spicy-sections[affordance=tab-bar]::part(tab-list) {
             justify-content: space-evenly;
             border-bottom: 1px solid rgba(0, 0, 0, 0.5);
         }
@@ -246,6 +246,9 @@
             display: inline-block;
             font-weight: 100;
             transition: transform 0.5s;
+        }
+        spicy-sections[affordance=collapse] > h2[expanded]::before {
+            transform: rotate(45deg);
         }
     </style>
 </head>
