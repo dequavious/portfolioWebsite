@@ -123,4 +123,7 @@ def send_forgot_password_email(user, request):
 
 
 def delete_file(file):
-    os.remove(file.path)
+    try:
+        os.remove(file.path)
+    except:
+        pass
