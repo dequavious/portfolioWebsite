@@ -7,14 +7,14 @@ html, body {
     margin: 0;
     width: 100%;
 	height: 100vh;
-    /*position: absolute;*/
+    position: absolute;
     scroll-behavior: smooth;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     * {
-        font-size: medium;
+        font-size: small;
     }
     .line-heading {
         width: 100%;
@@ -50,12 +50,16 @@ html, body {
         font-size: 1.5rem;
         font-family: Arial, Helvetica, sans-serif;
     }
+    .card img {
+        height: 75px;
+        width: 75px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     * {
-        font-size: large;
+        font-size: small;
     }
     .line-heading {
         width: 100%;
@@ -92,12 +96,16 @@ html, body {
         font-size: 1.5rem;
         font-family: Arial, Helvetica, sans-serif;
     }
+    .card img {
+        height: 75px;
+        width: 75px;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     * {
-        font-size: large;
+        font-size: medium;
     }
     .line-heading {
         width: 100%;
@@ -133,6 +141,10 @@ html, body {
         max-width: 20rem;
         font-size: 1.5rem;
         font-family: Arial, Helvetica, sans-serif;
+    }
+    .card img {
+        height: 100px;
+        width: 100px;
     }
 }
 
@@ -181,6 +193,10 @@ html, body {
         max-width: 20rem;
         font-size: 1.5rem;
         font-family: Arial, Helvetica, sans-serif;
+    }
+    .card img {
+        height: 100px;
+        width: 100px;
     }
 }
 
@@ -234,6 +250,10 @@ html, body {
         font-size: 1.5rem;
         font-family: Arial, Helvetica, sans-serif;
     }
+    .card img {
+        height: 100px;
+        width: 100px;
+    }
 }
 
 p, dd, td, .portfolioList {
@@ -243,11 +263,6 @@ p, dd, td, .portfolioList {
 .star {
     color: whitesmoke;
     text-shadow: 2px 2px 4px #000000;
-}
-
-.card img {
-    height: 100px;
-    width: 100px;
 }
 
 dl, dd {
