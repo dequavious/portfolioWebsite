@@ -66,7 +66,7 @@
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ language.language }}</h3>
-                            <p id="langPar{{ language.id }}" style="font-size: 16px; text-align: center;"></p>
+                            <p id="langPar{{ language.id }}"></p>
                         </div>
 
                     </div>
@@ -103,7 +103,7 @@
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ framework.framework }}</h3>
-                            <p id="framePar{{ framework.id }}" style="font-size: 16px; text-align: center;"></p>
+                            <p id="framePar{{ framework.id }}"></p>
                         </div>
 
                     </div>
@@ -139,7 +139,7 @@
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ database.dbms }}</h3>
-                            <p id="dbPar{{ database.id }}" style="font-size: 16px; text-align: center;"></p>
+                            <p id="dbPar{{ database.id }}"></p>
                         </div>
 
                     </div>
@@ -175,7 +175,7 @@
 
                         <div class="content">
                             <h3 style="text-align: center;">{{ tool.tool }}</h3>
-                            <p id="toolPar{{ tool.id }}" style="font-size: 16px; text-align: center;"></p>
+                            <p id="toolPar{{ tool.id }}"></p>
                         </div>
 
                     </div>
@@ -254,7 +254,7 @@
                     <div class="p-2 card" style="background: inherit; border: none;">
                         <img src="{{ hobby.avatar }}" class="rounded img-fluid hover-shadow" alt="{{ hobby.avatar }}" style="drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.5));">
                         <div class="hobby-content">
-                            <p style="font-size: 16px; text-align: center;">{{ hobby.hobby }}</p>
+                            <p>{{ hobby.hobby }}</p>
                         </div>
                     </div>
                 {% endfor %}
