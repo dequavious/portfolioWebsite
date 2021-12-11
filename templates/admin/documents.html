@@ -114,11 +114,11 @@
 
             <script type="text/javascript">
                 if ("{{ document.type }}" === "cv") {
-                    add("cv")
+                    add("cv");
                     document.getElementById("{{ document.type }}Label1").innerHTML = "Current CV:";
                     document.getElementById("{{ document.type }}Label2").innerHTML = "Replace CV:";
                 } else {
-                    add("record")
+                    add("record");
                     document.getElementById("{{ document.type }}Label1").innerHTML = "Current academic record:";
                     document.getElementById("{{ document.type }}Label2").innerHTML = "Replace academic record:";
                 }
