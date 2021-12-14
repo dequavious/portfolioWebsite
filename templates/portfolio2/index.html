@@ -193,6 +193,9 @@
                 font-size:small;
                 overflow: auto;
             }
+            .skillListItem {
+                font-size:small;
+            }
         }
 
         /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -204,6 +207,9 @@
               gap: 2rem;
             }
             dt, dd {
+                font-size:medium;
+            }
+            .skillListItem {
                 font-size:medium;
             }
         }
@@ -672,7 +678,7 @@
             <div class="design">
                 <ul class="list-group">
                     {% for skill in skills %}
-                        <li class="list-group-item portfolioList" style="background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+                        <li class="skillListItem" style="background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
                     {% endfor %}
                 </ul>
             </div>
