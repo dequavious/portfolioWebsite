@@ -52,6 +52,7 @@
         }
 
         .design h2 {
+            white-space: nowrap;
             background: var(--gradient);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -159,7 +160,8 @@
         }
 
         .hobby img {
-            height: 7rem;
+            width: 5rem;
+            height: 5rem;
             filter: brightness(0) invert(1);
         }
         @media screen and (min-width: 280px) and (max-width: 1080px) {
@@ -187,6 +189,9 @@
                 padding-bottom: 25px;
                 position: relative;
                 background-color: #181818;
+            }
+            .hobby h3 {
+                font-size: small;
             }
             dt, dd {
                 white-space: nowrap;
@@ -667,7 +672,7 @@
             <div class="backgroundR"></div>
             <div class="design">
                 {% for degree in degrees %}
-                    <h2 style="text-align: start;"><i class="fa fa-graduation-cap" style="white-space: nowrap; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ degree.degree }}</h2>
+                    <h2 style="text-align: start;"><i class="fa fa-graduation-cap"></i> {{ degree.degree }}</h2>
                     <table style="background: inherit; border: none; display:inline-block; max-width:71vw; overflow: auto;">
                         <tr>
                             <th><i class="fa fa-institution"></i> Institution</th>
