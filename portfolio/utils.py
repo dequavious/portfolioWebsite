@@ -65,6 +65,15 @@ def generate_security_code():
     return random_str
 
 
+def send_email(data):
+    send_mail(
+        data['subject'],
+        data['body'],
+        settings.OSCAR_FROM_EMAIL,
+        data['to_address']
+    )
+
+
 def email_2fa(user):
     data = {
         'subject': 'Security Code',

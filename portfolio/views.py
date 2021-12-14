@@ -51,6 +51,39 @@ def home(request):
     return render(request, 'portfolio2/index.html', context)
 
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def send_message(request):
+    """
+    View to send an email
+    """
+    email = request.data.get('email')
+    name = request.data.get('name')
+    if email is not None:
+
+        user = User.objects.get(id=1)
+
+        body = request.data.get('body')
+        if request.data.get('body', None):
+            data = {
+                'subject': 'Message from website',
+                'body': '''{}
+                
+                        From:
+                        {}
+                        {}
+                        '''.format(body, name, email),
+                'to_address': [user.email],
+            }
+            send_email(data)
+            messages.info(request, "Your message has been sent.")
+            return redirect('home')
+        else:
+            return Response("body missing", status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("name/email missing", status=status.HTTP_400_BAD_REQUEST)
+
+
 def login_page(request):
     return render(request, 'admin/login.html')
 

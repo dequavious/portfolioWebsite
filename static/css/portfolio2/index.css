@@ -348,7 +348,7 @@ p {
   background: var(--gradient);
   margin-bottom: 1rem;
 }
-.contact .form {
+.contact form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -356,7 +356,7 @@ p {
   margin: 2rem 0;
   gap: 1rem;
 }
-.contact .form input, .contact .form textarea {
+.contact form input, .contact form textarea {
   padding: 0.8rem 0.9rem 0.8rem 1rem;
   background-color: transparent;
   border: 1px solid #818080;
@@ -443,7 +443,7 @@ footer .section .brand h2 {
   }
   .hero .content .title h1 {
     white-space: nowrap;
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   .hero .image {
     position: initial;
