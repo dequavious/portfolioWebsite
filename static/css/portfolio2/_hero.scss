@@ -1,0 +1,39 @@
+.hero {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  overflow: hidden;
+  height: 60vh;
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    .title {
+      h1 {
+        @include gradientText;
+        font-size: 6vw;
+
+      }
+      p {
+        color:white;
+      }
+    }
+  }
+  .image {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    img {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter:contrast(140%);
+       z-index: -1;
+    }
+  }
+}

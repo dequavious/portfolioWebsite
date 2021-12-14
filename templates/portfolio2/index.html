@@ -1,0 +1,755 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ user.name }} {{ user.surname }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/portfolio2/index.css" %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module" src="https://assets.codepen.io/3/SpicySections-2.js"></script>
+    <style>
+        .dropdown-content {
+            flex-direction: column;
+            position: absolute;
+            background-color: #181818;
+        }
+        .dropdown-content a {
+            color: white;
+            float: none;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background: var(--gradient);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .design {
+            position: relative;
+        }
+        .backgroundL {
+            height: 10rem; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; left: -10px; top: -8px;
+        }
+        .backgroundR {
+            height: 10rem; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; right: -10px; bottom: -8px;
+        }
+
+        table, th, td {
+          border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px 40px 20px 30px;
+        }
+
+        tr {
+            white-space: nowrap;
+        }
+
+        .design h2 {
+            background: var(--gradient);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .container, .proj-container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          color: white;
+          gap: 2rem;
+        }
+
+        .proj-container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          color: white;
+          gap: 2rem;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            background-color: #181818;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stack img {
+            height: 5rem;
+        }
+
+        spicy-sections {
+            display: block;
+            --const-mq-affordances:
+            [screen and (max-width: 991px) ] collapse |
+            [screen and (min-width: 100vw) ] tab-bar;
+        }
+
+        spicy-sections > h3 {
+            cursor: pointer;
+            margin: 1rem 0 0 0;
+            padding: 0.5rem;
+        }
+
+        spicy-sections[affordance=tab-bar]::part(tab-list) {
+            justify-content: space-evenly;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        spicy-sections[affordance=tab-bar] h3[aria-selected=true] {
+            filter: hue-rotate(90deg);
+            border-bottom: 3px solid #FFA900;
+            background: var(--gradient);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+        }
+
+        spicy-sections[affordance=collapse] > h3::before {
+            content: "+";
+            background: inherit;
+            width: auto;
+            height: auto;
+            display: inline-block;
+            font-weight: 100;
+            transition: transform 0.5s;
+        }
+
+        spicy-sections[affordance=collapse] > h3[expanded]::before {
+            transform: rotate(45deg);
+        }
+
+        .edu-container, .exp-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            color: white;
+            gap: 2rem;
+            padding: 25px;
+            position: relative;
+            background-color: #181818;
+        }
+
+        .strengths-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            color: white;
+            gap: 2rem;
+            padding: 50px 25px;
+            position: relative;
+            background-color: #181818;
+        }
+
+        .hobbies-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 4rem;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            position: relative;
+            background-color: #181818;
+        }
+
+        .hobby img {
+            height: 7rem;
+            filter: brightness(0) invert(1);
+        }
+        @media screen and (min-width: 280px) and (max-width: 1080px) {
+            .proj-container {
+              grid-template-columns: 1fr;
+              color: white;
+              gap: 2rem;
+            }
+        }
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      color: white;
+      gap: 2rem;
+    }
+    .hobbies-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        position: relative;
+        background-color: #181818;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      color: white;
+      gap: 2rem;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      color: white;
+      gap: 2rem;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      color: white;
+      gap: 2rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      color: white;
+      gap: 2rem;
+    }
+}
+        a:visited {
+            text-decoration: none;
+            color: white;
+        }
+
+#about::before {
+  display: block;
+  content: " ";
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+  pointer-events: none;
+}
+#skills::before {
+  display: block;
+  content: " ";
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+  pointer-events: none;
+}
+#portfolio::before {
+  display: block;
+  content: " ";
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+  pointer-events: none;
+}
+#programming::before {
+  display: block;
+  content: " ";
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+  pointer-events: none;
+}
+#moreInfo::before {
+  display: block;
+  content: " ";
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+  pointer-events: none;
+}
+#contact::before {
+  display: block;
+  content: " ";
+  margin-top: -80px;
+  height: 80px;
+  visibility: hidden;
+  pointer-events: none;
+}
+    </style>
+</head>
+<body id="home">
+    <div class="scrollToTop">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    <nav class="navbar defaultMargin" style="position:relative; z-index: 100;">
+        <div class="brand__container">
+            <div class="brand">
+                <h2>Web Developer <span>3.0</span></h2>
+            </div>
+            <div class="toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#programming">Programming</a></li>
+                <li><a href="#moreInfo">More info</a></li>
+                <li>
+
+                    <div class="dropdown" style="margin-top: 0; display: inline-block;">
+
+                        <button class="dropbtn" onclick="toggleFunction()" style="border: none;">Documents
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+
+                        <div class="dropdown-content" id="myDropdown" style="display: none;">
+                            <a onclick="selectFunction()" class="dropdown__item" href="{% url 'get document' %}?type=cv" target="_blank"><i class="fa fa-file-pdf-o"></i>CV</a>
+                            <a onclick="selectFunction()" class="dropdown__item" href="{% url 'get document' %}?type=record" target="_blank"><i class="fa fa-file-pdf-o"></i>Academic Record</a>
+                        </div>
+                   </div>
+                </li>
+                <a href="#contact"><button><i class="far fa-id-card"></i>Contact</button></a>
+            </ul>
+        </div>
+    </nav>
+    <div class="responsive__navbar">
+{#        <div class="brand">#}
+{#            <h2>Web Developer <span>3.0</span></h2>#}
+{#        </div>#}
+        <div class="links" style="position: relative; z-index: 1;">
+            <ul>
+                <li class="nav__link"><a href="#home">Home</a></li>
+                <li class="nav__link"><a href="#skills">Skills</a></li>
+                <li class="nav__link"><a href="#portfolio">Portfolio</a></li>
+                <li class="nav__link"><a href="#programming">Programming</a></li>
+                <li class="nav__link"><a href="#moreInfo">More info</a></li>
+                <li>
+                    <div class="dropdown" style="margin-top: 0; display: inline-block;">
+                        <button class="dropbtn" onclick="toggleFunctionResponsive()" style="border: none;">Documents
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content" id="myDropdownResponsive" style="display: none; z-index: 100;">
+                            <a style="font-size: small;" onclick="selectFunctionResponsive()" class="nav__link" href="{% url 'get document' %}?type=cv" target="_blank"><i class="fa fa-file-pdf-o"></i> CV</a>
+                            <a style="font-size: small;" onclick="selectFunctionResponsive()" class="nav__link" href="{% url 'get document' %}?type=record" target="_blank"><i class="fa fa-file-pdf-o"></i> Academic Record</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav__link"><a href="#contact"><button><i class="far fa-id-card"></i>Contact</button></a></li>
+            </ul>
+        </div>
+    </div>
+    <section class="hero defaultMargin">
+        <div class="content">
+            <div class="title">
+                <h1>Hi, I'm {{ user.name }}!</h1>
+            </div>
+            <a href="#about"><button><i class="fas fa-coffee"></i> Learn More</button></a>
+        </div>
+        <div class="image">
+            <img src="{{ user.picture }}" alt="" style="align-self: center; justify-self: center;"/>
+        </div>
+    </section>
+    <div class="spring right" id="spring1">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <section id="about" class="about">
+        <div class="title__container">
+            <h2>About me</h2>
+            <p>{{ user.bio }}</p>
+        </div>
+    </section>
+    <div class="spring" id="spring2">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <section class="skills defaultMargin" id="skills">
+        <div class="title__container">
+            <h2>Main skills</h2>
+            <p></p>
+        </div>
+        <div class="content">
+            <div class="skill">
+                <div class="container two">
+                    <div class="circular">
+                        <div class="inner"></div>
+                        <div class="number">100%</div>
+                        <div class="circle">
+                            <div class="bar left">
+                                <div class="progress">
+
+                                </div>
+                            </div>
+                            <div class="bar right">
+                                <div class="progress">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>Backend Development</h3>
+            </div>
+            <div class="skill">
+                <div class="container">
+                    <div class="circular">
+                        <div class="inner"></div>
+                        <div class="number">42%</div>
+                        <div class="circle">
+                            <div class="bar left">
+                                <div class="progress">
+
+                                </div>
+                            </div>
+                            <div class="bar right">
+                                <div class="progress">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>Frontend Development</h3>
+            </div>
+            <div class="skill">
+                <div class="container three">
+                    <div class="circular">
+                        <div class="inner"></div>
+                        <div class="number">50%</div>
+                        <div class="circle">
+                            <div class="bar left">
+                                <div class="progress">
+
+                                </div>
+                            </div>
+                            <div class="bar right">
+                                <div class="progress">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>Network Applications</h3>
+            </div>
+        </div>
+    </section>
+    <div class="spring right" id="spring3">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <section class="portfolio defaultMargin" id="portfolio">
+
+        <div class="title__container">
+            <h2>Projects</h2>
+            <p>Some of the projects I've worked on</p>
+        </div>
+        {% for proj in projects %}
+        <div class="proj-container">
+            <div class="design">
+                <div class="backgroundL"></div>
+                <div class="backgroundR"></div>
+                <div class="portfolio__container">
+                    <h3>{{ proj.title }}</h3>
+                    <p>{{ proj.description }}</p>
+                    <ul>
+                        <li class="portfolioList"><a href="{{ proj.link }}" target="_blank" style="color: blue"><i class="fa fa-home"></i>Homepage</a></li>
+                        <li class="portfolioList"><a href="{{ proj.git }}" target="_blank" style="color: blue"><i class="fa fa-github"></i>Source code</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+    <div class="spring" id="spring4">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <section id="programming" class="programming defaultMargin">
+        <div class="title__container">
+            <h2>Programming</h2>
+            <p>Languages, Frameworks, Databases and Tools that I am familiar with.</p>
+        </div>
+        <spicy-sections>
+            <h3><i class="fa fa-language"></i> Languages</h3>
+            <div class="container">
+                {% for language in languages %}
+                    <div class="design">
+                        <div class="stack">
+
+                            <img id="img{{ language.id }}" src="{{ language.avatar }}" alt="{{ language.language }}" style="filter:none;">
+                            <h3 style="text-align: center;">{{ language.language }}</h3>
+                            <p id="langPar{{ language.id }}" style="color: white;"></p>
+
+                            <script type="text/javascript">
+                                if ("{{ language.confidence }}" === "Confident") {
+                                    document.getElementById("langPar{{ language.id }}").innerHTML =
+                                        "<i class=\"fa fa-check-square-o\"></i> {{ language.confidence }}";
+                                } else if ("{{ language.confidence }}" === "Partially confident") {
+                                    document.getElementById("langPar{{ language.id }}").innerHTML =
+                                        "<i class=\"fa fa-check\"></i> {{ language.confidence }}";
+                                } else {
+                                    document.getElementById("langPar{{ language.id }}").innerHTML =
+                                        "<i class=\"fa fa-info-circle\"></i> {{ language.confidence }}";
+                                }
+                            </script>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <h3><i class="fa fa-map"></i> Frameworks</h3>
+            <div class="container">
+                {% for framework in frameworks %}
+                    <div class="design">
+                        <div class="stack">
+
+                            <img id="img{{ framework.id }}" src="{{ framework.avatar }}" alt="{{ framework.framework }}" style="filter:none;">
+                            <h3 style="text-align: center;">{{ framework.framework }}</h3>
+                            <p id="framePar{{ framework.id }}" style="color: white;"></p>
+
+                            <script type="text/javascript">
+                                if ("{{ framework.confidence }}" === "Confident") {
+                                    document.getElementById("framePar{{ framework.id }}").innerHTML =
+                                        "<i class=\"fa fa-check-square-o\"></i> {{ framework.confidence }}";
+                                } else if ("{{ language.confidence }}" === "Partially confident") {
+                                    document.getElementById("framePar{{ framework.id }}").innerHTML =
+                                        "<i class=\"fa fa-check\"></i> {{ framework.confidence }}";
+                                } else {
+                                    document.getElementById("framePar{{ framework.id }}").innerHTML =
+                                        "<i class=\"fa fa-info-circle\"></i> {{ framework.confidence }}";
+                                }
+                            </script>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <h3><i class="fa fa-database"></i> Databases</h3>
+            <div class="container">
+                {% for db in databases %}
+                    <div class="design">
+                        <div class="stack">
+
+                            <img id="img{{ db.id }}" src="{{ db.avatar }}" alt="{{ db.dbms }}" style="filter:none;">
+                            <h3 style="text-align: center;">{{ db.dbms }}</h3>
+                            <p id="dbPar{{ db.id }}" style="color: white;"></p>
+
+                            <script type="text/javascript">
+                                if ("{{ db.confidence }}" === "Confident") {
+                                    document.getElementById("dbPar{{ db.id }}").innerHTML =
+                                        "<i class=\"fa fa-check-square-o\"></i> {{ db.confidence }}";
+                                } else if ("{{ db.confidence }}" === "Partially confident") {
+                                    document.getElementById("dbPar{{ db.id }}").innerHTML =
+                                        "<i class=\"fa fa-check\"></i> {{ db.confidence }}";
+                                } else {
+                                    document.getElementById("dbPar{{ db.id }}").innerHTML =
+                                        "<i class=\"fa fa-info\"></i> {{ db.confidence }}";
+                                }
+                            </script>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <h3><i class="fa fa-wrench"></i> Tools</h3>
+            <div class="container">
+                {% for tool in tools %}
+                    <div class="design">
+                        <div class="stack">
+
+                            <img id="img{{ tool.id }}" src="{{ tool.avatar }}" alt="{{ tool.tool }}" style="filter:none;">
+                            <h3 style="text-align: center;">{{ tool.tool }}</h3>
+                            <p id="toolPar{{ tool.id }}" style="color: white;"></p>
+
+                            <script type="text/javascript">
+                                if ("{{ tool.confidence }}" === "Confident") {
+                                    document.getElementById("toolPar{{ tool.id }}").innerHTML =
+                                        "<i class=\"fa fa-check-square-o\"></i> {{ tool.confidence }}";
+                                } else if ("{{ tool.confidence }}" === "Partially confident") {
+                                    document.getElementById("toolPar{{ tool.id }}").innerHTML =
+                                        "<i class=\"fa fa-check\"></i> {{ tool.confidence }}";
+                                } else {
+                                    document.getElementById("toolPar{{ tool.id }}").innerHTML =
+                                        "<i class=\"fa fa-info\"></i> {{ tool.confidence }}";
+                                }
+                            </script>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </spicy-sections>
+    </section>
+    <div class="spring right" id="spring5">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <section id="moreInfo" class="more-info defaultMargin">
+        <div class="title__container">
+            <h2>More info</h2>
+            <p>More about me.</p>
+        </div>
+    <spicy-sections>
+        <h3>Hobbies</h3>
+        <div class="hobbies-container">
+                <div class="backgroundL"></div>
+                <div class="backgroundR"></div>
+                {% for hobby in hobbies %}
+                <div class="hobby">
+                    <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="{{ hobby.hobby }}">
+                    <h3 style="text-align: center;">{{ hobby.hobby }}</h3>
+                </div>
+                {% endfor %}
+        </div>
+        <h3>Education</h3>
+    <div>
+        <div class="edu-container">
+            <div class="backgroundL"></div>
+            <div class="backgroundR"></div>
+            <div class="design">
+                {% for degree in degrees %}
+                    <h2 style="text-align: start;">{{ degree.degree }}</h2>
+                    <table style="background: inherit; border: none; display:inline-block; max-width:71vw; overflow: auto;">
+                        <tr>
+                            <th><i class="fa fa-institution"></i> Institution</th>
+                            {% if degree.grade %}
+                                <th>Grade</th>
+                            {% endif %}
+                            <th><i class="fa fa-calendar"></i> Year</th>
+                        </tr>
+                        <tr>
+                            <td>{{ degree.institution }}</td>
+                            {% if degree.grade %}
+                                <td>
+                                    {{ degree.grade }}
+                                </td>
+                            {% endif %}
+                            <td>{{ degree.year }}</td>
+                        </tr>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <h3>Strengths</h3>
+    <div>
+        <div class="strengths-container">
+            <div class="backgroundL"></div>
+            <div class="backgroundR"></div>
+            <div class="design">
+                <ul class="list-group">
+                    {% for skill in skills %}
+                        <li class="list-group-item portfolioList" style="background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h3>Experience</h3>
+    <div>
+        <div class="exp-container">
+            <div class="backgroundL"></div>
+            <div class="backgroundR"></div>
+            <div class="design" style="background-color: #181818;">
+                {% for job in jobs %}
+                    <dl>
+                        <dt style="font-size: 1.25rem; "><i class="fa fa-briefcase" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ job.description }}</dt>
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <dd style="white-space: nowrap;"><strong>Company:</strong> {{ job.company }}</dd>
+                            </div>
+                        </div>
+                    </dl>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </spicy-sections>
+    </section>
+        <div class="spring" id="spring6">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <section id="contact" class="contact defaultMargin">
+        <div class="left">
+            <div class="title">
+                <div class="bar"></div>
+                <h3>Get in touch with me?</h3>
+            </div>
+            <div class="form">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Number" required>
+                <textarea rows="10" cols="30" id="bio" name="body" placeholder="Message" required></textarea>
+                <button>Send message</button>
+            </div>
+        </div>
+        <div class="right">
+
+            <h2>Contact</h2>
+            <dl>
+                <dd><i class="fa fa-envelope text-danger" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ user.email }}</dd>
+                <dd><i class="fa fa-phone-square text-danger" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ user.number }}</dd>
+            </dl>
+        </div>
+    </section>
+    <div class="spring right" id="spring7">
+        <div class="coil">
+        </div>
+        <div class="bar gradient">
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="section">
+            <div class="brand">
+                <h2>Portfolio website.</h2>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static "js/script.js" %}"></script>
+    <script src="{% static "js/animation.js" %}"></script>
+    <script>
+        function toggleFunction() {
+          if (document.getElementById("myDropdown").style.display==="none") {
+              document.getElementById("myDropdown").style.display= "block";
+          } else {
+              document.getElementById("myDropdown").style.display= "none";
+          }
+        }
+        function selectFunction() {
+            document.getElementById("myDropdown").style.display= "none";
+        }
+        function toggleFunctionResponsive() {
+          if (document.getElementById("myDropdownResponsive").style.display==="none") {
+              document.getElementById("myDropdownResponsive").style.display = "block";
+          } else {
+              document.getElementById("myDropdownResponsive").style.display = "none";
+          }
+        }
+        function selectFunctionResponsive() {
+            document.getElementById("myDropdownResponsive").style.display = "none";
+        }
+    </script>
+</body>
+</html>

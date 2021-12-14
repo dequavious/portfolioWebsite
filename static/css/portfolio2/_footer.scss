@@ -1,0 +1,19 @@
+footer {
+  //display: grid;
+  //grid-template-columns: repeat(1, 1fr);
+  //justify-content: center;
+  background-color: #181818;
+  align-items: center;
+  gap: 5rem;
+  padding: 5rem 5rem;
+  color: rgb(129, 128, 128);
+  .section {
+    .brand {
+      h2 {
+        @include gradientText;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

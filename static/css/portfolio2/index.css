@@ -1,0 +1,458 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #0b0b0b;
+  font-family: "Outfit", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+:root {
+  --gradient: linear-gradient(to right, #c5e35b, #45b649);
+}
+
+::-webkit-scrollbar {
+  background-color: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #45b649;
+}
+
+.gradient {
+  background: var(--gradient);
+}
+
+.defaultMargin {
+  margin: 0 14rem;
+}
+
+button {
+  color: white;
+  padding: 1rem 1.8rem;
+  text-transform: uppercase;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #0b0b0b inset;
+  border: solid 4px transparent;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.spring {
+  display: flex;
+  align-items: center;
+  margin: 6rem 0;
+}
+.spring .coil {
+  border-top: white dashed 0.01rem;
+  width: 49.75%;
+}
+.spring .bar {
+  width: 0.5%;
+  height: 7rem;
+}
+
+.spring.right {
+  flex-direction: row-reverse;
+}
+
+.title__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6rem;
+  text-align: center;
+}
+.title__container h2 {
+  color: white;
+}
+.title__container p {
+  width: 75vw;
+  color: #999999;
+}
+
+h3 {
+  color: white;
+}
+
+p {
+  color: #818080;
+}
+
+.scrollToTop {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #303030;
+  z-index: 20;
+  padding: 1rem 1.3rem;
+  border-radius: 5rem;
+  cursor: pointer;
+}
+.scrollToTop i {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  color: white;
+  padding: 2rem 0;
+}
+.navbar .brand__container {
+  display: flex;
+}
+.navbar .brand__container .brand h2 span {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  color: #45b649;
+}
+.navbar .brand__container .toggle {
+  display: none;
+}
+.navbar .links ul {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.navbar .links ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+.navbar .links ul li a:hover {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.navbar .links ul li i:hover {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.navbar .links ul button {
+  background-color: black;
+  padding: 0.5rem;
+}
+
+.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  right: 0 !important;
+}
+
+.responsive__navbar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  height: 100%;
+  width: 70%;
+  background-color: black;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s ease-in-out;
+  color: white;
+  padding: 3rem 0;
+}
+.responsive__navbar .brand {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.responsive__navbar .brand h2 {
+  font-size: 1.2rem;
+}
+.responsive__navbar .brand h2 span {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  color: #45b649;
+}
+.responsive__navbar .links ul {
+  margin: 2vw;
+}
+.responsive__navbar .links ul li {
+  margin: 2vh;
+  font-size: 2.5vh;
+  cursor: pointer;
+}
+.responsive__navbar .links ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+.responsive__navbar .links ul button {
+  background-color: #0b0b0b;
+  padding: 0.5rem;
+}
+.responsive__navbar .links ul ul {
+  display: flex;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  overflow: hidden;
+  height: 60vh;
+}
+.hero .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.hero .content .title h1 {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 6vw;
+}
+.hero .content .title p {
+  color: white;
+}
+.hero .image {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.hero .image img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: contrast(140%);
+  z-index: -1;
+}
+
+.about .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.skills .content {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.skills .content .skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.circular {
+  height: 100px;
+  width: 100px;
+  position: relative;
+}
+.circular .inner {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  width: 80px;
+  margin: -40px 0 0 -40px;
+  background: #0b0b0b;
+  border-radius: 100%;
+}
+.circular .number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #999999;
+}
+.circular .bar {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: var(--gradient);
+  -webkit-border-radius: 100%;
+  clip: rect(0px, 100px, 100px, 50px);
+  transform: rotate(250deg);
+}
+
+.three .bar {
+  clip: rect(0px, 100px, 100px, 40px);
+}
+
+.two .bar {
+  clip: unset;
+}
+
+.portfolio {
+  position: relative;
+}
+.portfolio .proj-container .portfolio__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: #181818;
+  padding: 2rem;
+  text-align: center;
+}
+
+.programming {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.contact {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 20rem;
+  gap: 3rem;
+}
+.contact .right {
+  width: 26rem;
+}
+.contact .left .title .bar {
+  height: 0.5rem;
+  width: 5rem;
+  background: var(--gradient);
+  margin-bottom: 1rem;
+}
+.contact .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+.contact .form input, .contact .form textarea {
+  padding: 0.8rem 0.9rem 0.8rem 1rem;
+  background-color: transparent;
+  border: 1px solid #818080;
+  color: white;
+}
+
+footer {
+  background-color: #181818;
+  align-items: center;
+  gap: 5rem;
+  padding: 5rem 5rem;
+  color: #818080;
+}
+footer .section .brand h2 {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 280px) and (max-width: 1080px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .defaultMargin {
+    margin: 0 10vw;
+  }
+
+  .navbar .brand__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 2rem;
+    width: 100%;
+  }
+  .navbar .brand__container .toggle {
+    display: block;
+  }
+  .navbar .links {
+    display: none;
+  }
+
+  .about {
+    margin: 0 10vw;
+  }
+
+  .portfolio .proj-container .portfolio__container {
+    padding: 1rem;
+  }
+
+  .skills .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact {
+    flex-direction: column;
+    margin: 2rem 10vw;
+    gap: 5vw;
+  }
+  .contact .left .form input, .contact .left .form textarea {
+    padding-right: 10vw;
+  }
+
+  .footer {
+    padding: 50px;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 280px) and (max-width: 1175px) {
+  .hero {
+    margin: 0 10vw;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 100%;
+    gap: 2rem;
+  }
+  .hero .content {
+    align-items: center;
+  }
+  .hero .content .title h1 {
+    white-space: nowrap;
+    font-size: 2.5rem;
+  }
+  .hero .image {
+    position: initial;
+  }
+  .hero .image img {
+    position: initial;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */
