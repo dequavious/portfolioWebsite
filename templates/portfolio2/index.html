@@ -249,11 +249,6 @@
             display: block;
         }
 
-        a:visited {
-            text-decoration: none;
-            color: white;
-        }
-
         #about::before {
           display: block;
           content: " ";
@@ -326,7 +321,6 @@
                 <li><a href="#programming">Programming</a></li>
                 <li><a href="#info">Info</a></li>
                 <li>
-
                     <div class="dropdown" style="margin-top: 0; display: inline-block;">
 
                         <button class="dropbtn" onclick="toggleFunction()" style="border: none;">Documents
@@ -339,14 +333,11 @@
                         </div>
                    </div>
                 </li>
-                <a href="#contact"><button><i class="far fa-id-card"></i>Contact</button></a>
+                <a href="#contact" style="text-decoration: none;"><button><i class="far fa-id-card"></i>Contact</button></a>
             </ul>
         </div>
     </nav>
     <div class="responsive__navbar">
-{#        <div class="brand">#}
-{#            <h2>Web Developer <span>3.0</span></h2>#}
-{#        </div>#}
         <div class="links" style="position: relative; z-index: 1;">
             <ul>
                 <li class="nav__link"><a href="#home">Home</a></li>
@@ -366,7 +357,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav__link"><a href="#contact"><button><i class="far fa-id-card"></i>Contact</button></a></li>
+                <li class="nav__link"><a href="#contact" style="text-decoration: none;"><button><i class="far fa-id-card"></i>Contact</button></a></li>
             </ul>
         </div>
     </div>
@@ -376,7 +367,7 @@
             <div class="title">
                 <h1>Hi, I'm {{ user.name }}!</h1>
             </div>
-            <a href="#about"><button><i class="fas fa-coffee"></i> Learn More</button></a>
+            <a href="#about" style="text-decoration: none;"><button><i class="fas fa-coffee"></i> Learn More</button></a>
         </div>
         <div class="image">
             <img src="{{ user.picture }}" alt="" style="align-self: center; justify-self: center;"/>
@@ -492,8 +483,8 @@
                     <h3>{{ proj.title }}</h3>
                     <p>{{ proj.description }}</p>
                     <ul>
-                        <li class="portfolioList"><a href="{{ proj.link }}" target="_blank" style="color: blue"><i class="fa fa-home"></i>Homepage</a></li>
-                        <li class="portfolioList"><a href="{{ proj.git }}" target="_blank" style="color: blue"><i class="fa fa-github"></i>Source code</a></li>
+                        <li class="portfolioList"><a href="{{ proj.link }}" target="_blank" style="color: #0000EE;"><i class="fa fa-home"></i>Homepage</a></li>
+                        <li class="portfolioList"><a href="{{ proj.git }}" target="_blank" style="color: #0000EE;"><i class="fa fa-github"></i>Source code</a></li>
                     </ul>
                 </div>
             </div>
