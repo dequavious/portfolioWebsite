@@ -17,7 +17,7 @@ const sr2 = ScrollReveal({
     origin:"right",
     distance:"50%",
     duration:3000,
-    reset:false,
+    reset:true,
 });
 
 sr2.reveal (
@@ -30,7 +30,7 @@ const sr3 = ScrollReveal({
     origin:"left",
     distance:"50%",
     duration:3000,
-    reset:false,
+    reset:true,
 });
 
 sr3.reveal (
