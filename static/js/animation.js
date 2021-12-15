@@ -22,7 +22,7 @@ const sr2 = ScrollReveal({
 
 sr2.reveal (
     `
-    #spring1, #spring3, #spring5, #spring7
+    .springR
     `
 );
 
@@ -35,6 +35,6 @@ const sr3 = ScrollReveal({
 
 sr3.reveal (
     `
-    #spring2, #spring4, #spring6
+    .springL, #contact
     `
 );
