@@ -1,11 +1,3 @@
-if (history.scrollRestoration) {
-    history.scrollRestoration = 'manual';
-} else {
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-    }
-}
-
 const scrollToTop = document.querySelector(".scrollToTop");
 scrollToTop.addEventListener("click", ()=>{
     window.scrollTo({top:0});
