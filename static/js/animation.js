@@ -1,17 +1,18 @@
-// const sr = ScrollReveal({
-//     origin:"top",
-//     distance:"-80px",
-//     duration:2000,
-//     reset:false,
-// });
-//
-// sr.reveal (
-//     `
-//     .hero, .about, .skills, .portfolio, .programming, .info, .contact, .footer
-//     `, {
-//         interval:300,
-//     }
-// );
+const sr = ScrollReveal({
+    origin:"top",
+    distance:"-80px",
+    duration:2000,
+    reset:false,
+});
+
+sr.reveal (
+    `
+    .hero, .about, .skills, .portfolio, .programming, .info, .contact
+    `,
+    // {
+    //     interval:300,
+    // }
+);
 
 const sr2 = ScrollReveal({
     origin:"right",
