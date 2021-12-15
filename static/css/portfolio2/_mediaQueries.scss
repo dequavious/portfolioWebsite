@@ -6,21 +6,21 @@
   .defaultMargin {
     margin: 0 10vw;
   }
-  .navbar {
-    .brand__container {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 2rem;
-      width: 100%;
-      .toggle {
-        display: block;
-      }
-    }
-    .links {
-      display: none;
-    }
-  }
+  //.navbar {
+  //  .brand__container {
+  //    display: flex;
+  //    justify-content: space-between;
+  //    align-items: start;
+  //    gap: 2rem;
+  //    width: 100%;
+  //    .toggle {
+  //      display: block;
+  //    }
+  //  }
+  //  .links {
+  //    display: none;
+  //  }
+  //}
   .about {
     margin: 0 10vw;
   }
@@ -52,6 +52,24 @@
   .footer {
     padding: 50px;
     align-items: center;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 1230px) {
+    .navbar {
+    .brand__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 2rem;
+      width: 100%;
+      .toggle {
+        display: block;
+      }
+    }
+    .links {
+      display: none;
+    }
   }
 }
 

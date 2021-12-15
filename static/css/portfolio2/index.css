@@ -388,20 +388,6 @@ footer .section .brand h2 {
     margin: 0 10vw;
   }
 
-  .navbar .brand__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 2rem;
-    width: 100%;
-  }
-  .navbar .brand__container .toggle {
-    display: block;
-  }
-  .navbar .links {
-    display: none;
-  }
-
   .about {
     margin: 0 10vw;
   }
@@ -427,6 +413,21 @@ footer .section .brand h2 {
   .footer {
     padding: 50px;
     align-items: center;
+  }
+}
+@media screen and (min-width: 280px) and (max-width: 1230px) {
+  .navbar .brand__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 2rem;
+    width: 100%;
+  }
+  .navbar .brand__container .toggle {
+    display: block;
+  }
+  .navbar .links {
+    display: none;
   }
 }
 @media screen and (min-width: 280px) and (max-width: 1175px) {
