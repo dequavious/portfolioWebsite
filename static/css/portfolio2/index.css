@@ -379,15 +379,6 @@ footer .section .brand h2 {
 }
 
 @media screen and (min-width: 280px) and (max-width: 1080px) {
-  body {
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
-
-  .defaultMargin {
-    margin: 0 10vw;
-  }
-
   .about {
     margin: 0 10vw;
   }
@@ -415,7 +406,17 @@ footer .section .brand h2 {
     align-items: center;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 1230px) {
+@media screen and (min-width: 280px) and (max-width: 1550px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .defaultMargin {
+    margin: 0 10vw;
+  }
+}
+@media screen and (min-width: 280px) and (max-width: 1380px) {
   .navbar .brand__container {
     display: flex;
     justify-content: space-between;
