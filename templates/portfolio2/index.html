@@ -288,7 +288,7 @@
           display: block;
           content: " ";
           margin-top: -80px;
-          height: 100px;
+          height: 80px;
           visibility: hidden;
           pointer-events: none;
         }
@@ -296,7 +296,7 @@
           display: block;
           content: " ";
           margin-top: -80px;
-          height: 100px;
+          height: 80px;
           visibility: hidden;
           pointer-events: none;
         }
@@ -304,7 +304,7 @@
           display: block;
           content: " ";
           margin-top: -80px;
-          height: 100px;
+          height: 80px;
           visibility: hidden;
           pointer-events: none;
         }
@@ -312,7 +312,7 @@
           display: block;
           content: " ";
           margin-top: -80px;
-          height: 200px;
+          height: 80px;
           visibility: hidden;
           pointer-events: none;
         }
@@ -320,7 +320,7 @@
           display: block;
           content: " ";
           margin-top: -80px;
-          height: 100px;
+          height: 80px;
           visibility: hidden;
           pointer-events: none;
         }
@@ -328,7 +328,7 @@
           display: block;
           content: " ";
           margin-top: -80px;
-          height: 200px;
+          height: 80px;
           visibility: hidden;
           pointer-events: none;
         }
@@ -428,7 +428,7 @@
             <img src="{{ user.picture }}" alt="" style="align-self: center; justify-self: center;"/>
         </div>
     </section>
-    <div class="spring right springR">
+    <div class="spring right" id="spring1">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
@@ -438,7 +438,7 @@
             <p>{{ user.bio }}</p>
         </div>
     </section>
-    <div class="spring springL">
+    <div class="spring" id="spring1L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
@@ -501,7 +501,7 @@
             </div>
         </div>
     </section>
-    <div class="spring right springR">
+    <div class="spring right" id="spring2">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
@@ -520,22 +520,22 @@
                     <h3>{{ proj.title }}</h3>
                     <p>{{ proj.description }}</p>
                     <ul>
-                        <li class="portfolioList"><a href="{{ proj.link }}" target="_blank" style="color: #0000EE;"><i class="fa fa-home"></i>Homepage</a></li>
-                        <li class="portfolioList"><a href="{{ proj.git }}" target="_blank" style="color: #0000EE;"><i class="fa fa-github"></i>Source code</a></li>
+                        <li><a href="{{ proj.link }}" target="_blank" style="color: #0000EE;"><i class="fa fa-home"></i>Homepage</a></li>
+                        <li><a href="{{ proj.git }}" target="_blank" style="color: #0000EE;"><i class="fa fa-github"></i>Source code</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         {% endfor %}
     </section>
-    <div class="spring springL">
+    <div class="spring" id="spring2L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
     <section id="programming" class="programming defaultMargin">
         <div class="title__container">
             <h2>Programming</h2>
-            <p>Languages, Frameworks, Databases and Tools that I am familiar with.</p>
+            <p>Languages, frameworks, databases and tools that I am familiar with.</p>
         </div>
         <spicy-sections>
             <h3><i class="fa fa-language"></i> Languages</h3>
@@ -644,7 +644,7 @@
             </div>
         </spicy-sections>
     </section>
-    <div class="spring right springR">
+    <div class="spring right" id="spring3">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
@@ -724,7 +724,7 @@
             </div>
         </spicy-sections>
     </section>
-    <div class="spring springL">
+    <div class="spring" id="spring3L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
@@ -750,7 +750,7 @@
             </dl>
         </div>
     </section>
-    <div class="spring right springR">
+    <div class="spring right" id="spring4">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>

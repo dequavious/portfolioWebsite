@@ -7,11 +7,10 @@ const sr = ScrollReveal({
 
 sr.reveal (
     `
-    .hero, .about, .skills, .portfolio, .programming, .info, .contact
-    `,
-    // {
-    //     interval:300,
-    // }
+    .hero,.about,.skills,.portfolio
+    `,{
+        interval:300,
+    }
 );
 
 const sr2 = ScrollReveal({
@@ -23,7 +22,7 @@ const sr2 = ScrollReveal({
 
 sr2.reveal (
     `
-    .springR
+    #spring1,#spring2
     `
 );
 
@@ -36,6 +35,6 @@ const sr3 = ScrollReveal({
 
 sr3.reveal (
     `
-    .springL
+    #spring1L,#spring2L
     `
 );
