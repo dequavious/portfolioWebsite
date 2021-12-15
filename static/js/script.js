@@ -1,3 +1,11 @@
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+} else {
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+    }
+}
+
 const scrollToTop = document.querySelector(".scrollToTop");
 scrollToTop.addEventListener("click", ()=>{
     window.scrollTo({top:0});
@@ -26,3 +34,27 @@ navLinks.forEach((link)=>{
         responsiveNavBar.classList.remove("show");
     });
 });
+
+function toggleFunction() {
+  if (document.getElementById("myDropdown").style.display==="none") {
+      document.getElementById("myDropdown").style.display= "block";
+  } else {
+      document.getElementById("myDropdown").style.display= "none";
+  }
+}
+
+function selectFunction() {
+    document.getElementById("myDropdown").style.display= "none";
+}
+
+function toggleFunctionResponsive() {
+  if (document.getElementById("myDropdownResponsive").style.display==="none") {
+      document.getElementById("myDropdownResponsive").style.display = "block";
+  } else {
+      document.getElementById("myDropdownResponsive").style.display = "none";
+  }
+}
+
+function selectFunctionResponsive() {
+    document.getElementById("myDropdownResponsive").style.display = "none";
+}

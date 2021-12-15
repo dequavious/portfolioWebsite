@@ -76,7 +76,6 @@ def send_message(request):
                 'to_address': [user.email],
             }
             send_email(data)
-            messages.info(request, "Your message has been sent.")
             return redirect('home')
         else:
             return Response("body missing", status=status.HTTP_400_BAD_REQUEST)

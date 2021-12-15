@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module" src="https://assets.codepen.io/3/SpicySections-2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .dropdown-content {
             flex-direction: column;
@@ -330,6 +331,26 @@
           visibility: hidden;
           pointer-events: none;
         }
+        .loader {
+          border: 7px solid transparent;
+          border-radius: 50%;
+          border-top: 7px solid #45b649;
+          width: 40px;
+          height: 40px;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body id="home">
@@ -407,10 +428,8 @@
         </div>
     </section>
     <div class="spring right" id="spring1">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <section id="about" class="about">
         <div class="title__container">
@@ -419,10 +438,8 @@
         </div>
     </section>
     <div class="spring" id="spring2">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <section class="skills defaultMargin" id="skills">
         <div class="title__container">
@@ -437,14 +454,10 @@
                         <div class="number">100%</div>
                         <div class="circle">
                             <div class="bar left">
-                                <div class="progress">
-
-                                </div>
+                                <div class="progress"></div>
                             </div>
                             <div class="bar right">
-                                <div class="progress">
-
-                                </div>
+                                <div class="progress"></div>
                             </div>
                         </div>
                     </div>
@@ -458,14 +471,10 @@
                         <div class="number">42%</div>
                         <div class="circle">
                             <div class="bar left">
-                                <div class="progress">
-
-                                </div>
+                                <div class="progress"></div>
                             </div>
                             <div class="bar right">
-                                <div class="progress">
-
-                                </div>
+                                <div class="progress"></div>
                             </div>
                         </div>
                     </div>
@@ -479,14 +488,10 @@
                         <div class="number">50%</div>
                         <div class="circle">
                             <div class="bar left">
-                                <div class="progress">
-
-                                </div>
+                                <div class="progress"></div>
                             </div>
                             <div class="bar right">
-                                <div class="progress">
-
-                                </div>
+                                <div class="progress"></div>
                             </div>
                         </div>
                     </div>
@@ -496,10 +501,8 @@
         </div>
     </section>
     <div class="spring right" id="spring3">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <section class="portfolio defaultMargin" id="portfolio">
 
@@ -525,10 +528,8 @@
         {% endfor %}
     </section>
     <div class="spring" id="spring4">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <section id="programming" class="programming defaultMargin">
         <div class="title__container">
@@ -643,121 +644,114 @@
         </spicy-sections>
     </section>
     <div class="spring right" id="spring5">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <section id="info" class="info defaultMargin">
         <div class="title__container">
             <h2>Info</h2>
             <p>More about me.</p>
         </div>
-    <spicy-sections>
-        <h3>Hobbies</h3>
-        <div class="hobbies-container">
-            <div class="backgroundL"></div>
-            <div class="backgroundR"></div>
-            {% for hobby in hobbies %}
-                <div class="hobby">
-                    <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="{{ hobby.hobby }}">
-                    <h3 style="text-align: center;">{{ hobby.hobby }}</h3>
-                </div>
-            {% endfor %}
-        </div>
-
-        <h3>Education</h3>
-        <div class="edu-container">
-            <div class="backgroundL"></div>
-            <div class="backgroundR"></div>
-            <div class="design">
-                {% for degree in degrees %}
-                    <h2 style="text-align: start;"><i class="fa fa-graduation-cap"></i> {{ degree.degree }}</h2>
-                    <table style="background: inherit; border: none; display:inline-block; max-width:71vw; overflow: auto;">
-                        <tr>
-                            <th><i class="fa fa-institution"></i> Institution</th>
-                            {% if degree.grade %}
-                                <th>Grade</th>
-                            {% endif %}
-                            <th><i class="fa fa-calendar"></i> Year</th>
-                        </tr>
-                        <tr>
-                            <td>{{ degree.institution }}</td>
-                            {% if degree.grade %}
-                                <td>
-                                    {{ degree.grade }}
-                                </td>
-                            {% endif %}
-                            <td>{{ degree.year }}</td>
-                        </tr>
-                    </table>
+        <spicy-sections>
+            <h3>Hobbies</h3>
+            <div class="hobbies-container">
+                <div class="backgroundL"></div>
+                <div class="backgroundR"></div>
+                {% for hobby in hobbies %}
+                    <div class="hobby">
+                        <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="{{ hobby.hobby }}">
+                        <h3 style="text-align: center;">{{ hobby.hobby }}</h3>
+                    </div>
                 {% endfor %}
             </div>
-        </div>
 
-        <h3>Strengths</h3>
-        <div class="strengths-container">
-            <div class="backgroundL"></div>
-            <div class="backgroundR"></div>
-            <div class="design">
-                <ul class="list-group">
-                    {% for skill in skills %}
-                        <li class="skillListItem" style="background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+            <h3>Education</h3>
+            <div class="edu-container">
+                <div class="backgroundL"></div>
+                <div class="backgroundR"></div>
+                <div class="design">
+                    {% for degree in degrees %}
+                        <h2 style="text-align: start;"><i class="fa fa-graduation-cap"></i> {{ degree.degree }}</h2>
+                        <table style="background: inherit; border: none; display:inline-block; max-width:71vw; overflow: auto;">
+                            <tr>
+                                <th><i class="fa fa-institution"></i> Institution</th>
+                                {% if degree.grade %}
+                                    <th>Grade</th>
+                                {% endif %}
+                                <th><i class="fa fa-calendar"></i> Year</th>
+                            </tr>
+                            <tr>
+                                <td>{{ degree.institution }}</td>
+                                {% if degree.grade %}
+                                    <td>
+                                        {{ degree.grade }}
+                                    </td>
+                                {% endif %}
+                                <td>{{ degree.year }}</td>
+                            </tr>
+                        </table>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
-        </div>
 
-        <h3>Experience</h3>
-        <div class="exp-container">
-            <div class="backgroundL"></div>
-            <div class="backgroundR"></div>
-            <div class="design" style="background-color: #181818;">
-                {% for job in jobs %}
-                    <dl>
-                        <dt style="font-size: 1.25rem; "><i class="fa fa-briefcase" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ job.description }}</dt>
-                        <dd style="white-space: nowrap;"><strong>Company:</strong> {{ job.company }}</dd>
-                    </dl>
-                    <br>
-                {% endfor %}
+            <h3>Strengths</h3>
+            <div class="strengths-container">
+                <div class="backgroundL"></div>
+                <div class="backgroundR"></div>
+                <div class="design">
+                    <ul class="list-group">
+                        {% for skill in skills %}
+                            <li class="skillListItem" style="background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </spicy-sections>
+
+            <h3>Experience</h3>
+            <div class="exp-container">
+                <div class="backgroundL"></div>
+                <div class="backgroundR"></div>
+                <div class="design" style="background-color: #181818;">
+                    {% for job in jobs %}
+                        <dl>
+                            <dt style="font-size: 1.25rem; "><i class="fa fa-briefcase" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ job.description }}</dt>
+                            <dd style="white-space: nowrap;"><strong>Company:</strong> {{ job.company }}</dd>
+                        </dl>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </spicy-sections>
     </section>
-        <div class="spring" id="spring6">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+    <div class="spring" id="spring6">
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <section id="contact" class="contact defaultMargin">
-
         <div class="left">
             <div class="title">
                 <div class="bar"></div>
                 <h3>Get in touch with me?</h3>
             </div>
-            <form method="post" action="{% url 'send email' %}" enctype="multipart/form-data">
+            <form id="contactForm">
                 <input type="text" placeholder="Name" name="name" required>
                 <input type="email" placeholder="Email" name="email"  required>
-                <textarea rows="10" cols="30" name="body" placeholder="Message" required></textarea>
-                <button type="submit">Send message</button>
+                <textarea id="messageTextArea" rows="10" cols="30" name="body" placeholder="Message" required></textarea>
+                <button id="sendBtn" type="submit">Send message</button>
             </form>
         </div>
         <div class="right">
 
             <h2>Contact</h2>
             <dl>
-                <dd><i class="fa fa-envelope text-danger" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ user.email }}</dd>
-                <dd><i class="fa fa-phone-square text-danger" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ user.number }}</dd>
+                <dd><i class="fa fa-envelope" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ user.email }}</dd>
+                <dd><i class="fa fa-phone-square" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ user.number }}</dd>
             </dl>
         </div>
     </section>
     <div class="spring right" id="spring7">
-        <div class="coil">
-        </div>
-        <div class="bar gradient">
-        </div>
+        <div class="coil"></div>
+        <div class="bar gradient"></div>
     </div>
     <footer class="footer">
         <div class="section">
@@ -770,26 +764,60 @@
     <script src="{% static "js/script.js" %}"></script>
     <script src="{% static "js/animation.js" %}"></script>
     <script>
-        function toggleFunction() {
-          if (document.getElementById("myDropdown").style.display==="none") {
-              document.getElementById("myDropdown").style.display= "block";
-          } else {
-              document.getElementById("myDropdown").style.display= "none";
-          }
-        }
-        function selectFunction() {
-            document.getElementById("myDropdown").style.display= "none";
-        }
-        function toggleFunctionResponsive() {
-          if (document.getElementById("myDropdownResponsive").style.display==="none") {
-              document.getElementById("myDropdownResponsive").style.display = "block";
-          } else {
-              document.getElementById("myDropdownResponsive").style.display = "none";
-          }
-        }
-        function selectFunctionResponsive() {
-            document.getElementById("myDropdownResponsive").style.display = "none";
-        }
+        $(document).on('submit', '#contactForm', function(e) {
+
+            var innerHTML = document.getElementById("sendBtn").innerHTML;
+
+            document.getElementById("sendBtn").innerHTML = "<div class=\"loader\"></div>";
+            document.getElementById("sendBtn").style.cursor = "default";
+            document.getElementById("sendBtn").disabled = true;
+
+            var i, val, name;
+            var data = new FormData();
+            var input = document.getElementsByTagName('input');
+
+            for (i = 0; i < input.length; i++) {
+                name = input[i].name;
+                val = input[i].value;
+                if ((val.length > 0) && !data.has(name)) {
+                    data.append(name, val);
+                }
+            }
+
+            var textarea = document.getElementById('messageTextArea');
+
+            if (textarea.value.length > 0) {
+                data.append(textarea.name, textarea.value)
+            }
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'send email' %}',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    document.getElementById("sendBtn").innerHTML = innerHTML;
+                    document.getElementById("sendBtn").style.cursor = "pointer";
+                    document.getElementById("sendBtn").disabled = false;
+
+                    for (i = 0; i < input.length; i++) {
+                        val = input[i].value = "";
+                    }
+
+                    var textarea = document.getElementById('messageTextArea');
+
+                    textarea.value = "";
+
+                    alert("Your message has been sent!");
+                }
+            });
+        });
     </script>
 </body>
 </html>
