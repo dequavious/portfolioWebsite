@@ -35,6 +35,6 @@ const sr3 = ScrollReveal({
 
 sr3.reveal (
     `
-    .springL, #contact
+    .springL
     `
 );
