@@ -197,7 +197,6 @@ p {
 .responsive__navbar .links ul li {
   margin: 2vh;
   font-size: 2.5vh;
-  cursor: pointer;
 }
 .responsive__navbar .links ul li a {
   text-decoration: none;
@@ -205,7 +204,6 @@ p {
 }
 .responsive__navbar .links ul button {
   background-color: #0b0b0b;
-  padding: 0.5rem;
 }
 .responsive__navbar .links ul ul {
   display: flex;
@@ -406,7 +404,7 @@ footer .section .brand h2 {
     align-items: center;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 1550px) {
+@media screen and (min-width: 280px) and (max-width: 1470px) {
   body {
     overflow-x: hidden;
     overflow-y: hidden;
@@ -416,7 +414,7 @@ footer .section .brand h2 {
     margin: 0 10vw;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 1380px) {
+@media screen and (min-width: 280px) and (max-width: 1300px) {
   .navbar .brand__container {
     display: flex;
     justify-content: space-between;
