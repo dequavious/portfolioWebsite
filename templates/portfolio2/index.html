@@ -300,14 +300,14 @@
         }
 
         .proj__link {
-            color: #0000EE;
-        }
-
-        .proj__link:hover {
             filter: hue-rotate(90deg);
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .proj__link:hover {
+            filter: hue-rotate(180deg);
         }
 
         #about::before {
@@ -440,7 +440,6 @@
             </ul>
         </div>
     </div>
-    {% include 'portfolio2/messages.html' %}
     <section class="hero defaultMargin">
         <div class="content">
             <div class="title">
