@@ -346,7 +346,7 @@ p {
   background: var(--gradient);
   margin-bottom: 1rem;
 }
-.contact form {
+.contact .left form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -354,11 +354,16 @@ p {
   margin: 2rem 0;
   gap: 1rem;
 }
-.contact form input, .contact form textarea {
+.contact .left form input, .contact .left form textarea {
+  width: 75%;
   padding: 0.8rem 0.9rem 0.8rem 1rem;
   background-color: transparent;
   border: 1px solid #818080;
   color: white;
+}
+.contact .map {
+  height: 400px;
+  width: 100%;
 }
 
 footer {
