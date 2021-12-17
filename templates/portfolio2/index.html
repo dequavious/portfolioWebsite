@@ -299,6 +299,7 @@
         }
 
         .proj__link {
+            width:100%;
             white-space: nowrap;
             filter: hue-rotate(90deg);
             background: var(--gradient);
@@ -725,7 +726,7 @@
                 <div class="design">
                     <ul class="list-group">
                         {% for skill in skills %}
-                            <li class="skillListItem" style="background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="white-space:nowrap; font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+                            <li class="skillListItem" style="width:100%; background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="white-space:nowrap; font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
                         {% endfor %}
                     </ul>
                 </div>
