@@ -298,6 +298,21 @@
             width: 100%;
         }
 
+        .skillListItem {
+            width:100%;
+            display: inline-block;
+            background: inherit;
+            border: none;
+            white-space: nowrap;
+        }
+
+        .skillListItem i {
+            font-size: 12px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .proj__link {
             display: inline-block;
             white-space: nowrap;
@@ -726,7 +741,7 @@
                 <div class="design">
                     <ul class="list-group">
                         {% for skill in skills %}
-                            <li class="skillListItem" style="display: inline-block; background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+                            <li class="skillListItem"><i class="fa fa-circle-thin"></i> {{ skill.skill }}</li>
                         {% endfor %}
                     </ul>
                 </div>
