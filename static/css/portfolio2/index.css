@@ -170,6 +170,7 @@ p {
   background-color: black;
   z-index: 100;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   align-items: center;
   opacity: 0;
@@ -434,6 +435,26 @@ footer .section .brand h2 {
     display: none;
   }
 }
+@media screen and (min-width: 280px) and (max-width: 650px) {
+  .hero .image {
+    position: initial;
+  }
+  .hero .image img {
+    position: initial;
+    height: 100%;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 650px) and (max-width: 1175px) {
+  .hero .image {
+    position: initial;
+  }
+  .hero .image img {
+    position: initial;
+    height: 50%;
+    width: 50%;
+  }
+}
 @media screen and (min-width: 280px) and (max-width: 1175px) {
   .hero {
     margin: 0 10vw;
@@ -449,14 +470,6 @@ footer .section .brand h2 {
   .hero .content .title h1 {
     white-space: nowrap;
     font-size: 2rem;
-  }
-  .hero .image {
-    position: initial;
-  }
-  .hero .image img {
-    position: initial;
-    height: 100%;
-    width: 100%;
   }
 }
 

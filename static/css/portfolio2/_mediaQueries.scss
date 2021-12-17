@@ -61,6 +61,32 @@
   }
 }
 
+@media screen and (min-width: 280px) and (max-width: 650px) {
+  .hero {
+    .image {
+      position: initial;
+      img {
+        position: initial;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 650px) and (max-width: 1175px) {
+  .hero {
+    .image {
+      position: initial;
+      img {
+        position: initial;
+        height: 50%;
+        width: 50%;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 280px) and (max-width: 1175px) {
     .hero {
     margin: 0 10vw;
@@ -76,14 +102,6 @@
           white-space: nowrap;
           font-size: 2rem;
         }
-      }
-    }
-    .image {
-      position: initial;
-      img {
-        position: initial;
-        height: 100%;
-        width: 100%;
       }
     }
   }
