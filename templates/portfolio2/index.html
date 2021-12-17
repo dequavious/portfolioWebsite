@@ -299,7 +299,7 @@
         }
 
         .proj__link {
-            width:100%;
+            position:relative;
             white-space: nowrap;
             filter: hue-rotate(90deg);
             background: var(--gradient);
@@ -544,8 +544,8 @@
                     <h3>{{ proj.title }}</h3>
                     <p>{{ proj.description }}</p>
                     <ul>
-                        <li><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home" style="white-space:nowrap;"></i>Homepage</a></li>
-                        <li><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github" style="white-space:nowrap;"></i>Source code</a></li>
+                        <li><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i>Homepage</a></li>
+                        <li><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i>Source code</a></li>
                     </ul>
                 </div>
             </div>
@@ -726,7 +726,7 @@
                 <div class="design">
                     <ul class="list-group">
                         {% for skill in skills %}
-                            <li class="skillListItem" style="width:100%; background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="white-space:nowrap; font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
+                            <li class="skillListItem" style="position:relative; background: inherit; border: none; white-space: nowrap;"><i class="fa fa-circle-thin" style="font-size: 12px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ skill.skill }}</li>
                         {% endfor %}
                     </ul>
                 </div>
