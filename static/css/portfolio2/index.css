@@ -435,7 +435,7 @@ footer .section .brand h2 {
     display: none;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 600px) {
+@media screen and (min-width: 280px) and (max-width: 650px) {
   .hero .image {
     position: initial;
   }
@@ -445,7 +445,7 @@ footer .section .brand h2 {
     width: 100%;
   }
 }
-@media screen and (min-width: 600px) and (max-width: 1175px) {
+@media screen and (min-width: 650px) and (max-width: 1175px) {
   .hero .image {
     position: initial;
   }
