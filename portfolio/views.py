@@ -1842,12 +1842,8 @@ def add_project(request):
         return Response("description not provided", status=status.HTTP_400_BAD_REQUEST)
 
     git = request.data.get('git', None)
-    if not git:
-        return Response("git not provided", status=status.HTTP_400_BAD_REQUEST)
 
     link = request.data.get('link', None)
-    if not git:
-        return Response("link not provided", status=status.HTTP_400_BAD_REQUEST)
 
     proj = Project.objects.all().filter(title__iexact=title)
 
@@ -1856,8 +1852,18 @@ def add_project(request):
         html = render_to_string('admin/strengths.html')
         return HttpResponse(html)
 
-    project = Project(title=title, description=description, git=git, link=link)
-    project.save()
+    if git and proj:
+        project = Project(title=title, description=description, git=git, link=link)
+        project.save()
+    elif git:
+        project = Project(title=title, description=description, git=git)
+        project.save()
+    elif link:
+        project = Project(title=title, description=description, link=link)
+        project.save()
+    else:
+        project = Project(title=title, description=description)
+        project.save()
 
     messages.success(request, "Project has been added.")
     html = render_to_string('admin/projects.html')

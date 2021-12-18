@@ -118,8 +118,8 @@ class Work(models.Model):
 class Project(models.Model):
     title = models.CharField(unique=True, max_length=60)
     description = models.CharField(unique=True, max_length=1000)
-    git = models.CharField(unique=True, max_length=256)
-    link = models.CharField(unique=True, max_length=256)
+    git = models.CharField(unique=True, max_length=256, null=True, blank=True)
+    link = models.CharField(unique=True, max_length=256, null=True, blank=True)
 
     def __str__(self):
         return self.description

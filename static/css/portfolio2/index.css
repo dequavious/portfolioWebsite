@@ -315,7 +315,8 @@ p {
 .portfolio {
   position: relative;
 }
-.portfolio .proj-container .portfolio__container {
+.portfolio .portfolio__container .proj-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
