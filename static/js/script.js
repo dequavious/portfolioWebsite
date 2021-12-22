@@ -14,8 +14,8 @@ const responsiveToggle = document.querySelector(".toggle");
 responsiveNavBar.addEventListener("click", (e)=>e.stopPropagation());
 
 responsiveToggle.addEventListener("click", (e)=>{
-        e.stopPropagation();
-        responsiveNavBar.classList.toggle("show");
+    e.stopPropagation();
+    responsiveNavBar.classList.toggle("show");
 });
 
 html.addEventListener("click", ()=>responsiveNavBar.classList.remove("show"));
@@ -24,6 +24,7 @@ const navLinks = document.querySelectorAll(".nav__link");
 navLinks.forEach((link)=>{
     link.addEventListener("click", ()=>{
         responsiveNavBar.classList.remove("show");
+        selectFunctionResponsive();
     });
 });
 
