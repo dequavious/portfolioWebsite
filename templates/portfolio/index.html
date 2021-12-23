@@ -591,7 +591,7 @@
                     <div class="design">
                         <div class="stack">
 
-                            <img id="img{{ language.id }}" src="{{ language.avatar }}" alt="{{ language.language }}" style="filter:none;">
+                            <img id="img{{ language.id }}" src="{{ language.avatar }}" alt="" style="filter:none;">
                             <h3 style="text-align: center;">{{ language.language }}</h3>
                             <p id="langPar{{ language.id }}" style="color: white;"></p>
 
@@ -617,7 +617,7 @@
                     <div class="design">
                         <div class="stack">
 
-                            <img id="img{{ framework.id }}" src="{{ framework.avatar }}" alt="{{ framework.framework }}" style="filter:none;">
+                            <img id="img{{ framework.id }}" src="{{ framework.avatar }}" alt="" style="filter:none;">
                             <h3 style="text-align: center;">{{ framework.framework }}</h3>
                             <p id="framePar{{ framework.id }}" style="color: white;"></p>
 
@@ -643,7 +643,7 @@
                     <div class="design">
                         <div class="stack">
 
-                            <img id="img{{ db.id }}" src="{{ db.avatar }}" alt="{{ db.dbms }}" style="filter:none;">
+                            <img id="img{{ db.id }}" src="{{ db.avatar }}" alt="" style="filter:none;">
                             <h3 style="text-align: center;">{{ db.dbms }}</h3>
                             <p id="dbPar{{ db.id }}" style="color: white;"></p>
 
@@ -669,7 +669,7 @@
                     <div class="design">
                         <div class="stack">
 
-                            <img id="img{{ tool.id }}" src="{{ tool.avatar }}" alt="{{ tool.tool }}" style="filter:none;">
+                            <img id="img{{ tool.id }}" src="{{ tool.avatar }}" alt="" style="filter:none;">
                             <h3 style="text-align: center;">{{ tool.tool }}</h3>
                             <p id="toolPar{{ tool.id }}" style="color: white;"></p>
 
@@ -707,7 +707,7 @@
                 <div class="backgroundR"></div>
                 {% for hobby in hobbies %}
                     <div class="hobby">
-                        <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="{{ hobby.hobby }}">
+                        <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="">
                         <h3 style="text-align: center;">{{ hobby.hobby }}</h3>
                     </div>
                 {% endfor %}
@@ -784,6 +784,7 @@
             <form id="contactForm">
                 <input type="text" placeholder="Name" name="name" required>
                 <input type="email" placeholder="Email" name="email"  required>
+                <input type="text" placeholder="Subject" name="subject"  required>
                 <textarea id="messageTextArea" rows="10" cols="30" name="body" placeholder="Message" required></textarea>
                 <button id="sendBtn" type="submit">Send message</button>
             </form>

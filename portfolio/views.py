@@ -56,30 +56,34 @@ def send_message(request):
     """
     View to send an email
     """
+
     email = request.data.get('email')
     name = request.data.get('name')
-    if email is not None:
+    subject = request.data.get('subject')
+    body = request.data.get('body')
+
+    if (email is not None) and (name is not None) and (body is not None) and (subject is not None):
 
         user = User.objects.get(id=1)
 
-        body = request.data.get('body')
-        if request.data.get('body', None):
-            data = {
-                'subject': 'Message from website',
-                'body': '''{}
-                
-                        From:
-                        {}
-                        {}
-                        '''.format(body, name, email),
-                'to_address': [user.email],
-            }
-            send_email(data)
-            return redirect('home')
-        else:
-            return Response("body missing", status=status.HTTP_400_BAD_REQUEST)
+        data = {
+            'subject': subject,
+            'body': '''{}
+            
+                    From:
+                    {}
+                    {}
+                    '''.format(body, name, email),
+            'to_address': [user.email],
+        }
+
+        send_email(data)
+
+        return redirect('home')
+
     else:
-        return Response("name/email missing", status=status.HTTP_400_BAD_REQUEST)
+
+        return Response("name/email/subject/body missing", status=status.HTTP_400_BAD_REQUEST)
 
 
 def login_page(request):
