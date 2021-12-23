@@ -47,8 +47,7 @@ def home(request):
     context = {'user': user.data, 'languages': lang.data, 'frameworks': technologies.data,
                'databases': db.data, 'tools': tool_serializer.data, 'hobbies': interests.data, 'skills': skills.data,
                'jobs': jobs.data, 'projects': proj.data, 'degrees': degrees.data}
-    # return render(request, 'portfolio/home.html', context)
-    return render(request, 'portfolio2/index.html', context)
+    return render(request, 'portfolio/index.html', context)
 
 
 @api_view(['POST'])
