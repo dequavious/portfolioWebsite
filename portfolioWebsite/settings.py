@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'corsheaders',
-    'crispy_forms'
+    'crispy_forms',
+    'storages'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -202,3 +203,15 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+AWS_QUERYSTRING_AUTH = False
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = env('ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = env('SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'portfoliowebsite69247'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
