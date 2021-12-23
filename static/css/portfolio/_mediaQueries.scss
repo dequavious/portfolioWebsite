@@ -3,9 +3,14 @@
     margin: 0 10vw;
   }
   .portfolio {
-    .proj-container {
-      .portfolio__container {
-        padding: 1rem;
+    .portfolio__container {
+      grid-template-columns: 1fr;
+      color: white;
+      gap: 2rem;
+      .design {
+        .proj-container {
+          padding: 1rem;
+        }
       }
     }
   }
@@ -105,4 +110,109 @@
       }
     }
   }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      color: white;
+      gap: 2rem;
+    }
+    .hobbies-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        position: relative;
+        background-color: #181818;
+    }
+    .hobby h3 {
+        font-size: small;
+    }
+    dt, dd {
+        white-space: nowrap;
+        font-size:small;
+        overflow: auto;
+    }
+    .skillListItem {
+        font-size:small;
+    }
+    .design h2 {
+        font-size:small;
+    }
+    th, td {
+        font-size:small;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      color: white;
+      gap: 2rem;
+    }
+    dt, dd {
+        white-space: nowrap;
+        font-size:small;
+        overflow: auto;
+    }
+    .skillListItem {
+        font-size:small;
+    }
+    .design h2 {
+        font-size:small;
+    }
+    th, td {
+        font-size:small;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      color: white;
+      gap: 2rem;
+    }
+    dt, dd {
+        white-space: nowrap;
+        font-size:medium;
+        overflow: auto;
+    }
+    .skillListItem {
+        font-size:medium;
+    }
+    .design h2 {
+        font-size:medium;
+    }
+    th, td {
+        font-size:medium;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      color: white;
+      gap: 2rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      color: white;
+      gap: 2rem;
+    }
 }

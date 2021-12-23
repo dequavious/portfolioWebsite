@@ -1,0 +1,18 @@
+.hobbies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 4rem;
+    padding: 25px;
+    position: relative;
+    background-color: #181818;
+}
+
+.hobby {
+  text-align: center;
+  img {
+    width: 5rem;
+    height: 5rem;
+    filter: brightness(0) invert(1);
+  }
+}

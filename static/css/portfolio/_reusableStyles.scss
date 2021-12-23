@@ -62,25 +62,50 @@ p {
   color: rgb(129, 128, 128);
 }
 
-  //  .backgroundL {
-  //  height: 10rem;
-  //  width: 12rem;
-  //  background: linear-gradient(to right, #c5e35b, #45b649);
-  //  position: relative;
-  //  z-index: -1;
-  //  left: -10px;
-  //  top: -8px;
-  //}
-//.design {
-//  position: relative;
-//
-//  .backgroundR {
-//    height: 10rem;
-//    width: 12rem;
-//    background: linear-gradient(to right, #c5e35b, #45b649);
-//    z-index: -1;
-//    position: absolute;
-//    right: -10px;
-//    bottom: -8px;
-//  }
-//}
+.design {
+    position: relative;
+  h2 {
+    white-space: nowrap;
+    @include gradientText;
+  }
+}
+
+.backgroundL {
+    height: 10rem; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; left: -10px; top: -8px;
+}
+.backgroundR {
+    height: 10rem; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; right: -10px; bottom: -8px;
+}
+
+table, th, td {
+  border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px 40px 20px 30px;
+}
+
+tr {
+    white-space: nowrap;
+}
+
+.loader {
+  border: 7px solid transparent;
+  border-radius: 50%;
+  border-top: 7px solid #45b649;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

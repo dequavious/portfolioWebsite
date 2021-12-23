@@ -1,15 +1,31 @@
 .portfolio {
   position: relative;
   .portfolio__container {
-    .proj-container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      background-color: #181818;
-      padding: 2rem;
-      text-align: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    color: white;
+    gap: 2rem;
+    .design {
+      .proj-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background-color: #181818;
+        padding: 2rem;
+        text-align: center;
+      }
     }
   }
+}
+
+.proj__link {
+    display: inline-block;
+    white-space: nowrap;
+    filter: hue-rotate(90deg);
+    @include gradientText;
+    &:hover {
+      filter: hue-rotate(180deg);
+    }
 }

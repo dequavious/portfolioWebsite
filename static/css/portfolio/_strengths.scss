@@ -1,0 +1,21 @@
+.strengths-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    color: white;
+    gap: 2rem;
+    padding: 50px 25px;
+    position: relative;
+    background-color: #181818;
+}
+
+.skillListItem {
+    width:100%;
+    display: inline-block;
+    background: inherit;
+    border: none;
+    white-space: nowrap;
+    i {
+        font-size: 12px;
+        @include gradientText;
+    }
+}

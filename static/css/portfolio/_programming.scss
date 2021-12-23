@@ -3,3 +3,17 @@
   flex-direction: column;
   position: relative;
 }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: #181818;
+  padding: 2rem;
+  text-align: center;
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+}

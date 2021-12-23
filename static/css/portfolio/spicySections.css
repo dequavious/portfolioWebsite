@@ -1,0 +1,40 @@
+spicy-sections {
+    display: block;
+    --const-mq-affordances:
+    [screen and (max-width: 991px) ] collapse |
+    [screen and (min-width: 100vw) ] tab-bar;
+}
+
+spicy-sections > h3 {
+    cursor: pointer;
+    margin: 1rem 0 0 0;
+    padding: 0.5rem;
+}
+
+spicy-sections[affordance=tab-bar]::part(tab-list) {
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+spicy-sections[affordance=tab-bar] h3[aria-selected=true] {
+    filter: hue-rotate(90deg);
+    border-bottom: 3px solid #FFA900;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+spicy-sections[affordance=collapse] > h3::before {
+    content: "+";
+    background: inherit;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    font-weight: 100;
+    transition: transform 0.5s;
+}
+
+spicy-sections[affordance=collapse] > h3[expanded]::before {
+    transform: rotate(45deg);
+}
