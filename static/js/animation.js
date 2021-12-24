@@ -2,12 +2,27 @@ const sr = ScrollReveal({
     origin:"top",
     distance:"-80px",
     duration:2000,
-    reset:false,
+    reset:true,
 });
 
 sr.reveal (
     `
-    .hero,.about,.skills,.portfolio
+    .hero
+    `,{
+        interval:300,
+    }
+);
+
+const sr1 = ScrollReveal({
+    origin:"top",
+    distance:"-80px",
+    duration:2000,
+    reset:false,
+});
+
+sr1.reveal (
+    `
+    .about,.skills,.portfolio
     `,{
         interval:300,
     }
