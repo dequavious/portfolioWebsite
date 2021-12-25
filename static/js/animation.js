@@ -13,24 +13,6 @@ sr.reveal (
     }
 );
 
-const sectionsArray = [
-    document.querySelector('#about'),
-    document.querySelector('#skills'),
-    document.querySelector('#portfolio'),
-    document.querySelector('#programming'),
-    document.querySelector('#info'),
-    document.querySelector('#contact')
-];
-
-const sr1 = ScrollReveal({
-    origin:"top",
-    distance:"-80px",
-    duration:2000,
-    reset:false,
-});
-
-sr1.reveal(sectionsArray,{interval:300});
-
 const springArrayR = [
     document.querySelector('#spring1'),
     document.querySelector('#spring2'),
