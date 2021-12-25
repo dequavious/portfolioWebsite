@@ -69,16 +69,3 @@ function toggleFunctionResponsive() {
 function selectFunctionResponsive() {
     document.getElementById("myDropdownResponsive").style.display = "none";
 }
-
-// let menuOpen = false;
-// function toggleMenu(){
-//       if(!menuOpen) {
-//         responsiveNavBar.classList.toggle("show");
-//         responsiveToggle.classList.add('open');
-//         menuOpen = true;
-//       } else {
-//         responsiveNavBar.classList.remove("show");
-//         responsiveToggle.classList.remove('open');
-//         menuOpen = false;
-//       }
-// }
