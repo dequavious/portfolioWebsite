@@ -26,7 +26,7 @@ const sr2 = ScrollReveal({
     reset:false
 });
 
-sr2.reveal(springArrayR);
+sr2.reveal(springArrayR,{ desktop: false });
 
 const springArrayL = [
     document.querySelector('#spring1L'),
@@ -40,4 +40,4 @@ const sr3 = ScrollReveal({
     reset:false
 });
 
-sr3.reveal(springArrayL);
+sr3.reveal(springArrayL,{ desktop: false });
