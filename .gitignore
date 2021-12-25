@@ -1,4 +1,3 @@
-static/media
 staticfiles
 venv/
 __pycache__/

@@ -8,6 +8,7 @@ window.addEventListener("scroll", ()=>{
         (scrollToTop.style.display = "none");
 });
 
+let menuOpen = false;
 const html = document.querySelector("html");
 const responsiveNavBar = document.querySelector(".responsive__navbar");
 const responsiveToggle = document.querySelector(".toggle");
@@ -15,15 +16,32 @@ responsiveNavBar.addEventListener("click", (e)=>e.stopPropagation());
 
 responsiveToggle.addEventListener("click", (e)=>{
     e.stopPropagation();
-    responsiveNavBar.classList.toggle("show");
+      if(!menuOpen) {
+        responsiveToggle.classList.add('open');
+        responsiveNavBar.classList.toggle("show");
+        menuOpen = true;
+      } else {
+        responsiveToggle.classList.remove('open');
+        responsiveNavBar.classList.remove("show");
+        menuOpen = false;
+        selectFunctionResponsive();
+      }
 });
 
-html.addEventListener("click", ()=>responsiveNavBar.classList.remove("show"));
+html.addEventListener("click", ()=>{
+    responsiveToggle.classList.remove('open');
+    responsiveNavBar.classList.remove("show");
+    menuOpen = false;
+    selectFunctionResponsive();
+});
 
 const navLinks = document.querySelectorAll(".nav__link");
 navLinks.forEach((link)=>{
     link.addEventListener("click", ()=>{
+        responsiveToggle.classList.remove('open');
         responsiveNavBar.classList.remove("show");
+        menuOpen = false;
+        selectFunction();
         selectFunctionResponsive();
     });
 });
@@ -51,3 +69,16 @@ function toggleFunctionResponsive() {
 function selectFunctionResponsive() {
     document.getElementById("myDropdownResponsive").style.display = "none";
 }
+
+// let menuOpen = false;
+// function toggleMenu(){
+//       if(!menuOpen) {
+//         responsiveNavBar.classList.toggle("show");
+//         responsiveToggle.classList.add('open');
+//         menuOpen = true;
+//       } else {
+//         responsiveNavBar.classList.remove("show");
+//         responsiveToggle.classList.remove('open');
+//         menuOpen = false;
+//       }
+// }
