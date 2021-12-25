@@ -8,6 +8,7 @@
     <title>{{ user.name }} {{ user.surname }}</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/portfolio/index.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "css/portfolio/spicySections.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/portfolio/percentageCircle.css" %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="module" src="https://assets.codepen.io/3/SpicySections-2.js"></script>
@@ -106,34 +107,24 @@
         </div>
         <div class="content">
             <div class="skill">
-                <div class="container two">
-                    <div class="circular">
-                        <div class="inner"></div>
-                        <div class="number">100%</div>
-                        <div class="circle">
-                            <div class="bar left">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="bar right">
-                                <div class="progress"></div>
-                            </div>
+                <div class="container">
+                    <div class="c100 dark green p100 center">
+                        <span>100%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
                         </div>
                     </div>
                 </div>
                 <h3>Backend Development</h3>
             </div>
             <div class="skill">
-                <div class="container">
-                    <div class="circular">
-                        <div class="inner"></div>
-                        <div class="number">42%</div>
-                        <div class="circle">
-                            <div class="bar left">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="bar right">
-                                <div class="progress"></div>
-                            </div>
+                <div class="container two">
+                    <div class="c100 dark green p40 center">
+                        <span>40%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
                         </div>
                     </div>
                 </div>
@@ -141,16 +132,11 @@
             </div>
             <div class="skill">
                 <div class="container three">
-                    <div class="circular">
-                        <div class="inner"></div>
-                        <div class="number">50%</div>
-                        <div class="circle">
-                            <div class="bar left">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="bar right">
-                                <div class="progress"></div>
-                            </div>
+                    <div class="c100 dark green p50 center">
+                        <span>50%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
                         </div>
                     </div>
                 </div>
