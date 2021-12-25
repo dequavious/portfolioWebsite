@@ -41,7 +41,6 @@ navLinks.forEach((link)=>{
         responsiveToggle.classList.remove('open');
         responsiveNavBar.classList.remove("show");
         menuOpen = false;
-        selectFunction();
         selectFunctionResponsive();
     });
 });

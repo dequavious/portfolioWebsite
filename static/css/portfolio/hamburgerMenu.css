@@ -1,7 +1,7 @@
 .toggle {
   position: relative;
   width: 30px;
-  height: 50px;
+  /*height: 50px;*/
   cursor: pointer;
   transition: all .5s ease-in-out;
 }
