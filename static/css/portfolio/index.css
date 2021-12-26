@@ -654,27 +654,7 @@ footer .section .brand h2 {
     display: none;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 650px) {
-  .hero .image {
-    position: initial;
-  }
-  .hero .image img {
-    position: initial;
-    height: 100%;
-    width: 100%;
-  }
-}
-@media screen and (min-width: 650px) and (max-width: 1175px) {
-  .hero .image {
-    position: initial;
-  }
-  .hero .image img {
-    position: initial;
-    height: 50%;
-    width: 50%;
-  }
-}
-@media screen and (min-width: 280px) and (max-width: 1175px) {
+@media screen and (min-width: 280px) and (max-width: 600px) {
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -689,6 +669,30 @@ footer .section .brand h2 {
   .hero .content .title h1 {
     white-space: nowrap;
     font-size: 2rem;
+  }
+  .hero .image {
+    position: initial;
+  }
+  .hero .image img {
+    position: initial;
+    height: 100%;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 1175px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    overflow: hidden;
+    height: 60vh;
+  }
+  .hero .image {
+    position: initial;
+  }
+  .hero .image img {
+    position: initial;
+    height: 75%;
+    width: 75%;
   }
 }
 /* Extra small devices (phones, 600px and down) */
