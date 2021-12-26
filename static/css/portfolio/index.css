@@ -654,7 +654,7 @@ footer .section .brand h2 {
     display: none;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 600px) {
+@media screen and (min-width: 280px) and (max-width: 499px) {
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -679,7 +679,7 @@ footer .section .brand h2 {
     width: 100%;
   }
 }
-@media screen and (min-width: 600px) and (max-width: 1175px) {
+@media screen and (min-width: 500px) and (max-width: 1175px) {
   .hero {
     display: grid;
     grid-template-columns: 50% 50%;
