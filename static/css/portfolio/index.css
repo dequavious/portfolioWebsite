@@ -80,6 +80,7 @@ button {
   text-align: center;
 }
 .title__container h2 {
+  white-space: nowrap;
   color: white;
 }
 .title__container p {
@@ -630,10 +631,6 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 320px) and (max-width: 499px) {
-  .navbar .brand__container .brand {
-    font-size: small;
-  }
-
   .hero {
     margin: 0 10vw;
     display: flex;
