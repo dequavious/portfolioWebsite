@@ -602,6 +602,11 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 280px) and (max-width: 319px) {
+  dt {
+    white-space: nowrap;
+    font-size: 1rem;
+  }
+
   .navbar .brand__container .brand {
     font-size: small;
   }
@@ -631,6 +636,11 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 320px) and (max-width: 499px) {
+  dt {
+    white-space: nowrap;
+    font-size: 1.125rem;
+  }
+
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -656,6 +666,11 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 500px) and (max-width: 599px) {
+  dt {
+    white-space: nowrap;
+    font-size: 1.125rem;
+  }
+
   .navbar .brand__container .brand {
     font-size: small;
   }
@@ -683,6 +698,11 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 600px) and (max-width: 1175px) {
+  dt {
+    white-space: nowrap;
+    font-size: 1.25rem;
+  }
+
   .navbar .brand__container .brand {
     font-size: small;
   }
@@ -733,7 +753,7 @@ footer .section .brand h2 {
     font-size: small;
   }
 
-  dt, dd {
+  dd {
     white-space: nowrap;
     font-size: small;
     overflow: auto;
@@ -760,7 +780,7 @@ footer .section .brand h2 {
     gap: 2rem;
   }
 
-  dt, dd {
+  dd {
     white-space: nowrap;
     font-size: small;
     overflow: auto;
@@ -787,7 +807,7 @@ footer .section .brand h2 {
     gap: 2rem;
   }
 
-  dt, dd {
+  dd {
     white-space: nowrap;
     font-size: medium;
     overflow: auto;
@@ -807,6 +827,10 @@ footer .section .brand h2 {
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  dt {
+    font-size: 1.25rem;
+  }
+
   .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -816,6 +840,10 @@ footer .section .brand h2 {
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  dt {
+    font-size: 1.25rem;
+  }
+
   .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
