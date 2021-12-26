@@ -668,7 +668,7 @@ footer .section .brand h2 {
   }
   .hero .content .title h1 {
     white-space: normal;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   .hero .image {
     position: initial;
@@ -706,9 +706,10 @@ footer .section .brand h2 {
 }
 @media screen and (min-width: 500px) and (max-width: 599px) {
   .hero {
+    margin: 0 10vw;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 100%;
+    height: 60%;
     overflow: hidden;
   }
   .hero .content {
@@ -729,9 +730,10 @@ footer .section .brand h2 {
 }
 @media screen and (min-width: 600px) and (max-width: 1175px) {
   .hero {
+    margin: 0 10vw;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 100%;
+    height: 60%;
     overflow: hidden;
   }
   .hero .content {
@@ -746,8 +748,8 @@ footer .section .brand h2 {
   }
   .hero .image img {
     position: initial;
-    height: 100%;
-    width: 100%;
+    height: 75%;
+    width: 75%;
   }
 }
 /* Extra small devices (phones, 600px and down) */
