@@ -67,6 +67,13 @@
 }
 
 @media screen and (min-width: 280px) and (max-width: 319px) {
+  .navbar {
+    .brand__container {
+      .brand {
+        font-size: small;
+      }
+    }
+  }
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -95,6 +102,13 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 499px) {
+  .navbar {
+    .brand__container {
+      .brand {
+        font-size: small;
+      }
+    }
+  }
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -123,11 +137,17 @@
 }
 
 @media screen and (min-width: 500px) and (max-width: 599px) {
+  .navbar {
+    .brand__container {
+      .brand {
+        font-size: small;
+      }
+    }
+  }
   .hero {
-    margin: 0 10vw;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 60%;
+    height: 100%;
     overflow: hidden;
     .content {
       align-items: start;
@@ -150,11 +170,17 @@
 }
 
 @media screen and (min-width: 600px) and (max-width: 1175px) {
+  .navbar {
+    .brand__container {
+      .brand {
+        font-size: small;
+      }
+    }
+  }
   .hero {
-    margin: 0 10vw;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 60%;
+    height: 100%;
     overflow: hidden;
     .content {
       align-items: start;

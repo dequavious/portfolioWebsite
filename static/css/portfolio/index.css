@@ -31,60 +31,6 @@ ul {
   background-color: #45b649;
 }
 
-#about::before {
-  display: block;
-  content: " ";
-  margin-top: -80px;
-  height: 80px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#skills::before {
-  display: block;
-  content: " ";
-  margin-top: -80px;
-  height: 80px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#portfolio::before {
-  display: block;
-  content: " ";
-  margin-top: -80px;
-  height: 80px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#programming::before {
-  display: block;
-  content: " ";
-  margin-top: -80px;
-  height: 80px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#info::before {
-  display: block;
-  content: " ";
-  margin-top: -80px;
-  height: 80px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#contact::before {
-  display: block;
-  content: " ";
-  margin-top: -80px;
-  height: 80px;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 .gradient {
   background: var(--gradient);
 }
@@ -655,6 +601,10 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 280px) and (max-width: 319px) {
+  .navbar .brand__container .brand {
+    font-size: small;
+  }
+
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -680,6 +630,10 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 320px) and (max-width: 499px) {
+  .navbar .brand__container .brand {
+    font-size: small;
+  }
+
   .hero {
     margin: 0 10vw;
     display: flex;
@@ -705,11 +659,14 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 500px) and (max-width: 599px) {
+  .navbar .brand__container .brand {
+    font-size: small;
+  }
+
   .hero {
-    margin: 0 10vw;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 60%;
+    height: 100%;
     overflow: hidden;
   }
   .hero .content {
@@ -729,11 +686,14 @@ footer .section .brand h2 {
   }
 }
 @media screen and (min-width: 600px) and (max-width: 1175px) {
+  .navbar .brand__container .brand {
+    font-size: small;
+  }
+
   .hero {
-    margin: 0 10vw;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 60%;
+    height: 100%;
     overflow: hidden;
   }
   .hero .content {

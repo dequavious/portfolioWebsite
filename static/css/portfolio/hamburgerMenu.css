@@ -1,7 +1,7 @@
 .toggle {
   position: relative;
   width: 30px;
-  /*height: 50px;*/
+  height: 100%;
   cursor: pointer;
   transition: all .5s ease-in-out;
 }
@@ -31,15 +31,14 @@
 .menu-btn__burger::after {
   transform: translateY(10px);
 }
-/* ANIMATION */
+
 .toggle.open .menu-btn__burger {
-  transform: translateX(-50px);
   background: transparent;
   box-shadow: none;
 }
 .toggle.open .menu-btn__burger::before {
-  transform: rotate(45deg) translate(35px, -35px);
+  transform: rotate(45deg);
 }
 .toggle.open .menu-btn__burger::after {
-  transform: rotate(-45deg) translate(35px, 35px);
+  transform: rotate(-45deg);
 }
