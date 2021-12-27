@@ -272,11 +272,29 @@
     }
 }
 
+@media only screen and (min-width: 600px) and (min-width: 632px) {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      color: white;
+      gap: 2rem;
+    }
+}
+
+@media only screen and (min-width: 633px) {
+    .container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      color: white;
+      gap: 2rem;
+    }
+}
+
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 50% 50%;
       color: white;
       gap: 2rem;
     }
