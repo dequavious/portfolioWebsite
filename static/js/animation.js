@@ -23,7 +23,7 @@ const springArrayR = [
 const sr2 = ScrollReveal({
     origin:"right",
     distance:"50%",
-    reset:false
+    reset:true
 });
 
 sr2.reveal(springArrayR,{ desktop: false });
@@ -37,7 +37,7 @@ const springArrayL = [
 const sr3 = ScrollReveal({
     origin:"left",
     distance:"50%",
-    reset:false
+    reset:true
 });
 
 sr3.reveal(springArrayL,{ desktop: false });
