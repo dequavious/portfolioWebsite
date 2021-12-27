@@ -67,6 +67,15 @@
 }
 
 @media screen and (min-width: 280px) and (max-width: 319px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    color: white;
+    gap: 2rem;
+    .stack {
+      font-size: small;
+    }
+  }
   dt {
     white-space: nowrap;
     font-size: 1rem;
@@ -137,6 +146,27 @@
   }
 }
 
+@media screen and (min-width: 320px) and (max-width: 544px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    color: white;
+    gap: 2rem;
+  }
+}
+
+@media screen and (min-width: 545px) and (max-width: 632px) {
+  .container {
+    .stack {
+      font-size: small;
+    }
+    display: grid;
+    grid-template-columns: 50% 50%;
+    color: white;
+    gap: 2rem;
+  }
+}
+
 @media screen and (min-width: 500px) and (max-width: 599px) {
   dt {
     white-space: nowrap;
@@ -175,6 +205,15 @@
 }
 
 @media screen and (min-width: 600px) and (max-width: 1175px) {
+  //.container {
+  //    .stack {
+  //      font-size: medium;
+  //    }
+  //    display: grid;
+  //    grid-template-columns: 50% 50%;
+  //    color: white;
+  //    gap: 2rem;
+  //  }
   dt {
     white-space: nowrap;
     font-size: 1.25rem;
@@ -213,12 +252,6 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
-      color: white;
-      gap: 2rem;
-    }
     .hobbies-container {
         display: flex;
         flex-direction: column;
@@ -251,8 +284,11 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .container {
+      .stack {
+        font-size: small;
+      }
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 50% 50%;
       color: white;
       gap: 2rem;
     }
@@ -272,21 +308,15 @@
     }
 }
 
-@media only screen and (min-width: 600px) and (min-width: 632px) {
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
-      color: white;
-      gap: 2rem;
-    }
-}
-
 @media only screen and (min-width: 633px) {
     .container {
       display: grid;
       grid-template-columns: 50% 50%;
       color: white;
       gap: 2rem;
+      .stack {
+        font-size: medium;
+      }
     }
 }
 
@@ -316,9 +346,24 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      color: white;
+      gap: 2rem;
+    }
     dt {
       font-size: 1.25rem;
     }
+    .container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      color: white;
+      gap: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1030px) {
     .container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
