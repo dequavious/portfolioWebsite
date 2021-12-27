@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 4rem;
-    padding: 25px;
+    padding: 30px;
     position: relative;
     background-color: #181818;
 }
@@ -14,5 +14,8 @@
     width: 5rem;
     height: 5rem;
     filter: brightness(0) invert(1);
+  }
+  h3 {
+    font-size: small;
   }
 }
