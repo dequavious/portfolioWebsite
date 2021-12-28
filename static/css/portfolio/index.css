@@ -920,13 +920,24 @@ footer .section .brand h2 {
   }
 }
 .edu-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   color: white;
   gap: 2rem;
   padding: 25px;
   position: relative;
   background-color: #181818;
+}
+.edu-container .design {
+  width: 100%;
+}
+.edu-container .design h2 {
+  text-align: start;
+}
+.edu-container .design table {
+  background: inherit;
+  border: none;
+  display: inline-block;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .exp-container {
