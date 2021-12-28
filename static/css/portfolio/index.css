@@ -758,22 +758,16 @@ footer .section .brand h2 {
     width: 75%;
   }
 }
-@media only screen and (min-width: 280px) and (max-width: 395px) {
+@media only screen and (min-width: 280px) and (max-width: 408px) {
   .hobbies-container {
     display: flex;
     flex-direction: column;
   }
 }
-@media only screen and (min-width: 396px) and (max-width: 534px) {
+@media only screen and (min-width: 409px) and (max-width: 600px) {
   .hobbies-container {
     display: grid;
-    grid-template-columns: 50% 50%;
-  }
-}
-@media only screen and (min-width: 535px) and (max-width: 600px) {
-  .hobbies-container {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 /* Extra small devices (phones, 600px and down) */
@@ -798,6 +792,11 @@ footer .section .brand h2 {
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  .hobbies-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .container {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -826,6 +825,12 @@ footer .section .brand h2 {
     font-size: small;
   }
 }
+@media only screen and (min-width: 616px) {
+  .hobbies-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 @media only screen and (min-width: 633px) {
   .container {
     display: grid;
@@ -839,11 +844,9 @@ footer .section .brand h2 {
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .container {
+  .hobbies-container {
     display: grid;
-    grid-template-columns: 50% 50%;
-    color: white;
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   dd {
@@ -866,6 +869,11 @@ footer .section .brand h2 {
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .hobbies-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .container {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -894,6 +902,12 @@ footer .section .brand h2 {
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  .hobbies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
   dt {
     font-size: 1.25rem;
   }
@@ -926,9 +940,6 @@ footer .section .brand h2 {
 }
 
 .hobbies-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   gap: 4rem;
   padding: 30px;
   position: relative;

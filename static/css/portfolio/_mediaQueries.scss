@@ -241,24 +241,17 @@
   }
 }
 
-@media only screen and (min-width: 280px) and (max-width: 395px) {
+@media only screen and (min-width: 280px) and (max-width: 408px) {
   .hobbies-container {
     display: flex;
     flex-direction: column;
   }
 }
 
-@media only screen and (min-width: 396px) and (max-width: 534px) {
+@media only screen and (min-width: 409px) and (max-width: 600px) {
   .hobbies-container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-  }
-}
-
-@media only screen and (min-width: 535px) and (max-width: 600px) {
-  .hobbies-container {
-    display: flex;
-    flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -282,6 +275,10 @@
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+    .hobbies-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
     .container {
       .stack {
         font-size: small;
@@ -307,6 +304,13 @@
     }
 }
 
+@media only screen and (min-width: 616px) {
+  .hobbies-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media only screen and (min-width: 633px) {
     .container {
       display: grid;
@@ -321,12 +325,10 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .container {
+  .hobbies-container {
       display: grid;
-      grid-template-columns: 50% 50%;
-      color: white;
-      gap: 2rem;
-    }
+      grid-template-columns: repeat(3, 1fr);
+  }
     dd {
         white-space: nowrap;
         font-size:medium;
@@ -345,6 +347,10 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .hobbies-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+  }
   .container {
       display: grid;
       grid-template-columns: 50% 50%;
@@ -373,6 +379,11 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    .hobbies-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
     dt {
       font-size: 1.25rem;
     }
