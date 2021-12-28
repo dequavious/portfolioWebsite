@@ -241,14 +241,14 @@
   }
 }
 
-@media only screen and (min-width: 280px) and (max-width: 408px) {
+@media only screen and (min-width: 280px) and (max-width: 389px) {
   .hobbies-container {
     display: flex;
     flex-direction: column;
   }
 }
 
-@media only screen and (min-width: 409px) and (max-width: 600px) {
+@media only screen and (min-width: 390px) and (max-width: 600px) {
   .hobbies-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
