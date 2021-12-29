@@ -5,4 +5,12 @@
     align-items: center;
     position: relative;
   }
+  p {
+    i {
+      @include gradientText;
+      font-size: 64px;
+    }
+    font-size: x-large;
+    white-space: normal;
+  }
 }
