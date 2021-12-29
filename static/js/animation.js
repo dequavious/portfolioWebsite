@@ -41,3 +41,12 @@ const sr3 = ScrollReveal({
 });
 
 sr3.reveal(springArrayL,{ desktop: false });
+
+const sr4 = ScrollReveal({
+    origin:"left",
+    distance:"50%",
+    duration:3000,
+    reset:true
+});
+
+sr4.reveal('#about');
