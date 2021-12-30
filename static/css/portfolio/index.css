@@ -559,15 +559,6 @@ footer .section .title {
   color: white;
   margin-bottom: 1.3rem;
 }
-footer .section button {
-  margin-top: 1rem;
-  box-shadow: 2px 1000px 1px #181818 inset;
-}
-footer .section button a {
-  width: 100%;
-  text-decoration: none;
-  color: white;
-}
 footer .section ul {
   display: flex;
   flex-direction: column;
@@ -578,6 +569,15 @@ footer .section ul li {
   gap: 1rem;
   transition: 0.5s ease-in-out;
   cursor: pointer;
+}
+footer .section .footContact a {
+  text-decoration: none;
+  color: white;
+  width: max-content;
+}
+footer .section .footContact a button {
+  margin-top: 1rem;
+  box-shadow: 2px 1000px 1px #181818 inset;
 }
 footer .section .footContact li:hover {
   color: white !important;
