@@ -32,9 +32,26 @@
       }
     }
   }
+}
+
+@media screen and (min-width: 280px) and (max-width: 920px) {
   .footer {
-    padding: 50px;
-    align-items: center;
+    padding: 5vw 10vw;
+    grid-template-columns: 1fr;
+    gap: 10vw;
+  }
+  .lower__footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 5vw;
+    gap: 1rem;
+  }
+}
+
+
+@media screen and (min-width: 921px) and (max-width: 1196px) {
+  .footer {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

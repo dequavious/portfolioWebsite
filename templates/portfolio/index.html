@@ -416,8 +416,38 @@
             <div class="brand">
                 <h2>Portfolio website.</h2>
             </div>
+            <ul class="social">
+                <li><a href="https://www.linkedin.com/in/christiaan-slabbert-9070b922a/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="https://github.com/dequavious" target="_blank"><i class="fa fa-github"></i></a></li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3 class="title">Get in touch</h3>
+            <ul class="footContact">
+                <li><i class="fas fa-phone"></i> {{ user.number }}</li>
+                <li><i class="far fa-envelope-open"></i> {{ user.email }}</li>
+            </ul>
+            <a href="#contact"><button>Send message</button></a>
+        </div>
+         <div class="section">
+            <h3 class="title">Popular tags</h3>
+            <ul class="footList tags">
+                <li>Web</li>
+                <li>Development</li>
+                <li>Backend</li>
+                <li>Frontend</li>
+                <li>Fullstack</li>
+                <li>Applications</li>
+                <li>Databases</li>
+                <li>Software</li>
+                <li>Programming</li>
+            </ul>
         </div>
     </footer>
+    <div class="lower__footer">
+        <span>{{ user.name }} {{ user.surname }}</span>
+        <span><i class="fa fa-copyright"></i> 2021 all rights reserved.</span>
+    </div>
     <script src="{% static "js/animation.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
     <script>

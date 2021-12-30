@@ -539,6 +539,9 @@ tr {
 }
 
 footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
   background-color: #181818;
   align-items: center;
   gap: 5rem;
@@ -551,6 +554,75 @@ footer .section .brand h2 {
   -webkit-text-fill-color: transparent;
   font-size: 3rem;
   margin-bottom: 1rem;
+}
+footer .section .title {
+  color: white;
+  margin-bottom: 1.3rem;
+}
+footer .section a {
+  text-decoration: none;
+}
+footer .section a button {
+  margin-top: 1rem;
+  box-shadow: 2px 1000px 1px #181818 inset;
+}
+footer .section ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+footer .section ul li {
+  display: flex;
+  gap: 1rem;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+footer .section .footContact li:hover {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+footer .section .social {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+footer .section .social a {
+  color: #818080;
+}
+footer .section .social a i {
+  font-size: 1.2rem;
+  transition: 0.5s ease-in-out;
+}
+footer .section .social a:hover .fa-github {
+  color: white;
+}
+footer .section .social a:hover .fa-linkedin-in {
+  color: #0e76a8;
+}
+footer .section .tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+footer .section .tags li {
+  padding: 0.5rem;
+  width: max-content;
+  border: 1px solid #818080;
+}
+footer .section .tags li:hover {
+  color: white !important;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lower__footer {
+  color: #818080;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 14rem;
 }
 
 @media screen and (min-width: 280px) and (max-width: 1080px) {
@@ -580,10 +652,24 @@ footer .section .brand h2 {
   .contact .left .form input, .contact .left .form textarea {
     padding-right: 10vw;
   }
-
+}
+@media screen and (min-width: 280px) and (max-width: 920px) {
   .footer {
-    padding: 50px;
-    align-items: center;
+    padding: 5vw 10vw;
+    grid-template-columns: 1fr;
+    gap: 10vw;
+  }
+
+  .lower__footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 5vw;
+    gap: 1rem;
+  }
+}
+@media screen and (min-width: 921px) and (max-width: 1196px) {
+  .footer {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media screen and (min-width: 280px) and (max-width: 1470px) {
