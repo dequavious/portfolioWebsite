@@ -32,19 +32,18 @@ footer {
       }
     }
     .footContact {
-        a {
-          text-decoration: none;
-          color: white;
-          width: max-content;
-          button {
-            margin-top: 1rem;
-            box-shadow: 2px 1000px 1px #181818 inset;
-          }
-        }
       li {
         &:hover {
           color: white !important;
           @include gradientText;
+        }
+      }
+      a {
+        width: max-content;
+        text-decoration: none;
+        color: white;
+        button {
+          box-shadow: 2px 1000px 1px #181818 inset;
         }
       }
     }
