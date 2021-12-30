@@ -40,6 +40,7 @@ footer {
     .footContact {
       li {
         &:hover {
+          color: white !important;
           @include gradientText;
         }
       }

@@ -578,6 +578,7 @@ footer .section ul li {
   cursor: pointer;
 }
 footer .section .footContact li:hover {
+  color: white !important;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
