@@ -559,12 +559,14 @@ footer .section .title {
   color: white;
   margin-bottom: 1.3rem;
 }
-footer .section a {
-  text-decoration: none;
-}
-footer .section a button {
+footer .section button {
   margin-top: 1rem;
   box-shadow: 2px 1000px 1px #181818 inset;
+}
+footer .section button a {
+  width: 100%;
+  text-decoration: none;
+  color: white;
 }
 footer .section ul {
   display: flex;
