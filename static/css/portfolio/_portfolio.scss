@@ -6,7 +6,7 @@
     color: white;
     gap: 2rem;
     .design {
-      .proj-container {
+      .proj-container:nth-child(1), .proj-container:nth-child(2), .proj-container:nth-child(3), .proj-container:nth-child(4), .proj-container:nth-child(5){
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -15,6 +15,22 @@
         background-color: #181818;
         padding: 2rem;
         text-align: center;
+        transition: 0.5s ease-in-out;
+        &:after {
+            content: '';
+            position: absolute;
+            width: 103%;
+            height: 101%;
+            top: 1rem;
+            right: 0;
+            z-index: -12;
+        }
+        &:hover  img {
+            filter: invert(1);
+        }
+        &:hover:after {
+            outline: 2px solid $white;
+        }
       }
     }
   }

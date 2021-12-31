@@ -19,6 +19,11 @@ button {
     gap: 1rem;
     align-items: center;
     cursor: pointer;
+    transition: 0.5s ease-in-out;
+    &:hover {
+      filter: hue-rotate(90deg);
+      background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
+    }
 }
 
 .spring {

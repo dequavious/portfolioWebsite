@@ -52,6 +52,11 @@ button {
   gap: 1rem;
   align-items: center;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+button:hover {
+  filter: hue-rotate(90deg);
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
 }
 
 .spring {
@@ -459,7 +464,7 @@ tr {
   color: white;
   gap: 2rem;
 }
-.portfolio .portfolio__container .design .proj-container {
+.portfolio .portfolio__container .design .proj-container:nth-child(1), .portfolio .portfolio__container .design .proj-container:nth-child(2), .portfolio .portfolio__container .design .proj-container:nth-child(3), .portfolio .portfolio__container .design .proj-container:nth-child(4), .portfolio .portfolio__container .design .proj-container:nth-child(5) {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -468,6 +473,22 @@ tr {
   background-color: #181818;
   padding: 2rem;
   text-align: center;
+  transition: 0.5s ease-in-out;
+}
+.portfolio .portfolio__container .design .proj-container:nth-child(1):after, .portfolio .portfolio__container .design .proj-container:nth-child(2):after, .portfolio .portfolio__container .design .proj-container:nth-child(3):after, .portfolio .portfolio__container .design .proj-container:nth-child(4):after, .portfolio .portfolio__container .design .proj-container:nth-child(5):after {
+  content: "";
+  position: absolute;
+  width: 103%;
+  height: 101%;
+  top: 1rem;
+  right: 0;
+  z-index: -12;
+}
+.portfolio .portfolio__container .design .proj-container:nth-child(1):hover img, .portfolio .portfolio__container .design .proj-container:nth-child(2):hover img, .portfolio .portfolio__container .design .proj-container:nth-child(3):hover img, .portfolio .portfolio__container .design .proj-container:nth-child(4):hover img, .portfolio .portfolio__container .design .proj-container:nth-child(5):hover img {
+  filter: invert(1);
+}
+.portfolio .portfolio__container .design .proj-container:nth-child(1):hover:after, .portfolio .portfolio__container .design .proj-container:nth-child(2):hover:after, .portfolio .portfolio__container .design .proj-container:nth-child(3):hover:after, .portfolio .portfolio__container .design .proj-container:nth-child(4):hover:after, .portfolio .portfolio__container .design .proj-container:nth-child(5):hover:after {
+  outline: 2px solid #FFFFFF;
 }
 
 .proj__link {
