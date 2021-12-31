@@ -1,3 +1,7 @@
+n =  new Date();
+y = n.getFullYear();
+document.getElementById("date").innerHTML = "<i class=\"fa fa-copyright\"></i> " + y +  ", All rights reserved."
+
 const scrollToTop = document.querySelector(".scrollToTop");
 scrollToTop.addEventListener("click", ()=>{
     window.scrollTo({top:0});
