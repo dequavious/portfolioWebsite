@@ -674,7 +674,7 @@ footer .section .tags li:hover {
     gap: 1rem;
   }
 }
-@media screen and (min-width: 921px) and (max-width: 1196px) {
+@media screen and (min-width: 921px) and (max-width: 1446px) {
   .footer {
     grid-template-columns: repeat(3, 1fr);
   }
