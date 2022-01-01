@@ -33,7 +33,6 @@
 }
 
 .toggle.open .menu-btn__burger {
-  position: fixed;
   background: transparent;
   box-shadow: none;
 }
