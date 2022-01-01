@@ -33,10 +33,12 @@ responsiveToggle.addEventListener("click", (e)=>{
         responsiveNavBar.classList.remove("show");
         menuOpen = false;
         selectFunctionResponsive();
+        document.querySelector(".menu-btn__burger").style.position = "relative";
       }
 });
 
 html.addEventListener("click", ()=>{
+    document.querySelector(".menu-btn__burger").style.position = "relative";
     responsiveToggle.classList.remove('open');
     responsiveNavBar.classList.remove("show");
     menuOpen = false;
@@ -50,6 +52,7 @@ navLinks.forEach((link)=>{
         responsiveNavBar.classList.remove("show");
         menuOpen = false;
         selectFunctionResponsive();
+        document.querySelector(".menu-btn__burger").style.position = "relative";
     });
 });
 
