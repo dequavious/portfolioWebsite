@@ -20,9 +20,15 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
         $(document).ready(function() {
-            setTimeout(function() {
-                $('body').addClass('loaded');
-            }, 1000);
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+                setTimeout(function() {
+                    $('body').addClass('loaded');
+                }, 0);
+            } else {
+                setTimeout(function() {
+                    $('body').addClass('loaded');
+                }, 1000);
+            }
         });
     </script>
 </head>
