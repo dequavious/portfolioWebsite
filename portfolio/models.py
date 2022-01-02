@@ -60,28 +60,11 @@ class Address(models.Model):
     country = models.CharField(max_length=60)
 
 
-class Language(models.Model):
-    language = models.CharField(unique=True, max_length=30)
+class Technology(models.Model):
+    name = models.CharField(unique=True, max_length=30)
+    type = models.CharField(max_length=256)
     confidence = models.CharField(max_length=256)
-    avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
-
-
-class Framework(models.Model):
-    framework = models.CharField(unique=True, max_length=30)
-    confidence = models.CharField(max_length=256)
-    avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
-
-
-class DBMS(models.Model):
-    dbms = models.CharField(unique=True, max_length=30)
-    confidence = models.CharField(max_length=256)
-    avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
-
-
-class Tool(models.Model):
-    tool = models.CharField(unique=True, max_length=30)
-    confidence = models.CharField(max_length=256)
-    avatar = models.ImageField(default=None, upload_to='images', max_length=256, null=True, blank=True)
+    avatar = models.ImageField(upload_to='images', max_length=256)
 
 
 class Hobby(models.Model):
@@ -133,3 +116,16 @@ class Education(models.Model):
 
     def __str__(self):
         return self
+
+
+class ProjectStack(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    technology = models.ForeignKey(Technology, on_delete=models.CASCADE)
+
+
+class Quote(models.Model):
+    quote = models.CharField(unique=True, max_length=256)
+    author = models.CharField(unique=True, max_length=256)
+
+    def __str__(self):
+        return self.quote

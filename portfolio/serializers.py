@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import CustomUser as User, Address, Document, Hobby, Language, Skill, Framework, DBMS, Work, Project, \
-    Education, Tool
+from .models import CustomUser as User, Address, Document, Hobby, Skill, Work, Project, \
+    Education, Technology, ProjectStack, Quote
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -33,27 +33,9 @@ class HobbySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class LanguageSerializer(serializers.ModelSerializer):
+class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Language
-        fields = '__all__'
-
-
-class FrameworkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Framework
-        fields = '__all__'
-
-
-class DBMSSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DBMS
-        fields = '__all__'
-
-
-class ToolSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tool
+        model = Technology
         fields = '__all__'
 
 
@@ -75,7 +57,19 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProjectStackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectStack
+        fields = '__all__'
+
+
 class EducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Education
+        fields = '__all__'
+
+
+class QuoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quote
         fields = '__all__'

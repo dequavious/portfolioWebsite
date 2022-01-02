@@ -1,11 +1,12 @@
 import imghdr
+import json
 import re
 
 from django.contrib.auth.hashers import check_password, make_password
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from rest_framework import status, exceptions
-from rest_framework.decorators import api_view, permission_classes, parser_classes, authentication_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -16,22 +17,32 @@ from django.contrib import messages
 
 from .serializers import *
 from .utils import *
-from .models import CustomUser as User, Document, Language, Hobby, Skill, Address, Framework, DBMS, Tool
+from .models import CustomUser as User, Document, Hobby, Skill, Address, Technology, Project, ProjectStack, Quote, \
+    Education
 
 
 def home(request):
     user = User.objects.get(id=1)
     user = UserSerializer(user, many=False)
-    lang = Language.objects.all()
-    lang = LanguageSerializer(lang, many=True)
-    technologies = Framework.objects.all()
-    technologies = FrameworkSerializer(technologies, many=True)
-    db = DBMS.objects.all()
-    db = DBMSSerializer(db, many=True)
-    tool_list = Tool.objects.all()
-    tool_serializer = ToolSerializer(tool_list, many=True)
+
+    techs = Technology.objects.all().order_by('type')
+    techs = TechnologySerializer(techs, many=True)
+
+    langs = Technology.objects.all().filter(type='Language')
+    langs = TechnologySerializer(langs, many=True)
+
+    fworks = Technology.objects.all().filter(type='Framework')
+    fworks = TechnologySerializer(fworks, many=True)
+
+    db = Technology.objects.all().filter(type='Database')
+    db = TechnologySerializer(db, many=True)
+
+    tool_list = Technology.objects.all().filter(type='Tool')
+    tool_serializer = TechnologySerializer(tool_list, many=True)
+
     interests = Hobby.objects.all()
     interests = HobbySerializer(interests, many=True)
+
     skills = Skill.objects.all()
     skills = SkillSerializer(skills, many=True)
 
@@ -41,12 +52,26 @@ def home(request):
     proj = Project.objects.all()
     proj = ProjectSerializer(proj, many=True)
 
+    stack = ProjectStack.objects.all()
+    stack = ProjectStackSerializer(stack, many=True)
+
     degrees = Education.objects.all()
     degrees = EducationSerializer(degrees, many=True)
 
-    context = {'user': user.data, 'languages': lang.data, 'frameworks': technologies.data,
-               'databases': db.data, 'tools': tool_serializer.data, 'hobbies': interests.data, 'skills': skills.data,
-               'jobs': jobs.data, 'projects': proj.data, 'degrees': degrees.data}
+    quotes = Quote.objects.all().filter(id=1)
+    if quotes:
+        quote = quotes.first()
+        quote = QuoteSerializer(quote, many=False)
+        context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
+                   'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
+                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data, 'stack': stack.data,
+                   'degrees': degrees.data, 'quote': quote}
+    else:
+        context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
+                   'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
+                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data, 'stack': stack.data,
+                   'degrees': degrees.data}
+
     return render(request, 'portfolio/index.html', context)
 
 
@@ -166,11 +191,20 @@ def details(request):
         return redirect('login page')
 
     user = UserSerializer(user, many=False)
-
-    context = {
-        'token': request.session['token'],
-        'user': user.data,
-    }
+    quotes = Quote.objects.all().filter(id=1)
+    if quotes:
+        quote = quotes.first()
+        quote = QuoteSerializer(quote, many=False)
+        context = {
+            'token': request.session['token'],
+            'user': user.data,
+            'quote': quote.data,
+        }
+    else:
+        context = {
+            'token': request.session['token'],
+            'user': user.data,
+        }
 
     return render(request, 'admin/details.html', context)
 
@@ -323,16 +357,24 @@ def projects(request):
     proj = Project.objects.all()
     proj = ProjectSerializer(proj, many=True)
 
+    stack = ProjectStack.objects.all()
+    stack = ProjectStackSerializer(stack, many=True)
+
+    techs = Technology.objects.all()
+    techs = TechnologySerializer(techs, many=True)
+
     context = {
         'token': request.session['token'],
         'projects': proj.data,
+        'stack': stack.data,
+        'techs': techs.data,
     }
 
     return render(request, 'admin/projects.html', context)
 
 
 @permission_classes([IsAuthenticated])
-def languages(request):
+def technologies(request):
     user_id = request.session.get('user', None)
     if not user_id:
         return redirect('login page')
@@ -346,94 +388,15 @@ def languages(request):
     if not user.authenticated:
         return redirect('login page')
 
-    lang = Language.objects.all()
-    lang = LanguageSerializer(lang, many=True)
+    techs = Technology.objects.all()
+    techs = TechnologySerializer(techs, many=True)
 
     context = {
         'token': request.session['token'],
-        'languages': lang.data,
+        'techs': techs.data,
     }
 
-    return render(request, 'admin/languages.html', context)
-
-
-@permission_classes([IsAuthenticated])
-def frameworks(request):
-    user_id = request.session.get('user', None)
-    if not user_id:
-        return redirect('login page')
-
-    users = User.objects.all().filter(id=user_id)
-    if not users.exists():
-        return redirect('login page')
-    user = User.objects.get(id=user_id)
-    if not user.is_active:
-        return redirect('login page')
-    if not user.authenticated:
-        return redirect('login page')
-
-    technologies = Framework.objects.all()
-    technologies = FrameworkSerializer(technologies, many=True)
-
-    context = {
-        'token': request.session['token'],
-        'frameworks': technologies.data,
-    }
-
-    return render(request, 'admin/frameworks.html', context)
-
-
-@permission_classes([IsAuthenticated])
-def databases(request):
-    user_id = request.session.get('user', None)
-    if not user_id:
-        return redirect('login page')
-
-    users = User.objects.all().filter(id=user_id)
-    if not users.exists():
-        return redirect('login page')
-    user = User.objects.get(id=user_id)
-    if not user.is_active:
-        return redirect('login page')
-    if not user.authenticated:
-        return redirect('login page')
-
-    db = DBMS.objects.all()
-    db = DBMSSerializer(db, many=True)
-
-    context = {
-        'token': request.session['token'],
-        'databases': db.data,
-    }
-
-    return render(request, 'admin/databases.html', context)
-
-
-@permission_classes([IsAuthenticated])
-def tools(request):
-    user_id = request.session.get('user', None)
-    if not user_id:
-        return redirect('login page')
-
-    users = User.objects.all().filter(id=user_id)
-    if not users.exists():
-        return redirect('login page')
-    user = User.objects.get(id=user_id)
-    if not user.is_active:
-        return redirect('login page')
-    if not user.authenticated:
-        return redirect('login page')
-
-    technologies = Tool.objects.all()
-    technologies = ToolSerializer(technologies, many=True)
-
-    context = {
-        'token': request.session['token'],
-        'tools': technologies.data,
-    }
-
-    return render(request, 'admin/tools.html', context)
-
+    return render(request, 'admin/technologies.html', context)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -605,6 +568,23 @@ def update_details(request):
     if bio:
         user.bio = bio
         user.save()
+        just_email = False
+
+    quote = request.data.get('quote', None)
+    if quote:
+        author = request.data.get('author', None)
+        if not author:
+            messages.error(request, "Please provide an author for the quote.")
+            html = render_to_string('admin/details.html')
+            return HttpResponse(html)
+        old = Quote.objects.all().filter(id=1)
+        if old.exists():
+            old = old.first()
+            old.quote = quote
+            old.author = author
+        else:
+            new_quote = Quote(quote=quote, author=author)
+            new_quote.save()
         just_email = False
 
     image = request.data.get('file', None)
@@ -924,9 +904,9 @@ def save_address(request):
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser])
 @csrf_protect
-def add_language(request):
+def add_technology(request):
     """
-    View to add a programming language
+    View to add a technology
     """
     users = User.objects.all().filter(id=request.user.id)
     if not users.exists():
@@ -935,173 +915,40 @@ def add_language(request):
     if not user.authenticated:
         return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
 
-    language = request.data.get('language', None)
-    if not language:
-        return Response("language not provided", status=status.HTTP_400_BAD_REQUEST)
+    name = request.data.get('name', None)
+    if not name:
+        return Response("name not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    type = request.data.get('type', None)
+    if not type:
+        return Response("type not provided", status=status.HTTP_400_BAD_REQUEST)
+
 
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    lang = Language.objects.all().filter(language__iexact=language)
 
-    if lang.exists():
-        messages.error(request, "Language already added")
-        html = render_to_string('admin/languages.html')
+    avatar = request.data.get('avatar', None)
+    if not avatar:
+        return Response("avatar not provided", status=status.HTTP_400_BAD_REQUEST)
+
+    techs = Technology.objects.all().filter(name__iexact=name)
+
+    if techs.exists():
+        messages.error(request, "Technology already added")
+        html = render_to_string('admin/technologies.html')
         return HttpResponse(html)
 
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/languages.html')
-            return HttpResponse(html)
-        language = Language(language=language, confidence=confidence, avatar=avatar)
-    else:
-        language = Language(language=language, confidence=confidence)
-
-    language.save()
-
-    messages.success(request, "Language has been added.")
-    html = render_to_string('admin/languages.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser])
-@csrf_protect
-def update_language(request):
-    """
-    View to add update programming language
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    lid = request.GET.get('id')
-    if not lid:
-        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    lang = Language.objects.all().filter(id=lid)
-    if not lang.exists():
-        return Response("language not found", status=status.HTTP_400_BAD_REQUEST)
-
-    language = Language.objects.get(id=lid)
-
-    language_str = request.data.get('language', None)
-    if language_str:
-        lang = Language.objects.all().filter(language__iexact=language_str)
-
-        if lang.exists() and (int(lang.first().id) != int(lid)):
-            messages.error(request, "Language already added")
-            html = render_to_string('admin/languages.html')
-            return HttpResponse(html)
-        language.language = language_str
-        language.save()
-
-    confidence = request.data.get('confidence', None)
-    if confidence:
-        language.confidence = confidence
-        language.save()
-
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/languages.html')
-            return HttpResponse(html)
-        if language.avatar:
-            delete_file(language.avatar)
-        language.avatar = avatar
-        language.save()
-
-    messages.success(request, "Language has been updated.")
-    html = render_to_string('admin/languages.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@csrf_protect
-def delete_language(request):
-    """
-    View to delete a language
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    lid = request.GET.get('id')
-    if not lid:
-        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    lang = Language.objects.all().filter(id=lid)
-    if not lang.exists():
-        return Response("language not found", status=status.HTTP_400_BAD_REQUEST)
-
-    language = Language.objects.get(id=lid)
-
-    if language.avatar:
-        delete_file(language.avatar)
-
-    language.delete()
-
-    messages.success(request, "Language has been deleted.")
-    html = render_to_string('admin/languages.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser])
-@csrf_protect
-def add_framework(request):
-    """
-    View to add a framework
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    framework = request.data.get('framework', None)
-    if not framework:
-        return Response("framework not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    confidence = request.data.get('confidence', None)
-    if not confidence:
-        return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    technologies = Framework.objects.all().filter(framework__iexact=framework)
-
-    if technologies.exists():
-        messages.error(request, "Framework already added")
-        html = render_to_string('admin/frameworks.html')
+    if not imghdr.what(avatar):
+        messages.error(request, "Not a valid image format")
+        html = render_to_string('admin/technologies.html')
         return HttpResponse(html)
+    tech = Technology(name=name, type=type, confidence=confidence, avatar=avatar)
+    tech.save()
 
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/frameworks.html')
-            return HttpResponse(html)
-        framework = Framework(framework=framework, confidence=confidence, avatar=avatar)
-    else:
-        framework = Framework(framework=framework, confidence=confidence)
-
-    framework.save()
-
-    messages.success(request, "Framework has been added.")
-    html = render_to_string('admin/frameworks.html')
+    messages.success(request, "Technology has been added.")
+    html = render_to_string('admin/technologies.html')
     return HttpResponse(html)
 
 
@@ -1109,282 +956,9 @@ def add_framework(request):
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser])
 @csrf_protect
-def update_framework(request):
+def update_technology(request):
     """
-    View to update framework
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    fid = request.GET.get('id')
-    if not fid:
-        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    technologies = Framework.objects.all().filter(id=fid)
-    if not technologies.exists():
-        return Response("framework not found", status=status.HTTP_400_BAD_REQUEST)
-
-    framework = Framework.objects.get(id=fid)
-
-    framework_str = request.data.get('framework', None)
-    if framework_str:
-        technologies = Framework.objects.all().filter(framework__iexact=framework_str)
-
-        if technologies.exists() and (int(technologies.first().id) != int(fid)):
-            messages.error(request, "Framework already added")
-            html = render_to_string('admin/frameworks.html')
-            return HttpResponse(html)
-        framework.framework = framework_str
-        framework.save()
-
-    confidence = request.data.get('confidence', None)
-    if confidence:
-        framework.confidence = confidence
-        framework.save()
-
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/frameworks.html')
-            return HttpResponse(html)
-        if framework.avatar:
-            delete_file(framework.avatar)
-        framework.avatar = avatar
-        framework.save()
-
-    messages.success(request, "Framework has been updated.")
-    html = render_to_string('admin/frameworks.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@csrf_protect
-def delete_framework(request):
-    """
-    View to delete a framework
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    fid = request.GET.get('id')
-    if not fid:
-        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    technologies = Framework.objects.all().filter(id=fid)
-    if not technologies.exists():
-        return Response("framework not found", status=status.HTTP_400_BAD_REQUEST)
-
-    framework = Framework.objects.get(id=fid)
-
-    if framework.avatar:
-        delete_file(framework.avatar)
-
-    framework.delete()
-
-    messages.success(request, "Framework has been deleted.")
-    html = render_to_string('admin/frameworks.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser])
-@csrf_protect
-def add_dbms(request):
-    """
-    View to add a dbms
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    dbms = request.data.get('dbms', None)
-    if not dbms:
-        return Response("dbms not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    confidence = request.data.get('confidence', None)
-    if not confidence:
-        return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    db = DBMS.objects.all().filter(dbms__iexact=dbms)
-    if db.exists():
-        messages.error(request, "Database already added")
-        html = render_to_string('admin/databases.html')
-        return HttpResponse(html)
-
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/databases.html')
-            return HttpResponse(html)
-        dbms = DBMS(dbms=dbms, confidence=confidence, avatar=avatar)
-    else:
-        dbms = DBMS(dbms=dbms, confidence=confidence)
-
-    dbms.save()
-
-    messages.success(request, "Database has been added.")
-    html = render_to_string('admin/databases.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser])
-@csrf_protect
-def update_dbms(request):
-    """
-    View to add update dbms
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    did = request.GET.get('id')
-    if not did:
-        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    db = DBMS.objects.all().filter(id=did)
-    if not db.exists():
-        return Response("dbms not found", status=status.HTTP_400_BAD_REQUEST)
-
-    database = DBMS.objects.get(id=did)
-
-    dbms = request.data.get('dbms', None)
-    if dbms:
-        db = DBMS.objects.all().filter(dbms__iexact=dbms)
-        if db.exists() and (int(db.first().id) != int(did)):
-            messages.error(request, "Database already added")
-            html = render_to_string('admin/databases.html')
-            return HttpResponse(html)
-        database.dbms = dbms
-        database.save()
-
-    confidence = request.data.get('confidence', None)
-    if confidence:
-        database.confidence = confidence
-        database.save()
-
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/databases.html')
-            return HttpResponse(html)
-        if database.avatar:
-            delete_file(database.avatar)
-        database.avatar = avatar
-        database.save()
-
-    messages.success(request, "Database has been updated.")
-    html = render_to_string('admin/databases.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@csrf_protect
-def delete_dbms(request):
-    """
-    View to delete a dbms
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    did = request.GET.get('id')
-    if not did:
-        return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    db = DBMS.objects.all().filter(id=did)
-    if not db.exists():
-        return Response("dbms not found", status=status.HTTP_400_BAD_REQUEST)
-
-    database = DBMS.objects.get(id=did)
-
-    if database.avatar:
-        delete_file(database.avatar)
-
-    database.delete()
-
-    messages.success(request, "Database has been deleted.")
-    html = render_to_string('admin/databases.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser])
-@csrf_protect
-def add_tool(request):
-    """
-    View to add a tool
-    """
-    users = User.objects.all().filter(id=request.user.id)
-    if not users.exists():
-        return Response("user does not exist", status=status.HTTP_400_BAD_REQUEST)
-    user = User.objects.get(id=request.user.id)
-    if not user.authenticated:
-        return Response("account not authenticated", status=status.HTTP_400_BAD_REQUEST)
-
-    tool = request.data.get('tool', None)
-    if not tool:
-        return Response("tool not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    confidence = request.data.get('confidence', None)
-    if not confidence:
-        return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
-
-    tools = Tool.objects.all().filter(tool__iexact=tool)
-    if tools.exists():
-        messages.error(request, "Tool already added")
-        html = render_to_string('admin/tools.html')
-        return HttpResponse(html)
-
-    avatar = request.data.get('avatar', None)
-    if avatar:
-        if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/tools.html')
-            return HttpResponse(html)
-        tool = Tool(tool=tool, confidence=confidence, avatar=avatar)
-    else:
-        tool = Tool(tool=tool, confidence=confidence)
-
-    tool.save()
-
-    messages.success(request, "Tool has been added.")
-    html = render_to_string('admin/tools.html')
-    return HttpResponse(html)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser])
-@csrf_protect
-def update_tool(request):
-    """
-    View to add update tool
+    View to update a technology
     """
     users = User.objects.all().filter(id=request.user.id)
     if not users.exists():
@@ -1397,49 +971,58 @@ def update_tool(request):
     if not tid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    tools = Tool.objects.all().filter(id=tid)
-    if not tools.exists():
-        return Response("tool not found", status=status.HTTP_400_BAD_REQUEST)
+    techs = Technology.objects.all().filter(id=tid)
+    if not techs.exists():
+        return Response("technology not found", status=status.HTTP_400_BAD_REQUEST)
 
-    tool = Tool.objects.get(id=tid)
+    tech = Technology.objects.get(id=tid)
 
-    tool_str = request.data.get('tool', None)
-    if tool_str:
-        tools = Tool.objects.all().filter(tool__iexact=tool_str)
-        if tools.exists() and (int(tools.first().id) != int(tid)):
-            messages.error(request, "Tool already added")
-            html = render_to_string('admin/tools.html')
+    name = request.data.get('name', None)
+    if name:
+        techs = Technology.objects.all().filter(name__iexact=name)
+
+        if techs.exists() and (int(techs.first().id) != int(tid)):
+            messages.error(request, "Technology already exists")
+            html = render_to_string('admin/technologies.html')
             return HttpResponse(html)
-        tool.tool = tool_str
-        tool.save()
+        tech.name = name
+        tech.save()
+
+
+    type = request.data.get('type', None)
+    if type:
+        tech.type = type
+        tech.save()
+
 
     confidence = request.data.get('confidence', None)
     if confidence:
-        tool.confidence = confidence
-        tool.save()
+        tech.confidence = confidence
+        tech.save()
+
 
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
             messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/databases.html')
+            html = render_to_string('admin/technologies.html')
             return HttpResponse(html)
-        if tool.avatar:
-            delete_file(tool.avatar)
-        tool.avatar = avatar
-        tool.save()
+        if tech.avatar:
+            delete_file(tech.avatar)
+        tech.avatar = avatar
+        tech.save()
 
-    messages.success(request, "Tool has been updated.")
-    html = render_to_string('admin/tools.html')
+    messages.success(request, "Technology has been updated.")
+    html = render_to_string('admin/technologies.html')
     return HttpResponse(html)
 
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_protect
-def delete_tool(request):
+def delete_technology(request):
     """
-    View to delete a tool
+    View to delete a technology
     """
     users = User.objects.all().filter(id=request.user.id)
     if not users.exists():
@@ -1452,19 +1035,19 @@ def delete_tool(request):
     if not tid:
         return Response("id not provided", status=status.HTTP_400_BAD_REQUEST)
 
-    technologies = Tool.objects.all().filter(id=tid)
-    if not technologies.exists():
-        return Response("tool not found", status=status.HTTP_400_BAD_REQUEST)
+    techs = Technology.objects.all().filter(id=tid)
+    if not techs.exists():
+        return Response("technology not found", status=status.HTTP_400_BAD_REQUEST)
 
-    tool = Tool.objects.get(id=tid)
+    tech = Technology.objects.get(id=tid)
 
-    if tool.avatar:
-        delete_file(tool.avatar)
+    if tech.avatar:
+        delete_file(tech.avatar)
 
-    tool.delete()
+    tech.delete()
 
-    messages.success(request, "Tool has been deleted.")
-    html = render_to_string('admin/tools.html')
+    messages.success(request, "Technology has been deleted.")
+    html = render_to_string('admin/technologies.html')
     return HttpResponse(html)
 
 
@@ -1855,7 +1438,7 @@ def add_project(request):
         html = render_to_string('admin/strengths.html')
         return HttpResponse(html)
 
-    if git and proj:
+    if git and link:
         project = Project(title=title, description=description, git=git, link=link)
         project.save()
     elif git:
@@ -1867,6 +1450,17 @@ def add_project(request):
     else:
         project = Project(title=title, description=description)
         project.save()
+
+    stack = request.data.get('stack', None)
+    if stack:
+        stack = json.loads(stack)
+        for tech in stack:
+            techs = Technology.objects.all().filter(name=tech.get('technology'))
+            if not techs.exists():
+                return Response("technology not found", status=status.HTTP_400_BAD_REQUEST)
+            technology = techs.first()
+            new_entry = ProjectStack(project=project, technology=technology)
+            new_entry.save()
 
     messages.success(request, "Project has been added.")
     html = render_to_string('admin/projects.html')
@@ -1924,6 +1518,19 @@ def update_project(request):
     if link:
         project.link = link
         project.save()
+
+    stack = request.data.get('stack', None)
+    if stack:
+        old = ProjectStack.objects.all().filter(project=project)
+        old.delete()
+        stack = json.loads(stack)
+        for tech in stack:
+            techs = Technology.objects.all().filter(name=tech.get('technology'))
+            if not techs.exists():
+                return Response("technology not found", status=status.HTTP_400_BAD_REQUEST)
+            technology = techs.first()
+            new_entry = ProjectStack(project=project, technology=technology)
+            new_entry.save()
 
     messages.success(request, "Project has been updated.")
     html = render_to_string('admin/projects.html')
