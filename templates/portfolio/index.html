@@ -80,6 +80,7 @@
 
                         <div class="dropdown-content" id="myDropdown" style="display: none; z-index: 1000;">
                             <a onclick="selectFunction()" class="dropdown__item" href="{% url 'get document' %}?type=cv" target="_blank"><i class="fa fa-file-pdf-o"></i> CV</a>
+                            <a onclick="selectFunction()" class="dropdown__item" href="{% url 'get document' %}?type=bachelor" target="_blank"><i class="fa fa-file-pdf-o"></i> BSc Degree</a>
                             <a onclick="selectFunction()" class="dropdown__item" href="{% url 'get document' %}?type=record" target="_blank"><i class="fa fa-file-pdf-o"></i> Academic Record</a>
                         </div>
                    </div>
@@ -102,6 +103,7 @@
                         <button class="dropbtn" onclick="toggleFunctionResponsive()">Documents<i class="fa fa-caret-down"></i></button>
                         <div class="dropdown-content" id="myDropdownResponsive" style="display: none; z-index: 100;">
                             <a class="nav__link" style="font-size: small;" onclick="selectFunctionResponsive()" href="{% url 'get document' %}?type=cv" target="_blank"><i class="fa fa-file-pdf-o"></i> CV</a>
+                            <a class="nav__link" style="font-size: small;" onclick="selectFunctionResponsive()" href="{% url 'get document' %}?type=bachelor" target="_blank"><i class="fa fa-file-pdf-o"></i> BSc Degree</a>
                             <a class="nav__link" style="font-size: small;" onclick="selectFunctionResponsive()" href="{% url 'get document' %}?type=record" target="_blank"><i class="fa fa-file-pdf-o"></i> Academic Record</a>
                         </div>
                     </div>
@@ -409,7 +411,7 @@
             <div class="exp-container">
                 <div class="backgroundL"></div>
                 <div class="backgroundR"></div>
-                <div class="design" style="background-color: #181818;">
+                <div class="design">
                     {% for job in jobs %}
                         <dl>
                             <dt><i class="fa fa-briefcase" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ job.description }}</dt>

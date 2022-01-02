@@ -794,9 +794,9 @@ def upload_document(request):
 
     file_type = request.data.get('type', None)
     if not file_type:
-        return Response("no type (cv/record) provided", status=status.HTTP_400_BAD_REQUEST)
+        return Response("no type provided", status=status.HTTP_400_BAD_REQUEST)
 
-    if not ((file_type == "cv") or (file_type == "record")):
+    if not ((file_type == "cv") or (file_type == "bachelor") or (file_type == "honours") or (file_type == "record")):
         return Response("invalid type", status=status.HTTP_400_BAD_REQUEST)
 
     docs = Document.objects.all().filter(type=file_type)
@@ -822,7 +822,7 @@ def get_document(request):
     """
     file_type = request.GET.get('type')
     if not file_type:
-        return Response("no type (cv/record) provided", status=status.HTTP_400_BAD_REQUEST)
+        return Response("no type provided", status=status.HTTP_400_BAD_REQUEST)
 
     documents = Document.objects.all().filter(type=file_type)
     if not documents.exists():
@@ -849,7 +849,7 @@ def delete_document(request):
 
     file_type = request.GET.get('type')
     if not file_type:
-        return Response("no type (cv/record) provided", status=status.HTTP_400_BAD_REQUEST)
+        return Response("no type provided", status=status.HTTP_400_BAD_REQUEST)
 
     docs = Document.objects.all().filter(type=file_type)
     if docs.exists():

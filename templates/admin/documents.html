@@ -23,6 +23,40 @@
                 document.getElementById("uploadCvBtn").style.display = "none";
             }
         }
+        function uploadBach() {
+            var bool = false;
+            var input;
+
+            input = document.getElementById("uploadBachFile");
+            if (input !== undefined) {
+                if (input.value.length > 0) {
+                    bool = true;
+                }
+            }
+
+            if (bool) {
+                document.getElementById("uploadBachBtn").style.display = "block";
+            } else {
+                document.getElementById("uploadBachBtn").style.display = "none";
+            }
+        }
+        function uploadHon() {
+            var bool = false;
+            var input;
+
+            input = document.getElementById("uploadHonFile");
+            if (input !== undefined) {
+                if (input.value.length > 0) {
+                    bool = true;
+                }
+            }
+
+            if (bool) {
+                document.getElementById("uploadHonBtn").style.display = "block";
+            } else {
+                document.getElementById("uploadHohBtn").style.display = "none";
+            }
+        }
         function uploadRecord() {
             var bool = false;
             var input;
@@ -113,14 +147,28 @@
             <br>
 
             <script type="text/javascript">
-                if ("{{ document.type }}" === "cv") {
-                    add("cv");
-                    document.getElementById("{{ document.type }}Label1").innerHTML = "Current CV:";
-                    document.getElementById("{{ document.type }}Label2").innerHTML = "Replace CV:";
-                } else {
-                    add("record");
-                    document.getElementById("{{ document.type }}Label1").innerHTML = "Current academic record:";
-                    document.getElementById("{{ document.type }}Label2").innerHTML = "Replace academic record:";
+                switch ("{{ document.type }}") {
+                    case "cv":
+                        add("cv");
+                        document.getElementById("{{ document.type }}Label1").innerHTML = "Current CV:";
+                        document.getElementById("{{ document.type }}Label2").innerHTML = "Replace CV:";
+                        break;
+                    case "bachelor":
+                        add("bachelor");
+                        document.getElementById("{{ document.type }}Label1").innerHTML = "Current bachelor's degree:";
+                        document.getElementById("{{ document.type }}Label2").innerHTML = "Replace bachelor's degree:";
+                        break;
+                    case "honours":
+                        add("honours");
+                        document.getElementById("{{ document.type }}Label1").innerHTML = "Current honour's degree:";
+                        document.getElementById("{{ document.type }}Label2").innerHTML = "Replace honour's degree:";
+                        break;
+                    case "record":
+                        add("record");
+                        document.getElementById("{{ document.type }}Label1").innerHTML = "Current academic record:";
+                        document.getElementById("{{ document.type }}Label2").innerHTML = "Replace academic record:";
+                        break;
+                    default:
                 }
 
                 $(document).on('submit', '#updateForm{{ document.id }}', function(e) {
@@ -203,6 +251,38 @@
 
         <br>
 
+        <div id="uploadBachBorder" class="container-fluid bg-white border" style="display: none">
+            <br>
+            <form id="uploadBachForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
+                <label for="uploadBachFile">Upload bachelor's degree: </label>
+                <input type="file" oninput="uploadBach()" class="form-control" id="uploadBachFile" name="file" required>
+                <br>
+            </form>
+            <div id="bachButtons" class="clearfix">
+                <div class="float-end">
+                    <button id="uploadBachBtn" type="submit" class="btn" form="uploadBachForm" style="display: none"><i class="fa fa-upload text-secondary" style="font-size:36px;"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div id="uploadHonBorder" class="container-fluid bg-white border" style="display: none">
+            <br>
+            <form id="uploadHonForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
+                <label for="uploadHonFile">Upload honour's degree: </label>
+                <input type="file" oninput="uploadHon()" class="form-control" id="uploadHonFile" name="file" required>
+                <br>
+            </form>
+            <div id="honButtons" class="clearfix">
+                <div class="float-end">
+                    <button id="uploadHonBtn" type="submit" class="btn" form="uploadHonForm" style="display: none"><i class="fa fa-upload text-secondary" style="font-size:36px;"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
         <div id="uploadRecordBorder" class="container-fluid bg-white border" style="display: none">
             <br>
             <form id="uploadRecordForm" method="post" action="{% url 'upload document' %}" enctype="multipart/form-data" style="display: none">
@@ -234,6 +314,20 @@
             document.getElementById("uploadCvForm").style.display = "hidden";
             document.getElementById("uploadCvBorder").style.display = "hidden";
         }
+        if(types.indexOf("bachelor") === -1) {
+            document.getElementById("uploadBachForm").style.display = "block";
+            document.getElementById("uploadBachBorder").style.display = "block";
+        } else {
+            document.getElementById("uploadBachForm").style.display = "hidden";
+            document.getElementById("uploadBachBorder").style.display = "hidden";
+        }
+        if(types.indexOf("honours") === -1) {
+            document.getElementById("uploadHonForm").style.display = "block";
+            document.getElementById("uploadHonBorder").style.display = "block";
+        } else {
+            document.getElementById("uploadHonForm").style.display = "hidden";
+            document.getElementById("uploadHonBorder").style.display = "hidden";
+        }
         if(types.indexOf("record") === -1) {
             document.getElementById("uploadRecordForm").style.display = "block";
             document.getElementById("uploadRecordBorder").style.display = "block";
@@ -251,6 +345,68 @@
             data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
             data.append('type', 'cv');
             data.append('file', $('#uploadCvFile')[0].files[0]);
+
+            /* stop form from submitting normally */
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'upload document' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data:data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
+
+        $(document).on('submit', '#uploadBachForm', function(e) {
+
+            document.getElementById("uploadBachBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("uploadBachBtn").disabled = true;
+
+            var data = new FormData();
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('type', 'bachelor');
+            data.append('file', $('#uploadBachFile')[0].files[0]);
+
+            /* stop form from submitting normally */
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '{% url 'upload document' %}',
+                headers:{
+                  Authorization: 'Token {{ token }}'
+                },
+                data:data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success:function () {
+                    window.location.reload(true);
+                }
+            });
+        });
+
+        $(document).on('submit', '#uploadHonForm', function(e) {
+
+            document.getElementById("uploadHonBtn").innerHTML = "<div class=\"spinner-border\"></div>";
+            document.getElementById("uploadHonBtn").disabled = true;
+
+            var data = new FormData();
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            data.append('type', 'honours');
+            data.append('file', $('#uploadHonFile')[0].files[0]);
 
             /* stop form from submitting normally */
             e.preventDefault();
