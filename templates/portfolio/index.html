@@ -25,6 +25,22 @@
             }, 0);
         });
     </script>
+    <style>
+        .hobbyStack {
+            display:flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hobbyStack img {
+            height: 1.2rem;
+            width: 1.2rem;
+            transition: 0.5s ease-in-out;
+        }
+        .hobbyStack img:hover {
+            transform: scale(1.5);
+        }
+    </style>
 </head>
 <body id="home">
     <div id="loader-wrapper">
@@ -183,6 +199,15 @@
                 <div id="proj{{ proj.id }}" class="proj-container">
                     <h3>{{ proj.title }}</h3>
                     <p>{{ proj.description }}</p>
+                    <div class="hobbyStack">
+                        <img src="{% static 'images/html.png' %}" alt=""/>
+                        <img src="{% static 'images/css.png' %}" alt=""/>
+                        <img src="{% static 'images/js.png' %}" alt=""/>
+                        <img src="{% static 'images/python.png' %}" alt=""/>
+                        <img src="{% static 'images/django.png' %}" alt=""/>
+                        <img src="{% static 'images/aws.png' %}" alt=""/>
+                        <img src="{% static 'images/git.png' %}" alt=""/>
+                    </div>
                     <ul>
                         <li id="projLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
                         <li id="projGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
@@ -217,7 +242,7 @@
                         <div class="stack">
 
                             <img id="img{{ language.id }}" src="{{ language.avatar }}" alt="" style="filter:none;">
-                            <h3 style="text-align: center;">{{ language.language }}</h3>
+                            <h3 style="text-align: center;">{{ language.name }}</h3>
                             <p id="langPar{{ language.id }}" style="color: white;"></p>
 
                             <script type="text/javascript">
@@ -243,7 +268,7 @@
                         <div class="stack">
 
                             <img id="img{{ framework.id }}" src="{{ framework.avatar }}" alt="" style="filter:none;">
-                            <h3 style="text-align: center;">{{ framework.framework }}</h3>
+                            <h3 style="text-align: center;">{{ framework.name }}</h3>
                             <p id="framePar{{ framework.id }}" style="color: white;"></p>
 
                             <script type="text/javascript">
@@ -269,7 +294,7 @@
                         <div class="stack">
 
                             <img id="img{{ db.id }}" src="{{ db.avatar }}" alt="" style="filter:none;">
-                            <h3 style="text-align: center;">{{ db.dbms }}</h3>
+                            <h3 style="text-align: center;">{{ db.name }}</h3>
                             <p id="dbPar{{ db.id }}" style="color: white;"></p>
 
                             <script type="text/javascript">
@@ -295,7 +320,7 @@
                         <div class="stack">
 
                             <img id="img{{ tool.id }}" src="{{ tool.avatar }}" alt="" style="filter:none;">
-                            <h3 style="text-align: center;">{{ tool.tool }}</h3>
+                            <h3 style="text-align: center;">{{ tool.name }}</h3>
                             <p id="toolPar{{ tool.id }}" style="color: white;"></p>
 
                             <script type="text/javascript">
