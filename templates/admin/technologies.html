@@ -135,33 +135,33 @@
                             <form id="updateForm{{ tech.id }}">
                                 <div class="mb-3 mt-3">
                                     <label for="update{{ tech.id }}">Name:</label>
-                                    <input type="text" onclick="clickFunction(this.id, '{{ tech.name }}')" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-control" id="update{{ tech.id }}" name="name" placeholder="{{ tech.name }}">
+                                    <input type="text" onclick="clickFunction(this.id, '{{ tech.name }}')" oninput="showBtn({{ tech.id }})" class="form-control" id="update{{ tech.id }}" name="name" placeholder="{{ tech.name }}">
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="form-check">Type:</label>
                                     <div class="form-check">
-                                      <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateType{{ tech.id }}" value="Language">Language</label>
+                                      <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateType{{ tech.id }}" value="Language">Language</label>
                                     </div>
                                     <div class="form-check">
-                                        <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateType{{ tech.id }}" value="Framework">Framework</label>
+                                        <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateType{{ tech.id }}" value="Framework">Framework</label>
                                     </div>
                                     <div class="form-check">
-                                        <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateType{{ tech.id }}" value="Database">Database</label>
+                                        <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateType{{ tech.id }}" value="Database">Database</label>
                                     </div>
                                     <div class="form-check">
-                                        <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateType{{ tech.id }}" value="Tool">Tool</label>
+                                        <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateType{{ tech.id }}" value="Tool">Tool</label>
                                     </div>
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="form-check">Confidence:</label>
                                     <div class="form-check">
-                                      <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateConfidence{{ tech.id }}" value="Confident">Confident</label>
+                                      <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateConfidence{{ tech.id }}" value="Confident">Confident</label>
                                     </div>
                                     <div class="form-check">
-                                        <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateConfidence{{ tech.id }}" value="Partially confident">Partially confident</label>
+                                        <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateConfidence{{ tech.id }}" value="Partially confident">Partially confident</label>
                                     </div>
                                     <div class="form-check">
-                                        <label><input type="radio" oninput="changeTech({{ tech.id }}, '{{ tech.type }}', '{{ tech.confidence }}')" class="form-check-input" name="updateConfidence{{ tech.id }}" value="Have dabbled">Have dabbled</label>
+                                        <label><input type="radio" oninput="showBtn({{ tech.id }})" class="form-check-input" name="updateConfidence{{ tech.id }}" value="Have dabbled">Have dabbled</label>
                                     </div>
                                 </div>
                                 <div class="mb-3 mt-3">

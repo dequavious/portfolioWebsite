@@ -90,19 +90,19 @@
                             <form id="updateForm{{ proj.id }}">
                                 <div class="mb-3 mt-3">
                                     <label for="updateTitle{{ proj.id }}">Title:</label>
-                                    <input type="text" onclick="clickFunction(this.id, '{{ proj.title }}')" oninput="changeProject({{ proj.id }})" class="form-control" id="updateTitle{{ proj.id }}" name="title" placeholder="{{ proj.title }}">
+                                    <input type="text" onclick="clickFunction(this.id, '{{ proj.title }}')" oninput="showBtn({{ proj.id }})" class="form-control" id="updateTitle{{ proj.id }}" name="title" placeholder="{{ proj.title }}">
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="updateDescription{{ proj.id }}">Description:</label>
-                                    <textarea class="form-control" onclick="clickFunction(this.id, '{{ proj.description }}')" oninput="changeProject({{ proj.id }})" rows="5" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}"></textarea>
+                                    <textarea class="form-control" onclick="clickFunction(this.id, '{{ proj.description }}')" oninput="showBtn({{ proj.id }})" rows="5" id="updateDescription{{ proj.id }}" name="description" placeholder="{{ proj.description }}"></textarea>
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="updateGit{{ proj.id }}">Git: </label>
-                                    <input type="text" onclick="clickFunction(this.id, '{{ proj.git }}')" oninput="changeProject({{ proj.id }})" class="form-control"  id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
+                                    <input type="text" onclick="clickFunction(this.id, '{{ proj.git }}')" oninput="showBtn({{ proj.id }})" class="form-control" id="updateGit{{ proj.id }}" name="git" placeholder="{{ proj.git }}">
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="updateLink{{ proj.id }}">Homepage: </label>
-                                    <input type="text" onclick="clickFunction(this.id, '{{ proj.link }}')" oninput="changeProject({{ proj.id }})" class="form-control"  id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
+                                    <input type="text" onclick="clickFunction(this.id, '{{ proj.link }}')" oninput="showBtn({{ proj.id }})" class="form-control" id="updateLink{{ proj.id }}" name="link" placeholder="{{ proj.link }}">
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <details>
@@ -110,7 +110,7 @@
                                             {% for tech in techs %}
                                                 <div class="mb-3 mt-3">
                                                     <div class="form-check">
-                                                      <label><input id="tech{{ proj.id }}{{ tech.id }}" type="checkbox" class="form-check-input" value="{{ tech.name }}" name="updateStack{{ proj.id }}">{{ tech.name }}</label>
+                                                      <label><input oninput="showBtn({{ proj.id }})" id="tech{{ proj.id }}{{ tech.id }}" type="checkbox" class="form-check-input" value="{{ tech.name }}" name="updateStack{{ proj.id }}">{{ tech.name }}</label>
                                                     </div>
                                                 </div>
                                                 <script>
