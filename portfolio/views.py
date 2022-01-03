@@ -65,7 +65,7 @@ def home(request):
         context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
                    'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
                    'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data, 'stack': stack.data,
-                   'degrees': degrees.data, 'quote': quote}
+                   'degrees': degrees.data, 'quote': quote.data}
     else:
         context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
                    'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
