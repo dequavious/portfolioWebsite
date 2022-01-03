@@ -28,16 +28,16 @@ def home(request):
     techs = Technology.objects.all().order_by('type')
     techs = TechnologySerializer(techs, many=True)
 
-    langs = Technology.objects.all().filter(type='Language')
+    langs = Technology.objects.all().filter(type='Language').order_by('id')
     langs = TechnologySerializer(langs, many=True)
 
-    fworks = Technology.objects.all().filter(type='Framework')
+    fworks = Technology.objects.all().filter(type='Framework').order_by('id')
     fworks = TechnologySerializer(fworks, many=True)
 
-    db = Technology.objects.all().filter(type='Database')
+    db = Technology.objects.all().filter(type='Database').order_by('id')
     db = TechnologySerializer(db, many=True)
 
-    tool_list = Technology.objects.all().filter(type='Tool')
+    tool_list = Technology.objects.all().filter(type='Tool').order_by('id')
     tool_serializer = TechnologySerializer(tool_list, many=True)
 
     interests = Hobby.objects.all()
@@ -49,7 +49,7 @@ def home(request):
     jobs = Work.objects.all()
     jobs = WorkSerializer(jobs, many=True)
 
-    proj = Project.objects.all()
+    proj = Project.objects.all().order_by('id')
     proj = ProjectSerializer(proj, many=True)
 
     stack = ProjectStack.objects.all()
