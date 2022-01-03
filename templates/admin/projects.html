@@ -116,7 +116,7 @@
                                                 <script>
                                                     var checkbox = document.getElementById('tech{{ proj.id }}{{ tech.id }}');
                                                     {% for layer in stack %}
-                                                        if ('{{ tech.id }}' === '{{ layer.technology }}') {
+                                                        if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
                                                             checkbox.checked = true;
                                                         }
                                                     {% endfor %}
