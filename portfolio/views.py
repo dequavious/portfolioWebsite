@@ -25,7 +25,7 @@ def home(request):
     user = User.objects.get(id=1)
     user = UserSerializer(user, many=False)
 
-    techs = Technology.objects.all().order_by('type')
+    techs = Technology.objects.all().order_by('type', 'id')
     techs = TechnologySerializer(techs, many=True)
 
     langs = Technology.objects.all().filter(type='Language').order_by('id')
