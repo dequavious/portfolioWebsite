@@ -207,7 +207,10 @@
                         {% for tech in techs %}
                             {% for layer in stack %}
                                 if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
-                                    document.getElementById('projStack{{ proj.id }}').innerHTML += "<img src=\"{{ tech.avatar }}\" alt=\"\"/>";
+                                    document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
+                                    if ('{{ tech.name }}' === 'Flask') {
+                                         document.getElementById('stackImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
+                                    }
                                 }
                             {% endfor %}
                         {% endfor %}
