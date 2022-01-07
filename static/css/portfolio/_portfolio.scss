@@ -1,12 +1,11 @@
 .portfolio {
   position: relative;
   .portfolio__container {
-    display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr;
     color: white;
     gap: 2rem;
     .design {
-      .proj-container:nth-child(1), .proj-container:nth-child(2), .proj-container:nth-child(3), .proj-container:nth-child(4), .proj-container:nth-child(5){
+      .proj-container{
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -27,5 +26,103 @@
     @include gradientText;
     &:hover {
       filter: hue-rotate(180deg);
+    }
+}
+
+.projStack {
+    display:flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.projStack img {
+    height: 2rem;
+    width: 2rem;
+    transition: 0.5s ease-in-out;
+}
+.projStack img:hover {
+    transform: scale(1.5);
+}
+
+/* Style the buttons inside the tab */
+.tab a {
+  white-space: normal;
+  display: block;
+  background-color: inherit;
+  color: rgb(153, 153, 153);
+  padding: 22px 16px;
+  height: 100px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab a:hover {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Create an active/current "tab button" class */
+.tab a.active {
+    filter: hue-rotate(90deg);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Style the tab content */
+.tabcontent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: #181818;
+    padding: 2rem;
+    text-align: center;
+}
+@media only screen and (min-width: 530px) {
+    .vertTabs {
+        display: grid;
+        grid-template-columns: 1% 19% 80%;
+    }
+}
+@media only screen and (min-width: 675px) and (max-width: 767px) {
+    .tab a {
+        font-size: small;
+    }
+}
+@media only screen and (min-width: 525px) and (max-width: 674px) {
+    .vertTabs {
+        display: grid;
+        grid-template-columns: 0.5% 20% 80%;
+    }
+    .tab a {
+        font-size: x-small;
+    }
+}
+@media only screen and (min-width: 486px) and (max-width: 524px) {
+    .vertTabs {
+        display: grid;
+        grid-template-columns: 0.5% 20% 80%;
+    }
+    .tab a {
+        font-size: xx-small;
+    }
+}
+@media only screen and (min-width: 280px) and (max-width: 485px) {
+    .tab {
+        display: none;
+    }
+    .springVert {
+        display: none;
+    }
+    .vertTabs {
+        display: none;
     }
 }

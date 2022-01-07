@@ -2,18 +2,6 @@
   .about {
     margin: 0 10vw;
   }
-  .portfolio {
-    .portfolio__container {
-      grid-template-columns: 1fr;
-      color: white;
-      gap: 2rem;
-      .design {
-        .proj-container {
-          padding: 1rem;
-        }
-      }
-    }
-  }
   .skills {
     .content {
       flex-direction: column;
