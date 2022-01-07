@@ -289,6 +289,9 @@
                                     document.getElementById("framePar{{ framework.id }}").innerHTML =
                                         "<i class=\"fa fa-info-circle\"></i> {{ framework.confidence }}";
                                 }
+                                if ("{{ framework.name }}" === "Flask") {
+                                     document.getElementById('img{{ framework.id }}').style.filter = 'invert(100%)';
+                                }
                             </script>
                         </div>
                     </div>
