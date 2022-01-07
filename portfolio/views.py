@@ -923,11 +923,9 @@ def add_technology(request):
     if not type:
         return Response("type not provided", status=status.HTTP_400_BAD_REQUEST)
 
-
     confidence = request.data.get('confidence', None)
     if not confidence:
         return Response("confidence not provided", status=status.HTTP_400_BAD_REQUEST)
-
 
     avatar = request.data.get('avatar', None)
     if not avatar:
@@ -941,9 +939,11 @@ def add_technology(request):
         return HttpResponse(html)
 
     if not imghdr.what(avatar):
-        messages.error(request, "Not a valid image format")
-        html = render_to_string('admin/technologies.html')
-        return HttpResponse(html)
+        tokens = os.path.splitext(str(avatar))
+        if not tokens[1] == '.svg':
+            messages.error(request, "Not a valid image format")
+            html = render_to_string('admin/technologies.html')
+            return HttpResponse(html)
     tech = Technology(name=name, type=type, confidence=confidence, avatar=avatar)
     tech.save()
 
@@ -988,25 +988,24 @@ def update_technology(request):
         tech.name = name
         tech.save()
 
-
     type = request.data.get('type', None)
     if type:
         tech.type = type
         tech.save()
-
 
     confidence = request.data.get('confidence', None)
     if confidence:
         tech.confidence = confidence
         tech.save()
 
-
     avatar = request.data.get('avatar', None)
     if avatar:
         if not imghdr.what(avatar):
-            messages.error(request, "Not a valid image format")
-            html = render_to_string('admin/technologies.html')
-            return HttpResponse(html)
+            tokens = os.path.splitext(str(avatar))
+            if not tokens[1] == '.svg':
+                messages.error(request, "Not a valid image format")
+                html = render_to_string('admin/technologies.html')
+                return HttpResponse(html)
         if tech.avatar:
             delete_file(tech.avatar)
         tech.avatar = avatar
