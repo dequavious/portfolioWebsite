@@ -204,31 +204,29 @@
                         <div id="projTabStack{{ proj.id }}" class="projStack">
                         </div>
                         <br>
-                        <script>
-                            {% for tech in techs %}
-                                {% for layer in stack %}
-                                    if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
-                                        document.getElementById('projTabStack{{ proj.id }}').innerHTML += "<img id=\"stackTabImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
-                                        if ('{{ tech.name }}' === 'Flask') {
-                                             document.getElementById('stackTabImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
-                                        }
-                                    }
-                                {% endfor %}
-                            {% endfor %}
-                        </script>
                         <ul>
                             <li id="projTabLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
                             <li id="projTabGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
-                            <script>
-                                if ('{{ proj.link }}' === 'None') {
-                                    document.getElementById("projTabLink{{ proj.id }}").style.display = "none";
-                                }
-                                if ('{{ proj.git }}' === 'None') {
-                                    document.getElementById("projTabGit{{ proj.id }}").style.display = "none";
-                                }
-                            </script>
                         </ul>
                     </div>
+                    <script>
+                        {% for tech in techs %}
+                            {% for layer in stack %}
+                                if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
+                                    document.getElementById('projTabStack{{ proj.id }}').innerHTML += "<img id=\"stackTabImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
+                                    if ('{{ tech.name }}' === 'Flask') {
+                                         document.getElementById('stackTabImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
+                                    }
+                                }
+                            {% endfor %}
+                        {% endfor %}
+                        if ('{{ proj.link }}' === 'None') {
+                            document.getElementById("projTabLink{{ proj.id }}").style.display = "none";
+                        }
+                        if ('{{ proj.git }}' === 'None') {
+                            document.getElementById("projTabGit{{ proj.id }}").style.display = "none";
+                        }
+                    </script>
                 {% endfor %}
 
             </div>
@@ -237,84 +235,40 @@
 
         <div class="portfolio__container" style="display: grid;">
             {% for proj in projects %}
-            <div class="design">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                <div id="proj{{ proj.id }}" class="proj-container">
-                    <h3>{{ proj.title }}</h3>
-                    <p>{{ proj.description }}</p>
-                    <div id="projStack{{ proj.id }}" class="projStack">
+                <div class="design">
+                    <div class="backgroundL"></div>
+                    <div class="backgroundR"></div>
+                    <div id="proj{{ proj.id }}" class="proj-container">
+                        <h3>{{ proj.title }}</h3>
+                        <p>{{ proj.description }}</p>
+                        <div id="projStack{{ proj.id }}" class="projStack">
+                        </div>
+                        <ul>
+                            <li id="projLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
+                            <li id="projGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
+                        </ul>
                     </div>
-                    <script>
-                        {% for tech in techs %}
-                            {% for layer in stack %}
-                                if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
-                                    document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
-                                    if ('{{ tech.name }}' === 'Flask') {
-                                         document.getElementById('stackImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
-                                    }
-                                }
-                            {% endfor %}
-                        {% endfor %}
-                    </script>
-                    <ul>
-                        <li id="projLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
-                        <li id="projGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
-                        <script>
-                            if ('{{ proj.link }}' === 'None') {
-                                document.getElementById("projLink{{ proj.id }}").style.display = "none";
-                            }
-                            if ('{{ proj.git }}' === 'None') {
-                                document.getElementById("projGit{{ proj.id }}").style.display = "none";
-                            }
-                        </script>
-                    </ul>
                 </div>
-            </div>
+                <script>
+                    {% for tech in techs %}
+                        {% for layer in stack %}
+                            if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
+                                document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
+                                if ('{{ tech.name }}' === 'Flask') {
+                                     document.getElementById('stackImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
+                                }
+                            }
+                        {% endfor %}
+                    {% endfor %}
+                    if ('{{ proj.link }}' === 'None') {
+                        document.getElementById("projLink{{ proj.id }}").style.display = "none";
+                    }
+                    if ('{{ proj.git }}' === 'None') {
+                        document.getElementById("projGit{{ proj.id }}").style.display = "none";
+                    }
+                </script>
             {% endfor %}
         </div>
-
-        <script>
-            function openProject(evt, projName) {
-              var i, tabcontent, tablinks;
-              tabcontent = document.getElementsByClassName("tabcontent");
-              for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-              }
-              tablinks = document.getElementsByClassName("tablinks");
-              for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-              }
-              document.getElementById(projName).style.display = "block";
-              evt.currentTarget.className += " active";
-            }
-
-            // Get the element with id="defaultOpen" and click on it
-            document.getElementById("defaultOpen").click();
-
-            function breakPt(x) {
-                var i, tabcontent, port_cont;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                port_cont = document.getElementsByClassName("portfolio__container");
-                if (x.matches) {
-                    for (i = 0; i < tabcontent.length; i++) {
-                        tabcontent[i].style.display = "none";
-                    }
-                    for (i = 0; i < port_cont.length; i++) {
-                        port_cont[i].style.display = "grid";
-                    }
-                } else {
-                    for (i = 0; i < port_cont.length; i++) {
-                        port_cont[i].style.display = "none";
-                    }
-                    document.getElementById("defaultOpen").click();
-                }
-            }
-
-            var x = window.matchMedia("(max-width: 445px)");
-            breakPt(x);
-            x.addListener(breakPt);
-        </script>
     </section>
     <div class="spring" id="spring2L">
         <div class="coil"></div>
