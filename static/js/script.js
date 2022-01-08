@@ -3,16 +3,17 @@ y = n.getFullYear();
 document.getElementById("date").innerHTML = "<i class=\"fa fa-copyright\"></i> " + y +  ", All rights reserved."
 
 const scrollToTop = document.querySelector(".scrollToTop");
+scrollToTop.style.display = "none";
 scrollToTop.addEventListener("click", ()=>{
     window.scrollTo({top:0});
 });
 window.addEventListener("scroll", ()=>{
     if (window.pageYOffset > 100) {
+         scrollToTop.style.display = "block";
         document.querySelector(".toggle.open .menu-btn__burger").style.position = "fixed";
-        scrollToTop.style.display = "block";
     } else {
-        document.querySelector(".toggle.open .menu-btn__burger").style.position = "relative";
         scrollToTop.style.display = "none";
+        document.querySelector(".toggle.open .menu-btn__burger").style.position = "relative";
     }
 });
 
