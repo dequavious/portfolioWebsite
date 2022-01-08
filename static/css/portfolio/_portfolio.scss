@@ -44,6 +44,10 @@
     transform: scale(1.5);
 }
 
+.tab {
+  justify-content: space-evenly;
+}
+
 /* Style the buttons inside the tab */
 .tab a {
   white-space: normal;
@@ -52,7 +56,7 @@
   color: rgb(153, 153, 153);
   padding: 22px 16px;
   height: 100px;
-  width: 100%;
+  width: 90%;
   border: none;
   outline: none;
   text-align: left;
@@ -92,12 +96,12 @@
         grid-template-columns: 1% 19% 80%;
     }
 }
-@media only screen and (min-width: 675px) and (max-width: 767px) {
+@media only screen and (min-width: 620px) and (max-width: 729px) {
     .tab a {
         font-size: small;
     }
 }
-@media only screen and (min-width: 525px) and (max-width: 674px) {
+@media only screen and (min-width: 500px) and (max-width: 619px) {
     .vertTabs {
         display: grid;
         grid-template-columns: 0.5% 20% 80%;
@@ -106,7 +110,7 @@
         font-size: x-small;
     }
 }
-@media only screen and (min-width: 486px) and (max-width: 524px) {
+@media only screen and (min-width: 446px) and (max-width: 499px) {
     .vertTabs {
         display: grid;
         grid-template-columns: 0.5% 20% 80%;
@@ -115,7 +119,7 @@
         font-size: xx-small;
     }
 }
-@media only screen and (min-width: 280px) and (max-width: 485px) {
+@media only screen and (min-width: 280px) and (max-width: 445px) {
     .tab {
         display: none;
     }
