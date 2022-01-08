@@ -217,14 +217,14 @@
                             {% endfor %}
                         </script>
                         <ul>
-                            <li id="projLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
-                            <li id="projGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
+                            <li id="projTabLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-home"></i> Homepage</a></li>
+                            <li id="projTabGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
                             <script>
                                 if ('{{ proj.link }}' === 'None') {
-                                    document.getElementById("projLink{{ proj.id }}").style.display = "none";
+                                    document.getElementById("projTabLink{{ proj.id }}").style.display = "none";
                                 }
                                 if ('{{ proj.git }}' === 'None') {
-                                    document.getElementById("projGit{{ proj.id }}").style.display = "none";
+                                    document.getElementById("projTabGit{{ proj.id }}").style.display = "none";
                                 }
                             </script>
                         </ul>
