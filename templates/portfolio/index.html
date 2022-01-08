@@ -234,7 +234,9 @@
         </div>
 
         <div class="portfolio__container" style="display: grid;">
+            <spicy-sections>
             {% for proj in projects %}
+                <h3>{{ proj.title }}</h3>
                 <div class="design">
                     <div class="backgroundL"></div>
                     <div class="backgroundR"></div>
@@ -268,6 +270,7 @@
                     }
                 </script>
             {% endfor %}
+            </spicy-sections>
         </div>
     </section>
     <div class="spring" id="spring2L">
@@ -399,17 +402,17 @@
             <p>More about me.</p>
         </div>
         <spicy-sections>
-            <h3>Hobbies</h3>
-            <div class="hobbies-container">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                {% for hobby in hobbies %}
-                    <div class="hobby">
-                        <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="">
-                        <h3 style="text-align: center;">{{ hobby.hobby }}</h3>
-                    </div>
-                {% endfor %}
-            </div>
+{#            <h3>Hobbies</h3>#}
+{#            <div class="hobbies-container">#}
+{#                <div class="backgroundL"></div>#}
+{#                <div class="backgroundR"></div>#}
+{#                {% for hobby in hobbies %}#}
+{#                    <div class="hobby">#}
+{#                        <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="">#}
+{#                        <h3 style="text-align: center;">{{ hobby.hobby }}</h3>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
 
             <h3>Education</h3>
             <div class="edu-container">
@@ -440,18 +443,18 @@
                 </div>
             </div>
 
-            <h3>Strengths</h3>
-            <div class="strengths-container">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                <div class="design">
-                    <ul class="list-group">
-                        {% for skill in skills %}
-                            <li class="skillListItem"><i class="fa fa-circle-thin"></i> {{ skill.skill }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+{#            <h3>Strengths</h3>#}
+{#            <div class="strengths-container">#}
+{#                <div class="backgroundL"></div>#}
+{#                <div class="backgroundR"></div>#}
+{#                <div class="design">#}
+{#                    <ul class="list-group">#}
+{#                        {% for skill in skills %}#}
+{#                            <li class="skillListItem"><i class="fa fa-circle-thin"></i> {{ skill.skill }}</li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
 
             <h3>Experience</h3>
             <div class="exp-container">
