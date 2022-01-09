@@ -1,9 +1,10 @@
 .portfolio {
   position: relative;
   .portfolio__container {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
     color: white;
-    gap: 2rem;
     .design {
       .proj-container{
         height: 100%;
@@ -17,13 +18,10 @@
       }
     }
     .springTabVert {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       position: relative;
-      height: 20px;
+      height: 50px;
+      z-index: -2;
       .coilTab {
-        position: absolute;
         border-left: white dashed 0.1rem;
         height: 100%;
       }
@@ -78,17 +76,13 @@
 
 /* Change background color of buttons on hover */
 .tab a:hover {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @include gradientText;
 }
 
 /* Create an active/current "tab button" class */
 .tab a.active {
     filter: hue-rotate(90deg);
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @include gradientText;
 }
 
 /* Style the tab content */
