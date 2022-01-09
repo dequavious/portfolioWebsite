@@ -496,7 +496,7 @@ tr {
 }
 .portfolio .portfolio__container .springVert {
   position: relative;
-  height: 50px;
+  height: 75px;
   z-index: -2;
 }
 .portfolio .portfolio__container .springVert .coil {
