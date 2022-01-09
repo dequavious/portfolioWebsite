@@ -17,11 +17,11 @@
         text-align: center;
       }
     }
-    .springTabVert {
+    .springVert {
       position: relative;
       height: 50px;
       z-index: -2;
-      .coilTab {
+      .coil {
         border-left: white dashed 0.1rem;
         height: 100%;
       }
@@ -129,10 +129,20 @@
     .tab {
         display: none;
     }
-    .springVert {
+    .tabSpringVert {
         display: none;
     }
     .vertTabs {
         display: none;
     }
+}
+
+.tabSpringVert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .tabCoil {
+    border-left: white dashed 0.1rem;
+    height: 100%;
+  }
 }

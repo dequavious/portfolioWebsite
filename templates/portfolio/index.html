@@ -179,9 +179,9 @@
         </div>
 
         <div class="vertTabs">
-            <div class="springVert" style="float: left;">
+            <div class="tabSpringVert" style="float: left;">
               <i class="fa fa-circle-thin" style="background:var(--gradient);-webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: small;"></i>
-              <div class="coil"></div>
+              <div class="tabCoil"></div>
               <i class="fa fa-circle-thin" style="background:var(--gradient);-webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: small;"></i>
             </div>
 
@@ -235,7 +235,7 @@
 
         <div class="portfolio__container" style="display: grid;">
             {% for proj in projects %}
-                <div id="springTabVert{{ proj.id }}" class="springTabVert">
+                <div id="springVert{{ proj.id }}" class="springVert">
                 </div>
                 <div class="design">
                     <div class="backgroundL"></div>
@@ -253,9 +253,9 @@
                 </div>
                 <script>
                     if ('{{ proj.id }}' !== '1') {
-                        document.getElementById('springTabVert{{ proj.id }}').innerHTML = "<div class=\"coilTab\"></div>"
+                        document.getElementById('springVert{{ proj.id }}').innerHTML = "<div class=\"coil\"></div>"
                     } else {
-                        document.getElementById('springTabVert{{ proj.id }}').style.display = "none";
+                        document.getElementById('springVert{{ proj.id }}').style.display = "none";
                     }
                     {% for tech in techs %}
                         {% for layer in stack %}

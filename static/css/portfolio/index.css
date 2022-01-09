@@ -73,16 +73,6 @@ button:hover {
   height: 7rem;
 }
 
-.springVert {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.springVert .coil {
-  border-left: white dashed 0.1rem;
-  height: 100%;
-}
-
 .spring.right {
   flex-direction: row-reverse;
 }
@@ -504,12 +494,12 @@ tr {
   padding: 2rem;
   text-align: center;
 }
-.portfolio .portfolio__container .springTabVert {
+.portfolio .portfolio__container .springVert {
   position: relative;
   height: 50px;
   z-index: -2;
 }
-.portfolio .portfolio__container .springTabVert .coilTab {
+.portfolio .portfolio__container .springVert .coil {
   border-left: white dashed 0.1rem;
   height: 100%;
 }
@@ -626,7 +616,7 @@ tr {
     display: none;
   }
 
-  .springVert {
+  .tabSpringVert {
     display: none;
   }
 
@@ -634,6 +624,16 @@ tr {
     display: none;
   }
 }
+.tabSpringVert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tabSpringVert .tabCoil {
+  border-left: white dashed 0.1rem;
+  height: 100%;
+}
+
 .programming {
   display: flex;
   flex-direction: column;
