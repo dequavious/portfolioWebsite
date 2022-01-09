@@ -43,7 +43,9 @@ footer {
         text-decoration: none;
         color: white;
         button {
-          box-shadow: 2px 1000px 1px #181818 inset;
+          &:hover {
+            box-shadow: 2px 1000px 1px #181818 inset;
+          }
         }
       }
     }

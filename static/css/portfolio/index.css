@@ -40,21 +40,23 @@ ul {
 }
 
 button {
-  color: white;
+  color: black;
   padding: 1rem 1.8rem;
   text-transform: uppercase;
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
   background-origin: border-box;
   background-clip: content-box, border-box;
-  box-shadow: 2px 1000px 1px #0b0b0b inset;
   border: solid 4px transparent;
   display: flex;
   gap: 1rem;
   align-items: center;
   cursor: pointer;
+  border-radius: 25px;
   transition: 0.5s ease-in-out;
 }
 button:hover {
+  color: white;
+  box-shadow: 2px 1000px 1px #0b0b0b inset;
   filter: hue-rotate(90deg);
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
 }
@@ -386,6 +388,7 @@ tr {
   align-items: flex-end;
 }
 .hero .image img {
+  border-radius: 15px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -550,11 +553,12 @@ tr {
   outline: none;
   text-align: left;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.5s ease-in-out;
 }
 
 /* Change background color of buttons on hover */
 .tab a:hover {
+  color: white !important;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -700,6 +704,7 @@ tr {
   gap: 1rem;
 }
 .contact .left form input, .contact .left form textarea {
+  border-radius: 10px;
   width: 75%;
   padding: 0.8rem 0.9rem 0.8rem 1rem;
   background-color: transparent;
@@ -754,7 +759,7 @@ footer .section .footContact a {
   text-decoration: none;
   color: white;
 }
-footer .section .footContact a button {
+footer .section .footContact a button:hover {
   box-shadow: 2px 1000px 1px #181818 inset;
 }
 footer .section .social {

@@ -7,20 +7,23 @@
 }
 
 button {
-    color: white;
+    color: black;
     padding: 1rem 1.8rem;
     text-transform: uppercase;
     background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
     background-origin: border-box;
     background-clip: content-box, border-box;
-    box-shadow: 2px 1000px 1px #0b0b0b inset;
+    //box-shadow: 2px 1000px 1px #0b0b0b inset;
     border: solid 4px transparent;
     display: flex;
     gap: 1rem;
     align-items: center;
     cursor: pointer;
+    border-radius: 25px;
     transition: 0.5s ease-in-out;
     &:hover {
+      color: white;
+      box-shadow: 2px 1000px 1px #0b0b0b inset;
       filter: hue-rotate(90deg);
       background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(to right, #dce35b, #45b649);
     }
