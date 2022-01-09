@@ -650,6 +650,7 @@ tr {
   padding: 2rem;
   text-align: center;
   border-radius: 10px;
+  transition: 0.5s ease-in-out;
 }
 .stack img {
   width: 5rem;
