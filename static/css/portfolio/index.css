@@ -388,7 +388,6 @@ tr {
   align-items: flex-end;
 }
 .hero .image img {
-  border-radius: 15px;
   position: absolute;
   bottom: 0;
   width: 100%;
