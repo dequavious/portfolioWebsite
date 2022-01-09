@@ -123,15 +123,19 @@
         }
 
         .dropdown {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           button {
               width: 100%;
           }
 
           .dropdown-content {
+            top:3.6rem;
             flex-direction: column;
             position: absolute;
             background-color: #181818;
-
             a {
               color: white;
               float: none;
