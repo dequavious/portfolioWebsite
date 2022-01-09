@@ -648,6 +648,7 @@ tr {
   background-color: #181818;
   padding: 2rem;
   text-align: center;
+  border-radius: 10px;
 }
 .stack img {
   width: 5rem;
