@@ -235,6 +235,8 @@
 
         <div class="portfolio__container" style="display: grid;">
             {% for proj in projects %}
+                <div id="springTabVert{{ proj.id }}" class="springTabVert">
+                </div>
                 <div class="design">
                     <div class="backgroundL"></div>
                     <div class="backgroundR"></div>
@@ -249,8 +251,12 @@
                         </ul>
                     </div>
                 </div>
-                <br>
                 <script>
+                    if ('{{ proj.id }}' !== '1') {
+                        document.getElementById('springTabVert{{ proj.id }}').innerHTML = "<div class=\"coilTab\"></div>"
+                    } else {
+                        document.getElementById('springTabVert{{ proj.id }}').style.display = "none";
+                    }
                     {% for tech in techs %}
                         {% for layer in stack %}
                             if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
