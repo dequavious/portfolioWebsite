@@ -234,9 +234,7 @@
         </div>
 
         <div class="portfolio__container" style="display: grid;">
-            <spicy-sections>
             {% for proj in projects %}
-                <h3>{{ proj.title }}</h3>
                 <div class="design">
                     <div class="backgroundL"></div>
                     <div class="backgroundR"></div>
@@ -251,6 +249,7 @@
                         </ul>
                     </div>
                 </div>
+                <br>
                 <script>
                     {% for tech in techs %}
                         {% for layer in stack %}
@@ -270,7 +269,6 @@
                     }
                 </script>
             {% endfor %}
-            </spicy-sections>
         </div>
     </section>
     <div class="spring" id="spring2L">
