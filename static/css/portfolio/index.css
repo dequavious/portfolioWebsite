@@ -641,6 +641,7 @@ tr {
 }
 
 .stack {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -653,6 +654,24 @@ tr {
 .stack img {
   width: 5rem;
   height: 5rem;
+}
+.stack p {
+  font-style: italic;
+}
+.stack:hover {
+  transform: translateY(5px);
+}
+
+.stack::before {
+  content: "";
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 3px #bb86fc;
+  background-color: transparent;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .contact {
