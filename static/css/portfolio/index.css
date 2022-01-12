@@ -565,14 +565,10 @@ tr {
 /* Change background color of buttons on hover */
 .tab a:hover {
   color: white !important;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* Create an active/current "tab button" class */
 .tab a.active {
-  filter: hue-rotate(90deg);
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
