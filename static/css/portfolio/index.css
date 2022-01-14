@@ -11,7 +11,6 @@ html {
 }
 
 body {
-  background-color: #0b0b0b;
   font-family: "Outfit", sans-serif;
 }
 
@@ -24,7 +23,7 @@ ul {
 }
 
 ::-webkit-scrollbar {
-  background-color: #0b0b0b;
+  background-color: black;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -124,26 +123,6 @@ p {
 }
 
 .backgroundR {
-  height: 10rem;
-  width: 12rem;
-  background: linear-gradient(to right, #c5e35b, #45b649);
-  position: absolute;
-  z-index: -1;
-  right: -10px;
-  bottom: -8px;
-}
-
-.backgroundL1 {
-  height: 10rem;
-  width: 12rem;
-  background: linear-gradient(to right, #c5e35b, #45b649);
-  position: absolute;
-  z-index: -1;
-  left: 0px;
-  top: -8px;
-}
-
-.backgroundR1 {
   height: 10rem;
   width: 12rem;
   background: linear-gradient(to right, #c5e35b, #45b649);
@@ -486,6 +465,7 @@ tr {
 
 .portfolio {
   position: relative;
+  z-index: 0;
 }
 .portfolio .portfolio__container {
   display: flex;
@@ -584,6 +564,24 @@ tr {
   background-color: #181818;
   padding: 2rem;
   text-align: center;
+}
+.tabcontent .backgroundL1 {
+  height: 10rem;
+  width: 12rem;
+  background: linear-gradient(to right, #c5e35b, #45b649);
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: -8px;
+}
+.tabcontent .backgroundR1 {
+  height: 10rem;
+  width: 12rem;
+  background: linear-gradient(to right, #c5e35b, #45b649);
+  position: absolute;
+  z-index: -1;
+  right: -10px;
+  bottom: -8px;
 }
 
 @media only screen and (min-width: 530px) {
@@ -1261,6 +1259,11 @@ footer .section .tags li:hover {
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.info {
+  position: relative;
+  z-index: 0;
 }
 
 /*# sourceMappingURL=index.css.map */

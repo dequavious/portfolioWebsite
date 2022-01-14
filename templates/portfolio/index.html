@@ -25,6 +25,13 @@
             }, 0);
         });
     </script>
+    <style>
+        body {
+            background: url({% static 'img/wp2757874.gif' %});
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body id="home">
     <div id="loader-wrapper">
@@ -110,19 +117,24 @@
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
-    <section id="about" class="about">
+    <div id="about" style="padding-top:20px; width: 100%; background-color: #0b0b0b; border-radius: 20px;">
+    <section class="about">
         <div class="title__container">
             <h2>About me</h2>
             <br>
             <p><i class="fa fa-quote-right"></i>&emsp;{{ quote.quote }}</p>
             <br>
             <p style="text-align: match-parent; font-style: italic; color: #c5e35b;"> - {{ quote.author }}</p>
+            <br>
         </div>
     </section>
+    </div>
     <div class="spring" id="spring1L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
+    <div style="padding-top:25px; padding-bottom:25px; width: 100%; background-color: #0b0b0b; border-radius: 20px;">
+    <br>
     <section class="skills defaultMargin" id="skills">
         <div class="title__container">
             <h2>Main skills</h2>
@@ -167,10 +179,14 @@
             </div>
         </div>
     </section>
+    <br>
+    </div>
     <div class="spring right" id="spring2">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
+    <div style="padding-top:25px; padding-bottom:25px; width: 100%; background-color: #0b0b0b; border-radius: 20px;">
+    <br>
     <section class="portfolio defaultMargin" id="portfolio">
 
         <div class="title__container">
@@ -277,10 +293,14 @@
             {% endfor %}
         </div>
     </section>
+    <br>
+    </div>
     <div class="spring" id="spring2L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
+    <div style="padding-top:25px; padding-bottom:25px; width: 100%; background-color: #0b0b0b; border-radius: 20px;">
+    <br>
     <section id="programming" class="programming defaultMargin">
         <div class="title__container">
             <h2>Programming</h2>
@@ -396,11 +416,15 @@
             </div>
         </spicy-sections>
     </section>
+    <br>
+    </div>
     <div class="spring right" id="spring3">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
-    <section id="info" class="info defaultMargin">
+    <div id="info" style="padding-top:25px; padding-bottom:25px; width: 100%; background-color: #0b0b0b; border-radius: 20px;">
+    <br>
+    <section class="info defaultMargin">
         <div class="title__container">
             <h2>Info</h2>
             <p>More about me.</p>
@@ -476,11 +500,15 @@
             </div>
         </spicy-sections>
     </section>
+    <br>
+    </div>
     <div class="spring" id="spring3L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>
-    <section id="contact" class="contact defaultMargin">
+    <div id="contact" style="width: 100%; background-color: #0b0b0b; border-radius: 20px;">
+    <br>
+    <section class="contact defaultMargin">
         <div class="left">
             <div class="title">
                 <div class="bar"></div>
@@ -495,7 +523,9 @@
             </form>
         </div>
         <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6624.115735522693!2d18.659831128174933!3d-33.88816346628829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc50e2bba31127%3A0xc4a2b39073618f02!2sOakglen%2C%20Cape%20Town%2C%207530!5e0!3m2!1sen!2sza!4v1639745869857!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <br>
     </section>
+    </div>
     <div class="spring right" id="spring4">
         <div class="coil"></div>
         <div class="bar gradient"></div>

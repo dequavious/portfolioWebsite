@@ -94,7 +94,7 @@
   top: 0;
   width: 51%;
   height: 100%;
-  background: #0b0b0b;
+  background: inherit;
   z-index: 10000;
 }
 

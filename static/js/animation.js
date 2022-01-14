@@ -49,4 +49,4 @@ const sr4 = ScrollReveal({
     reset:true
 });
 
-sr4.reveal('#about');
+sr4.reveal('.about');
