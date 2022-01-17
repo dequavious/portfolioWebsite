@@ -52,8 +52,7 @@ def home(request):
     proj = Project.objects.all().order_by('id')
     proj = ProjectSerializer(proj, many=True)
 
-    stack = ProjectStack.objects.all()
-    stack = ProjectStackSerializer(stack, many=True)
+    stacks = my_custom_sql()
 
     degrees = Education.objects.all()
     degrees = EducationSerializer(degrees, many=True)
@@ -64,13 +63,13 @@ def home(request):
         quote = QuoteSerializer(quote, many=False)
         context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
                    'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
-                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data, 'stack': stack.data,
-                   'degrees': degrees.data, 'quote': quote.data}
+                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data,
+                   'stacks': stacks, 'degrees': degrees.data, 'quote': quote.data}
     else:
         context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
                    'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
-                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data, 'stack': stack.data,
-                   'degrees': degrees.data}
+                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data,
+                   'stacks': stacks, 'degrees': degrees.data}
 
     return render(request, 'portfolio/index.html', context)
 

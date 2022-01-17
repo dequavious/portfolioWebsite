@@ -24,6 +24,10 @@
                 $('body').addClass('loaded');
             }, 0);
         });
+        let proj_stacks = []
+        {% for stack in stacks %}
+            proj_stacks.push({id: '{{ stack.id }}', tech_id: '{{ stack.tech_id }}', name: '{{ stack.name }}', avatar: '{% static stack.avatar %}'});
+        {% endfor %}
     </script>
 </head>
 <body id="home">
@@ -211,16 +215,20 @@
                         </ul>
                     </div>
                     <script>
-                        {% for tech in techs %}
-                            {% for layer in stack %}
-                                if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
-                                    document.getElementById('projTabStack{{ proj.id }}').innerHTML += "<img id=\"stackTabImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
-                                    if ('{{ tech.name }}' === 'Flask') {
-                                         document.getElementById('stackTabImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
-                                    }
-                                }
-                            {% endfor %}
-                        {% endfor %}
+                        var i;
+                        var stack = proj_stacks.filter(function(item){
+                            return item.id === '{{ proj.id }}';
+                        });
+
+                        for (i = 0; i < stack.length; i++) {
+                            var src = stack[i].avatar;
+                            document.getElementById('projTabStack{{ proj.id }}').innerHTML += "<img id=\"stackTabImg{{ proj.id }}" + stack[i].tech_id + "\"" + "src=\"" + src + "\" alt=\"\"/>";
+                            if (stack[i].name === 'Flask') {
+                                var id = 'stackTabImg{{ proj.id }}' + stack[i].tech_id;
+                                 document.getElementById(id).style.filter = 'invert(100%)';
+                            }
+                        }
+
                         if ('{{ proj.link }}' === 'None') {
                             document.getElementById("projTabLink{{ proj.id }}").style.display = "none";
                         }
@@ -258,16 +266,21 @@
                     } else {
                         document.getElementById('springVert{{ proj.id }}').style.display = "none";
                     }
-                    {% for tech in techs %}
-                        {% for layer in stack %}
-                            if (('{{ tech.id }}' === '{{ layer.technology }}') && ('{{ layer.project }}' === '{{ proj.id }}')) {
-                                document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}{{ tech.id }}\" src=\"{{ tech.avatar }}\" alt=\"\"/>";
-                                if ('{{ tech.name }}' === 'Flask') {
-                                     document.getElementById('stackImg{{ proj.id }}{{ tech.id }}').style.filter = 'invert(100%)';
-                                }
-                            }
-                        {% endfor %}
-                    {% endfor %}
+
+                    var i;
+                    var stack = proj_stacks.filter(function(item){
+                        return item.id === '{{ proj.id }}';
+                    });
+
+                    for (i = 0; i < stack.length; i++) {
+                        var src = stack[i].avatar;
+                        document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}" + stack[i].tech_id + "\"" + "src=\"" + src + "\" alt=\"\"/>";
+                        if (stack[i].name === 'Flask') {
+                            var id = 'stackImg{{ proj.id }}' + stack[i].tech_id;
+                             document.getElementById(id).style.filter = 'invert(100%)';
+                        }
+                    }
+
                     if ('{{ proj.link }}' === 'None') {
                         document.getElementById("projLink{{ proj.id }}").style.display = "none";
                     }

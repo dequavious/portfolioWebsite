@@ -8,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.utils import timezone
-
+from django.db import connection
 
 def generate_access_token(user, remember_me):
     if remember_me:
@@ -135,3 +135,18 @@ def delete_file(file):
         os.remove(file.path)
     except:
         pass
+
+
+def my_custom_sql():
+    with connection.cursor() as cursor:
+        cursor.execute('''SELECT portfolio_project.id, portfolio_technology.id as tech_id, name, avatar
+                            FROM (portfolio_project JOIN portfolio_projectstack
+                            ON portfolio_project.id = portfolio_projectstack.project_id)
+                            JOIN portfolio_technology ON portfolio_projectstack.technology_id = portfolio_technology.id 
+                            ORDER BY portfolio_project.id, portfolio_technology.type ,tech_id;
+                            ''')
+        columns = [col[0] for col in cursor.description]
+        return [
+            dict(zip(columns, row))
+            for row in cursor.fetchall()
+        ]
