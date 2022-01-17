@@ -221,8 +221,7 @@
                         });
 
                         for (i = 0; i < stack.length; i++) {
-                            var src = stack[i].avatar;
-                            document.getElementById('projTabStack{{ proj.id }}').innerHTML += "<img id=\"stackTabImg{{ proj.id }}" + stack[i].tech_id + "\"" + "src=\"" + src + "\" alt=\"\"/>";
+                            document.getElementById('projTabStack{{ proj.id }}').innerHTML += "<img id=\"stackTabImg{{ proj.id }}" + stack[i].tech_id + "\"" + "src=\"" + stack[i].avatar + "\" alt=\"\"/>";
                             if (stack[i].name === 'Flask') {
                                 var id = 'stackTabImg{{ proj.id }}' + stack[i].tech_id;
                                  document.getElementById(id).style.filter = 'invert(100%)';
@@ -273,8 +272,7 @@
                     });
 
                     for (i = 0; i < stack.length; i++) {
-                        var src = stack[i].avatar;
-                        document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}" + stack[i].tech_id + "\"" + "src=\"" + src + "\" alt=\"\"/>";
+                        document.getElementById('projStack{{ proj.id }}').innerHTML += "<img id=\"stackImg{{ proj.id }}" + stack[i].tech_id + "\"" + "src=\"" + stack[i].avatar + "\" alt=\"\"/>";
                         if (stack[i].name === 'Flask') {
                             var id = 'stackImg{{ proj.id }}' + stack[i].tech_id;
                              document.getElementById(id).style.filter = 'invert(100%)';
