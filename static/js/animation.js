@@ -42,11 +42,30 @@ const sr3 = ScrollReveal({
 
 sr3.reveal(springArrayL,{ desktop: false });
 
+const springArrayL1 = [
+    document.querySelector('.about'),
+    document.querySelector('.tabSpringVert'),
+    document.querySelector('.tab')
+];
+
 const sr4 = ScrollReveal({
     origin:"left",
     distance:"50%",
-    duration:3000,
+    duration:1000,
     reset:true
 });
 
-sr4.reveal('.about');
+sr4.reveal(springArrayL1);
+
+const springArrayR1 = [
+    document.querySelector('.vertTabcontent')
+];
+
+const sr5 = ScrollReveal({
+    origin:"right",
+    distance:"50%",
+    duration:1000,
+    reset:true
+});
+
+sr5.reveal(springArrayR1);
