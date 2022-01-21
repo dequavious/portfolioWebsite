@@ -44,7 +44,6 @@ sr3.reveal(springArrayL,{ desktop: false });
 
 const springArrayL1 = [
     document.querySelector('.about'),
-    document.querySelector('.tabSpringVert'),
     document.querySelector('.tab')
 ];
 
