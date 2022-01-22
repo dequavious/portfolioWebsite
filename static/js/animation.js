@@ -43,7 +43,6 @@ const sr3 = ScrollReveal({
 sr3.reveal(springArrayL,{ desktop: false });
 
 const springArrayL1 = [
-    document.querySelector('.about'),
     document.querySelector('.tab')
 ];
 
@@ -68,3 +67,17 @@ const sr5 = ScrollReveal({
 });
 
 sr5.reveal(springArrayR1);
+
+
+const springArrayL2 = [
+    document.querySelector('.about')
+];
+
+const sr6 = ScrollReveal({
+    origin:"left",
+    distance:"50%",
+    duration:3000,
+    reset:true
+});
+
+sr6.reveal(springArrayL2);
