@@ -16,8 +16,7 @@ sr.reveal (
 const springArrayR = [
     document.querySelector('#spring1'),
     document.querySelector('#spring2'),
-    document.querySelector('#spring3'),
-    document.querySelector('#spring4')
+    document.querySelector('#spring3')
 ];
 
 const sr2 = ScrollReveal({

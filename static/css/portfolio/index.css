@@ -685,18 +685,14 @@ tr {
   display: flex;
   flex-direction: column;
   margin: 4rem 20rem;
-  gap: 3rem;
 }
-.contact .right {
-  width: 26rem;
-}
-.contact .left .title .bar {
+.contact .contactWrapper .title .bar {
   height: 0.5rem;
   width: 5rem;
   background: var(--gradient);
   margin-bottom: 1rem;
 }
-.contact .left form {
+.contact .contactWrapper form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -704,7 +700,7 @@ tr {
   margin: 2rem 0;
   gap: 1rem;
 }
-.contact .left form input, .contact .left form textarea {
+.contact .contactWrapper form input, .contact .contactWrapper form textarea {
   border-radius: 10px;
   width: 75%;
   padding: 0.8rem 0.9rem 0.8rem 1rem;
@@ -819,7 +815,6 @@ footer .section .tags li:hover {
   .contact {
     flex-direction: column;
     margin: 2rem 10vw;
-    gap: 5vw;
   }
   .contact .left .form input, .contact .left .form textarea {
     padding-right: 10vw;
