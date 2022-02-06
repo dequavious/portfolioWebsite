@@ -437,6 +437,7 @@
                 <div class="design">
                     {% for degree in degrees %}
                         <h2><i class="fa fa-graduation-cap"></i> {{ degree.degree }}</h2>
+                        <br>
                         <table>
                             <tr>
                                 <th><i class="fa fa-institution"></i> Institution</th>
@@ -455,6 +456,7 @@
                                 <td>{{ degree.year }}</td>
                             </tr>
                         </table>
+                        <br>
                     {% endfor %}
                 </div>
             </div>
@@ -466,7 +468,7 @@
                 <div class="design">
                     <ul class="list-group">
                         {% for skill in skills %}
-                            <li class="skillListItem"><i class="fa fa-circle-thin"></i> {{ skill.skill }}</li>
+                            <li class="skillListItem"><i class='fas fa-angle-double-right'></i> {{ skill.skill }}</li>
                         {% endfor %}
                     </ul>
                 </div>

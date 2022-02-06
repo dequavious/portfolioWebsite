@@ -134,6 +134,7 @@ p {
 }
 
 table, th, td {
+  text-align: start;
   border-collapse: collapse;
 }
 
@@ -142,6 +143,7 @@ th, td {
 }
 
 tr {
+  text-align: start;
   white-space: nowrap;
 }
 
