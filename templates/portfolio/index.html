@@ -192,7 +192,7 @@
 
             <div class="tab">
                 {% for proj in projects %}
-                    <a class="tablinks" onclick="openProject(event, 'proj{{ proj.id }}')" id="defaultOpen">{{ proj.title }}</a>
+                    <a class="tablinks" onclick="openProject(event, 'proj{{ proj.id }}', this.id, '{{ proj.title }}')" name="{{ proj.title }}" id="defaultOpen{{ proj.id }}">{{ proj.title }}</a>
                 {% endfor %}
             </div>
 
