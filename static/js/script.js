@@ -86,7 +86,7 @@ function selectFunctionResponsive() {
     document.getElementById("myDropdownResponsive").style.display = "none";
 }
 
-function openProject(evt, projName, projLink, projTitle) {
+function openProject(evt, projName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -95,16 +95,13 @@ function openProject(evt, projName, projLink, projTitle) {
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
-        tablinks[i].innerHTML = tablinks[i].name;
     }
     document.getElementById(projName).style.display = "block";
     evt.currentTarget.className += " active";
-
-    document.getElementById(projLink).innerHTML = "<i class=\"fas fa-terminal\"></i> " + projTitle;
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen1").click();
+document.getElementById("defaultOpen").click();
 
 function breakPt(x) {
     var i, tabcontent, port_cont;
