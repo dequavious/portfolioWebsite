@@ -57,7 +57,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#programming">Programming</a></li>
-                <li style="padding-right: 25px;"><a href="#info">Info</a></li>
+{#                <li style="padding-right: 25px;"><a href="#info">Info</a></li>#}
                 <a href="#contact" style="text-decoration: none;"><button><i class="far fa-id-card"></i>Contact</button></a>
                 <li>
                     <div class="dropdown" style="margin-top: 0; display: inline-block;">
@@ -83,7 +83,7 @@
                 <li class="nav__link"><a class="nav__a" href="#skills">Skills</a></li>
                 <li class="nav__link"><a class="nav__a" href="#portfolio">Portfolio</a></li>
                 <li class="nav__link"><a class="nav__a" href="#programming">Programming</a></li>
-                <li class="nav__link"><a class="nav__a" href="#info">Info</a></li>
+{#                <li class="nav__link"><a class="nav__a" href="#info">Info</a></li>#}
                 <li class="nav__link"><a href="#contact" style="text-decoration: none;"><button><i class="far fa-id-card"></i>Contact</button></a></li>
                 <li>
                     <div class="dropdown">
@@ -182,15 +182,15 @@
         </div>
 
         <div class="vertTabs">
-            <div class="tabSpringVert">
-              <i class="fa fa-circle-thin" style="background:var(--gradient);-webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: small;"></i>
-              <div class="tabCoil"></div>
-              <i class="fa fa-circle-thin" style="background:var(--gradient);-webkit-background-clip: text;-webkit-text-fill-color: transparent; font-size: small;"></i>
-            </div>
+{#            <div class="tabSpringVert">#}
+{#            </div>#}
+
 
             <div class="tab">
+{#                <div class="backgroundT"></div>#}
+{#                <div class="backgroundB"></div>#}
                 {% for proj in projects %}
-                    <a class="tablinks" onclick="openProject(event, 'proj{{ proj.id }}')" id="defaultOpen">{{ proj.title }}</a>
+                    <a class="tablinks" onclick="openProject(event, 'proj{{ proj.id }}', this)" id="defaultOpen" name="{{ proj.title }}">{{ proj.title }}</a>
                 {% endfor %}
             </div>
 
@@ -407,86 +407,6 @@
         </spicy-sections>
     </section>
     <div class="spring right" id="spring3">
-        <div class="coil"></div>
-        <div class="bar gradient"></div>
-    </div>
-    <section id="info" class="info defaultMargin">
-        <div class="title__container">
-            <h2>Info</h2>
-            <p>More about me.</p>
-        </div>
-        <spicy-sections>
-            <h3>Hobbies</h3>
-            <div class="hobbies-container">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                {% for hobby in hobbies %}
-                    <div class="hobby">
-                        <img id="img{{ hobby.id }}" src="{{ hobby.avatar }}" alt="">
-                        <h3 style="text-align: center;">{{ hobby.hobby }}</h3>
-                    </div>
-                {% endfor %}
-            </div>
-
-            <h3>Education</h3>
-            <div class="edu-container">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                <div class="design">
-                    {% for degree in degrees %}
-                        <h2><i class="fa fa-graduation-cap"></i> {{ degree.degree }}</h2>
-                        <table>
-                            <tr>
-                                <th><i class="fa fa-institution"></i> Institution</th>
-                                {% if degree.grade %}
-                                    <th><i class="fas fa-star"></i> Grade</th>
-                                {% endif %}
-                                <th><i class="fa fa-calendar"></i> Year</th>
-                            </tr>
-                            <tr>
-                                <td>{{ degree.institution }}</td>
-                                {% if degree.grade %}
-                                    <td>
-                                        {{ degree.grade }}
-                                    </td>
-                                {% endif %}
-                                <td>{{ degree.year }}</td>
-                            </tr>
-                        </table>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <h3>Strengths</h3>
-            <div class="strengths-container">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                <div class="design">
-                    <ul class="list-group">
-                        {% for skill in skills %}
-                            <li class="skillListItem"><i class='fas fa-angle-double-right'></i> {{ skill.skill }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-
-            <h3>Experience</h3>
-            <div class="exp-container">
-                <div class="backgroundL"></div>
-                <div class="backgroundR"></div>
-                <div class="design">
-                    {% for job in jobs %}
-                        <dl>
-                            <dt><i class="fa fa-briefcase" style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> {{ job.description }}</dt>
-                            <dd style="white-space: nowrap;"><strong>Company:</strong> {{ job.company }}</dd>
-                        </dl>
-                        <br>
-                    {% endfor %}
-                </div>
-            </div>
-        </spicy-sections>
-    </section>
-    <div class="spring" id="spring3L">
         <div class="coil"></div>
         <div class="bar gradient"></div>
     </div>

@@ -496,6 +496,10 @@ tr {
   height: 100%;
 }
 
+.vertTabs {
+  position: relative;
+}
+
 .proj__link {
   display: inline-block;
   white-space: nowrap;
@@ -526,10 +530,29 @@ tr {
 }
 
 .tab {
+  border-left: white dashed 0.1rem;
+  position: relative;
   justify-content: space-evenly;
+  background: #0b0b0b;
 }
-
-/* Style the buttons inside the tab */
+.tab .backgroundT {
+  height: 0.5rem;
+  width: 5rem;
+  background: linear-gradient(to right, #c5e35b, #45b649);
+  position: absolute;
+  z-index: -1;
+  left: -3px;
+  top: -8px;
+}
+.tab .backgroundB {
+  height: 0.5rem;
+  width: 5rem;
+  background: linear-gradient(to right, #c5e35b, #45b649);
+  position: absolute;
+  z-index: -1;
+  left: -3px;
+  bottom: -8px;
+}
 .tab a {
   white-space: normal;
   display: block;
@@ -543,15 +566,20 @@ tr {
   text-align: left;
   cursor: pointer;
   transition: 0.5s ease-in-out;
+  position: relative;
 }
-
-/* Change background color of buttons on hover */
 .tab a:hover {
   color: white !important;
 }
+.tab a i {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: fixed;
+  left: -21px;
+}
 
-/* Create an active/current "tab button" class */
-.tab a.active {
+a.active {
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -590,31 +618,67 @@ tr {
 @media only screen and (min-width: 530px) {
   .vertTabs {
     display: grid;
-    grid-template-columns: 1% 19% 80%;
+    grid-template-columns: 20% 80%;
   }
 }
 @media only screen and (min-width: 620px) and (max-width: 729px) {
   .tab a {
     font-size: small;
   }
+  .tab a .backgroundT {
+    width: 5rem;
+    left: -3px;
+  }
+  .tab a .backgroundB {
+    width: 5rem;
+    left: -3px;
+  }
+  .tab a i {
+    left: -19px;
+    font-size: small;
+  }
 }
 @media only screen and (min-width: 500px) and (max-width: 619px) {
   .vertTabs {
     display: grid;
-    grid-template-columns: 0.5% 20% 80%;
+    grid-template-columns: 20% 80%;
   }
 
   .tab a {
+    font-size: x-small;
+  }
+  .tab a .backgroundT {
+    width: 5rem;
+    left: -3px;
+  }
+  .tab a .backgroundB {
+    width: 5rem;
+    left: -3px;
+  }
+  .tab a i {
+    left: -18px;
     font-size: x-small;
   }
 }
 @media only screen and (min-width: 446px) and (max-width: 499px) {
   .vertTabs {
     display: grid;
-    grid-template-columns: 0.5% 20% 80%;
+    grid-template-columns: 20% 80%;
   }
 
   .tab a {
+    font-size: xx-small;
+  }
+  .tab a .backgroundT {
+    width: 3rem;
+    left: -1px;
+  }
+  .tab a .backgroundB {
+    width: 3rem;
+    left: -1px;
+  }
+  .tab a i {
+    left: -17px;
     font-size: xx-small;
   }
 }
@@ -623,24 +687,10 @@ tr {
     display: none;
   }
 
-  .tabSpringVert {
-    display: none;
-  }
-
   .vertTabs {
     display: none;
   }
 }
-.tabSpringVert {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.tabSpringVert .tabCoil {
-  border-left: white dashed 0.1rem;
-  height: 100%;
-}
-
 .programming {
   display: flex;
   flex-direction: column;
@@ -851,7 +901,7 @@ footer .section .tags li:hover {
     margin: 0 10vw;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 1370px) {
+@media screen and (min-width: 280px) and (max-width: 1300px) {
   .navbar .brand__container {
     display: flex;
     justify-content: space-between;
@@ -1183,85 +1233,6 @@ footer .section .tags li:hover {
     color: white;
     gap: 2rem;
   }
-}
-.edu-container {
-  color: white;
-  gap: 2rem;
-  padding: 25px;
-  position: relative;
-  background-color: #181818;
-}
-.edu-container .design {
-  width: 100%;
-}
-.edu-container .design h2 {
-  text-align: start;
-}
-.edu-container .design table {
-  background: inherit;
-  border: none;
-  display: inline-block;
-  max-width: 100%;
-  overflow: auto;
-}
-
-.exp-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  color: white;
-  gap: 2rem;
-  padding: 25px;
-  position: relative;
-  background-color: #181818;
-}
-
-.hobbies-container {
-  gap: 4rem;
-  padding: 30px;
-  position: relative;
-  background-color: #181818;
-}
-
-.hobby {
-  text-align: center;
-}
-.hobby img {
-  width: 5rem;
-  height: 5rem;
-  filter: brightness(0) invert(1);
-}
-.hobby h3 {
-  white-space: nowrap;
-  font-size: small;
-}
-
-.strengths-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  color: white;
-  gap: 2rem;
-  padding: 25px 50px 25px 25px;
-  position: relative;
-  background-color: #181818;
-}
-
-.skillListItem {
-  width: 100%;
-  display: inline-block;
-  background: inherit;
-  border: none;
-  white-space: nowrap;
-}
-.skillListItem i {
-  font-size: 12px;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.info {
-  position: relative;
-  z-index: 0;
 }
 
 /*# sourceMappingURL=index.css.map */

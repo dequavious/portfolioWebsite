@@ -40,36 +40,22 @@ def home(request):
     tool_list = Technology.objects.all().filter(type='Tool').order_by('id')
     tool_serializer = TechnologySerializer(tool_list, many=True)
 
-    interests = Hobby.objects.all()
-    interests = HobbySerializer(interests, many=True)
-
-    skills = Skill.objects.all()
-    skills = SkillSerializer(skills, many=True)
-
-    jobs = Work.objects.all()
-    jobs = WorkSerializer(jobs, many=True)
-
     proj = Project.objects.all().order_by('id')
     proj = ProjectSerializer(proj, many=True)
 
     stacks = my_custom_sql()
-
-    degrees = Education.objects.all()
-    degrees = EducationSerializer(degrees, many=True)
 
     quotes = Quote.objects.all().filter(id=1)
     if quotes:
         quote = quotes.first()
         quote = QuoteSerializer(quote, many=False)
         context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
-                   'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
-                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data,
-                   'stacks': stacks, 'degrees': degrees.data, 'quote': quote.data}
+                   'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'projects': proj.data,
+                   'stacks': stacks, 'quote': quote.data}
     else:
         context = {'user': user.data, 'languages': langs.data, 'frameworks': fworks.data,
-                   'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'hobbies': interests.data,
-                   'skills': skills.data, 'jobs': jobs.data, 'projects': proj.data,
-                   'stacks': stacks, 'degrees': degrees.data}
+                   'databases': db.data, 'tools': tool_serializer.data, 'techs': techs.data, 'projects': proj.data,
+                   'stacks': stacks}
 
     return render(request, 'portfolio/index.html', context)
 
