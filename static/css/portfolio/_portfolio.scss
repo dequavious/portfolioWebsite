@@ -8,10 +8,10 @@
     .design {
       width: 100%;
       .backgroundL2 {
-            height: 50%; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; left: -10px; top: -8px;
+            height: 4rem; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; left: -10px; top: -8px;
         }
         .backgroundR2 {
-            height: 50%; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; right: -10px; bottom: -8px;
+            height: 4rem; width: 12rem; background: linear-gradient(to right, #c5e35b, #45b649); position: absolute; z-index: -1; right: -10px; bottom: -8px;
         }
       .proj-container{
         details {
@@ -22,6 +22,11 @@
           background-color: #181818;
           padding: 2rem;
           text-align: center;
+          summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+          }
         }
       }
     }
