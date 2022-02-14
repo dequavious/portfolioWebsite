@@ -558,6 +558,7 @@ tr {
   position: relative;
   justify-content: space-evenly;
   background: #0b0b0b;
+  height: max-content;
 }
 .tab a {
   white-space: normal;
