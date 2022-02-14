@@ -182,13 +182,9 @@
         </div>
 
         <div class="vertTabs">
-{#            <div class="tabSpringVert">#}
-{#            </div>#}
 
 
             <div class="tab">
-{#                <div class="backgroundT"></div>#}
-{#                <div class="backgroundB"></div>#}
                 {% for proj in projects %}
                     <a class="tablinks" onclick="openProject(event, 'proj{{ proj.id }}', this)" id="defaultOpen" name="{{ proj.title }}">{{ proj.title }}</a>
                 {% endfor %}
@@ -244,24 +240,31 @@
                 <div id="springVert{{ proj.id }}" class="springVert">
                 </div>
                 <div class="design">
-                    <div class="backgroundL"></div>
-                    <div class="backgroundR"></div>
+                    <div class="backgroundL2"></div>
+                    <div class="backgroundR2"></div>
                     <div id="proj{{ proj.id }}" class="proj-container">
-                        <h3>{{ proj.title }}</h3>
-                        <p>{{ proj.description }}</p>
-                        <div id="projStack{{ proj.id }}" class="projStack">
-                        </div>
-                        <ul>
-                            <li id="projLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-external-link"></i> Homepage</a></li>
-                            <li id="projGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
-                        </ul>
+                        <details id="projDeets{{ proj.id }}">
+                            <summary>{{ proj.title }}</summary>
+                            <br>
+                            <p>{{ proj.description }}</p>
+                            <br>
+                            <div id="projStack{{ proj.id }}" class="projStack">
+                            </div>
+                            <br>
+                            <ul>
+                                <li id="projLink{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.link }}" target="_blank"><i class="fa fa-external-link"></i> Homepage</a></li>
+                                <li id="projGit{{ proj.id }}" style="display: block;"><a class="proj__link" href="{{ proj.git }}" target="_blank"><i class="fa fa-github"></i> Source code</a></li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
                 <script>
                     if ('{{ proj.id }}' !== '1') {
                         document.getElementById('springVert{{ proj.id }}').innerHTML = "<div class=\"coil\"></div>"
+
                     } else {
                         document.getElementById('springVert{{ proj.id }}').style.display = "none";
+                        document.getElementById('projDeets{{ proj.id }}').setAttribute("open", "");
                     }
 
                     var i;

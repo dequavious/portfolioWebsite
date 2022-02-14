@@ -467,7 +467,6 @@ tr {
 }
 
 .portfolio {
-  position: relative;
   z-index: 0;
 }
 .portfolio .portfolio__container {
@@ -476,8 +475,28 @@ tr {
   justify-items: center;
   color: white;
 }
-.portfolio .portfolio__container .design .proj-container {
-  height: 100%;
+.portfolio .portfolio__container .design {
+  width: 100%;
+}
+.portfolio .portfolio__container .design .backgroundL2 {
+  height: 50%;
+  width: 12rem;
+  background: linear-gradient(to right, #c5e35b, #45b649);
+  position: absolute;
+  z-index: -1;
+  left: -10px;
+  top: -8px;
+}
+.portfolio .portfolio__container .design .backgroundR2 {
+  height: 50%;
+  width: 12rem;
+  background: linear-gradient(to right, #c5e35b, #45b649);
+  position: absolute;
+  z-index: -1;
+  right: -10px;
+  bottom: -8px;
+}
+.portfolio .portfolio__container .design .proj-container details {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -534,24 +553,6 @@ tr {
   position: relative;
   justify-content: space-evenly;
   background: #0b0b0b;
-}
-.tab .backgroundT {
-  height: 0.5rem;
-  width: 5rem;
-  background: linear-gradient(to right, #c5e35b, #45b649);
-  position: absolute;
-  z-index: -1;
-  left: -3px;
-  top: -8px;
-}
-.tab .backgroundB {
-  height: 0.5rem;
-  width: 5rem;
-  background: linear-gradient(to right, #c5e35b, #45b649);
-  position: absolute;
-  z-index: -1;
-  left: -3px;
-  bottom: -8px;
 }
 .tab a {
   white-space: normal;
