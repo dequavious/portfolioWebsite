@@ -18,12 +18,11 @@ spicy-sections[affordance=tab-bar]::part(tab-list) {
 }
 
 spicy-sections[affordance=tab-bar] h3[aria-selected=true] {
-    /*filter: hue-rotate(90deg);*/
-    border-top: white;
-    border-left: white;
-    border-right: white;
+    border-top: white solid 0.1rem;
+    border-right: white solid 0.1rem;
+    border-left: white solid 0.1rem;
     border-bottom: none;
-    /*border-bottom: 3px solid #FFA900;*/
+    border-radius: 5px 5px 0 0;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
