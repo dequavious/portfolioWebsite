@@ -100,7 +100,7 @@ function openProject(evt, projName, projLink) {
     activeProj = document.getElementById(projName);
     activeProj.style.display = "block";
     evt.currentTarget.className += " active";
-    projLink.innerHTML = "<i class=\"fa fa-circle\"></i> " + projLink.name;
+    projLink.innerHTML = "<i class=\"fas fa-angle-double-right\"></i> " + projLink.name;
 }
 
 // Get the element with id="defaultOpen" and click on it
