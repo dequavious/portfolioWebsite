@@ -568,7 +568,7 @@ tr {
 }
 
 .tab {
-  border-left: white dashed 0.1rem;
+  border-left: #818080 solid 0.1rem;
   position: relative;
   justify-content: space-evenly;
   background: #0b0b0b;

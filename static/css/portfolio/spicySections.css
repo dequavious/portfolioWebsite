@@ -14,7 +14,7 @@ spicy-sections > h3 {
 spicy-sections[affordance=tab-bar]::part(tab-list) {
     justify-content: space-evenly;
     margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgb(129, 128, 128);
 }
 
 spicy-sections[affordance=tab-bar] h3[aria-selected=true] {
