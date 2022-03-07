@@ -82,7 +82,6 @@
                 <li class="nav__link"><a class="nav__a" href="#skills">Skills</a></li>
                 <li class="nav__link"><a class="nav__a" href="#portfolio">Portfolio</a></li>
                 <li class="nav__link"><a class="nav__a" href="#programming">Programming</a></li>
-{#                <li class="nav__link"><a class="nav__a" href="#info">Info</a></li>#}
                 <li class="nav__link"><a href="#contact" style="text-decoration: none;"><button><i class="far fa-id-card"></i>Contact</button></a></li>
                 <li>
                     <div class="dropdown">
@@ -101,7 +100,7 @@
             <div class="title">
                 <h1>Hi, I'm {{ user.name }}!</h1>
             </div>
-            <a href="#about" style="text-decoration: none;"><button><i class="fas fa-coffee"></i> Learn More</button></a>
+            <a href="#about" style="text-decoration: none;" onclick="selectFunction()"><button><i class="fas fa-coffee"></i> Learn More</button></a>
         </div>
         <div class="image">
             <img src="{{ user.picture }}" alt="" style="align-self: center; justify-self: center;"/>
