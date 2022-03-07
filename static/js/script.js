@@ -25,6 +25,8 @@ window.addEventListener("scroll", ()=>{
 
 let menuOpen = false;
 const html = document.querySelector("html");
+const myDropdown = document.getElementById("myDropdown");
+const myDropdownResponsive = document.getElementById("myDropdownResponsive");
 const responsiveNavBar = document.querySelector(".responsive__navbar");
 responsiveNavBar.addEventListener("click", (e)=>e.stopPropagation());
 
@@ -43,12 +45,16 @@ responsiveToggle.addEventListener("click", (e)=>{
       }
 });
 
-html.addEventListener("click", ()=>{
+html.addEventListener("click", function(e){
     menuBurger.style.position = "relative";
     responsiveToggle.classList.remove('open');
     responsiveNavBar.classList.remove("show");
     menuOpen = false;
     selectFunctionResponsive();
+    var targetText  = $(e.target).text();
+    if (!targetText.startsWith("Documents") && targetText !== "") {
+        selectFunction();
+    }
 });
 
 const navLinks = document.querySelectorAll(".nav__link");
@@ -63,27 +69,27 @@ navLinks.forEach((link)=>{
 });
 
 function toggleFunction() {
-  if (document.getElementById("myDropdown").style.display==="none") {
-      document.getElementById("myDropdown").style.display= "block";
+  if (myDropdown.style.display==="none") {
+      myDropdown.style.display= "block";
   } else {
-      document.getElementById("myDropdown").style.display= "none";
+      myDropdown.style.display= "none";
   }
 }
 
 function selectFunction() {
-    document.getElementById("myDropdown").style.display= "none";
+    myDropdown.style.display= "none";
 }
 
 function toggleFunctionResponsive() {
-  if (document.getElementById("myDropdownResponsive").style.display==="none") {
-      document.getElementById("myDropdownResponsive").style.display = "block";
+  if (myDropdownResponsive.style.display==="none") {
+      myDropdownResponsive.style.display = "block";
   } else {
-      document.getElementById("myDropdownResponsive").style.display = "none";
+      myDropdownResponsive.style.display = "none";
   }
 }
 
 function selectFunctionResponsive() {
-    document.getElementById("myDropdownResponsive").style.display = "none";
+    myDropdownResponsive.style.display = "none";
 }
 
 function openProject(evt, projName, projLink) {

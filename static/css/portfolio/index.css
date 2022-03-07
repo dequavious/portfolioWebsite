@@ -936,7 +936,7 @@ footer .section .tags li:hover {
     margin: 0 10vw;
   }
 }
-@media screen and (min-width: 280px) and (max-width: 1300px) {
+@media screen and (min-width: 280px) and (max-width: 1199px) {
   .navbar .brand__container {
     display: flex;
     justify-content: space-between;
