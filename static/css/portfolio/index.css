@@ -178,7 +178,9 @@ tr {
 .scrollToTop {
   position: fixed;
   bottom: 40px;
-  right: 40px;
+  left: -webkit-calc(100vw - 80px);
+  left: -moz-calc(100vw - 80px);
+  left: calc(100vw - 80px);
   background-color: #303030;
   z-index: 20;
   padding: 1rem 1.3rem;
