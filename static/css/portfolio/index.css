@@ -1269,5 +1269,13 @@ footer .section .tags li:hover {
     gap: 2rem;
   }
 }
+@media only screen and (min-width: 1386px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: white;
+    gap: 2rem;
+  }
+}
 
 /*# sourceMappingURL=index.css.map */
