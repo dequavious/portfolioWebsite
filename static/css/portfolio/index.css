@@ -265,7 +265,7 @@ tr {
   right: -350px;
   height: 100%;
   width: 70%;
-  background-color: black;
+  background-color: #0b0b0b;
   z-index: 100;
   display: flex;
   overflow-y: auto;

@@ -2,6 +2,25 @@ n =  new Date();
 y = n.getFullYear();
 document.getElementById("date").innerHTML = "<i class=\"fa fa-copyright\"></i> " + y +  ", All rights reserved."
 
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+  } else {
+    document.getElementById("navbar").style.top = "-105px";
+    selectFunction();
+  }
+  prevScrollpos = currentScrollPos;
+}
+
+function closeNavbar() {
+      setTimeout(
+    function() {
+        document.getElementById("navbar").style.top = "-105px";
+    }, 750);
+}
+
 const responsiveToggle = document.querySelector(".toggle");
 const menuBurger = document.querySelector(".menu-btn__burger");
 const scrollToTop = document.querySelector(".scrollToTop");

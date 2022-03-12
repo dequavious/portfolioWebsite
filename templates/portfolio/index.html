@@ -41,6 +41,7 @@
     <div class="scrollToTop">
         <i class="fas fa-angle-up"></i>
     </div>
+    <div id="navbar" style="  top:0; position:fixed; width: 100%; z-index: 99999999; background-color: #0b0b0b; transition: top 0.3s;">
     <nav class="navbar defaultMargin" style="position:relative;">
         <div class="brand__container">
             <div class="brand" style="z-index: -1;">
@@ -51,13 +52,13 @@
             </div>
         </div>
         <div class="links">
-            <ul>
+            <ul id="mainNav">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#programming">Programming</a></li>
-                <a href="#contact" style="text-decoration: none;" onclick="selectFunction()"><button><i class="far fa-id-card"></i>Contact</button></a>
+                <li><a href="#about" onclick="closeNavbar()">About</a></li>
+                <li><a href="#skills" onclick="closeNavbar()">Skills</a></li>
+                <li><a href="#portfolio" onclick="closeNavbar()">Portfolio</a></li>
+                <li><a href="#programming" onclick="closeNavbar()">Programming</a></li>
+                <a href="#contact" style="text-decoration: none;" onclick="selectFunction(); closeNavbar();"><button><i class="far fa-id-card"></i>Contact</button></a>
                 <li>
                     <div class="dropdown" style="margin-top: 0; display: inline-block;">
 
@@ -74,15 +75,16 @@
             </ul>
         </div>
     </nav>
+    </div>
     <div class="responsive__navbar" style="z-index: 100;">
-        <div class="links" style="position: relative; z-index: 1;">
+        <div class="links" style="position: relative; z-index: 1; top: 25px;">
             <ul>
                 <li class="nav__link"><a class="nav__a" href="#home">Home</a></li>
-                <li class="nav__link"><a class="nav__a" href="#about">About</a></li>
-                <li class="nav__link"><a class="nav__a" href="#skills">Skills</a></li>
-                <li class="nav__link"><a class="nav__a" href="#portfolio">Portfolio</a></li>
-                <li class="nav__link"><a class="nav__a" href="#programming">Programming</a></li>
-                <li class="nav__link"><a href="#contact" style="text-decoration: none;"><button><i class="far fa-id-card"></i>Contact</button></a></li>
+                <li class="nav__link"><a class="nav__a" href="#about" onclick="closeNavbar()">About</a></li>
+                <li class="nav__link"><a class="nav__a" href="#skills" onclick="closeNavbar()">Skills</a></li>
+                <li class="nav__link"><a class="nav__a" href="#portfolio" onclick="closeNavbar()">Portfolio</a></li>
+                <li class="nav__link"><a class="nav__a" href="#programming" onclick="closeNavbar()">Programming</a></li>
+                <li class="nav__link"><a href="#contact" style="text-decoration: none;" onclick="closeNavbar()"><button><i class="far fa-id-card"></i>Contact</button></a></li>
                 <li>
                     <div class="dropdown">
                         <button class="dropbtn" onclick="toggleFunctionResponsive()">Documents<i class="fa fa-caret-down"></i></button>
@@ -95,6 +97,7 @@
             </ul>
         </div>
     </div>
+    <div style="position:relative; top:105px;">
     <section class="hero defaultMargin" style="position:relative; z-index: 1;">
         <div class="content">
             <div class="title">
@@ -465,6 +468,7 @@
     <div class="lower__footer">
         <span>{{ user.name }} {{ user.surname }}</span>
         <span id="date"></span>
+    </div>
     </div>
     <script src="{% static "js/animation.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
