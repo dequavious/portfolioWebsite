@@ -10,6 +10,7 @@ var currentScrollPos = window.pageYOffset;
   } else {
     document.getElementById("navbar").style.top = "-105px";
     selectFunction();
+    closeResponsive();
   }
   prevScrollpos = currentScrollPos;
 }
@@ -75,6 +76,12 @@ html.addEventListener("click", function(e){
         selectFunction();
     }
 });
+
+function closeResponsive() {
+    responsiveToggle.classList.remove('open');
+    responsiveNavBar.classList.remove("show");
+    menuOpen = false;
+}
 
 const navLinks = document.querySelectorAll(".nav__link");
 navLinks.forEach((link)=>{
