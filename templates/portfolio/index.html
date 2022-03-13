@@ -38,6 +38,18 @@
         <div class="loader-section section-right"></div>
 
     </div>
+    <div id="id01" class="modal" style="display: none;">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">×</span>
+      <form class="modal-content">
+        <div class="modContainer">
+            <p>
+                <span>
+                Your message has been sent. <i class='fas fa-check' style="color: #45b649; font-weight: bolder; opacity: 0.7; float: right;"></i>
+                </span>
+            </p>
+        </div>
+      </form>
+    </div>
     <div style="left: 0; width: 10vw;">
     <div class="scrollToTop">
         <i class="fas fa-angle-up"></i>
@@ -472,6 +484,11 @@
         <span id="date"></span>
     </div>
     </div>
+
+    <svg id="mySVG" style="opacity: 0.05; z-index: -1;">
+      <path fill="none" stroke="cyan" stroke-width="10" id="triangle" d="M150 0 L75 200 L225 200 Z" />
+    </svg>
+
     <script src="{% static "js/animation.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
     <script>
@@ -525,7 +542,8 @@
 
                     textarea.value = "";
 
-                    alert("Your message has been sent!");
+                    document.getElementById('id01').style.display='block';
+
                 }
             });
         });

@@ -1,0 +1,91 @@
+/* Add padding and center-align text to the container */
+.modContainer {
+  padding: 16px;
+  text-align: left;
+}
+
+/* The Modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 99999999999999999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #0b0b0b;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 340px) {
+  .modal {
+    .modal-content {
+      .modContainer {
+        p {
+          span {
+            i {
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 339px) {
+  .modal {
+    .modal-content {
+      .modContainer {
+        p {
+          font-size: small;
+          span {
+            i {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 299px) {
+  .modal {
+    .modal-content {
+      .modContainer {
+        p {
+          font-size: x-small;
+          span {
+            i {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
