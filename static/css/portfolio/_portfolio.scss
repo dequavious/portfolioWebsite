@@ -67,7 +67,7 @@
     filter: hue-rotate(90deg);
     @include gradientText;
     &:hover {
-      filter: hue-rotate(180deg);
+      opacity: 0.6;
     }
 }
 

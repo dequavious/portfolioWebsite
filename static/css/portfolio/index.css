@@ -553,7 +553,7 @@ tr {
   -webkit-text-fill-color: transparent;
 }
 .proj__link:hover {
-  filter: hue-rotate(180deg);
+  opacity: 0.6;
 }
 
 .projStack {
