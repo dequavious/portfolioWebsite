@@ -1,1 +1,1 @@
-web: gunicorn portfolioWebsite.wsgi --log-file -
+web: gunicorn portfolioWebsite.wsgi --preload --log-file -
