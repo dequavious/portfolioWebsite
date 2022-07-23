@@ -1,7 +1,17 @@
-#mySVG {
+svg {
   position: fixed;
-  top: 15%;
-  width: 400px;
-  height: 210px;
-  margin-left:-50px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 640px;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+.path {
+  stroke-dashoffset: 1000;
+  stroke-dasharray: 1000;
 }

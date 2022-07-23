@@ -80,3 +80,24 @@ const sr6 = ScrollReveal({
 });
 
 sr6.reveal(springArrayL2);
+
+$(document).ready(function() {
+
+  $(".path").css("stroke-dashoffset", "1000");
+  $(".path").css("stroke-dasharray", "1000");
+
+  var $dashOffset = $(".path").css("stroke-dashoffset");
+
+  $(window).scroll(function () {
+
+    var $percentageComplete = (($(window).scrollTop()/($("html").height()-$(window).height()))*100);
+
+    var $newUnit = parseInt($dashOffset, 10);
+
+    var $offsetUnit = $percentageComplete * ($newUnit / 100);
+
+    $(".path").css("stroke-dashoffset", $newUnit - $offsetUnit);
+
+  });
+
+});
