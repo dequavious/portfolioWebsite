@@ -416,7 +416,7 @@
     top:0.04em;left:0.04em;width:0.92em;height:0.92em
 }
 .c100.dark{
-    background-color:#0b0b0b
+    background-color:transparent;
 }
 .c100.dark .bar,.c100.dark .fill{
     border-color:#45b649 !important;
@@ -425,7 +425,7 @@
     color:rgb(129, 128, 128)
 }
 .c100.dark:after{
-    background-color:#0b0b0b
+    background-color:transparent;
 }
 .c100.dark:hover > span{
     color:#c5e35b
